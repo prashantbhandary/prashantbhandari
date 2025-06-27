@@ -1,0 +1,12 @@
+/*
+ * File: input.css
+ * Created Date: Friday June 27th 2025
+ * Author: Prashant Bhandari
+ * Last Modified: Fr/06/2025 08:06:43
+ * Modified By: Prashant Bhandari
+ * Copyright (c) 2025 Prashant Bhandari
+ */
+
+ @tailwind base;
+ @tailwind components;
+ @tailwind utilities
