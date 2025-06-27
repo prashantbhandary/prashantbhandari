@@ -354,60 +354,66 @@ section {
     font-size: 1.1rem;
 }
 
-/* About Section */
+/* Updated CSS for About Section */
 .about-content {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 4rem;
+    gap: 3rem;
 }
 
-.about-img {
-    flex: 1;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: var(--shadow-heavy);
-    background: var(--gradient-3);
-    height: 450px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.profile-img-container {
     position: relative;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(6, 182, 212, 0.4);
+    border: 4px solid rgba(99, 102, 241, 0.3);
+    transition: all 0.4s ease;
 }
 
-.profile-img-placeholder {
-    width: 300px;
-    height: 300px;
+.profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.img-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, transparent 70%);
     border-radius: 50%;
-    background: rgba(255,255,255,0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 5rem;
-    border: 5px solid rgba(255,255,255,0.2);
-    box-shadow: 0 0 30px rgba(0,0,0,0.2);
+}
+
+.profile-img-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 40px rgba(6, 182, 212, 0.6);
+}
+
+.profile-img-container:hover .profile-img {
+    transform: scale(1.1);
 }
 
 .about-text {
-    flex: 1;
+    text-align: center;
+    max-width: 800px;
 }
 
-.about-text h3 {
-    font-size: 2.2rem;
-    margin-bottom: 1.5rem;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+@media (min-width: 992px) {
+    .about-content {
+        flex-direction: row;
+        text-align: left;
+    }
+    
+    .about-text {
+        text-align: left;
+    }
 }
-
-.about-text p {
-    margin-bottom: 1.5rem;
-    color: var(--gray-light);
-    font-size: 1.1rem;
-    line-height: 1.8;
-}
-
 .info-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
