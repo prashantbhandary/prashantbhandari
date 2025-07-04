@@ -1424,4 +1424,28 @@ footer::before {
     }
 }
 
+@media print {
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  header, nav, .circuit-background, .hero-btns, .blog-cta, footer {
+    display: none !important;
+  }
+  main, .container, section, .about-content, .skills-container, .timeline, .projects-grid, .achievements-grid, .blog-grid, .contact-container {
+    color: #000 !important;
+    background: #fff !important;
+    box-shadow: none !important;
+  }
+}
+.skip-to-content:focus {
+  left: 8px !important;
+  top: 8px !important;
+  width: auto !important;
+  height: auto !important;
+  overflow: visible !important;
+  z-index: 10000 !important;
+  outline: 2px solid #06b6d4;
+}
+
 
