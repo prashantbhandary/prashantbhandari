@@ -501,7 +501,6 @@ section {
     transform: translateY(-5px) scale(1.1);
     box-shadow: var(--shadow-heavy);
 }
-
 /* Specific colors for each social icon */
 .about-text .social-links a:nth-child(1) { /* LinkedIn */
     background: linear-gradient(135deg, rgba(10, 102, 194, 0.7), rgba(10, 102, 194, 0.9));
