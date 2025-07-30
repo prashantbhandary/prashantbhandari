@@ -21,9 +21,15 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Prevent body scroll when menu is open
         if (navLinks.classList.contains('active')) {
+            document.body.classList.add('menu-open');
             document.body.style.overflow = 'hidden';
+            document.body.style.position = 'fixed';
+            document.body.style.width = '100%';
         } else {
+            document.body.classList.remove('menu-open');
             document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.width = '';
         }
     }
     
@@ -31,7 +37,10 @@ document.addEventListener('DOMContentLoaded', function() {
         navLinks.classList.remove('active');
         navOverlay.classList.remove('active');
         hamburger.classList.remove('active');
+        document.body.classList.remove('menu-open');
         document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.width = '';
     }
     
     // Smooth scrolling for navigation
@@ -84,6 +93,34 @@ document.addEventListener('DOMContentLoaded', function() {
             closeMobileMenu();
         }
     });
+    
+    // Handle touch events for better mobile experience
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    // Close menu on swipe right when menu is open
+    document.addEventListener('touchstart', function(e) {
+        if (navLinks.classList.contains('active')) {
+            touchStartX = e.changedTouches[0].screenX;
+        }
+    });
+    
+    document.addEventListener('touchend', function(e) {
+        if (navLinks.classList.contains('active')) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }
+    });
+    
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const swipeDistance = touchEndX - touchStartX;
+        
+        // Close menu on swipe right
+        if (swipeDistance > swipeThreshold) {
+            closeMobileMenu();
+        }
+    }
     
     // Form submission with EmailJS
     const contactForm = document.getElementById('contactForm');

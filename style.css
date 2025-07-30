@@ -123,6 +123,8 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* Header Styles */
@@ -180,6 +182,20 @@ nav {
 .nav-overlay.active {
     opacity: 1;
     visibility: visible;
+}
+
+/* Prevent horizontal scroll and ensure proper mobile layout */
+html, body {
+    overflow-x: hidden;
+    position: relative;
+    width: 100%;
+}
+
+body.menu-open {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
 .hamburger {
@@ -1364,16 +1380,19 @@ footer::before {
     .nav-links {
         position: fixed;
         top: 0;
-        right: -300px;
-        width: 280px;
+        right: -100%;
+        width: 75%;
+        max-width: 300px;
         height: 100vh;
-        background: rgba(10, 10, 22, 0.95);
-        backdrop-filter: blur(10px);
+        background: rgba(10, 10, 22, 0.98);
+        backdrop-filter: blur(15px);
         flex-direction: column;
-        padding: 100px 20px 20px;
-        transition: all 0.4s ease;
+        padding: 80px 20px 20px;
+        transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         z-index: 100;
-        box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
     }
     
     .nav-links.active {
@@ -1381,20 +1400,25 @@ footer::before {
     }
     
     .nav-links li {
-        margin: 15px 0;
+        margin: 10px 0;
+        width: 100%;
     }
     
     .nav-links a {
         font-size: 1.1rem;
-        padding: 15px 0;
+        padding: 15px 10px;
         display: block;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        width: 100%;
+        box-sizing: border-box;
     }
     
     .nav-links a:hover {
         background: rgba(251, 191, 36, 0.1);
-        padding-left: 10px;
-        border-radius: 5px;
+        transform: translateX(5px);
+        border-bottom: 1px solid rgba(251, 191, 36, 0.3);
     }
 }
 
@@ -1445,8 +1469,39 @@ footer::before {
 }
 
 @media (max-width: 480px) {
+    /* Prevent horizontal scrolling on mobile */
+    html {
+        overflow-x: hidden;
+    }
+    
+    body {
+        overflow-x: hidden;
+        position: relative;
+        width: 100%;
+    }
+    
+    /* Ensure all elements don't overflow */
+    * {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .container {
+        padding: 0 15px;
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    /* Mobile navigation adjustments */
+    .nav-links {
+        width: 80%;
+        max-width: 280px;
+        right: -80%;
+    }
+    
     .hero h1 {
         font-size: 2rem;
+        word-wrap: break-word;
     }
     
     .hero p {
@@ -1456,14 +1511,30 @@ footer::before {
     .section-title h2 {
         font-size: 1.8rem;
     }
-    
+
     .hero-content {
         padding: 1.5rem;
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
     }
-    
+
     .hero-btns {
         flex-direction: column;
         gap: 15px;
+    }
+    
+    /* Ensure images don't cause horizontal scroll */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    /* Fix any potential overflow issues */
+    .about-content, .contact-container {
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
     }
 }
 
