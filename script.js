@@ -9,6 +9,31 @@ document.addEventListener('DOMContentLoaded', function() {
         circuit.style.top = `${randomY}%`;
     });
     
+    // Mobile menu elements
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
+    const navOverlay = document.getElementById('nav-overlay');
+    
+    function toggleMobileMenu() {
+        navLinks.classList.toggle('active');
+        navOverlay.classList.toggle('active');
+        hamburger.classList.toggle('active');
+        
+        // Prevent body scroll when menu is open
+        if (navLinks.classList.contains('active')) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+    }
+    
+    function closeMobileMenu() {
+        navLinks.classList.remove('active');
+        navOverlay.classList.remove('active');
+        hamburger.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
     // Smooth scrolling for navigation
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -23,40 +48,119 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
                 
                 // Close mobile menu if open
-                navLinks.classList.remove('active');
+                closeMobileMenu();
             }
         });
     });
     
     // Mobile menu toggle
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('nav-links');
+    hamburger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        toggleMobileMenu();
+    });
     
-    hamburger.addEventListener('click', function() {
-        navLinks.classList.toggle('active');
+    // Close menu when clicking on nav links
+    navLinks.addEventListener('click', function(e) {
+        if (e.target.tagName === 'A') {
+            closeMobileMenu();
+        }
+    });
+    
+    // Close menu when clicking on overlay
+    navOverlay.addEventListener('click', function() {
+        closeMobileMenu();
     });
     
     // Close menu when clicking outside
     document.addEventListener('click', function(event) {
-        if (!navLinks.contains(event.target)) {
-            navLinks.classList.remove('active');
+        if (!navLinks.contains(event.target) && !hamburger.contains(event.target)) {
+            closeMobileMenu();
         }
     });
     
-    // Form submission
+    // Close menu on escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+            closeMobileMenu();
+        }
+    });
+    
+    // Form submission with EmailJS
     const contactForm = document.getElementById('contactForm');
     if(contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
             // Get form values
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const subject = document.getElementById('subject').value.trim();
+            const message = document.getElementById('message').value.trim();
             
-            // In a real implementation, you would send this data to a server
-            // Here we'll just show a success message
-            alert(`Thank you for your message, ${name}! I will get back to you at ${email} soon.`);
-            contactForm.reset();
+            // Basic validation
+            if (!name || !email || !subject || !message) {
+                alert('Please fill in all fields.');
+                return;
+            }
+            
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+            
+            // Show loading state
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+            
+            // EmailJS configuration
+            const serviceID = "service_vqzpcsn"; // Replace with your EmailJS service ID
+            const templateID = "template_pmdilpp"; // Replace with your EmailJS template ID
+            const userID = "90R1DZh0HH_ycIDrs"; // Replace with your EmailJS user ID
+            
+            const templateParams = {
+                from_name: name,
+                from_email: email,
+                subject: subject,
+                message: message,
+                to_email: 'info@bhandari-prashant.com.np'
+            };
+            
+            // Check if EmailJS is available (fallback for local testing)
+            if (typeof emailjs !== 'undefined') {
+                emailjs.send(serviceID, templateID, templateParams, userID)
+                    .then(function(response) {
+                        console.log('SUCCESS!', response.status, response.text);
+                        alert(`Thank you for your message, ${name}! I will get back to you at ${email} soon.`);
+                        contactForm.reset();
+                    }, function(error) {
+                        console.log('FAILED...', error);
+                        alert('Sorry, there was an error sending your message. Please try again or contact me directly at info@bhandari-prashant.com.np');
+                    })
+                    .finally(function() {
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                    });
+            } else {
+                // Fallback when EmailJS is not loaded or for testing
+                console.log('EmailJS not loaded. Form data:', templateParams);
+                
+                // Create mailto link as fallback
+                const mailtoLink = `mailto:info@bhandari-prashant.com.np?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+                
+                if (confirm(`EmailJS service is not configured. Would you like to open your default email client to send the message?`)) {
+                    window.location.href = mailtoLink;
+                    contactForm.reset();
+                } else {
+                    alert('Please contact me directly at info@bhandari-prashant.com.np');
+                }
+                
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
         });
     }
     
