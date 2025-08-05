@@ -1,0 +1,399 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom CSS Variables */
+:root {
+  --primary: #6366f1;
+  --primary-dark: #4f46e5;
+  --secondary: #0ea5e9;
+  --accent: #06b6d4;
+  --accent-secondary: #f59e0b;
+  --dark: #0f172a;
+  --light: #f8fafc;
+  --gray: #64748b;
+  --gray-light: #cbd5e1;
+  
+  --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+  --gradient-hero: linear-gradient(135deg, #0c0e2c 0%, #2a0845 100%);
+  
+  --shadow-light: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-heavy: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-3d: 0 15px 30px -5px rgba(0, 0, 0, 0.25);
+  
+  --transition: all 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+  font-size: 16px;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+}
+
+body {
+  background-color: #0a0a16;
+  color: #f0f0f0;
+  line-height: 1.7;
+  overflow-x: hidden;
+  position: relative;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  max-width: 100vw;
+}
+
+/* Circuit Background */
+.circuit-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: 
+    radial-gradient(circle at 10% 20%, rgba(22, 22, 64, 0.8) 0%, transparent 20%),
+    radial-gradient(circle at 90% 80%, rgba(38, 12, 77, 0.6) 0%, transparent 20%),
+    linear-gradient(to bottom, #0a0a16, #1a1a40);
+  opacity: 0.7;
+  overflow: hidden;
+  max-width: 100vw;
+}
+
+.circuit-background::before {
+  content: '';
+  position: absolute;
+  top: -25%;
+  left: -25%;
+  width: 150%;
+  height: 150%;
+  background-image: 
+    linear-gradient(rgba(99, 102, 241, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99, 102, 241, 0.1) 1px, transparent 1px);
+  background-size: 60px 60px;
+  transform: rotate(10deg);
+  animation: circuitMove 40s linear infinite;
+}
+
+.circuit-element {
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  filter: blur(1px);
+  animation: float 15s infinite ease-in-out;
+}
+
+.circuit-1 {
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.3) 0%, transparent 70%);
+  animation-delay: 0s;
+}
+
+.circuit-2 {
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.3) 0%, transparent 70%);
+  animation-delay: 5s;
+}
+
+.circuit-3 {
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(102, 126, 234, 0.2) 0%, transparent 70%);
+  animation-delay: 10s;
+}
+
+.circuit-4 {
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle, rgba(118, 75, 162, 0.3) 0%, transparent 70%);
+  animation-delay: 7s;
+}
+
+/* Animations */
+@keyframes circuitMove {
+  0% { transform: rotate(10deg) translate(0, 0); }
+  100% { transform: rotate(10deg) translate(-60px, -60px); }
+}
+
+@keyframes float {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(20px, 15px) rotate(5deg); }
+  50% { transform: translate(10px, 30px) rotate(0deg); }
+  75% { transform: translate(-15px, 20px) rotate(-5deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes slideInDelayed {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Navigation overlay - Hidden on desktop */
+.nav-overlay {
+  display: none;
+}
+
+/* Show overlay only on mobile */
+@media (max-width: 1024px) {
+  .nav-overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: calc(100% - 280px);
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 998;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    pointer-events: auto;
+  }
+  
+  .nav-overlay.open {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* Additional animations */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 6s linear infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Hide mobile navigation on desktop by default */
+.nav-links {
+  display: none;
+}
+
+/* Show hamburger only on mobile */
+.hamburger {
+  display: none;
+}
+
+/* Responsive hamburger and mobile navigation */
+@media (max-width: 1024px) {
+  /* Show hamburger button on mobile */
+  .hamburger {
+    display: block !important;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 1001;
+    padding: 8px 12px;
+    transition: all 0.3s ease;
+    position: relative;
+    backdrop-filter: none;
+    filter: none;
+    pointer-events: auto;
+  }
+  
+  .hamburger:hover {
+    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Mobile navigation menu - hidden by default */
+  .nav-links {
+    display: flex !important;
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 280px;
+    height: 100vh;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(20px);
+    padding: 80px 25px 30px;
+    transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 1000;
+    flex-direction: column;
+    align-items: flex-start;
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.8);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    pointer-events: auto !important;
+    display: flex;
+  }
+  
+  .nav-links.open {
+    right: 0;
+  }
+  
+  .nav-links li {
+    margin: 0 0 5px 0;
+    width: 100%;
+    opacity: 0;
+    transform: translateX(20px);
+    animation: slideInDelayed 0.3s ease forwards;
+    pointer-events: auto !important;
+    z-index: 1001;
+  }
+  
+  .nav-links li button {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    z-index: 1002;
+    position: relative;
+    user-select: none;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1);
+    touch-action: manipulation;
+  }
+  
+  .nav-links.open li:nth-child(1) { animation-delay: 0.1s; }
+  .nav-links.open li:nth-child(2) { animation-delay: 0.15s; }
+  .nav-links.open li:nth-child(3) { animation-delay: 0.2s; }
+  .nav-links.open li:nth-child(4) { animation-delay: 0.25s; }
+  .nav-links.open li:nth-child(5) { animation-delay: 0.3s; }
+  .nav-links.open li:nth-child(6) { animation-delay: 0.35s; }
+  .nav-links.open li:nth-child(7) { animation-delay: 0.4s; }
+}
+
+/* Text utility classes for better readability */
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.3;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+}
+
+p {
+  margin-bottom: 1em;
+  line-height: 1.7;
+}
+
+.text-readable {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #e2e8f0;
+}
+
+.text-heading {
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.text-subheading {
+  font-weight: 600;
+  color: #cbd5e1;
+  line-height: 1.4;
+}
+
+/* Ensure visibility */
+.bg-opacity-low {
+  background-color: rgba(15, 23, 42, 0.85);
+}
+
+.backdrop-blur-custom {
+  backdrop-filter: blur(12px);
+}
+
+/* Fix any layout issues */
+.container-fix {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Ensure all sections don't overflow */
+section {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Fix any potentially wide elements */
+* {
+  max-width: 100%;
+}
+
+/* Prevent horizontal scroll on mobile */
+@media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+  }
+  
+  .max-w-6xl {
+    max-width: calc(100vw - 2.5rem) !important;
+  }
+  
+  .px-5 {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+  
+  /* Ensure no element exceeds viewport width */
+  * {
+    max-width: 100vw;
+    box-sizing: border-box;
+  }
+  
+  /* Additional mobile overflow prevention */
+  html, body, #__next, [id="__next"] > div {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+  }
+  
+  /* Prevent touch actions that could cause horizontal scroll */
+  * {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Re-enable text selection for content areas */
+  p, h1, h2, h3, h4, h5, h6, span, div[class*="text"], .content {
+    -webkit-user-select: text;
+    -khtml-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+  }
+}
