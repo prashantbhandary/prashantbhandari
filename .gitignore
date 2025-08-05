@@ -1,26 +1,44 @@
-# Node dependencies
-node_modules/
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# Tailwind build output
-dist/
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+.yarn/install-state.gz
 
-# VS Code settings (optional)
-.vscode/
+# testing
+/coverage
 
-# Log files
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# OS-specific
-.DS_Store
-Thumbs.db
-
-# Hugo-related (if you're also working with Hugo)
-public/
-resources/
-hugo_stats.json
-
-# Optional: dotenv/env files if you use any
+# local env files
+.env*.local
 .env
 .env.*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# OS-specific
+Thumbs.db
+
+# Backup files
+temp_backup/
