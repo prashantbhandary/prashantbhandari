@@ -2,9 +2,8 @@
  * File: Achievements.tsx
  * Created Date: Tuesday August 5th 2025
  * Author: Prashant Bhandari
- * Last Modified: Tu/08/2025 04:18:24
+ * Last Modified: Tu/08/2025 05:57:58
  * Modified By: Prashant Bhandari
- * Copyright (c) 2025 YARSA TECH
  */
 
 export default function Achievements() {
