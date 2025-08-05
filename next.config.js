@@ -1,12 +1,12 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   // Production optimizations
   compress: true,
   poweredByHeader: false,
   
   // Image optimization
   images: {
+    unoptimized: true, // Required for static export
     formats: ['image/webp', 'image/avif'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
@@ -52,24 +52,6 @@ const nextConfig: NextConfig = {
             value: 'camera=(), microphone=(), geolocation=()'
           }
         ]
-      },
-      {
-        source: '/sitemap.xml',
-        headers: [
-          {
-            key: 'Content-Type',
-            value: 'application/xml'
-          }
-        ]
-      },
-      {
-        source: '/robots.txt',
-        headers: [
-          {
-            key: 'Content-Type',
-            value: 'text/plain'
-          }
-        ]
       }
     ]
   },
@@ -92,7 +74,6 @@ const nextConfig: NextConfig = {
   
   // Experimental features for better performance
   experimental: {
-    optimizeCss: true,
     scrollRestoration: true,
   },
   
@@ -101,12 +82,13 @@ const nextConfig: NextConfig = {
     removeConsole: process.env.NODE_ENV === 'production',
   },
   
-  // Output configuration
-  output: 'standalone',
+  // Output configuration for static export (Cloudflare Pages compatible)
+  output: 'export',
   trailingSlash: false,
+  distDir: 'out',
   
   // PWA and offline support
   swcMinify: true,
 };
 
-export default nextConfig;
+module.exports = nextConfig;
