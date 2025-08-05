@@ -1,3 +1,12 @@
+/*
+ * File: layout.tsx
+ * Created Date: Tuesday August 5th 2025
+ * Author: Prashant Bhandari
+ * Last Modified: Tu/08/2025 06:06:24
+ * Modified By: Prashant Bhandari
+ * Copyright (c) 2025 Prashant Bhandari
+ */
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -7,8 +16,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Prashant Bhandari | Electronics Engineer & Robotics Expert | Nepal",
-  description: "Prashant Bhandari - Electronics Engineer & Robotics Specialist from Pokhara, Nepal. Expertise in embedded systems, PCB design, and robotics competitions. Currently pursuing Electronics, Communication and Information Engineering at Pashchimanchal Campus.",
+  title: "Prashant Bhandari | Electronics Engineer & Robotics Expert",
+  description: "Electronics Engineer & Robotics Expert from Nepal. Winner of LOCUS 2025 & multiple robotics competitions. Expert in embedded systems & PCB design.",
   keywords: "Prashant Bhandari, electronics engineer, robotics engineer, Nepal, Pokhara, embedded systems, PCB design, Arduino, ESP32, robotics club, YarsaTech, micromouse, robotics club wrc, executive member, electronics engineer intern, general member, robotics mentor, PCB Designer, Embedded Systems Developer, Web Developer, Robotics Enthusiast, Pashchimanchal Campus, LOCUS 2025, Delta 5.0, Techfest IIT Bombay, autonomous boat, line follower, KiCad, Proteus, microcontrollers, Raspberry Pi, C, C++, Python, JavaScript, HTML5, CSS3, TailwindCSS, Hugo, machine learning, linear regression, classification, Git, GitHub, VS Code",
   authors: [{ name: "Prashant Bhandari", url: "https://bhandari-prashant.com.np" }],
   creator: "Prashant Bhandari",
@@ -20,7 +29,7 @@ export const metadata: Metadata = {
     url: "https://bhandari-prashant.com.np",
     siteName: "Prashant Bhandari - Portfolio",
     title: "Prashant Bhandari | Electronics Engineer & Robotics Expert",
-    description: "Electronics Engineering Student & Robotics Enthusiast from Pokhara, Nepal. Expertise in embedded systems, PCB design, and robotics competitions.",
+    description: "Electronics Engineer & Robotics Expert from Nepal. Winner of LOCUS 2025 & multiple robotics competitions. Expert in embedded systems & PCB design.",
     images: [
       {
         url: "https://bhandari-prashant.com.np/images/PrashantBhandari.png",
@@ -43,7 +52,7 @@ export const metadata: Metadata = {
     site: "@santhprashant",
     creator: "@santhprashant",
     title: "Prashant Bhandari | Electronics Engineer & Robotics Expert",
-    description: "Electronics Engineering Student & Robotics Enthusiast from Pokhara, Nepal. Expertise in embedded systems, PCB design, and robotics competitions.",
+    description: "Electronics Engineer & Robotics Expert from Nepal. Winner of LOCUS 2025 & multiple robotics competitions. Expert in embedded systems & PCB design.",
     images: ["https://bhandari-prashant.com.np/images/PrashantBhandari.png"],
   },
   alternates: {
