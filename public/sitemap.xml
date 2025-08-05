@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://bhandari-prashant.com.np/</loc>
-    <lastmod>2025-07-04</lastmod>
+    <lastmod>2025-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -15,11 +15,23 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://bhandari-prashant.com.np/#experience</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://bhandari-prashant.com.np/#projects</loc>
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://bhandari-prashant.com.np/#achievements</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://bhandari-prashant.com.np/#blog</loc>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://bhandari-prashant.com.np/#contact</loc>
+    <priority>0.6</priority>
   </url>
 </urlset>
