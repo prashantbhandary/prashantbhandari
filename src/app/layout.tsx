@@ -2,7 +2,7 @@
  * File: layout.tsx
  * Created Date: Tuesday August 5th 2025
  * Author: Prashant Bhandari
- * Last Modified: Tu/08/2025 06:06:24
+ * Last Modified: Su/08/2025 05:21:00
  * Modified By: Prashant Bhandari
  * Copyright (c) 2025 Prashant Bhandari
  */
@@ -22,7 +22,17 @@ export const metadata: Metadata = {
   authors: [{ name: "Prashant Bhandari", url: "https://bhandari-prashant.com.np" }],
   creator: "Prashant Bhandari",
   publisher: "Prashant Bhandari",
-  robots: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -87,6 +97,8 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="googlebot" content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1" />
         <link 
           rel="stylesheet" 
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
