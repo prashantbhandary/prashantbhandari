@@ -34,10 +34,10 @@ export default function Experience() {
       title: 'General Member',
       company: 'Robotics Club Pashchimanchal Campus',
       period: 'March 2024 - March 2025',
-      description: 'Developed advanced Micromouse robot using line maze-solving algorithms and coordinated 15-day "Funny Session" workshop, training 100+ students in robotics.',
+      description: 'Developed advanced Micromouse robot using line maze-solving algorithms and coordinated 15-day "Rainy Session" workshop, training 100+ students in robotics.',
       responsibilities: [
         'Developed advanced Micromouse robot using line maze-solving algorithms',
-        'Coordinated 15-day "Funny Session" workshop, training 100+ students in robotics',
+        'Coordinated 15-day "Rainy Session" workshop, training 100+ students in robotics',
         'Mentored teams for Autonomous Boat Racing Competition, achieving 1st Runner-up position',
         'Participated in various robotics projects and competitions'
       ],
