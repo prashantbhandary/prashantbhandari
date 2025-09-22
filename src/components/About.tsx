@@ -14,16 +14,16 @@ export default function About() {
         <div className="flex flex-col lg:flex-row items-center gap-16">
           {/* Profile Image */}
           <div className="flex-shrink-0">
-            <div className="relative w-80 h-80 rounded-full overflow-hidden border-4 border-indigo-500/20 shadow-2xl bg-gradient-to-br from-slate-800 to-slate-900 animate-float">
+            <div className="relative w-[26rem] h-[32rem] rounded-2xl overflow-hidden border-4 border-indigo-500/20 shadow-2xl bg-gradient-to-br from-slate-800 to-slate-900 hover:shadow-indigo-500/20 transition-all duration-500">
               <Image
                 src="/images/PrashantBhandari.png"
                 alt="Prashant Bhandari - Electronics Engineer in Pokhara, Nepal"
-                width={320}
-                height={320}
+                width={416}
+                height={512}
                 className="w-full h-full object-cover transition-transform duration-500 hover:scale-105 filter grayscale-[20%] contrast-110 hover:grayscale-0 hover:contrast-120"
                 priority
               />
-              <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/10 via-transparent to-yellow-400/10 rounded-full animate-spin-slow"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/10 via-transparent to-yellow-400/10 rounded-2xl"></div>
             </div>
           </div>
 
