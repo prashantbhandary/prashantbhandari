@@ -42,7 +42,7 @@ export default function Contact() {
     const serviceID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "service_vqzpcsn"
     const templateID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "template_pmdilpp"
     const userID = process.env.NEXT_PUBLIC_EMAILJS_USER_ID || "90R1DZh0HH_ycIDrs"
-    const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "info@bhandari-prashant.com.np"
+    const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "santhprashant@gmail.com"
     
     const templateParams = {
       from_name: name,

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 
 export default function Hero() {
   const [typedText, setTypedText] = useState('')
-  const fullText = 'Embedded Systems Developer | PCB Designer | Web Developer'
+  const fullText = 'Electronics Engineering Student | Robotics & Embedded Systems Enthusiast'
 
   useEffect(() => {
     let index = 0
@@ -49,7 +49,7 @@ export default function Hero() {
           </h1>
           
           <p className="text-2xl md:text-3xl mb-8 text-gray-200">
-            Electronics Engineering Student & Robotics Enthusiast
+            B.E. Electronics, Communication & Information Engineering Student
           </p>
           
           <div className="text-cyan-400 font-semibold text-xl md:text-2xl mb-12 min-h-[2rem]">
@@ -65,6 +65,17 @@ export default function Hero() {
               <span className="relative z-10">Get in Touch</span>
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
             </button>
+            
+            <a
+              href="/resume"
+              className="group relative inline-block border-2 border-green-400 text-green-400 py-4 px-10 rounded-full font-semibold transition-all duration-300 hover:-translate-y-1 hover:bg-green-400 hover:text-white hover:shadow-xl hover:shadow-green-400/30 overflow-hidden"
+            >
+              <span className="relative z-10 flex items-center gap-2">
+                <i className="fas fa-download"></i>
+                Download Resume
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+            </a>
             
             <a
               href="https://www.linkedin.com/in/prashantbdri"

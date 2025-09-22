@@ -4,55 +4,55 @@ export default function Experience() {
   const experiences = [
     {
       title: 'Electronics Engineer Intern',
-      company: 'YarsaTech',
-      period: '2024 - Present',
-      description: 'Working on embedded systems development and IoT solutions. Gaining hands-on experience in real-world electronics projects and product development.',
+      company: 'Yarsa Tech, Pokhara',
+      period: 'Jan 2025 - July 2025',
+      description: 'Designed and optimized embedded systems, reducing output fluctuations and improving quality assurance through rigorous testing protocols.',
       responsibilities: [
-        'Developed embedded system solutions using Arduino and ESP32',
-        'Collaborated on IoT device development and testing',
-        'Assisted in PCB design and circuit optimization',
-        'Participated in product testing and quality assurance'
+        'Developed embedded applications for ESP32, ESP8266, and STM32 microcontrollers',
+        'Designed and programmed BLE-enabled QR/barcode scanner systems',
+        'Implemented embedded software for MicroPython and C for commercial products',
+        'Developed user interfaces with LVGL graphics library for embedded display systems'
       ],
       type: 'work'
     },
     {
       title: 'Executive Member',
-      company: 'Robotics Club WRC',
-      period: '2023 - Present',
-      description: 'Leading robotics initiatives and organizing technical events. Mentoring junior members and driving innovation in robotics projects.',
+      company: 'Robotics Club, Pashchimanchal Campus',
+      period: 'March 2025 - Present',
+      description: 'Leading functional teams and coordinating club technical activities while mentoring 50+ members in microcontroller programming and PCB design.',
       responsibilities: [
-        'Organized robotics competitions and technical workshops',
-        'Mentored students in robotics and embedded systems',
-        'Led project teams for various robotics competitions',
-        'Coordinated with industry professionals for knowledge sharing'
+        'Lead functional teams and coordinate club technical activities',
+        'Mentor 50+ members in microcontroller programming and PCB design',
+        'Organize robotics competitions and technical workshops',
+        'Coordinate with industry professionals for knowledge sharing sessions'
       ],
       type: 'leadership'
     },
     {
-      title: 'Robotics Club Member',
-      company: 'Pashchimanchal Campus',
-      period: '2022 - 2023',
-      description: 'Active participation in robotics projects and competitions. Developed skills in robot design, programming, and team collaboration.',
+      title: 'General Member',
+      company: 'Robotics Club Pashchimanchal Campus',
+      period: 'March 2024 - March 2025',
+      description: 'Developed advanced Micromouse robot using line maze-solving algorithms and coordinated 15-day "Funny Session" workshop, training 100+ students in robotics.',
       responsibilities: [
-        'Participated in micromouse competition development',
-        'Collaborated on line-following and obstacle-avoiding robots',
-        'Learned advanced robotics concepts and applications',
-        'Contributed to club\'s technical documentation'
+        'Developed advanced Micromouse robot using line maze-solving algorithms',
+        'Coordinated 15-day "Funny Session" workshop, training 100+ students in robotics',
+        'Mentored teams for Autonomous Boat Racing Competition, achieving 1st Runner-up position',
+        'Participated in various robotics projects and competitions'
       ],
       type: 'education'
     },
     {
-      title: 'Electronics Engineering Student',
-      company: 'Pashchimanchal Campus, Pokhara',
-      period: '2021 - Present',
-      description: 'Pursuing Bachelor\'s degree in Electronics Engineering with focus on embedded systems, robotics, and digital signal processing.',
+      title: 'Robotics Mentor',
+      company: 'Karyashala & Engineer Without Borders',
+      period: 'July 2024, 7 days',
+      description: 'Guided students through 3D design, 3D printing, and ESP32-based projects as a volunteer mentor.',
       responsibilities: [
-        'Completed coursework in circuit analysis and design',
-        'Worked on various lab projects and assignments',
-        'Participated in academic research projects',
-        'Maintained excellent academic performance'
+        'Mentored students in 3D design and 3D printing techniques',
+        'Guided ESP32-based project development',
+        'Provided hands-on training in embedded systems',
+        'Supported students in robotics project implementation'
       ],
-      type: 'education'
+      type: 'volunteer'
     }
   ]
 
@@ -64,6 +64,8 @@ export default function Experience() {
         return 'fas fa-users'
       case 'education':
         return 'fas fa-graduation-cap'
+      case 'volunteer':
+        return 'fas fa-heart'
       default:
         return 'fas fa-circle'
     }
@@ -77,14 +79,16 @@ export default function Experience() {
         return 'from-green-500 to-teal-600'
       case 'education':
         return 'from-yellow-500 to-orange-600'
+      case 'volunteer':
+        return 'from-pink-500 to-red-600'
       default:
         return 'from-gray-500 to-gray-600'
     }
   }
 
   return (
-    <section id="experience" className="py-24 relative">
-      <div className="max-w-4xl mx-auto px-5">
+    <section id="experience" className="py-24 relative bg-slate-900/30">
+      <div className="max-w-5xl mx-auto px-5">
         <div className="text-center mb-16">
           <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
             Experience
@@ -96,46 +100,69 @@ export default function Experience() {
           </p>
         </div>
 
-        <div className="relative">
-          {/* Timeline Line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-indigo-500 via-purple-500 to-cyan-500"></div>
-
+        <div className="space-y-8">
           {experiences.map((exp, index) => (
-            <div key={index} className="relative flex items-center mb-12 last:mb-0">
-              {/* Timeline Dot */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 z-10">
-                <div className={`w-6 h-6 bg-gradient-to-r ${getGradient(exp.type)} rounded-full border-4 border-slate-900 shadow-lg`}></div>
-              </div>
-
-              {/* Content */}
-              <div className={`w-full ${index % 2 === 0 ? 'pr-1/2 text-right' : 'pl-1/2 text-left'}`}>
-                <div className={`bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 border border-indigo-500/20 hover:border-indigo-500/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/20 ${index % 2 === 0 ? 'mr-8' : 'ml-8'}`}>
-                  {/* Header */}
-                  <div className={`flex items-center gap-4 mb-4 ${index % 2 === 0 ? 'justify-end' : 'justify-start'}`}>
-                    <div className={`w-12 h-12 bg-gradient-to-r ${getGradient(exp.type)} rounded-full flex items-center justify-center shadow-lg ${index % 2 === 0 ? 'order-2' : 'order-1'}`}>
-                      <i className={`${getIcon(exp.type)} text-white text-lg`}></i>
-                    </div>
-                    <div className={`${index % 2 === 0 ? 'order-1' : 'order-2'}`}>
-                      <h3 className="text-xl font-bold text-white">{exp.title}</h3>
-                      <p className="text-indigo-300 font-semibold">{exp.company}</p>
-                      <p className="text-cyan-400 text-sm font-medium">{exp.period}</p>
-                    </div>
+            <div key={index} className="relative">
+              {/* Experience Card */}
+              <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 border border-indigo-500/20 hover:border-indigo-500/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/20">
+                {/* Header */}
+                <div className="flex items-start gap-6 mb-6">
+                  {/* Icon */}
+                  <div className={`flex-shrink-0 w-16 h-16 bg-gradient-to-r ${getGradient(exp.type)} rounded-full flex items-center justify-center shadow-lg`}>
+                    <i className={`${getIcon(exp.type)} text-white text-xl`}></i>
                   </div>
+                  
+                  {/* Title and Company */}
+                  <div className="flex-1">
+                    <h3 className="text-2xl font-bold text-white mb-2">{exp.title}</h3>
+                    <p className="text-indigo-300 font-semibold text-lg mb-1">{exp.company}</p>
+                    <p className="text-cyan-400 font-medium">{exp.period}</p>
+                  </div>
+                  
+                  {/* Type Badge */}
+                  <div className={`px-4 py-2 rounded-full border-2 ${
+                    exp.type === 'work' ? 'bg-blue-500/20 border-blue-400 text-blue-300' :
+                    exp.type === 'leadership' ? 'bg-green-500/20 border-green-400 text-green-300' :
+                    exp.type === 'education' ? 'bg-yellow-500/20 border-yellow-400 text-yellow-300' :
+                    exp.type === 'volunteer' ? 'bg-pink-500/20 border-pink-400 text-pink-300' :
+                    'bg-gray-500/20 border-gray-400 text-gray-300'
+                  }`}>
+                    <span className="text-sm font-bold uppercase tracking-wide">
+                      {exp.type === 'work' ? 'Work' :
+                       exp.type === 'leadership' ? 'Leadership' :
+                       exp.type === 'education' ? 'Education' :
+                       exp.type === 'volunteer' ? 'Volunteer' :
+                       exp.type}
+                    </span>
+                  </div>
+                </div>
 
-                  {/* Description */}
-                  <p className="text-gray-300 mb-4 leading-relaxed">{exp.description}</p>
+                {/* Description */}
+                <p className="text-gray-300 mb-6 leading-relaxed text-lg">{exp.description}</p>
 
-                  {/* Responsibilities */}
-                  <ul className={`space-y-2 ${index % 2 === 0 ? 'text-right' : 'text-left'}`}>
+                {/* Responsibilities */}
+                <div>
+                  <h4 className="text-white font-semibold mb-4 flex items-center gap-2">
+                    <i className="fas fa-tasks text-cyan-400"></i>
+                    Key Responsibilities & Achievements
+                  </h4>
+                  <div className="grid md:grid-cols-2 gap-3">
                     {exp.responsibilities.map((responsibility, respIndex) => (
-                      <li key={respIndex} className={`text-gray-400 text-sm flex items-start gap-2 ${index % 2 === 0 ? 'justify-end' : 'justify-start'}`}>
-                        <i className={`fas fa-chevron-right text-cyan-400 text-xs mt-1 ${index % 2 === 0 ? 'order-2' : 'order-1'}`}></i>
-                        <span className={`${index % 2 === 0 ? 'order-1' : 'order-2'}`}>{responsibility}</span>
-                      </li>
+                      <div key={respIndex} className="flex items-start gap-3 p-3 bg-slate-700/30 rounded-lg border border-slate-600/30">
+                        <i className="fas fa-check-circle text-green-400 text-sm mt-1 flex-shrink-0"></i>
+                        <span className="text-gray-300 text-sm leading-relaxed">{responsibility}</span>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
               </div>
+              
+              {/* Connection Line (except for last item) */}
+              {index < experiences.length - 1 && (
+                <div className="flex justify-center py-4">
+                  <div className="w-px h-8 bg-gradient-to-b from-indigo-500 to-purple-500"></div>
+                </div>
+              )}
             </div>
           ))}
         </div>

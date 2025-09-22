@@ -3,81 +3,42 @@
 export default function Projects() {
   const projects = [
     {
-      title: 'Smart Home Automation System',
-      description: 'IoT-based home automation system using ESP32 and mobile app control. Features include remote lighting control, temperature monitoring, and security system integration.',
-      tech: ['ESP32', 'Arduino IDE', 'WiFi', 'Mobile App', 'Sensors', 'React Native'],
-      icon: 'fas fa-home',
-      gradient: 'from-blue-500 to-cyan-500',
-      features: [
-        'Remote control via mobile application',
-        'Real-time sensor data monitoring',
-        'Automated lighting and climate control',
-        'Security alerts and notifications'
-      ]
-    },
-    {
-      title: 'Micromouse Competition Robot',
-      description: 'Autonomous maze-solving robot designed for micromouse competitions. Implemented advanced algorithms for optimal path finding and efficient maze navigation.',
-      tech: ['Arduino', 'C++', 'Ultrasonic Sensors', 'Motors', 'Algorithms', 'PCB Design'],
+      title: 'Micromouse Line Maze-Solving Robot',
+      description: 'Designed and programmed a maze-solving robot using Arduino Nano, QTR sensors, and PID control, achieving 95% accuracy in speed and 40% boost in speed and reliability.',
+      tech: ['Arduino Nano', 'QTR Sensors', 'PID Control', 'C++', 'Motor Control'],
       icon: 'fas fa-robot',
       gradient: 'from-purple-500 to-pink-500',
       features: [
-        'Flood-fill algorithm implementation',
-        'Real-time maze mapping',
-        'Optimal path calculation',
-        'Precise motor control system'
+        'Flood-fill algorithm implementation for maze solving',
+        '95% accuracy in navigation and speed optimization',
+        'PID control system for precise movement',
+        '40% improvement in speed and reliability over previous designs'
       ]
     },
     {
-      title: 'PCB Design Portfolio',
-      description: 'Collection of custom PCB designs for various embedded projects including sensor modules, motor controllers, and development boards with professional layouts.',
-      tech: ['KiCad', 'Altium Designer', 'Circuit Design', 'Component Selection', 'Manufacturing', 'Testing'],
-      icon: 'fas fa-microchip',
+      title: 'Voyager Line Follower Bot',
+      description: 'Built line-following robot with ultrasonic obstacle detection, optimized for speed and stability using advanced sensor integration and control algorithms.',
+      tech: ['Arduino', 'Ultrasonic Sensors', 'Line Detection', 'Obstacle Avoidance', 'Motor Control'],
+      icon: 'fas fa-route',
+      gradient: 'from-blue-500 to-cyan-500',
+      features: [
+        'Advanced line detection and following capabilities',
+        'Ultrasonic obstacle detection and avoidance',
+        'Optimized for speed and stability',
+        'Real-time sensor data processing'
+      ]
+    },
+    {
+      title: 'Autonomous Boat Project',
+      description: 'Designed and raced an autonomous boat for competition. The team achieved 1st Runner-Up position in the competition through innovative design and programming.',
+      tech: ['Microcontroller', 'Autonomous Navigation', 'Competition Design', 'Team Leadership'],
+      icon: 'fas fa-ship',
       gradient: 'from-green-500 to-teal-500',
       features: [
-        'Multi-layer PCB designs',
-        'Component library development',
-        'Signal integrity optimization',
-        'Manufacturing-ready outputs'
-      ]
-    },
-    {
-      title: 'Weather Monitoring Station',
-      description: 'Complete weather monitoring system with web dashboard for real-time data visualization. Includes multiple sensors and wireless data transmission.',
-      tech: ['ESP32', 'Sensors', 'Web Dashboard', 'Database', 'Charts', 'API'],
-      icon: 'fas fa-cloud-sun',
-      gradient: 'from-yellow-500 to-orange-500',
-      features: [
-        'Multiple weather parameter monitoring',
-        'Real-time web dashboard',
-        'Historical data storage',
-        'Mobile-responsive interface'
-      ]
-    },
-    {
-      title: 'Robotic Arm Controller',
-      description: 'Precision robotic arm with wireless control and computer vision integration. Capable of object recognition and automated manipulation tasks.',
-      tech: ['Arduino', 'Servo Motors', 'Computer Vision', 'Python', 'OpenCV', 'Wireless'],
-      icon: 'fas fa-hand-paper',
-      gradient: 'from-red-500 to-pink-500',
-      features: [
-        '6-DOF robotic arm control',
-        'Computer vision integration',
-        'Object recognition and tracking',
-        'Wireless remote control'
-      ]
-    },
-    {
-      title: 'IoT Environmental Monitor',
-      description: 'Environmental monitoring system for indoor air quality, temperature, humidity, and pollution levels with cloud data logging and alert system.',
-      tech: ['IoT', 'Cloud Platform', 'Sensors', 'Data Analytics', 'Mobile Alerts', 'Dashboard'],
-      icon: 'fas fa-leaf',
-      gradient: 'from-emerald-500 to-green-500',
-      features: [
-        'Multi-parameter environmental sensing',
-        'Cloud-based data storage',
-        'Real-time alert notifications',
-        'Data analytics and trends'
+        'Autonomous navigation system implementation',
+        'Competition-grade design and optimization',
+        'Team leadership and project coordination',
+        'Achieved 1st Runner-Up position in racing competition'
       ]
     }
   ]

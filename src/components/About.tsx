@@ -32,23 +32,22 @@ export default function About() {
             <div className="space-y-6 text-gray-300">
               <p className="text-lg leading-relaxed">
                 Hello! I&apos;m <span className="text-yellow-400 font-semibold">Prashant Bhandari</span>, 
-                an Electronics Engineering student from the beautiful city of Pokhara, Nepal. 
-                I&apos;m passionate about robotics, embedded systems, and the endless possibilities 
-                that technology brings to solve real-world problems.
+                an Electronics Engineering student with hands-on experience in Robotics, PCB designs, 
+                and Embedded systems. I have a proven track record in leading projects, mentoring teams, 
+                and delivering competition-winning designs.
               </p>
               
               <p className="text-lg leading-relaxed">
-                Currently pursuing my degree in Electronics Engineering at Pashchimanchal Campus, 
-                I specialize in embedded systems development, PCB design, and robotics. My journey 
-                in technology has been driven by curiosity and a desire to create innovative solutions 
-                that make a difference.
+                Currently pursuing my B.E. in Electronics, Communication & Information Engineering at 
+                Pashchimanchal Campus, Pokhara (Jan 2023 to Present), I&apos;m in my 3rd year with a 
+                strong focus on embedded systems, robotics, and PCB design.
               </p>
 
               <p className="text-lg leading-relaxed">
-                As an active member of the Robotics Club and an intern at YarsaTech, I&apos;ve had 
-                the opportunity to work on exciting projects ranging from micromouse competitions 
-                to complex embedded system designs. I believe in continuous learning and staying 
-                updated with the latest technological advancements.
+                As an Executive Member of the Robotics Club at Pashchimanchal Campus and Electronics 
+                Engineer Intern at Yarsa Tech, Pokhara, I&apos;ve gained valuable experience in leading 
+                functional teams, coordinating technical activities, and mentoring 50+ members in 
+                microcontroller programming and PCB design.
               </p>
             </div>
 
@@ -58,8 +57,8 @@ export default function About() {
                 <i className="fas fa-graduation-cap text-2xl bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mr-4 mt-1"></i>
                 <div>
                   <h4 className="font-semibold text-white mb-1">Education</h4>
-                  <p className="text-gray-400">Electronics Engineering</p>
-                  <p className="text-sm text-gray-500">Pashchimanchal Campus, Pokhara</p>
+                  <p className="text-gray-400">B.E. Electronics, Communication & Information Engineering</p>
+                  <p className="text-sm text-gray-500">Pashchimanchal Campus, Pokhara (2023-Present)</p>
                 </div>
               </div>
 
@@ -77,7 +76,7 @@ export default function About() {
                 <div>
                   <h4 className="font-semibold text-white mb-1">Experience</h4>
                   <p className="text-gray-400">Electronics Engineer Intern</p>
-                  <p className="text-sm text-gray-500">YarsaTech</p>
+                  <p className="text-sm text-gray-500">Yarsa Tech, Pokhara (Jan 2025 - July 2025)</p>
                 </div>
               </div>
 
@@ -86,7 +85,7 @@ export default function About() {
                 <div>
                   <h4 className="font-semibold text-white mb-1">Leadership</h4>
                   <p className="text-gray-400">Executive Member</p>
-                  <p className="text-sm text-gray-500">Robotics Club WRC</p>
+                  <p className="text-sm text-gray-500">Robotics Club, Pashchimanchal Campus (March 2025 - Present)</p>
                 </div>
               </div>
             </div>

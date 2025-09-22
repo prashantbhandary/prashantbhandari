@@ -4,37 +4,37 @@ export default function Skills() {
       title: 'Programming Languages',
       icon: 'fas fa-code',
       gradient: 'from-blue-500 to-purple-600',
-      skills: ['C/C++', 'Python', 'JavaScript', 'TypeScript', 'Assembly', 'MATLAB']
+      skills: ['C/C++', 'Python', 'JavaScript', 'Micro Python']
     },
     {
       title: 'Embedded Systems',
       icon: 'fas fa-microchip',
       gradient: 'from-green-500 to-teal-600',
-      skills: ['Arduino', 'ESP32', 'STM32', 'Raspberry Pi', 'Embedded C', 'IoT Development']
+      skills: ['Arduino', 'ESP32', 'ESP8266', 'STM32', 'Helios SDK', 'HCM111Z']
     },
     {
       title: 'PCB Design & CAD',
       icon: 'fas fa-draw-polygon',
       gradient: 'from-purple-500 to-pink-600',
-      skills: ['KiCad', 'Altium Designer', 'AutoCAD', 'Fusion 360', 'Circuit Design', 'Schematic Design']
+      skills: ['KiCad', 'Proteus', 'Circuit Design', 'Schematic Design']
     },
     {
-      title: 'Web Development',
-      icon: 'fas fa-globe',
+      title: 'UI Development',
+      icon: 'fas fa-paint-brush',
       gradient: 'from-yellow-500 to-orange-600',
-      skills: ['HTML/CSS', 'React', 'Next.js', 'Node.js', 'Express.js', 'MongoDB']
+      skills: ['LVGL Graphics Library', 'Embedded Display Systems']
     },
     {
-      title: 'Robotics & Control',
-      icon: 'fas fa-robot',
+      title: 'Machine Learning',
+      icon: 'fas fa-brain',
       gradient: 'from-red-500 to-pink-600',
-      skills: ['Robot Programming', 'Sensor Integration', 'Motor Control', 'PID Control', 'Computer Vision', 'ROS']
+      skills: ['Linear Regression', 'Classification']
     },
     {
       title: 'Tools & Technologies',
       icon: 'fas fa-tools',
       gradient: 'from-indigo-500 to-blue-600',
-      skills: ['Git/GitHub', 'VS Code', 'Proteus', 'Multisim', 'LabVIEW', 'Docker']
+      skills: ['Git/GitHub', 'VS Code', 'BLE Communication', 'QR/Barcode Scanner']
     }
   ]
 
