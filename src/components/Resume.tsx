@@ -127,7 +127,7 @@ export default function Resume() {
                   <h3 className="font-semibold text-gray-800 text-lg">General Member - Robotics Club Pashchimanchal Campus (March 2024 – March 2025)</h3>
                   <ul className="list-disc list-inside text-gray-700 ml-4 space-y-1">
                     <li>Developed advanced Micromouse robot using line maze-solving algorithms</li>
-                    <li>Coordinated 15-day &ldquo;Funny Session&rdquo; workshop, training 100+ students in robotics</li>
+                    <li>Coordinated 15-day &ldquo;Rainy Session&rdquo; workshop, training 100+ students in robotics</li>
                     <li>Mentored teams for Autonomous Boat Racing Competition, achieving 1st Runner-up position</li>
                   </ul>
                 </div>
