@@ -98,7 +98,7 @@ export default function Header() {
                 { href: 'skills', label: 'Skills' },
                 { href: 'experience', label: 'Experience' },
                 { href: 'projects', label: 'Projects' },
-                { href: 'achievements', label: 'Achievements' },
+                { href: 'certificates', label: 'Certificates' },
                 { href: 'contact', label: 'Contact' }
               ].map((item) => (
                 <li key={item.href}>
@@ -130,7 +130,7 @@ export default function Header() {
                 { href: 'skills', label: 'Skills' },
                 { href: 'experience', label: 'Experience' },
                 { href: 'projects', label: 'Projects' },
-                { href: 'achievements', label: 'Achievements' },
+                { href: 'certificates', label: 'Certificates' },
                 { href: 'contact', label: 'Contact' }
               ].map((item, index) => (
                 <li 

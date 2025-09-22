@@ -32,22 +32,8 @@ export default function About() {
             <div className="space-y-6 text-gray-300">
               <p className="text-lg leading-relaxed">
                 Hello! I&apos;m <span className="text-yellow-400 font-semibold">Prashant Bhandari</span>, 
-                an Electronics Engineering student with hands-on experience in Robotics, PCB designs, 
-                and Embedded systems. I have a proven track record in leading projects, mentoring teams, 
-                and delivering competition-winning designs.
-              </p>
-              
-              <p className="text-lg leading-relaxed">
-                Currently pursuing my B.E. in Electronics, Communication & Information Engineering at 
-                Pashchimanchal Campus, Pokhara (Jan 2023 to Present), I&apos;m in my 3rd year with a 
-                strong focus on embedded systems, robotics, and PCB design.
-              </p>
-
-              <p className="text-lg leading-relaxed">
-                As an Executive Member of the Robotics Club at Pashchimanchal Campus and Electronics 
-                Engineer Intern at Yarsa Tech, Pokhara, I&apos;ve gained valuable experience in leading 
-                functional teams, coordinating technical activities, and mentoring 50+ members in 
-                microcontroller programming and PCB design.
+                an Electronics Engineering student specializing in Robotics, PCB design, and Embedded systems 
+                with a proven track record in competition-winning projects.
               </p>
             </div>
 

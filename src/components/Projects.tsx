@@ -1,5 +1,8 @@
 'use client'
 
+import Image from 'next/image'
+import CertificateBadge from './CertificateBadge'
+
 export default function Projects() {
   const projects = [
     {
@@ -7,6 +10,8 @@ export default function Projects() {
       description: 'Designed and programmed a maze-solving robot using Arduino Nano, QTR sensors, and PID control, achieving 95% accuracy in speed and 40% boost in speed and reliability.',
       tech: ['Arduino Nano', 'QTR Sensors', 'PID Control', 'C++', 'Motor Control'],
       icon: 'fas fa-robot',
+      image: '/images/MicroMouse.jpg',
+      githubUrl: 'https://github.com/prashantbhandary/',
       gradient: 'from-purple-500 to-pink-500',
       features: [
         'Flood-fill algorithm implementation for maze solving',
@@ -20,6 +25,8 @@ export default function Projects() {
       description: 'Built line-following robot with ultrasonic obstacle detection, optimized for speed and stability using advanced sensor integration and control algorithms.',
       tech: ['Arduino', 'Ultrasonic Sensors', 'Line Detection', 'Obstacle Avoidance', 'Motor Control'],
       icon: 'fas fa-route',
+      image: '/images/VoyagerBot2023.jpg',
+      githubUrl: 'https://github.com/prashantbhandary/',
       gradient: 'from-blue-500 to-cyan-500',
       features: [
         'Advanced line detection and following capabilities',
@@ -33,6 +40,8 @@ export default function Projects() {
       description: 'Designed and raced an autonomous boat for competition. The team achieved 1st Runner-Up position in the competition through innovative design and programming.',
       tech: ['Microcontroller', 'Autonomous Navigation', 'Competition Design', 'Team Leadership'],
       icon: 'fas fa-ship',
+      image: null, // No specific image available for boat project
+      githubUrl: 'https://github.com/prashantbhandary/',
       gradient: 'from-green-500 to-teal-500',
       features: [
         'Autonomous navigation system implementation',
@@ -65,15 +74,56 @@ export default function Projects() {
             >
               {/* Project Image/Icon */}
               <div className={`h-48 bg-gradient-to-br ${project.gradient} flex items-center justify-center relative overflow-hidden`}>
-                <i className={`${project.icon} text-6xl text-white/90 group-hover:scale-110 transition-transform duration-300`}></i>
+                {project.image ? (
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    width={300}
+                    height={192}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                ) : (
+                  <i className={`${project.icon} text-6xl text-white/90 group-hover:scale-110 transition-transform duration-300`}></i>
+                )}
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300"></div>
               </div>
 
               {/* Project Content */}
               <div className="p-6">
                 {/* Title */}
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-indigo-300 transition-colors duration-300">
+                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-indigo-300 transition-colors duration-300 flex items-center gap-3">
                   {project.title}
+                  {/* Certificate badges for specific projects */}
+                  {project.title === 'Micromouse Line Maze-Solving Robot' && (
+                    <div className="flex gap-1">
+                      <CertificateBadge 
+                        certificateImage="/images/BattleForSpeed2023WinnerCertification.jpg"
+                        title="Battle For Speed 2023 Winner"
+                        description="First place winner in Battle For Speed robotics competition"
+                        size="sm"
+                      />
+                      <CertificateBadge 
+                        certificateImage="/images/DeltaRobothonRunnerUpCertification.jpg"
+                        title="Delta Robothon Runner-Up"
+                        description="Second place in Delta Robothon competition"
+                        size="sm"
+                      />
+                      <CertificateBadge 
+                        certificateImage="/images/MeshMerizeIITBombay.png"
+                        title="MeshMerize IIT Bombay"
+                        description="Participation in MeshMerize competition at IIT Bombay"
+                        size="sm"
+                      />
+                    </div>
+                  )}
+                  {project.title === 'Voyager Line Follower Bot' && (
+                    <CertificateBadge 
+                      certificateImage="/images/VoyagerBot2023.jpg"
+                      title="Voyager Bot 2023"
+                      description="First place in Voyager line follower bot competition"
+                      size="sm"
+                    />
+                  )}
                 </h3>
 
                 {/* Description */}
@@ -109,10 +159,15 @@ export default function Projects() {
                     <i className="fas fa-eye mr-2"></i>
                     View Details
                   </button>
-                  <button className="flex-1 border border-indigo-500/50 text-indigo-300 py-2 px-4 rounded-lg font-medium transition-all duration-300 hover:bg-indigo-500/20 hover:border-indigo-400 text-sm">
+                  <a 
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 border border-indigo-500/50 text-indigo-300 py-2 px-4 rounded-lg font-medium transition-all duration-300 hover:bg-indigo-500/20 hover:border-indigo-400 text-sm text-center"
+                  >
                     <i className="fab fa-github mr-2"></i>
                     Source Code
-                  </button>
+                  </a>
                 </div>
               </div>
 
@@ -120,46 +175,6 @@ export default function Projects() {
               <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
             </div>
           ))}
-        </div>
-
-        {/* View More Projects */}
-        <div className="mt-16 text-center">
-          <div className="bg-slate-800/30 backdrop-blur-sm rounded-2xl p-8 border border-indigo-500/20">
-            <h3 className="text-2xl font-bold text-white mb-4">
-              <i className="fas fa-code-branch text-cyan-400 mr-3"></i>
-              More Projects Coming Soon
-            </h3>
-            <p className="text-gray-400 max-w-2xl mx-auto mb-6">
-              I&apos;m constantly working on new projects and experiments. Check out my GitHub 
-              for the latest updates and contributions to open-source projects.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="https://github.com/prashantbhandary"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-gradient-to-r from-gray-700 to-gray-800 text-white py-3 px-8 rounded-full font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-gray-700/30"
-              >
-                <i className="fab fa-github mr-2"></i>
-                View GitHub
-              </a>
-              <button 
-                onClick={() => {
-                  const element = document.getElementById('contact')
-                  if (element) {
-                    const headerHeight = 80
-                    const elementPosition = element.getBoundingClientRect().top
-                    const offsetPosition = elementPosition + window.pageYOffset - headerHeight - 20
-                    window.scrollTo({ top: offsetPosition, behavior: 'smooth' })
-                  }
-                }}
-                className="border border-cyan-400 text-cyan-400 py-3 px-8 rounded-full font-semibold transition-all duration-300 hover:-translate-y-1 hover:bg-cyan-400 hover:text-white"
-              >
-                <i className="fas fa-handshake mr-2"></i>
-                Collaborate
-              </button>
-            </div>
-          </div>
         </div>
       </div>
     </section>

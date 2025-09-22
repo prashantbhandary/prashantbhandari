@@ -89,21 +89,6 @@ export default function Skills() {
             </div>
           ))}
         </div>
-
-        {/* Additional Info */}
-        <div className="mt-16 text-center">
-          <div className="bg-slate-800/30 backdrop-blur-sm rounded-2xl p-8 border border-indigo-500/20">
-            <h3 className="text-2xl font-bold text-white mb-4">
-              <i className="fas fa-lightbulb text-yellow-400 mr-3"></i>
-              Always Learning
-            </h3>
-            <p className="text-gray-400 max-w-2xl mx-auto">
-              Technology evolves rapidly, and I&apos;m committed to continuous learning. Currently exploring 
-              advanced topics in AI/ML integration with embedded systems, advanced PCB design techniques, 
-              and cutting-edge web technologies to stay at the forefront of innovation.
-            </p>
-          </div>
-        </div>
       </div>
     </section>
   )

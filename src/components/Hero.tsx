@@ -4,18 +4,58 @@ import { useEffect, useState } from 'react'
 
 export default function Hero() {
   const [typedText, setTypedText] = useState('')
-  const fullText = 'Electronics Engineering Student | Robotics & Embedded Systems Enthusiast'
+  const [currentTextIndex, setCurrentTextIndex] = useState(0)
+  
+  const texts = [
+    'Electronics Engineering Student 🎓',
+    'Robotics Enthusiast 🤖',
+    'PCB Design Expert 🔧',
+    'Embedded Systems Developer 💻',
+    'Competition Winner 🏆',
+    'Arduino & ESP32 Pro ⚡',
+    'Innovation Builder 🚀'
+  ]
 
   useEffect(() => {
     let index = 0
-    const timer = setInterval(() => {
-      if (index < fullText.length) {
-        setTypedText(fullText.slice(0, index + 1))
-        index++
-      } else {
-        clearInterval(timer)
+    let isDeleting = false
+    let isTyping = true
+    let textIndex = 0
+    
+    const typeText = () => {
+      const currentText = texts[textIndex]
+      
+      if (isTyping && !isDeleting) {
+        // Typing phase
+        if (index < currentText.length) {
+          setTypedText(currentText.slice(0, index + 1))
+          index++
+        } else {
+          // Finished typing, wait then start deleting
+          isTyping = false
+          setTimeout(() => {
+            isDeleting = true
+            isTyping = true
+          }, 2000) // Wait 2 seconds before deleting
+        }
+      } else if (isTyping && isDeleting) {
+        // Deleting phase
+        if (index > 0) {
+          setTypedText(currentText.slice(0, index - 1))
+          index--
+        } else {
+          // Finished deleting, move to next text
+          isDeleting = false
+          textIndex = (textIndex + 1) % texts.length
+          setCurrentTextIndex(textIndex)
+          setTimeout(() => {
+            isTyping = true
+          }, 500) // Wait 0.5 second before typing next text
+        }
       }
-    }, 50)
+    }
+
+    const timer = setInterval(typeText, isDeleting ? 50 : 120) // Faster when deleting
 
     return () => clearInterval(timer)
   }, [])
@@ -39,6 +79,27 @@ export default function Hero() {
       {/* Background Overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-900/50 via-purple-900/30 to-slate-900/50" />
       
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full animate-float blur-3xl"></div>
+        <div className="absolute top-3/4 right-1/4 w-80 h-80 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-full animate-float blur-3xl" style={{animationDelay: '2s'}}></div>
+        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-to-r from-yellow-500/10 to-orange-500/10 rounded-full animate-spin-slow blur-2xl"></div>
+        
+        {/* Floating particles */}
+        {[...Array(5)].map((_, i) => (
+          <div
+            key={i}
+            className={`absolute w-2 h-2 bg-cyan-400/50 rounded-full animate-float`}
+            style={{
+              left: `${20 + i * 15}%`,
+              top: `${30 + i * 10}%`,
+              animationDelay: `${i * 1.5}s`,
+              animationDuration: `${4 + i}s`
+            }}
+          />
+        ))}
+      </div>
+      
       {/* Hero Content */}
       <div className="relative z-10 max-w-4xl mx-auto px-5 text-center">
         <div className="bg-slate-900/40 backdrop-blur-md p-12 rounded-3xl border border-indigo-500/20 shadow-2xl">
@@ -54,7 +115,7 @@ export default function Hero() {
           
           <div className="text-cyan-400 font-semibold text-xl md:text-2xl mb-12 min-h-[2rem]">
             {typedText}
-            <span className="animate-pulse">|</span>
+            <span className="animate-pulse text-yellow-400 font-bold">|</span>
           </div>
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center">

@@ -1,5 +1,7 @@
 'use client'
 
+import CertificateBadge from './CertificateBadge'
+
 export default function Experience() {
   const experiences = [
     {
@@ -114,7 +116,31 @@ export default function Experience() {
                   
                   {/* Title and Company */}
                   <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-white mb-2">{exp.title}</h3>
+                    <h3 className="text-2xl font-bold text-white mb-2 flex items-center gap-3">
+                      {exp.title}
+                      {/* Certificate badges for specific experiences */}
+                      {exp.title === 'General Member' && (
+                        <CertificateBadge 
+                          certificateImage="/images/GeneralMemberCertification.png"
+                          title="General Member Certification"
+                          description="Official membership certification for Robotics Club"
+                        />
+                      )}
+                      {exp.title === 'Robotics Mentor' && (
+                        <div className="flex gap-2">
+                          <CertificateBadge 
+                            certificateImage="/images/KaryaShalaMentorCertification.jpg"
+                            title="Karyashala Mentor Certification"
+                            description="Certification for mentoring students in robotics projects"
+                          />
+                          <CertificateBadge 
+                            certificateImage="/images/MentorShipCertification.jpg"
+                            title="Mentorship Certification"
+                            description="Recognition for outstanding mentorship in robotics"
+                          />
+                        </div>
+                      )}
+                    </h3>
                     <p className="text-indigo-300 font-semibold text-lg mb-1">{exp.company}</p>
                     <p className="text-cyan-400 font-medium">{exp.period}</p>
                   </div>
@@ -165,34 +191,6 @@ export default function Experience() {
               )}
             </div>
           ))}
-        </div>
-
-        {/* Call to Action */}
-        <div className="mt-16 text-center">
-          <div className="bg-slate-800/30 backdrop-blur-sm rounded-2xl p-8 border border-indigo-500/20">
-            <h3 className="text-2xl font-bold text-white mb-4">
-              <i className="fas fa-rocket text-cyan-400 mr-3"></i>
-              Looking Forward
-            </h3>
-            <p className="text-gray-400 max-w-2xl mx-auto mb-6">
-              I&apos;m always excited about new opportunities to learn, grow, and contribute to innovative 
-              projects in electronics, robotics, and embedded systems development.
-            </p>
-            <button 
-              onClick={() => {
-                const element = document.getElementById('contact')
-                if (element) {
-                  const headerHeight = 80
-                  const elementPosition = element.getBoundingClientRect().top
-                  const offsetPosition = elementPosition + window.pageYOffset - headerHeight - 20
-                  window.scrollTo({ top: offsetPosition, behavior: 'smooth' })
-                }
-              }}
-              className="bg-gradient-to-r from-cyan-400 to-blue-500 text-white py-3 px-8 rounded-full font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-cyan-400/30"
-            >
-              Get In Touch
-            </button>
-          </div>
         </div>
       </div>
     </section>
