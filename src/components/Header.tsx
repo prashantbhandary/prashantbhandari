@@ -98,8 +98,7 @@ export default function Header() {
                 { href: 'skills', label: 'Skills' },
                 { href: 'experience', label: 'Experience' },
                 { href: 'projects', label: 'Projects' },
-                { href: 'achievements', label: 'Achievements' },
-                { href: 'blog', label: 'Blog' },
+                { href: 'certificates', label: 'Certificates' },
                 { href: 'contact', label: 'Contact' }
               ].map((item) => (
                 <li key={item.href}>
@@ -111,6 +110,17 @@ export default function Header() {
                   </button>
                 </li>
               ))}
+              
+              {/* Resume Link - External */}
+              <li>
+                <a
+                  href="/resume"
+                  className="text-white hover:text-green-400 font-medium transition-all duration-300 relative py-2 hover:-translate-y-1 after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-green-400 after:to-emerald-400 hover:after:w-full after:transition-all after:duration-300 flex items-center gap-1"
+                >
+                  <i className="fas fa-file-alt text-sm"></i>
+                  Resume
+                </a>
+              </li>
             </ul>
 
             {/* Mobile Navigation */}
@@ -120,8 +130,7 @@ export default function Header() {
                 { href: 'skills', label: 'Skills' },
                 { href: 'experience', label: 'Experience' },
                 { href: 'projects', label: 'Projects' },
-                { href: 'achievements', label: 'Achievements' },
-                { href: 'blog', label: 'Blog' },
+                { href: 'certificates', label: 'Certificates' },
                 { href: 'contact', label: 'Contact' }
               ].map((item, index) => (
                 <li 
@@ -155,6 +164,24 @@ export default function Header() {
                   </div>
                 </li>
               ))}
+              
+              {/* Resume Link for Mobile */}
+              <li style={{ animationDelay: `${7 * 0.05}s` }}>
+                <a
+                  href="/resume"
+                  onClick={() => closeMenu()}
+                  className="flex w-full text-left py-6 px-6 text-white hover:text-green-400 font-medium transition-all duration-300 border-b border-white/10 hover:bg-green-400/10 rounded-lg cursor-pointer touch-manipulation items-center gap-2"
+                  style={{ 
+                    touchAction: 'manipulation',
+                    WebkitTapHighlightColor: 'rgba(255, 255, 255, 0.1)',
+                    minHeight: '60px',
+                    userSelect: 'none'
+                  }}
+                >
+                  <i className="fas fa-file-alt text-sm"></i>
+                  Resume
+                </a>
+              </li>
             </ul>
           </nav>
         </div>

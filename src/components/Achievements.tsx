@@ -9,28 +9,52 @@
 export default function Achievements() {
   const achievements = [
     {
-      title: 'Robotics Competition Winner',
-      description: 'First place in regional robotics competition',
+      title: '1st LOCUS 2025 (Micromouse)',
+      description: 'First place in LOCUS 2025 Micromouse competition - Jan 2025',
       icon: 'fas fa-trophy',
       gradient: 'from-yellow-500 to-amber-500'
     },
     {
-      title: 'Technical Workshop Leader',
-      description: 'Conducted workshops on embedded systems',
-      icon: 'fas fa-chalkboard-teacher',
+      title: '2nd Delta 3.0 (Micromouse)',
+      description: 'Second place in Delta 3.0 Micromouse competition - Feb 2025',
+      icon: 'fas fa-medal',
+      gradient: 'from-silver to-gray-600'
+    },
+    {
+      title: '3rd TechFest IIT Bombay (Micromouse)',
+      description: 'Third place in TechFest IIT Bombay Micromouse - Dec 2024',
+      icon: 'fas fa-award',
+      gradient: 'from-amber-600 to-yellow-700'
+    },
+    {
+      title: '1st Runner-Up Autonomous Boat Racing',
+      description: 'First Runner-Up in Autonomous Boat Racing Competition - Oct 2024',
+      icon: 'fas fa-ship',
       gradient: 'from-blue-500 to-indigo-500'
     },
     {
-      title: 'Innovation Award',
-      description: 'Recognition for innovative project solutions',
-      icon: 'fas fa-lightbulb',
+      title: '1st Voyager A line Follower Bot',
+      description: 'First place in Voyager A line Follower Bot competition - June 2025',
+      icon: 'fas fa-robot',
+      gradient: 'from-green-500 to-emerald-500'
+    },
+    {
+      title: 'Python Programming Certification',
+      description: 'Completed Python Programming: A Concise Introduction - Wesleyan University',
+      icon: 'fas fa-certificate',
       gradient: 'from-purple-500 to-pink-500'
     },
     {
-      title: 'Academic Excellence',
-      description: 'Consistently high academic performance',
-      icon: 'fas fa-medal',
-      gradient: 'from-green-500 to-emerald-500'
+      title: 'Machine Learning Certification',
+      description: 'Supervised Machine Learning: Regression and Classification - Stanford Online',
+      icon: 'fas fa-brain',
+      gradient: 'from-red-500 to-pink-500'
+    },
+    {
+      title: 'Robotics Mentor',
+      description: 'Volunteer mentor at Karyashala & Engineer Without Borders - 7 days training program',
+      icon: 'fas fa-chalkboard-teacher',
+      gradient: 'from-cyan-500 to-blue-500'
     }
   ]
 

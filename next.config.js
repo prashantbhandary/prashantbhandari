@@ -86,9 +86,6 @@ const nextConfig = {
   output: 'export',
   trailingSlash: false,
   distDir: 'out',
-  
-  // PWA and offline support
-  swcMinify: true,
 };
 
 module.exports = nextConfig;

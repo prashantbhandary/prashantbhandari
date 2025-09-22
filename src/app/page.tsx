@@ -4,8 +4,7 @@ import About from '@/components/About'
 import Skills from '@/components/Skills'
 import Experience from '@/components/Experience'
 import Projects from '@/components/Projects'
-import Achievements from '@/components/Achievements'
-import Blog from '@/components/Blog'
+import Certificates from '@/components/Certificates'
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
 import CircuitElements from '@/components/CircuitElements'
@@ -20,8 +19,7 @@ export default function Home() {
         <Skills />
         <Experience />
         <Projects />
-        <Achievements />
-        <Blog />
+        <Certificates />
         <Contact />
       </main>
       <Footer />
