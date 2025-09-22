@@ -1,12 +1,11 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 
 export default function Hero() {
   const [typedText, setTypedText] = useState('')
-  const [currentTextIndex, setCurrentTextIndex] = useState(0)
   
-  const texts = [
+  const texts = useMemo(() => [
     'Electronics Engineering Student 🎓',
     'Robotics Enthusiast 🤖',
     'PCB Design Expert 🔧',
@@ -14,7 +13,7 @@ export default function Hero() {
     'Competition Winner 🏆',
     'Arduino & ESP32 Pro ⚡',
     'Innovation Builder 🚀'
-  ]
+  ], [])
 
   useEffect(() => {
     let index = 0
@@ -47,7 +46,6 @@ export default function Hero() {
           // Finished deleting, move to next text
           isDeleting = false
           textIndex = (textIndex + 1) % texts.length
-          setCurrentTextIndex(textIndex)
           setTimeout(() => {
             isTyping = true
           }, 500) // Wait 0.5 second before typing next text
@@ -58,7 +56,7 @@ export default function Hero() {
     const timer = setInterval(typeText, isDeleting ? 50 : 120) // Faster when deleting
 
     return () => clearInterval(timer)
-  }, [])
+  }, [texts])
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
