@@ -30,7 +30,7 @@
 
 **After:**
 ```
-"Electronics Engineer & Robotics Expert from Nepal. Winner of LOCUS 2025 & multiple robotics competitions. Expert in embedded systems & PCB design."
+"Electronics Engineer & Robotics Expert from Nepal. Ranked 5th position at Techfest-2024 IIT Bombay & Winner at multiple robotics competitions. Expert in embedded systems & PCB design."
 ```
 - **Length**: ~980 pixels (within 1000 pixel limit)
 - **Character Count**: 147 characters (optimal)
@@ -55,7 +55,7 @@
 ### 2. **Enhanced Keywords Strategy**
 - **Primary Keywords Retained**: Electronics Engineer, Robotics Expert
 - **Location Keywords**: Nepal (maintained for local SEO)
-- **Achievement Keywords**: Added "Winner of LOCUS 2025" for credibility
+- **Achievement Keywords**: Added "Winner of Techfest-2024 IIT Bombay" for credibility
 - **Technical Keywords**: Embedded systems, PCB design
 
 ### 3. **Mobile Optimization**
