@@ -81,7 +81,7 @@ export default function About() {
               {[
                 { href: 'https://www.linkedin.com/in/prashantbdri', icon: 'fab fa-linkedin', color: 'from-blue-600 to-blue-700' },
                 { href: 'https://github.com/prashantbhandary', icon: 'fab fa-github', color: 'from-gray-700 to-gray-800' },
-                { href: 'https://twitter.com/santhprashant', icon: 'fab fa-twitter', color: 'from-blue-400 to-blue-500' },
+                { href: 'https://twitter.com/santhprashant', icon: 'fab fa-twitter', color: 'from-gray-400 to-gray-600' },
                 { href: 'https://www.instagram.com/_prashant.08/', icon: 'fab fa-instagram', color: 'from-pink-500 to-purple-600' }
               ].map((social, index) => (
                 <a

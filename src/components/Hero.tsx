@@ -6,13 +6,13 @@ export default function Hero() {
   const [typedText, setTypedText] = useState('')
   
   const texts = useMemo(() => [
-    'Electronics Engineering Student 🎓',
-    'Robotics Enthusiast 🤖',
-    'PCB Design Expert 🔧',
-    'Embedded Systems Developer 💻',
-    'Competition Winner 🏆',
-    'Arduino & ESP32 Pro ⚡',
-    'Innovation Builder 🚀'
+    'Electronics Engineering Student',
+    'Robotics Enthusiast',
+    'PCB Design Expert',
+    'Embedded Systems Developer',
+    'Competition Winner',
+    'Arduino & ESP32 Pro',
+    'Innovation Builder'
   ], [])
 
   useEffect(() => {

@@ -8,7 +8,7 @@ interface Certificate {
   title: string
   description: string
   image: string
-  category: 'competition' | 'mentorship' | 'membership' | 'workshop'
+  category: 'competition' | 'mentorship' | 'workshop' | 'experience'
   date?: string
   organization?: string
 }
@@ -24,9 +24,9 @@ export function CertificateModal({ certificate, isOpen, onClose }: CertificateMo
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-      <div className="relative max-w-4xl w-full max-h-[90vh] bg-slate-900 rounded-2xl border border-indigo-500/30 overflow-hidden">
+      <div className="relative max-w-5xl w-full max-h-[95vh] bg-slate-900 rounded-2xl border border-indigo-500/30 flex flex-col overflow-hidden">
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-slate-700">
+        <div className="flex items-center justify-between p-6 border-b border-slate-700 flex-shrink-0">
           <div>
             <h3 className="text-2xl font-bold text-white">{certificate.title}</h3>
             {certificate.organization && (
@@ -44,21 +44,22 @@ export function CertificateModal({ certificate, isOpen, onClose }: CertificateMo
           </button>
         </div>
 
-        {/* Certificate Image */}
-        <div className="p-6">
-          <div className="relative w-full h-[60vh] bg-slate-800 rounded-lg overflow-hidden">
+        {/* Scrollable Content */}
+        <div className="flex-1 overflow-y-auto p-6">
+          {/* Certificate Image */}
+          <div className="relative w-full min-h-[70vh] bg-slate-800 rounded-lg overflow-hidden mb-6">
             <Image
               src={certificate.image}
               alt={certificate.title}
               fill
-              className="object-contain"
+              className="object-contain p-4"
               priority
             />
           </div>
           
           {/* Description */}
           {certificate.description && (
-            <div className="mt-4 p-4 bg-slate-800/50 rounded-lg">
+            <div className="p-4 bg-slate-800/50 rounded-lg">
               <p className="text-gray-300 leading-relaxed">{certificate.description}</p>
             </div>
           )}
@@ -74,13 +75,13 @@ export default function CertificatesShowcase() {
 
   const certificates: Certificate[] = [
     {
-      id: 'battle-for-speed',
-      title: 'Battle For Speed 2023 Winner',
-      description: 'First place winner in the Battle For Speed 2023 robotics competition, demonstrating excellence in robot design and programming.',
-      image: '/images/BattleForSpeed2023WinnerCertification.jpg',
-      category: 'competition',
-      date: 'March 2023',
-      organization: 'Robotics Competition'
+      id: 'yarsa-tech-experience',
+      title: 'Yarsa Tech Experience Certificate',
+      description: 'Certificate of experience for completing Electronics Engineer Internship at Yarsa Tech, Pokhara. Gained hands-on experience in electronics engineering, PCB design, and embedded systems development.',
+      image: '/images/YarsaTechCertificationOfExperience.jpg',
+      category: 'experience',
+      date: 'January 2025 - July 2025',
+      organization: 'Yarsa Tech, Pokhara'
     },
     {
       id: 'delta-robothon',
@@ -92,13 +93,13 @@ export default function CertificatesShowcase() {
       organization: 'Delta Robothon'
     },
     {
-      id: 'general-member',
-      title: 'General Member Certification',
-      description: 'Official membership certification recognizing active participation and contribution to the robotics club.',
-      image: '/images/GeneralMemberCertification.png',
-      category: 'membership',
-      date: 'March 2024',
-      organization: 'Robotics Club'
+      id: 'mesh-merize-iit',
+      title: 'MeshMerize IIT Bombay',
+      description: 'Participation certificate from MeshMerize competition at IIT Bombay, one of India\'s premier technical institutes.',
+      image: '/images/MeshMerizeIITBombay.png',
+      category: 'competition',
+      date: 'December 2024',
+      organization: 'IIT Bombay'
     },
     {
       id: 'karyashala-mentor',
@@ -119,15 +120,6 @@ export default function CertificatesShowcase() {
       organization: 'Educational Institution'
     },
     {
-      id: 'mesh-merize-iit',
-      title: 'MeshMerize IIT Bombay',
-      description: 'Participation certificate from MeshMerize competition at IIT Bombay, one of India\'s premier technical institutes.',
-      image: '/images/MeshMerizeIITBombay.png',
-      category: 'competition',
-      date: 'December 2024',
-      organization: 'IIT Bombay'
-    },
-    {
       id: 'workshop-lab448',
       title: 'Workshop by Lab448',
       description: 'Completion certificate for advanced workshop conducted by Lab448, focusing on cutting-edge technology and innovation.',
@@ -135,6 +127,24 @@ export default function CertificatesShowcase() {
       category: 'workshop',
       date: '2024',
       organization: 'Lab448'
+    },
+    {
+      id: 'general-member',
+      title: 'General Member Certification',
+      description: 'Official membership certification recognizing active participation and contribution to the robotics club activities.',
+      image: '/images/GeneralMemberCertification.png',
+      category: 'experience',
+      date: 'March 2024 - March 2025',
+      organization: 'Robotics Club'
+    },
+    {
+      id: 'battle-for-speed',
+      title: 'Battle For Speed 2023 Winner',
+      description: 'First place winner in the Battle For Speed 2023 robotics competition with Voyager Line Follower Bot. Built advanced line-following robot with ultrasonic obstacle detection, optimized for speed and stability using advanced sensor integration.',
+      image: '/images/BattleForSpeed2023WinnerCertification.jpg',
+      category: 'competition',
+      date: 'March 2023',
+      organization: 'Robotics Competition'
     }
   ]
 
@@ -152,8 +162,8 @@ export default function CertificatesShowcase() {
     switch (category) {
       case 'competition': return 'fas fa-trophy'
       case 'mentorship': return 'fas fa-chalkboard-teacher'
-      case 'membership': return 'fas fa-users'
       case 'workshop': return 'fas fa-tools'
+      case 'experience': return 'fas fa-briefcase'
       default: return 'fas fa-certificate'
     }
   }
@@ -162,13 +172,13 @@ export default function CertificatesShowcase() {
     switch (category) {
       case 'competition': return 'from-yellow-500 to-orange-500'
       case 'mentorship': return 'from-green-500 to-teal-500'
-      case 'membership': return 'from-blue-500 to-purple-500'
       case 'workshop': return 'from-pink-500 to-red-500'
+      case 'experience': return 'from-purple-500 to-violet-500'
       default: return 'from-gray-500 to-gray-600'
     }
   }
 
-  const categories = ['competition', 'mentorship', 'membership', 'workshop']
+  const categories = ['competition', 'mentorship', 'workshop', 'experience']
   const [activeCategory, setActiveCategory] = useState<string>('all')
 
   const filteredCertificates = activeCategory === 'all' 
