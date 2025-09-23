@@ -17,7 +17,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Prashant Bhandari | Electronics Engineering Student & Robotics Competition Winner",
-  description: "Electronics Engineering Student from Pokhara, Nepal. Competition winner in robotics (Battle For Speed 2023, Delta Robothon Runner-Up). Expert in Arduino, ESP32, PCB design & embedded systems. Currently at Pashchimanchal Campus & Electronics Engineer Intern at Yarsa Tech.",
+  description: "Electronics Engineering Student from Pokhara, Nepal. Competition winner in robotics (Battle For Speed 2023, Delta Robothon Runner-Up, Ranked 5th position at Techfest-2024 IIT Bombay & Winner at multiple robotics competitions). Expert in Arduino, ESP32, PCB design & embedded systems. Currently at Pashchimanchal Campus & Electronics Engineer Intern at Yarsa Tech.",
   keywords: "Prashant Bhandari, electronics engineering student, robotics competition winner, Battle For Speed 2023, Delta Robothon, Pokhara Nepal, Pashchimanchal Campus, Yarsa Tech intern, Arduino ESP32, PCB design, embedded systems, micromouse robot, line follower bot, autonomous boat, KiCad, C++ Python, robotics club executive member, electronics intern Nepal, competition robotics, maze solving robot, QTR sensors PID control",
   authors: [{ name: "Prashant Bhandari", url: "https://bhandari-prashant.com.np" }],
   creator: "Prashant Bhandari",
@@ -139,7 +139,7 @@ export default function RootLayout({
                 {
                   "@type": "Organization",
                   "name": "YarsaTech",
-                  "url": "https://yarsatech.com",
+                  "url": "https://yarsa.tech",
                   "location": {
                     "@type": "Place",
                     "name": "Pokhara, Nepal"
@@ -149,7 +149,8 @@ export default function RootLayout({
               "memberOf": {
                 "@type": "Organization",
                 "name": "Robotics Club Pashchimanchal Campus",
-                "description": "Executive Member leading robotics initiatives and mentoring projects"
+                "description": "Executive Member leading robotics initiatives and mentoring projects",
+                "url": "https://www.robotics.wrc.edu.np"
               },
               "alumniOf": {
                 "@type": "EducationalOrganization",
