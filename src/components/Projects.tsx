@@ -89,14 +89,36 @@ export default function Projects() {
       techStack: ['Arduino', 'Ultrasonic Sensors', 'Line Sensors', 'Motor Control', 'PID Tuning'],
       image: '/images/VoyagerBot2023.jpg',
       demoEmbedUrl: '',
-      primaryLink: 'https://github.com/prashantbhandary/',
-      secondaryLink: 'https://github.com/prashantbhandary/',
+      primaryLink: '/documentation-project-voyager.pdf',
+      secondaryLink: 'https://github.com/prashantbhandary/Project_Voyager',
       gradient: 'from-green-500 to-teal-500'
     }
   ]
 
   return (
     <section id="projects" className="py-24 relative bg-slate-900/30">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "name": "Prashant Bhandari Projects",
+            "itemListElement": projects.map((project, index) => ({
+              "@type": "ListItem",
+              "position": index + 1,
+              "item": {
+                "@type": "CreativeWork",
+                "name": project.title,
+                "description": `${project.summary} ${project.outcome}`,
+                "url": `https://bhandari-prashant.com.np/#projects`,
+                "sameAs": project.secondaryLink,
+                "identifier": project.primaryLink
+              }
+            }))
+          })
+        }}
+      />
       <div className="max-w-7xl mx-auto px-5">
         <div className="text-center mb-16">
           <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
