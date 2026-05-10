@@ -99,10 +99,6 @@ export default function RootLayout({
       <head>
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="googlebot" content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1" />
-        <link 
-          rel="stylesheet" 
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -222,7 +218,7 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
-        <div className="circuit-background" />
+        <div className="circuit-background" aria-hidden="true" />
         {children}
       </body>
     </html>
