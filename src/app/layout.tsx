@@ -16,8 +16,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Prashant Bhandari | Electronics Engineering Student & Robotics Competition Winner",
-  description: "Electronics Engineering Student from Pokhara, Nepal. Competition winner in robotics (Battle For Speed 2023, Delta Robothon Runner-Up, Ranked 5th position at Techfest-2024 IIT Bombay & Winner at multiple robotics competitions). Expert in Arduino, ESP32, PCB design & embedded systems. Currently at Pashchimanchal Campus & Electronics Engineer Intern at Yarsa Tech.",
+  title: "Prashant Bhandari | Electronics Engineer & Robotics Developer",
+  description: "Portfolio of Prashant Bhandari — Electronics Engineering student, robotics competition winner, PCB designer, and embedded systems developer from Pokhara, Nepal.",
   keywords: "Prashant Bhandari, electronics engineering student, robotics competition winner, Battle For Speed 2023, Delta Robothon, Pokhara Nepal, Pashchimanchal Campus, Yarsa Tech intern, Arduino ESP32, PCB design, embedded systems, micromouse robot, line follower bot, autonomous boat, KiCad, C++ Python, robotics club executive member, electronics intern Nepal, competition robotics, maze solving robot, QTR sensors PID control",
   authors: [{ name: "Prashant Bhandari", url: "https://bhandari-prashant.com.np" }],
   creator: "Prashant Bhandari",
@@ -38,8 +38,8 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://bhandari-prashant.com.np",
     siteName: "Prashant Bhandari - Portfolio",
-    title: "Prashant Bhandari | Electronics Engineering Student & Robotics Competition Winner",
-    description: "Electronics Engineering Student from Pokhara, Nepal. Competition winner in robotics (Battle For Speed 2023, Delta Robothon Runner-Up). Expert in Arduino, ESP32, PCB design & embedded systems. Currently at Pashchimanchal Campus & Electronics Engineer Intern at Yarsa Tech.",
+    title: "Prashant Bhandari | Electronics Engineer & Robotics Developer",
+    description: "Portfolio of Prashant Bhandari — Electronics Engineering student, robotics competition winner, PCB designer, and embedded systems developer from Pokhara, Nepal.",
     images: [
       {
         url: "https://bhandari-prashant.com.np/images/PrashantBhandari.png",
@@ -61,8 +61,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@santhprashant",
     creator: "@santhprashant",
-    title: "Prashant Bhandari | Electronics Engineering Student & Robotics Competition Winner",
-    description: "Electronics Engineering Student from Pokhara, Nepal. Competition winner in robotics (Battle For Speed 2023, Delta Robothon Runner-Up). Expert in Arduino, ESP32, PCB design & embedded systems. Currently at Pashchimanchal Campus & Electronics Engineer Intern at Yarsa Tech.",
+    title: "Prashant Bhandari | Electronics Engineer & Robotics Developer",
+    description: "Portfolio of Prashant Bhandari — Electronics Engineering student, robotics competition winner, PCB designer, and embedded systems developer from Pokhara, Nepal.",
     images: ["https://bhandari-prashant.com.np/images/PrashantBhandari.png"],
   },
   alternates: {

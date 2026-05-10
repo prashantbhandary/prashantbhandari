@@ -79,16 +79,17 @@ export default function About() {
             {/* Social Links */}
             <div className="flex justify-center lg:justify-start gap-6 mt-8">
               {[
-                { href: 'https://www.linkedin.com/in/prashantbdri', icon: 'fab fa-linkedin', color: 'from-blue-600 to-blue-700' },
-                { href: 'https://github.com/prashantbhandary', icon: 'fab fa-github', color: 'from-gray-700 to-gray-800' },
-                { href: 'https://twitter.com/santhprashant', icon: 'fab fa-twitter', color: 'from-gray-400 to-gray-600' },
-                { href: 'https://www.instagram.com/_prashant.08/', icon: 'fab fa-instagram', color: 'from-pink-500 to-purple-600' }
+                { href: 'https://www.linkedin.com/in/prashantbdri', icon: 'fab fa-linkedin', color: 'from-blue-600 to-blue-700', label: 'LinkedIn profile' },
+                { href: 'https://github.com/prashantbhandary', icon: 'fab fa-github', color: 'from-gray-700 to-gray-800', label: 'GitHub profile' },
+                { href: 'https://twitter.com/santhprashant', icon: 'fab fa-twitter', color: 'from-gray-400 to-gray-600', label: 'Twitter profile' },
+                { href: 'https://www.instagram.com/_prashant.08/', icon: 'fab fa-instagram', color: 'from-pink-500 to-purple-600', label: 'Instagram profile' }
               ].map((social, index) => (
                 <a
                   key={index}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={social.label}
                   className={`w-12 h-12 rounded-full bg-gradient-to-r ${social.color} flex items-center justify-center text-white transition-all duration-300 hover:-translate-y-2 hover:scale-110 hover:shadow-lg relative overflow-hidden group`}
                 >
                   <i className={`${social.icon} text-lg relative z-10`}></i>
