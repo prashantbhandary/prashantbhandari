@@ -7,7 +7,6 @@ export default function Footer() {
         <div className="text-center">
           {/* Logo */}
           <div className="text-3xl font-bold flex items-center justify-center mb-4">
-            <i className="fas fa-microchip mr-3 text-yellow-400"></i>
             <span>Prashant Bhandari</span>
           </div>
           

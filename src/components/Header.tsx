@@ -78,7 +78,6 @@ export default function Header() {
               className="text-3xl font-bold flex items-center cursor-pointer"
               onClick={() => window.location.reload()}
             >
-              <i className="fas fa-microchip mr-3 text-yellow-400 animate-pulse"></i>
               <span>Prashant</span>
             </div>
 
