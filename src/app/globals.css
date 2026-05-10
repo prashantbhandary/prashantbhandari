@@ -288,7 +288,6 @@ body {
   .nav-links.open li:nth-child(6) { animation-delay: 0.35s; }
   .nav-links.open li:nth-child(7) { animation-delay: 0.4s; }
 }
-
 /* Text utility classes for better readability */
 h1, h2, h3, h4, h5, h6 {
   line-height: 1.3;
@@ -318,6 +317,23 @@ p {
   color: #cbd5e1;
   line-height: 1.4;
 }
+
+/* Focus visible styles for accessibility */
+*:focus-visible {
+  outline: 2px solid #06b6d4;
+  outline-offset: 2px;
+}
+
+/* Ensure interactive elements have visible focus */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid #06b6d4;
+  outline-offset: 2px;
+}
+
 
 /* Ensure visibility */
 .bg-opacity-low {

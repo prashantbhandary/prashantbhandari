@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import { Link2, Github } from 'lucide-react'
 import CertificateBadge from './CertificateBadge'
 
 type Project = {
@@ -166,6 +167,7 @@ function ProjectImage({ project }: { project: Project }) {
       width={420}
       height={240}
       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+      loading="lazy"
     />
   )
 }
@@ -191,18 +193,18 @@ function ProjectActions({
         href={primaryLink}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex-1 bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-2 px-4 rounded-lg font-medium transition-all duration-300 hover:from-indigo-500 hover:to-purple-500 hover:-translate-y-1 hover:shadow-lg text-sm text-center"
+        className="flex-1 bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-2 px-4 rounded-lg font-medium transition-all duration-300 hover:from-indigo-500 hover:to-purple-500 hover:-translate-y-1 hover:shadow-lg text-sm text-center flex items-center justify-center gap-2"
       >
-        <i className="fas fa-link mr-2" />
+        <Link2 size={14} aria-hidden="true" />
         Project Documentation
       </a>
       <a
         href={secondaryLink}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex-1 border border-indigo-500/50 text-indigo-300 py-2 px-4 rounded-lg font-medium transition-all duration-300 hover:bg-indigo-500/20 hover:border-indigo-400 text-sm text-center"
+        className="flex-1 border border-indigo-500/50 text-indigo-300 py-2 px-4 rounded-lg font-medium transition-all duration-300 hover:bg-indigo-500/20 hover:border-indigo-400 text-sm text-center flex items-center justify-center gap-2"
       >
-        <i className="fab fa-github mr-2" />
+        <Github size={14} aria-hidden="true" />
         Source Code
       </a>
     </div>
@@ -213,13 +215,13 @@ function ProjectCard({ project }: { project: Project }) {
   const isMicromouse = project.title === MICROMOUSE_TITLE
 
   return (
-    <div className="group bg-slate-800/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-indigo-500/20 hover:border-indigo-500/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-indigo-500/20 relative">
+    <article className="group bg-slate-800/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-indigo-500/20 hover:border-indigo-500/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-indigo-500/20 relative">
       {/* Image / Demo */}
       <div
         className={`h-52 bg-gradient-to-br ${project.gradient} flex items-center justify-center relative overflow-hidden`}
       >
         <ProjectImage project={project} />
-        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300" />
+        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300" aria-hidden="true" />
       </div>
 
       {/* Content */}
@@ -256,8 +258,8 @@ function ProjectCard({ project }: { project: Project }) {
       </div>
 
       {/* Hover overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-    </div>
+      <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" aria-hidden="true" />
+    </article>
   )
 }
 
@@ -269,8 +271,8 @@ function SectionHeader() {
       <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
         Featured Projects
       </h2>
-      <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-yellow-400 mx-auto rounded-full mb-4" />
-      <p className="text-gray-400 max-w-3xl mx-auto text-lg">
+      <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-yellow-400 mx-auto rounded-full mb-4" aria-hidden="true" />
+      <p className="text-gray-300 max-w-3xl mx-auto text-lg">
         A showcase of my technical projects spanning embedded systems, robotics, IoT development,
         and PCB design. Each project demonstrates practical application of engineering principles.
       </p>
@@ -282,7 +284,7 @@ function SectionHeader() {
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-24 relative bg-slate-900/30">
+    <section id="projects" className="py-24 relative bg-slate-900/30" aria-labelledby="projects-heading">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(projectsJsonLd) }}
