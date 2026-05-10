@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState, useMemo } from 'react'
+import { Download, ExternalLink } from 'lucide-react'
 
 export default function Hero() {
   const [typedText, setTypedText] = useState('')
@@ -69,12 +70,12 @@ export default function Hero() {
   }
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden py-40">
+    <section className="min-h-screen flex items-center justify-center relative overflow-hidden py-40" aria-label="Hero section">
       {/* Background Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-900/50 via-purple-900/30 to-slate-900/50" />
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-900/50 via-purple-900/30 to-slate-900/50" aria-hidden="true" />
       
       {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full animate-float blur-3xl"></div>
         <div className="absolute top-3/4 right-1/4 w-80 h-80 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-full animate-float blur-3xl" style={{animationDelay: '2s'}}></div>
         <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-to-r from-yellow-500/10 to-orange-500/10 rounded-full animate-spin-slow blur-2xl"></div>
@@ -107,39 +108,42 @@ export default function Hero() {
             B.E. Electronics, Communication & Information Engineering Student
           </p>
           
-          <div className="text-cyan-400 font-semibold text-xl md:text-2xl mb-12 min-h-[2rem]">
+          <div className="text-cyan-400 font-semibold text-xl md:text-2xl mb-12 min-h-[2rem]" aria-live="polite">
             {typedText}
-            <span className="animate-pulse text-yellow-400 font-bold">|</span>
+            <span className="animate-pulse text-yellow-400 font-bold" aria-hidden="true">|</span>
           </div>
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <button
               onClick={() => scrollToSection('contact')}
-              className="group relative inline-block bg-gradient-to-r from-cyan-400 to-blue-500 text-white py-4 px-10 rounded-full font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-cyan-400/30 overflow-hidden"
+              className="group relative inline-block bg-gradient-to-r from-cyan-400 to-blue-500 text-white py-4 px-10 rounded-full font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-cyan-400/30 overflow-hidden focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-slate-900"
             >
               <span className="relative z-10">Get in Touch</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700" aria-hidden="true" />
             </button>
             
             <a
               href="/resume"
-              className="group relative inline-block border-2 border-green-400 text-green-400 py-4 px-10 rounded-full font-semibold transition-all duration-300 hover:-translate-y-1 hover:bg-green-400 hover:text-white hover:shadow-xl hover:shadow-green-400/30 overflow-hidden"
+              className="group relative inline-block border-2 border-green-400 text-green-400 py-4 px-10 rounded-full font-semibold transition-all duration-300 hover:-translate-y-1 hover:bg-green-400 hover:text-white hover:shadow-xl hover:shadow-green-400/30 overflow-hidden focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 focus:ring-offset-slate-900"
             >
-              <span className="relative z-10 flex items-center gap-2">
-                <i className="fas fa-download"></i>
+              <span className="relative z-10 flex items-center gap-2 justify-center">
+                <Download size={18} aria-hidden="true" />
                 Download Resume
               </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700" aria-hidden="true" />
             </a>
             
             <a
               href="https://www.linkedin.com/in/prashantbdri"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative inline-block border-2 border-yellow-400 text-yellow-400 py-4 px-10 rounded-full font-semibold transition-all duration-300 hover:-translate-y-1 hover:bg-yellow-400 hover:text-white hover:shadow-xl hover:shadow-yellow-400/30 overflow-hidden"
+              className="group relative inline-block border-2 border-yellow-400 text-yellow-400 py-4 px-10 rounded-full font-semibold transition-all duration-300 hover:-translate-y-1 hover:bg-yellow-400 hover:text-white hover:shadow-xl hover:shadow-yellow-400/30 overflow-hidden focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 focus:ring-offset-slate-900"
             >
-              <span className="relative z-10">View LinkedIn</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+              <span className="relative z-10 flex items-center gap-2 justify-center">
+                View LinkedIn
+                <ExternalLink size={16} aria-hidden="true" />
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700" aria-hidden="true" />
             </a>
           </div>
         </div>

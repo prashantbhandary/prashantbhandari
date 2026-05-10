@@ -1,5 +1,6 @@
 'use client'
 
+import { Briefcase, GraduationCap, Users, Heart, CheckCircle, FileText, ExternalLink } from 'lucide-react'
 import CertificateBadge from './CertificateBadge'
 
 export default function Experience() {
@@ -77,17 +78,17 @@ export default function Experience() {
   const getIcon = (type: string) => {
     switch (type) {
       case 'work':
-        return 'fas fa-briefcase'
+        return Briefcase
       case 'internship':
-        return 'fas fa-user-graduate'
+        return GraduationCap
       case 'leadership':
-        return 'fas fa-users'
+        return Users
       case 'education':
-        return 'fas fa-graduation-cap'
+        return GraduationCap
       case 'volunteer':
-        return 'fas fa-heart'
+        return Heart
       default:
-        return 'fas fa-circle'
+        return Briefcase
     }
   }
 
@@ -108,39 +109,144 @@ export default function Experience() {
     }
   }
 
+  const getTypeStyles = (type: string) => {
+    switch (type) {
+      case 'work':
+        return 'bg-blue-500/20 border-blue-400 text-blue-300'
+      case 'internship':
+        return 'bg-indigo-500/20 border-indigo-400 text-indigo-300'
+      case 'leadership':
+        return 'bg-green-500/20 border-green-400 text-green-300'
+      case 'education':
+        return 'bg-yellow-500/20 border-yellow-400 text-yellow-300'
+      case 'volunteer':
+        return 'bg-pink-500/20 border-pink-400 text-pink-300'
+      default:
+        return 'bg-gray-500/20 border-gray-400 text-gray-300'
+    }
+  }
+
+  const getTypeLabel = (type: string) => {
+    switch (type) {
+      case 'work':
+        return 'Work'
+      case 'internship':
+        return 'Internship'
+      case 'leadership':
+        return 'Leadership'
+      case 'education':
+        return 'Education'
+      case 'volunteer':
+        return 'Volunteer'
+      default:
+        return type
+    }
+  }
+
   return (
-    <section id="experience" className="py-24 relative bg-slate-900/30">
+    <section id="experience" className="py-24 relative bg-slate-900/30" aria-labelledby="experience-heading">
       <div className="max-w-5xl mx-auto px-5">
         <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
+          <h2 id="experience-heading" className="text-5xl font-bold mb-6 bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
             Experience
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-yellow-400 mx-auto rounded-full mb-4"></div>
-          <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+          <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-yellow-400 mx-auto rounded-full mb-4" aria-hidden="true"></div>
+          <p className="text-gray-300 max-w-2xl mx-auto text-lg">
             My journey through academic learning, professional experience, and leadership roles 
             in the field of electronics engineering and robotics.
           </p>
         </div>
 
         <div className="space-y-8">
-          {experiences.map((exp, index) => (
-            <div key={index} className="relative">
-              {/* Experience Card */}
-              <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 border border-indigo-500/20 hover:border-indigo-500/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/20">
-                {/* Header */}
-                <div className="mb-6">
-                  {/* Mobile Layout - Stacked */}
-                  <div className="block md:hidden">
-                    <div className="flex items-start gap-4 mb-4">
+          {experiences.map((exp, index) => {
+            const IconComponent = getIcon(exp.type)
+            return (
+              <article key={index} className="relative">
+                {/* Experience Card */}
+                <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 border border-indigo-500/20 hover:border-indigo-500/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/20">
+                  {/* Header */}
+                  <div className="mb-6">
+                    {/* Mobile Layout - Stacked */}
+                    <div className="block md:hidden">
+                      <div className="flex items-start gap-4 mb-4">
+                        {/* Icon */}
+                        <div className={`flex-shrink-0 w-12 h-12 bg-gradient-to-r ${getGradient(exp.type)} rounded-full flex items-center justify-center shadow-lg`} aria-hidden="true">
+                          <IconComponent className="w-5 h-5 text-white" />
+                        </div>
+                        
+                        {/* Title and Company */}
+                        <div className="flex-1 min-w-0">
+                          <h3 className="text-xl font-bold text-white mb-2 flex flex-wrap items-center gap-2">
+                            <span className="mr-2">{exp.title}</span>
+                            {/* Certificate badges for specific experiences */}
+                            {exp.links?.map((link, linkIndex) => (
+                              <a
+                                key={linkIndex}
+                                href={link.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-cyan-400/40 text-cyan-200 hover:bg-cyan-400/10 transition-all duration-300 text-xs"
+                              >
+                                <FileText size={12} aria-hidden="true" />
+                                {link.label}
+                                <ExternalLink size={10} aria-hidden="true" />
+                              </a>
+                            ))}
+                            {exp.title === 'Electronics Engineer Intern' && (
+                              <CertificateBadge 
+                                certificateImage="/images/YarsaTechCertificationOfExperience.jpg"
+                                title="Yarsa Tech Experience Certificate"
+                                description="Certificate of experience for Electronics Engineer Internship at Yarsa Tech"
+                              />
+                            )}
+                            {exp.title === 'General Member' && (
+                              <CertificateBadge 
+                                certificateImage="/images/GeneralMemberCertification.png"
+                                title="General Member Certification"
+                                description="Official membership certification for Robotics Club"
+                              />
+                            )}
+                            {exp.title === 'Robotics Mentor' && (
+                              <div className="flex gap-2">
+                                <CertificateBadge 
+                                  certificateImage="/images/KaryaShalaMentorCertification.jpg"
+                                  title="Karyashala Mentor Certification"
+                                  description="Certification for mentoring students in robotics projects"
+                                />
+                                <CertificateBadge 
+                                  certificateImage="/images/MentorShipCertification.jpg"
+                                  title="Mentorship Certification"
+                                  description="Recognition for outstanding mentorship in robotics"
+                                />
+                              </div>
+                            )}
+                          </h3>
+                          <p className="text-indigo-300 font-semibold text-base mb-1">{exp.company}</p>
+                          <p className="text-cyan-400 font-medium text-sm">{exp.period}</p>
+                        </div>
+                      </div>
+                      
+                      {/* Type Badge - Below on mobile */}
+                      <div className="flex justify-end">
+                        <div className={`px-3 py-1.5 rounded-full border-2 inline-flex ${getTypeStyles(exp.type)}`}>
+                          <span className="text-xs font-bold uppercase tracking-wide whitespace-nowrap">
+                            {getTypeLabel(exp.type)}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Desktop/Laptop Layout - Original horizontal layout */}
+                    <div className="hidden md:flex items-start gap-6">
                       {/* Icon */}
-                      <div className={`flex-shrink-0 w-12 h-12 bg-gradient-to-r ${getGradient(exp.type)} rounded-full flex items-center justify-center shadow-lg`}>
-                        <i className={`${getIcon(exp.type)} text-white text-lg`}></i>
+                      <div className={`flex-shrink-0 w-16 h-16 bg-gradient-to-r ${getGradient(exp.type)} rounded-full flex items-center justify-center shadow-lg`} aria-hidden="true">
+                        <IconComponent className="w-6 h-6 text-white" />
                       </div>
                       
                       {/* Title and Company */}
-                      <div className="flex-1 min-w-0">
-                        <h3 className="text-xl font-bold text-white mb-2 flex flex-wrap items-center gap-2">
-                          <span className="mr-2">{exp.title}</span>
+                      <div className="flex-1">
+                        <h3 className="text-2xl font-bold text-white mb-2 flex items-center gap-3">
+                          {exp.title}
                           {/* Certificate badges for specific experiences */}
                           {exp.links?.map((link, linkIndex) => (
                             <a
@@ -150,8 +256,9 @@ export default function Experience() {
                               rel="noopener noreferrer"
                               className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-cyan-400/40 text-cyan-200 hover:bg-cyan-400/10 transition-all duration-300 text-xs"
                             >
-                              <i className="fas fa-file-pdf"></i>
+                              <FileText size={12} aria-hidden="true" />
                               {link.label}
+                              <ExternalLink size={10} aria-hidden="true" />
                             </a>
                           ))}
                           {exp.title === 'Electronics Engineer Intern' && (
@@ -183,155 +290,65 @@ export default function Experience() {
                             </div>
                           )}
                         </h3>
-                        <p className="text-indigo-300 font-semibold text-base mb-1">{exp.company}</p>
-                        <p className="text-cyan-400 font-medium text-sm">{exp.period}</p>
+                        <p className="text-indigo-300 font-semibold text-lg mb-1">{exp.company}</p>
+                        <p className="text-cyan-400 font-medium">{exp.period}</p>
                       </div>
-                    </div>
-                    
-                    {/* Type Badge - Below on mobile */}
-                    <div className="flex justify-end">
-                      <div className={`px-3 py-1.5 rounded-full border-2 inline-flex ${
-                        exp.type === 'work' ? 'bg-blue-500/20 border-blue-400 text-blue-300' :
-                        exp.type === 'internship' ? 'bg-indigo-500/20 border-indigo-400 text-indigo-300' :
-                        exp.type === 'leadership' ? 'bg-green-500/20 border-green-400 text-green-300' :
-                        exp.type === 'education' ? 'bg-yellow-500/20 border-yellow-400 text-yellow-300' :
-                        exp.type === 'volunteer' ? 'bg-pink-500/20 border-pink-400 text-pink-300' :
-                        'bg-gray-500/20 border-gray-400 text-gray-300'
-                      }`}>
-                        <span className="text-xs font-bold uppercase tracking-wide whitespace-nowrap">
-                          {exp.type === 'work' ? 'Work' :
-                           exp.type === 'internship' ? 'Internship' :
-                           exp.type === 'leadership' ? 'Leadership' :
-                           exp.type === 'education' ? 'Education' :
-                           exp.type === 'volunteer' ? 'Volunteer' :
-                           exp.type}
+                      
+                      {/* Type Badge - Right side on desktop */}
+                      <div className={`px-4 py-2 rounded-full border-2 flex-shrink-0 ${getTypeStyles(exp.type)}`}>
+                        <span className="text-sm font-bold uppercase tracking-wide whitespace-nowrap">
+                          {getTypeLabel(exp.type)}
                         </span>
                       </div>
                     </div>
                   </div>
 
-                  {/* Desktop/Laptop Layout - Original horizontal layout */}
-                  <div className="hidden md:flex items-start gap-6">
-                    {/* Icon */}
-                    <div className={`flex-shrink-0 w-16 h-16 bg-gradient-to-r ${getGradient(exp.type)} rounded-full flex items-center justify-center shadow-lg`}>
-                      <i className={`${getIcon(exp.type)} text-white text-xl`}></i>
+                  {/* Description */}
+                  <p className="text-gray-300 mb-6 leading-relaxed text-lg">{exp.description}</p>
+
+                  {/* Responsibilities */}
+                  <div>
+                    <h4 className="text-white font-semibold mb-4 flex items-center gap-2">
+                      <CheckCircle className="w-5 h-5 text-cyan-400" aria-hidden="true" />
+                      Key Responsibilities & Achievements
+                    </h4>
+                    <div className="grid md:grid-cols-2 gap-3">
+                      {exp.responsibilities.map((responsibility, respIndex) => (
+                        <div key={respIndex} className="flex items-start gap-3 p-3 bg-slate-700/30 rounded-lg border border-slate-600/30">
+                          <CheckCircle className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" aria-hidden="true" />
+                          <span className="text-gray-300 text-sm leading-relaxed">{responsibility}</span>
+                        </div>
+                      ))}
                     </div>
-                    
-                    {/* Title and Company */}
-                    <div className="flex-1">
-                      <h3 className="text-2xl font-bold text-white mb-2 flex items-center gap-3">
-                        {exp.title}
-                        {/* Certificate badges for specific experiences */}
-                        {exp.links?.map((link, linkIndex) => (
+                    {exp.links && (
+                      <div className="mt-5 flex flex-wrap gap-3">
+                        {exp.links.map((link, linkIndex) => (
                           <a
                             key={linkIndex}
                             href={link.href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-cyan-400/40 text-cyan-200 hover:bg-cyan-400/10 transition-all duration-300 text-xs"
+                            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-400/40 text-cyan-200 hover:bg-cyan-400/10 transition-all duration-300"
                           >
-                            <i className="fas fa-file-pdf"></i>
+                            <FileText size={14} aria-hidden="true" />
                             {link.label}
+                            <ExternalLink size={12} aria-hidden="true" />
                           </a>
                         ))}
-                        {exp.title === 'Electronics Engineer Intern' && (
-                          <CertificateBadge 
-                            certificateImage="/images/YarsaTechCertificationOfExperience.jpg"
-                            title="Yarsa Tech Experience Certificate"
-                            description="Certificate of experience for Electronics Engineer Internship at Yarsa Tech"
-                          />
-                        )}
-                        {exp.title === 'General Member' && (
-                          <CertificateBadge 
-                            certificateImage="/images/GeneralMemberCertification.png"
-                            title="General Member Certification"
-                            description="Official membership certification for Robotics Club"
-                          />
-                        )}
-                        {exp.title === 'Robotics Mentor' && (
-                          <div className="flex gap-2">
-                            <CertificateBadge 
-                              certificateImage="/images/KaryaShalaMentorCertification.jpg"
-                              title="Karyashala Mentor Certification"
-                              description="Certification for mentoring students in robotics projects"
-                            />
-                            <CertificateBadge 
-                              certificateImage="/images/MentorShipCertification.jpg"
-                              title="Mentorship Certification"
-                              description="Recognition for outstanding mentorship in robotics"
-                            />
-                          </div>
-                        )}
-                      </h3>
-                      <p className="text-indigo-300 font-semibold text-lg mb-1">{exp.company}</p>
-                      <p className="text-cyan-400 font-medium">{exp.period}</p>
-                    </div>
-                    
-                    {/* Type Badge - Right side on desktop */}
-                    <div className={`px-4 py-2 rounded-full border-2 flex-shrink-0 ${
-                      exp.type === 'work' ? 'bg-blue-500/20 border-blue-400 text-blue-300' :
-                      exp.type === 'internship' ? 'bg-indigo-500/20 border-indigo-400 text-indigo-300' :
-                      exp.type === 'leadership' ? 'bg-green-500/20 border-green-400 text-green-300' :
-                      exp.type === 'education' ? 'bg-yellow-500/20 border-yellow-400 text-yellow-300' :
-                      exp.type === 'volunteer' ? 'bg-pink-500/20 border-pink-400 text-pink-300' :
-                      'bg-gray-500/20 border-gray-400 text-gray-300'
-                    }`}>
-                      <span className="text-sm font-bold uppercase tracking-wide whitespace-nowrap">
-                        {exp.type === 'work' ? 'Work' :
-                         exp.type === 'internship' ? 'Internship' :
-                         exp.type === 'leadership' ? 'Leadership' :
-                         exp.type === 'education' ? 'Education' :
-                         exp.type === 'volunteer' ? 'Volunteer' :
-                         exp.type}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Description */}
-                <p className="text-gray-300 mb-6 leading-relaxed text-lg">{exp.description}</p>
-
-                {/* Responsibilities */}
-                <div>
-                  <h4 className="text-white font-semibold mb-4 flex items-center gap-2">
-                    <i className="fas fa-tasks text-cyan-400"></i>
-                    Key Responsibilities & Achievements
-                  </h4>
-                  <div className="grid md:grid-cols-2 gap-3">
-                    {exp.responsibilities.map((responsibility, respIndex) => (
-                      <div key={respIndex} className="flex items-start gap-3 p-3 bg-slate-700/30 rounded-lg border border-slate-600/30">
-                        <i className="fas fa-check-circle text-green-400 text-sm mt-1 flex-shrink-0"></i>
-                        <span className="text-gray-300 text-sm leading-relaxed">{responsibility}</span>
                       </div>
-                    ))}
+                    )}
                   </div>
-                  {exp.links && (
-                    <div className="mt-5 flex flex-wrap gap-3">
-                      {exp.links.map((link, linkIndex) => (
-                        <a
-                          key={linkIndex}
-                          href={link.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-400/40 text-cyan-200 hover:bg-cyan-400/10 transition-all duration-300"
-                        >
-                          <i className="fas fa-file-pdf"></i>
-                          {link.label}
-                        </a>
-                      ))}
-                    </div>
-                  )}
                 </div>
-              </div>
-              
-              {/* Connection Line (except for last item) */}
-              {index < experiences.length - 1 && (
-                <div className="flex justify-center py-4">
-                  <div className="w-px h-8 bg-gradient-to-b from-indigo-500 to-purple-500"></div>
-                </div>
-              )}
-            </div>
-          ))}
+                
+                {/* Connection Line (except for last item) */}
+                {index < experiences.length - 1 && (
+                  <div className="flex justify-center py-4" aria-hidden="true">
+                    <div className="w-px h-8 bg-gradient-to-b from-indigo-500 to-purple-500"></div>
+                  </div>
+                )}
+              </article>
+            )
+          })}
         </div>
       </div>
     </section>

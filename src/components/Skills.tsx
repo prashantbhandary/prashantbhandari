@@ -1,46 +1,48 @@
+import { Cpu, Zap, Code, Cog, Wrench } from 'lucide-react'
+
 export default function Skills() {
   const skillCategories = [
     {
       title: 'PCB Design',
-      icon: 'fas fa-code',
+      icon: Cpu,
       gradient: 'from-blue-500 to-purple-600',
       skills: ['KiCad', 'Proteus', 'Schematic Capture', 'PCB Layout', 'Buck/Boost Converter Design', 'DRC/ERC']
     },
     {
       title: 'Embedded Systems',
-      icon: 'fas fa-bolt',
+      icon: Zap,
       gradient: 'from-green-500 to-teal-600',
       skills: ['ESP32', 'Arduino', 'FreeRTOS', 'ECU2000', 'HCM111Z', 'BLE', 'LoRa', 'UART/SPI/I2C']
     },
     {
       title: 'Programming',
-      icon: 'fas fa-draw-polygon',
+      icon: Code,
       gradient: 'from-purple-500 to-pink-600',
       skills: ['C/C++', 'Python', 'MicroPython', 'JavaScript']
     },
     {
       title: 'Hardware',
-      icon: 'fas fa-paint-brush',
+      icon: Cog,
       gradient: 'from-yellow-500 to-orange-600',
       skills: ['IoT Systems', 'Power Electronics', 'QC Test Fixtures', 'Robotics', 'CubeSat Subsystems']
     },
     {
       title: 'Tools',
-      icon: 'fas fa-tools',
+      icon: Wrench,
       gradient: 'from-indigo-500 to-blue-600',
       skills: ['Git', 'OLED Dashboards', 'Sensor Integration', 'OTA', 'JLCPCB/Gerber Workflows']
     }
   ]
 
   return (
-    <section id="skills" className="py-24 relative bg-slate-900/30">
+    <section id="skills" className="py-24 relative bg-slate-900/30" aria-labelledby="skills-heading">
       <div className="max-w-6xl mx-auto px-5">
         <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
+          <h2 id="skills-heading" className="text-5xl font-bold mb-6 bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
             Skills & Expertise
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-yellow-400 mx-auto rounded-full mb-4"></div>
-          <p className="text-gray-400 max-w-3xl mx-auto text-lg">
+          <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-yellow-400 mx-auto rounded-full mb-4" aria-hidden="true"></div>
+          <p className="text-gray-300 max-w-3xl mx-auto text-lg">
             A comprehensive set of technical skills acquired through academic learning, 
             hands-on projects, and professional experience in electronics and software development.
           </p>
@@ -48,16 +50,16 @@ export default function Skills() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {skillCategories.map((category, index) => (
-            <div
+            <article
               key={index}
               className="group bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 border border-indigo-500/20 hover:border-indigo-500/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-indigo-500/20 relative overflow-hidden"
             >
               {/* Background Gradient */}
-              <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${category.gradient}`}></div>
+              <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${category.gradient}`} aria-hidden="true"></div>
               
               {/* Icon */}
-              <div className={`w-16 h-16 bg-gradient-to-r ${category.gradient} rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
-                <i className={`${category.icon} text-2xl text-white`}></i>
+              <div className={`w-16 h-16 bg-gradient-to-r ${category.gradient} rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`} aria-hidden="true">
+                <category.icon className="w-7 h-7 text-white" />
               </div>
 
               {/* Title */}
@@ -73,14 +75,14 @@ export default function Skills() {
                     className="px-4 py-2 bg-gradient-to-r from-indigo-600/20 to-purple-600/20 text-indigo-300 rounded-full text-sm font-medium border border-indigo-500/30 hover:border-indigo-400/50 hover:bg-indigo-500/20 transition-all duration-300 hover:-translate-y-1 cursor-default relative overflow-hidden group/skill"
                   >
                     <span className="relative z-10">{skill}</span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 -translate-x-full group-hover/skill:translate-x-full transition-transform duration-700" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 -translate-x-full group-hover/skill:translate-x-full transition-transform duration-700" aria-hidden="true" />
                   </span>
                 ))}
               </div>
 
               {/* Hover Effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-            </div>
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" aria-hidden="true" />
+            </article>
           ))}
         </div>
       </div>
