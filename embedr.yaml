@@ -1,0 +1,61 @@
+manifest_version: 1
+name: prashant-web-nextjs
+version: 0.1.0
+description: Modern Next.js portfolio website for Prashant Bhandari — Electronics Engineer & Robotics Expert from Nepal. Built with Next.js 15, TypeScript, Tailwind CSS, and static export for hosting on Cloudflare Pages / Vercel.
+author: Prashant Bhandari
+
+project:
+  kind: web
+  language: typescript
+
+source:
+  entry: src/app/page.tsx
+  source_dirs:
+    - src
+  include_dirs:
+    - src
+  build_dir: out
+
+discovery:
+  detected_toolchain: npm
+  provider: custom
+  confidence: 0.95
+  markers:
+    - package.json
+    - next.config.js
+    - tsconfig.json
+    - tailwind.config.js
+    - src/app/page.tsx
+
+capabilities:
+  firmware:
+    enabled: true
+    provider: custom
+    actions:
+      build:
+        command: npm run build
+        cwd: .
+        timeout_ms: 300000
+      lint:
+        command: npm run lint
+        cwd: .
+        timeout_ms: 60000
+      start:
+        command: npm start
+        cwd: .
+        timeout_ms: 600000
+      dev:
+        command: npm run dev
+        cwd: .
+        timeout_ms: 600000
+      deploy:build:
+        command: npm run deploy:build
+        cwd: .
+        timeout_ms: 600000
+      type-check:
+        command: npm run type-check
+        cwd: .
+        timeout_ms: 120000
+
+components: []
+connections: []
