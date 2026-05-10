@@ -8,7 +8,7 @@ export default function Skills() {
     },
     {
       title: 'Embedded Systems',
-      icon: 'fas fa-microchip',
+      icon: 'fas fa-bolt',
       gradient: 'from-green-500 to-teal-600',
       skills: ['Arduino', 'ESP32', 'ESP8266', 'STM32', 'Helios SDK', 'HCM111Z']
     },

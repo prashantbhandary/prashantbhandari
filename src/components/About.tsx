@@ -16,7 +16,7 @@ export default function About() {
           <div className="flex-shrink-0">
             <div className="relative w-[26rem] h-[32rem] rounded-2xl overflow-hidden border-4 border-indigo-500/20 shadow-2xl bg-gradient-to-br from-slate-800 to-slate-900 hover:shadow-indigo-500/20 transition-all duration-500">
               <Image
-                src="/images/PrashantBhandari.png"
+                src="/images/IMG_6446.jpeg"
                 alt="Prashant Bhandari - Electronics Engineer in Pokhara, Nepal"
                 width={416}
                 height={512}
