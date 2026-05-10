@@ -1,28 +1,34 @@
 export default function Skills() {
   const skillCategories = [
     {
-      title: 'Microcontrollers',
+      title: 'PCB Design',
       icon: 'fas fa-code',
       gradient: 'from-blue-500 to-purple-600',
-      skills: ['Arduino', 'ESP32', 'ESP8266', 'STM32']
+      skills: ['KiCad', 'Proteus', 'Schematic Capture', 'PCB Layout', 'Buck/Boost Converter Design', 'DRC/ERC']
+    },
+    {
+      title: 'Embedded Systems',
+      icon: 'fas fa-bolt',
+      gradient: 'from-green-500 to-teal-600',
+      skills: ['ESP32', 'Arduino', 'FreeRTOS', 'ECU2000', 'HCM111Z', 'BLE', 'LoRa', 'UART/SPI/I2C']
     },
     {
       title: 'Programming',
-      icon: 'fas fa-bolt',
-      gradient: 'from-green-500 to-teal-600',
-      skills: ['C', 'C++', 'MicroPython', 'Embedded C']
+      icon: 'fas fa-draw-polygon',
+      gradient: 'from-purple-500 to-pink-600',
+      skills: ['C/C++', 'Python', 'MicroPython', 'JavaScript']
+    },
+    {
+      title: 'Hardware',
+      icon: 'fas fa-paint-brush',
+      gradient: 'from-yellow-500 to-orange-600',
+      skills: ['IoT Systems', 'Power Electronics', 'QC Test Fixtures', 'Robotics', 'CubeSat Subsystems']
     },
     {
       title: 'Tools',
-      icon: 'fas fa-draw-polygon',
-      gradient: 'from-purple-500 to-pink-600',
-      skills: ['KiCad', 'Proteus', 'LVGL', 'Autodesk']
-    },
-    {
-      title: 'Other',
-      icon: 'fas fa-paint-brush',
-      gradient: 'from-yellow-500 to-orange-600',
-      skills: ['3D Printing', 'IoT', 'Robotics']
+      icon: 'fas fa-tools',
+      gradient: 'from-indigo-500 to-blue-600',
+      skills: ['Git', 'OLED Dashboards', 'Sensor Integration', 'OTA', 'JLCPCB/Gerber Workflows']
     }
   ]
 

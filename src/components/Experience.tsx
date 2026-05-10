@@ -5,15 +5,31 @@ import CertificateBadge from './CertificateBadge'
 export default function Experience() {
   const experiences = [
     {
+      title: 'Electronics Design Intern',
+      company: 'SEDS Nepal (Remote), Pokhara, Nepal',
+      period: 'Sept 2025 - Jan 2026',
+      description: 'Designed electronics modules for pseudo-satellite (HAPS) systems with a focus on modular, reproducible architecture.',
+      responsibilities: [
+        'Designed electronics modules for pseudo-satellite (HAPS) systems and validated subsystem interfaces',
+        'Performed component selection, BOM budgeting, and design reviews across interdisciplinary satellite subsystems'
+      ],
+      links: [
+        {
+          label: 'Completion Letter',
+          href: '/completion-letter-prashant.pdf'
+        }
+      ],
+      type: 'internship'
+    },
+    {
       title: 'Electronics Engineer Intern',
       company: 'Yarsa Tech, Pokhara',
       period: 'Jan 2025 - July 2025',
-      description: 'Designed and optimized embedded systems, reducing output fluctuations and improving quality assurance through rigorous testing protocols.',
+      description: 'Designed and optimized power electronics and embedded firmware for production hardware and QA systems.',
       responsibilities: [
-        'Developed embedded applications for ESP32, ESP8266, and STM32 microcontrollers',
-        'Designed and programmed BLE-enabled QR/barcode scanner systems',
-        'Implemented embedded software for MicroPython and C for commercial products',
-        'Developed user interfaces with LVGL graphics library for embedded display systems'
+        'Designed and optimized buck converter circuits; improved layout across multiple iterations using KiCad',
+        'Developed automated QC testing device for power backup products using MicroPython and custom firmware',
+        'Built BLE-enabled QR/barcode scanner system; implemented complete firmware stack in C/C++'
       ],
       type: 'internship'
     },
@@ -126,6 +142,18 @@ export default function Experience() {
                         <h3 className="text-xl font-bold text-white mb-2 flex flex-wrap items-center gap-2">
                           <span className="mr-2">{exp.title}</span>
                           {/* Certificate badges for specific experiences */}
+                          {exp.links?.map((link, linkIndex) => (
+                            <a
+                              key={linkIndex}
+                              href={link.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-cyan-400/40 text-cyan-200 hover:bg-cyan-400/10 transition-all duration-300 text-xs"
+                            >
+                              <i className="fas fa-file-pdf"></i>
+                              {link.label}
+                            </a>
+                          ))}
                           {exp.title === 'Electronics Engineer Intern' && (
                             <CertificateBadge 
                               certificateImage="/images/YarsaTechCertificationOfExperience.jpg"
@@ -194,6 +222,18 @@ export default function Experience() {
                       <h3 className="text-2xl font-bold text-white mb-2 flex items-center gap-3">
                         {exp.title}
                         {/* Certificate badges for specific experiences */}
+                        {exp.links?.map((link, linkIndex) => (
+                          <a
+                            key={linkIndex}
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-cyan-400/40 text-cyan-200 hover:bg-cyan-400/10 transition-all duration-300 text-xs"
+                          >
+                            <i className="fas fa-file-pdf"></i>
+                            {link.label}
+                          </a>
+                        ))}
                         {exp.title === 'Electronics Engineer Intern' && (
                           <CertificateBadge 
                             certificateImage="/images/YarsaTechCertificationOfExperience.jpg"
@@ -265,6 +305,22 @@ export default function Experience() {
                       </div>
                     ))}
                   </div>
+                  {exp.links && (
+                    <div className="mt-5 flex flex-wrap gap-3">
+                      {exp.links.map((link, linkIndex) => (
+                        <a
+                          key={linkIndex}
+                          href={link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-400/40 text-cyan-200 hover:bg-cyan-400/10 transition-all duration-300"
+                        >
+                          <i className="fas fa-file-pdf"></i>
+                          {link.label}
+                        </a>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
               
