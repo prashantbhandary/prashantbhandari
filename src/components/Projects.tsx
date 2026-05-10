@@ -6,22 +6,77 @@ import CertificateBadge from './CertificateBadge'
 export default function Projects() {
   const projects = [
     {
+      title: 'LoRaNet Communication Module',
+      summary: 'Long-range LoRa communication module with custom PCB and embedded firmware.',
+      outcome: 'Achieved ~7 km line-of-sight range with reliable packet transmission.',
+      techStack: ['KiCad', 'ESP32', 'LoRa', 'C/C++'],
+      image: '/file.svg',
+      demoEmbedUrl: '',
+      primaryLink: 'https://github.com/awakesid/LoraNet.git',
+      secondaryLink: 'https://github.com/awakesid/LoraNet.git',
+      gradient: 'from-indigo-500 to-purple-500'
+    },
+    {
+      title: 'DC-DC Buck Converter',
+      summary: '12V-to-5V converter designed from schematic through PCB for embedded use.',
+      outcome: 'Reached ~90% efficiency with reduced ripple suitable for industrial loads.',
+      techStack: ['KiCad', 'Power Electronics', 'XL2013E1', 'PCB Layout'],
+      image: '/file.svg',
+      demoEmbedUrl: '',
+      primaryLink: '/buck-converter-documentation.pdf',
+      secondaryLink: 'https://github.com/prashantbhandary/',
+      gradient: 'from-amber-500 to-orange-500'
+    },
+    {
       title: 'Micromouse Robot (Maze-Solving)',
       summary: 'Arduino Nano micromouse using QTR sensors, PID control, and flood-fill maze-solving.',
       outcome: '95% maze accuracy with a 40% speed boost over previous iterations.',
       techStack: ['Arduino Nano', 'QTR Sensors', 'PID Control', 'Flood-Fill Algorithm', 'C++'],
       image: '/images/MicroMouse.jpg',
       demoEmbedUrl: '',
-      primaryLink: 'https://github.com/prashantbhandary/',
-      secondaryLink: 'https://github.com/prashantbhandary/',
+      primaryLink: 'https://github.com/prashantbhandary/MicroMouse-LineMaze.git',
+      secondaryLink: 'https://github.com/prashantbhandary/MicroMouse-LineMaze.git',
       gradient: 'from-purple-500 to-pink-500'
+    },
+    {
+      title: 'Pocket CubeSat Module (1.5U)',
+      summary: 'Stacked PCB CubeSat module integrating OBC, power management, sensors, and LoRa comms.',
+      outcome: 'Compact 1.5U form factor with Li-Po solar charging integration.',
+      techStack: ['Stacked PCB', 'LoRa', 'NodeMCU', 'Power Management'],
+      image: '/file.svg',
+      demoEmbedUrl: '',
+      primaryLink: '/cubesat.pdf',
+      secondaryLink: 'https://github.com/prashantbhandary/pocketCubeSat_Esp32_demo.git',
+      gradient: 'from-sky-500 to-blue-500'
+    },
+    {
+      title: 'Solar Greenhouse Automation',
+      summary: 'Solar-powered automation for soil, temperature, and humidity monitoring.',
+      outcome: 'Automated irrigation with BLE data transmission and OLED dashboard.',
+      techStack: ['ESP32', 'BLE', 'MOSFET Control', 'OLED'],
+      image: '/file.svg',
+      demoEmbedUrl: '',
+      primaryLink: 'https://github.com/prashantbhandary/GreenHouseMonitoring.git',
+      secondaryLink: 'https://github.com/prashantbhandary/GreenHouseMonitoring.git',
+      gradient: 'from-emerald-500 to-teal-500'
+    },
+    {
+      title: 'Smart Helmet Safety System',
+      summary: 'Wearable safety system with pulse/SpO2 sensing and fall detection.',
+      outcome: 'SOS alerts transmitted via BLE to a supervisor dashboard.',
+      techStack: ['IoT', 'BLE', 'SpO2 Sensor', 'Fall Detection'],
+      image: '/file.svg',
+      demoEmbedUrl: '',
+      primaryLink: '/safetron-mvp-safe-250345.pdf',
+      secondaryLink: 'https://github.com/prashantbhandary/SmartHelmet_Esp32_BLE.git',
+      gradient: 'from-rose-500 to-pink-500'
     },
     {
       title: 'BLE QR/Barcode Scanner',
       summary: 'ESP32 BLE QR/Barcode scanner with LVGL UI and robust firmware stack.',
       outcome: 'Improved scan reliability and operator feedback with BLE status dashboards.',
       techStack: ['ESP32', 'BLE', 'LVGL', 'C/C++', 'MicroPython'],
-      image: '/images/file.svg',
+      image: '/file.svg',
       demoEmbedUrl: '',
       primaryLink: 'https://github.com/prashantbhandary/',
       secondaryLink: 'https://github.com/prashantbhandary/',
@@ -141,7 +196,7 @@ export default function Projects() {
                     className="flex-1 bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-2 px-4 rounded-lg font-medium transition-all duration-300 hover:from-indigo-500 hover:to-purple-500 hover:-translate-y-1 hover:shadow-lg text-sm text-center"
                   >
                     <i className="fas fa-link mr-2"></i>
-                    Project Link
+                    Project Documentation
                   </a>
                   <a 
                     href={project.secondaryLink}
