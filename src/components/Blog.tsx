@@ -5,7 +5,7 @@ export default function Blog() {
       excerpt: 'A comprehensive guide to ESP32 programming and IoT development for beginners.',
       date: 'January 15, 2025',
       readTime: '5 min read',
-      icon: 'fas fa-microchip',
+      icon: 'fas fa-bolt',
       gradient: 'from-blue-500 to-purple-500'
     },
     {
