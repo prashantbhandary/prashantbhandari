@@ -1,40 +1,28 @@
 export default function Skills() {
   const skillCategories = [
     {
-      title: 'Programming Languages',
+      title: 'Microcontrollers',
       icon: 'fas fa-code',
       gradient: 'from-blue-500 to-purple-600',
-      skills: ['C/C++', 'Python', 'JavaScript', 'Micro Python']
+      skills: ['Arduino', 'ESP32', 'ESP8266', 'STM32']
     },
     {
-      title: 'Embedded Systems',
+      title: 'Programming',
       icon: 'fas fa-bolt',
       gradient: 'from-green-500 to-teal-600',
-      skills: ['Arduino', 'ESP32', 'ESP8266', 'STM32', 'Helios SDK', 'HCM111Z']
+      skills: ['C', 'C++', 'MicroPython', 'Embedded C']
     },
     {
-      title: 'PCB Design & CAD',
+      title: 'Tools',
       icon: 'fas fa-draw-polygon',
       gradient: 'from-purple-500 to-pink-600',
-      skills: ['KiCad', 'Proteus', 'Circuit Design', 'Schematic Design']
+      skills: ['KiCad', 'Proteus', 'LVGL', 'Autodesk']
     },
     {
-      title: 'UI Development',
+      title: 'Other',
       icon: 'fas fa-paint-brush',
       gradient: 'from-yellow-500 to-orange-600',
-      skills: ['LVGL Graphics Library', 'Embedded Display Systems']
-    },
-    {
-      title: 'Machine Learning',
-      icon: 'fas fa-brain',
-      gradient: 'from-red-500 to-pink-600',
-      skills: ['Linear Regression', 'Classification']
-    },
-    {
-      title: 'Tools & Technologies',
-      icon: 'fas fa-tools',
-      gradient: 'from-indigo-500 to-blue-600',
-      skills: ['Git/GitHub', 'VS Code', 'BLE Communication', 'QR/Barcode Scanner']
+      skills: ['3D Printing', 'IoT', 'Robotics']
     }
   ]
 

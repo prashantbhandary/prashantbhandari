@@ -6,49 +6,37 @@ import CertificateBadge from './CertificateBadge'
 export default function Projects() {
   const projects = [
     {
-      title: 'Micromouse Line Maze-Solving Robot',
-      description: 'Designed and programmed a maze-solving robot using Arduino Nano, QTR sensors, and PID control, achieving 95% accuracy in speed and 40% boost in speed and reliability.',
-      tech: ['Arduino Nano', 'QTR Sensors', 'PID Control', 'C++', 'Motor Control'],
-      icon: 'fas fa-robot',
+      title: 'Micromouse Robot (Maze-Solving)',
+      summary: 'Arduino Nano micromouse using QTR sensors, PID control, and flood-fill maze-solving.',
+      outcome: '95% maze accuracy with a 40% speed boost over previous iterations.',
+      techStack: ['Arduino Nano', 'QTR Sensors', 'PID Control', 'Flood-Fill Algorithm', 'C++'],
       image: '/images/MicroMouse.jpg',
-      githubUrl: 'https://github.com/prashantbhandary/',
-      gradient: 'from-purple-500 to-pink-500',
-      features: [
-        'Flood-fill algorithm implementation for maze solving',
-        '95% accuracy in navigation and speed optimization',
-        'PID control system for precise movement',
-        '40% improvement in speed and reliability over previous designs'
-      ]
+      demoEmbedUrl: '',
+      primaryLink: 'https://github.com/prashantbhandary/',
+      secondaryLink: 'https://github.com/prashantbhandary/',
+      gradient: 'from-purple-500 to-pink-500'
     },
     {
-      title: 'Voyager Line Follower Bot',
-      description: 'Built line-following robot with ultrasonic obstacle detection, optimized for speed and stability using advanced sensor integration and control algorithms.',
-      tech: ['Arduino', 'Ultrasonic Sensors', 'Line Detection', 'Obstacle Avoidance', 'Motor Control'],
-      icon: 'fas fa-route',
+      title: 'BLE QR/Barcode Scanner',
+      summary: 'ESP32 BLE QR/Barcode scanner with LVGL UI and robust firmware stack.',
+      outcome: 'Improved scan reliability and operator feedback with BLE status dashboards.',
+      techStack: ['ESP32', 'BLE', 'LVGL', 'C/C++', 'MicroPython'],
+      image: '/images/file.svg',
+      demoEmbedUrl: '',
+      primaryLink: 'https://github.com/prashantbhandary/',
+      secondaryLink: 'https://github.com/prashantbhandary/',
+      gradient: 'from-blue-500 to-cyan-500'
+    },
+    {
+      title: 'Line-Following Robot',
+      summary: 'High-speed line follower with ultrasonic obstacle detection and tuned control loops.',
+      outcome: 'Optimized speed and stability with reliable obstacle avoidance.',
+      techStack: ['Arduino', 'Ultrasonic Sensors', 'Line Sensors', 'Motor Control', 'PID Tuning'],
       image: '/images/VoyagerBot2023.jpg',
-      githubUrl: 'https://github.com/prashantbhandary/',
-      gradient: 'from-blue-500 to-cyan-500',
-      features: [
-        'Advanced line detection and following capabilities',
-        'Ultrasonic obstacle detection and avoidance',
-        'Optimized for speed and stability',
-        'Real-time sensor data processing'
-      ]
-    },
-    {
-      title: 'Autonomous Boat Project',
-      description: 'Designed and raced an autonomous boat for competition. The team achieved 1st Runner-Up position in the competition through innovative design and programming.',
-      tech: ['Microcontroller', 'Autonomous Navigation', 'Competition Design', 'Team Leadership'],
-      icon: 'fas fa-ship',
-      image: null, // No specific image available for boat project
-      githubUrl: 'https://github.com/prashantbhandary/',
-      gradient: 'from-green-500 to-teal-500',
-      features: [
-        'Autonomous navigation system implementation',
-        'Competition-grade design and optimization',
-        'Team leadership and project coordination',
-        'Achieved 1st Runner-Up position in racing competition'
-      ]
+      demoEmbedUrl: '',
+      primaryLink: 'https://github.com/prashantbhandary/',
+      secondaryLink: 'https://github.com/prashantbhandary/',
+      gradient: 'from-green-500 to-teal-500'
     }
   ]
 
@@ -73,17 +61,23 @@ export default function Projects() {
               className="group bg-slate-800/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-indigo-500/20 hover:border-indigo-500/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-indigo-500/20 relative"
             >
               {/* Project Image/Icon */}
-              <div className={`h-48 bg-gradient-to-br ${project.gradient} flex items-center justify-center relative overflow-hidden`}>
-                {project.image ? (
+              <div className={`h-52 bg-gradient-to-br ${project.gradient} flex items-center justify-center relative overflow-hidden`}>
+                {project.demoEmbedUrl ? (
+                  <iframe
+                    src={project.demoEmbedUrl}
+                    title={`${project.title} demo`}
+                    className="w-full h-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                ) : (
                   <Image
                     src={project.image}
                     alt={project.title}
-                    width={300}
-                    height={192}
+                    width={420}
+                    height={240}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   />
-                ) : (
-                  <i className={`${project.icon} text-6xl text-white/90 group-hover:scale-110 transition-transform duration-300`}></i>
                 )}
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300"></div>
               </div>
@@ -93,8 +87,7 @@ export default function Projects() {
                 {/* Title */}
                 <h3 className="text-xl font-bold text-white mb-3 group-hover:text-indigo-300 transition-colors duration-300 flex items-center gap-3">
                   {project.title}
-                  {/* Certificate badges for specific projects */}
-                  {project.title === 'Micromouse Line Maze-Solving Robot' && (
+                  {project.title === 'Micromouse Robot (Maze-Solving)' && (
                     <div className="flex gap-1">
                       <CertificateBadge 
                         certificateImage="/images/BattleForSpeed2023WinnerCertification.jpg"
@@ -116,34 +109,20 @@ export default function Projects() {
                       />
                     </div>
                   )}
-                  {project.title === 'Voyager Line Follower Bot' && (
-                    <CertificateBadge 
-                      certificateImage="/images/VoyagerBot2023.jpg"
-                      title="Voyager Bot 2023"
-                      description="First place in Voyager line follower bot competition"
-                      size="sm"
-                    />
-                  )}
                 </h3>
 
                 {/* Description */}
-                <p className="text-gray-300 mb-4 leading-relaxed line-clamp-3">
-                  {project.description}
+                <p className="text-gray-300 mb-3 leading-relaxed">
+                  {project.summary}
                 </p>
 
-                {/* Features */}
-                <ul className="space-y-1 mb-6">
-                  {project.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="text-gray-400 text-sm flex items-start gap-2">
-                      <i className="fas fa-check text-cyan-400 text-xs mt-1 flex-shrink-0"></i>
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
+                <p className="text-cyan-300 text-sm font-medium mb-4">
+                  {project.outcome}
+                </p>
 
                 {/* Tech Stack */}
                 <div className="flex flex-wrap gap-2 mb-6">
-                  {project.tech.map((tech, techIndex) => (
+                  {project.techStack.map((tech, techIndex) => (
                     <span
                       key={techIndex}
                       className="px-3 py-1 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 text-yellow-400 rounded-full text-xs font-medium border border-yellow-500/30 hover:border-yellow-400/50 transition-colors duration-300"
@@ -155,12 +134,17 @@ export default function Projects() {
 
                 {/* Action Buttons */}
                 <div className="flex gap-3">
-                  <button className="flex-1 bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-2 px-4 rounded-lg font-medium transition-all duration-300 hover:from-indigo-500 hover:to-purple-500 hover:-translate-y-1 hover:shadow-lg text-sm">
-                    <i className="fas fa-eye mr-2"></i>
-                    View Details
-                  </button>
                   <a 
-                    href={project.githubUrl}
+                    href={project.primaryLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-2 px-4 rounded-lg font-medium transition-all duration-300 hover:from-indigo-500 hover:to-purple-500 hover:-translate-y-1 hover:shadow-lg text-sm text-center"
+                  >
+                    <i className="fas fa-link mr-2"></i>
+                    Project Link
+                  </a>
+                  <a 
+                    href={project.secondaryLink}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex-1 border border-indigo-500/50 text-indigo-300 py-2 px-4 rounded-lg font-medium transition-all duration-300 hover:bg-indigo-500/20 hover:border-indigo-400 text-sm text-center"

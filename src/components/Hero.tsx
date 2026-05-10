@@ -25,35 +25,31 @@ export default function Hero() {
       const currentText = texts[textIndex]
       
       if (isTyping && !isDeleting) {
-        // Typing phase
         if (index < currentText.length) {
           setTypedText(currentText.slice(0, index + 1))
           index++
         } else {
-          // Finished typing, wait then start deleting
           isTyping = false
           setTimeout(() => {
             isDeleting = true
             isTyping = true
-          }, 2000) // Wait 2 seconds before deleting
+          }, 2000)
         }
       } else if (isTyping && isDeleting) {
-        // Deleting phase
         if (index > 0) {
           setTypedText(currentText.slice(0, index - 1))
           index--
         } else {
-          // Finished deleting, move to next text
           isDeleting = false
           textIndex = (textIndex + 1) % texts.length
           setTimeout(() => {
             isTyping = true
-          }, 500) // Wait 0.5 second before typing next text
+          }, 500)
         }
       }
     }
 
-    const timer = setInterval(typeText, isDeleting ? 50 : 120) // Faster when deleting
+    const timer = setInterval(typeText, isDeleting ? 50 : 120)
 
     return () => clearInterval(timer)
   }, [texts])

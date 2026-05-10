@@ -96,7 +96,7 @@ export default function Contact() {
   ]
 
   return (
-    <section id="contact" className="py-24 relative bg-slate-900/30">
+    <section id="contact" className="py-16 md:py-24 relative bg-slate-900/30">
       <div className="max-w-6xl mx-auto px-5">
         <div className="text-center mb-16">
           <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
@@ -129,16 +129,17 @@ export default function Contact() {
             {/* Social Links */}
             <div className="flex gap-4 justify-center lg:justify-start">
               {[
-                { href: 'https://www.linkedin.com/in/prashantbdri', icon: 'fab fa-linkedin', color: 'from-blue-600 to-blue-700' },
-                { href: 'https://github.com/prashantbhandary', icon: 'fab fa-github', color: 'from-gray-700 to-gray-800' },
-                { href: 'https://twitter.com/santhprashant', icon: 'fab fa-twitter', color: 'from-gray-400 to-gray-600' },
-                { href: 'https://www.instagram.com/_prashant.08/', icon: 'fab fa-instagram', color: 'from-pink-500 to-purple-600' }
+                { href: 'https://www.linkedin.com/in/prashantbdri', icon: 'fab fa-linkedin', color: 'from-blue-600 to-blue-700', label: 'LinkedIn profile' },
+                { href: 'https://github.com/prashantbhandary', icon: 'fab fa-github', color: 'from-gray-700 to-gray-800', label: 'GitHub profile' },
+                { href: 'https://twitter.com/santhprashant', icon: 'fab fa-twitter', color: 'from-gray-400 to-gray-600', label: 'Twitter profile' },
+                { href: 'https://www.instagram.com/_prashant.08/', icon: 'fab fa-instagram', color: 'from-pink-500 to-purple-600', label: 'Instagram profile' }
               ].map((social, index) => (
                 <a
                   key={index}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={social.label}
                   className={`w-14 h-14 rounded-full bg-gradient-to-r ${social.color} flex items-center justify-center text-white transition-all duration-300 hover:-translate-y-2 hover:scale-110 hover:shadow-lg relative overflow-hidden group`}
                 >
                   <i className={`${social.icon} text-xl relative z-10`}></i>

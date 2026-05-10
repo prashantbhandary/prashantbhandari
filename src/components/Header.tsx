@@ -60,7 +60,6 @@ export default function Header() {
       }
     }, 100)
   }
-
   return (
     <>
       {/* Mobile Navigation Overlay */}
@@ -68,7 +67,6 @@ export default function Header() {
         className={`nav-overlay ${isMenuOpen ? 'open' : ''}`}
         onClick={closeMenu}
       />
-
       {/* Header */}
       <header className="bg-slate-900/80 backdrop-blur-md text-white py-4 sticky top-0 z-50 shadow-lg border-b border-indigo-500/20">
         <div className="max-w-6xl mx-auto px-5">
