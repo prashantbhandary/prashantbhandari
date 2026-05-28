@@ -35,8 +35,12 @@ export default function Skills() {
   ]
 
   return (
-    <section id="skills" className="py-24 relative bg-slate-900/30" aria-labelledby="skills-heading">
-      <div className="max-w-6xl mx-auto px-5">
+    <section id="skills" className="py-24 relative section-3d" aria-labelledby="skills-heading">
+      <div className="accent-orbs" aria-hidden="true">
+        <div className="accent-orb orb-2" />
+        <div className="accent-orb orb-3" />
+      </div>
+      <div className="max-w-6xl mx-auto px-5 relative z-10">
         <div className="text-center mb-16">
           <h2 id="skills-heading" className="text-5xl font-bold mb-6 bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
             Skills & Expertise
@@ -52,7 +56,7 @@ export default function Skills() {
           {skillCategories.map((category, index) => (
             <article
               key={index}
-              className="group bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 border border-indigo-500/20 hover:border-indigo-500/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-indigo-500/20 relative overflow-hidden"
+              className="group rounded-2xl p-8 relative overflow-hidden depth-card edge-glow lift shine-line"
             >
               {/* Background Gradient */}
               <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${category.gradient}`} aria-hidden="true"></div>
@@ -72,7 +76,7 @@ export default function Skills() {
                 {category.skills.map((skill, skillIndex) => (
                   <span
                     key={skillIndex}
-                    className="px-4 py-2 bg-gradient-to-r from-indigo-600/20 to-purple-600/20 text-indigo-300 rounded-full text-sm font-medium border border-indigo-500/30 hover:border-indigo-400/50 hover:bg-indigo-500/20 transition-all duration-300 hover:-translate-y-1 cursor-default relative overflow-hidden group/skill"
+                    className="px-4 py-2 text-indigo-200 rounded-full text-sm font-medium transition-all duration-300 hover:-translate-y-1 cursor-default relative overflow-hidden group/skill chip-3d"
                   >
                     <span className="relative z-10">{skill}</span>
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 -translate-x-full group-hover/skill:translate-x-full transition-transform duration-700" aria-hidden="true" />

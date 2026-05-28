@@ -99,6 +99,7 @@ export default function RootLayout({
       <head>
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="googlebot" content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1" />
+        <meta name="google-adsense-account" content="ca-pub-7919679791683906" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
