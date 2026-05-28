@@ -41,8 +41,12 @@ export default function About() {
   ]
 
   return (
-    <section id="about" className="py-24 relative" aria-labelledby="about-heading">
-      <div className="max-w-6xl mx-auto px-5">
+    <section id="about" className="py-24 relative section-3d" aria-labelledby="about-heading">
+      <div className="accent-orbs" aria-hidden="true">
+        <div className="accent-orb orb-1" />
+        <div className="accent-orb orb-4" />
+      </div>
+      <div className="max-w-6xl mx-auto px-5 relative z-10">
         <div className="text-center mb-16">
           <h2 id="about-heading" className="text-5xl font-bold mb-6 bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
             About Me
@@ -53,7 +57,7 @@ export default function About() {
         <div className="flex flex-col lg:flex-row items-center gap-16">
           {/* Profile Image */}
           <div className="flex-shrink-0">
-            <div className="relative w-[26rem] h-[32rem] rounded-2xl overflow-hidden border-4 border-indigo-500/20 shadow-2xl bg-gradient-to-br from-slate-800 to-slate-900 hover:shadow-indigo-500/20 transition-all duration-500">
+            <div className="relative w-[26rem] h-[32rem] rounded-2xl overflow-hidden depth-card edge-glow lift shine-line">
               <Image
                 src="/images/IMG_6446.jpeg"
                 alt="Prashant Bhandari - Electronics Engineer in Pokhara, Nepal"
@@ -81,7 +85,7 @@ export default function About() {
               {infoCards.map((card, index) => (
                 <div
                   key={index}
-                  className="flex items-start p-6 bg-slate-800/50 rounded-xl border border-indigo-500/20 hover:border-indigo-500/40 transition-all duration-300 hover:-translate-y-1"
+                  className="flex items-start p-6 rounded-xl surface-3d edge-glow lift shine-line"
                 >
                   <div className={`bg-gradient-to-r ${card.gradient} bg-clip-text text-transparent mr-4 mt-1`} aria-hidden="true">
                     <card.icon className="w-6 h-6 text-white" style={{ color: 'white' }} />
@@ -104,7 +108,7 @@ export default function About() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className={`w-12 h-12 rounded-full bg-gradient-to-r ${social.color} flex items-center justify-center text-white transition-all duration-300 hover:-translate-y-2 hover:scale-110 hover:shadow-lg relative overflow-hidden group focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-900`}
+                  className={`w-12 h-12 rounded-full bg-gradient-to-r ${social.color} flex items-center justify-center text-white transition-all duration-300 hover:-translate-y-2 hover:scale-110 hover:shadow-lg relative overflow-hidden group focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-900 glow-ring`}
                 >
                   <social.icon className="w-5 h-5 relative z-10" aria-hidden="true" />
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700" aria-hidden="true" />

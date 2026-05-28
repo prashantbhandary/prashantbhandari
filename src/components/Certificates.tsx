@@ -187,8 +187,12 @@ export default function CertificatesShowcase() {
 
   return (
     <>
-      <section id="certificates" className="py-24 relative">
-        <div className="max-w-7xl mx-auto px-5">
+      <section id="certificates" className="py-24 relative section-3d">
+        <div className="accent-orbs" aria-hidden="true">
+          <div className="accent-orb orb-1" />
+          <div className="accent-orb orb-2" />
+        </div>
+        <div className="max-w-7xl mx-auto px-5 relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
               Certificates & Awards
@@ -206,8 +210,8 @@ export default function CertificatesShowcase() {
               onClick={() => setActiveCategory('all')}
               className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
                 activeCategory === 'all'
-                  ? 'bg-gradient-to-r from-cyan-400 to-blue-500 text-white shadow-lg'
-                  : 'bg-slate-800/50 text-gray-400 hover:text-white border border-slate-600'
+                  ? 'bg-gradient-to-r from-cyan-400 to-blue-500 text-white shadow-lg glow-ring'
+                  : 'text-gray-300 hover:text-white surface-3d'
               }`}
             >
               All Certificates
@@ -218,8 +222,8 @@ export default function CertificatesShowcase() {
                 onClick={() => setActiveCategory(category)}
                 className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 flex items-center gap-2 ${
                   activeCategory === category
-                    ? `bg-gradient-to-r ${getCategoryColor(category)} text-white shadow-lg`
-                    : 'bg-slate-800/50 text-gray-400 hover:text-white border border-slate-600'
+                    ? `bg-gradient-to-r ${getCategoryColor(category)} text-white shadow-lg glow-ring`
+                    : 'text-gray-300 hover:text-white surface-3d'
                 }`}
               >
                 <i className={getCategoryIcon(category)}></i>
@@ -234,7 +238,7 @@ export default function CertificatesShowcase() {
               <div
                 key={certificate.id}
                 onClick={() => openModal(certificate)}
-                className="group bg-slate-800/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-indigo-500/20 hover:border-indigo-500/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-indigo-500/20 cursor-pointer"
+                className="group rounded-2xl overflow-hidden cursor-pointer depth-card edge-glow lift shine-line"
               >
                 {/* Certificate Preview */}
                 <div className="relative h-48 bg-slate-700/50 overflow-hidden">

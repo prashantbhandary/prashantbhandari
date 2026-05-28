@@ -98,8 +98,12 @@ export default function Contact() {
   ]
 
   return (
-    <section id="contact" className="py-16 md:py-24 relative bg-slate-900/30" aria-labelledby="contact-heading">
-      <div className="max-w-6xl mx-auto px-5">
+    <section id="contact" className="py-16 md:py-24 relative section-3d" aria-labelledby="contact-heading">
+      <div className="accent-orbs" aria-hidden="true">
+        <div className="accent-orb orb-3" />
+        <div className="accent-orb orb-4" />
+      </div>
+      <div className="max-w-6xl mx-auto px-5 relative z-10">
         <div className="text-center mb-16">
           <h2 id="contact-heading" className="text-5xl font-bold mb-6 bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
             Contact Me
@@ -116,7 +120,7 @@ export default function Contact() {
             {contactInfo.map((info, index) => (
               <div
                 key={index}
-                className="flex items-start gap-6 p-6 bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-indigo-500/20 hover:border-indigo-500/40 transition-all duration-300 hover:-translate-y-1"
+                className="flex items-start gap-6 p-6 rounded-2xl depth-card edge-glow lift shine-line"
               >
                 <div className={`w-16 h-16 bg-gradient-to-r ${info.gradient} rounded-full flex items-center justify-center flex-shrink-0 shadow-lg`} aria-hidden="true">
                   <info.icon className="w-6 h-6 text-white" />
@@ -137,7 +141,7 @@ export default function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className={`w-14 h-14 rounded-full bg-gradient-to-r ${social.color} flex items-center justify-center text-white transition-all duration-300 hover:-translate-y-2 hover:scale-110 hover:shadow-lg relative overflow-hidden group focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-900`}
+                  className={`w-14 h-14 rounded-full bg-gradient-to-r ${social.color} flex items-center justify-center text-white transition-all duration-300 hover:-translate-y-2 hover:scale-110 hover:shadow-lg relative overflow-hidden group focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-900 glow-ring`}
                 >
                   <social.icon className="w-5 h-5 relative z-10" aria-hidden="true" />
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700" aria-hidden="true" />
@@ -147,7 +151,7 @@ export default function Contact() {
           </div>
 
           {/* Contact Form */}
-          <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 border border-indigo-500/20">
+          <div className="rounded-2xl p-8 depth-card edge-glow">
             <div className="w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full mb-8" aria-hidden="true"></div>
             
             <form onSubmit={handleSubmit} className="space-y-6" aria-label="Contact form">
@@ -162,7 +166,7 @@ export default function Contact() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-6 py-4 border-2 border-indigo-500/20 rounded-lg bg-slate-900/30 text-white transition-all duration-300 focus:outline-none focus:border-indigo-400 focus:bg-slate-900/50 focus:shadow-lg"
+                  className="w-full px-6 py-4 rounded-lg text-white transition-all duration-300 focus:outline-none focus:border-indigo-400 focus:shadow-lg input-3d"
                   placeholder="Enter your name"
                 />
               </div>
@@ -178,7 +182,7 @@ export default function Contact() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-6 py-4 border-2 border-indigo-500/20 rounded-lg bg-slate-900/30 text-white transition-all duration-300 focus:outline-none focus:border-indigo-400 focus:bg-slate-900/50 focus:shadow-lg"
+                  className="w-full px-6 py-4 rounded-lg text-white transition-all duration-300 focus:outline-none focus:border-indigo-400 focus:shadow-lg input-3d"
                   placeholder="Enter your email"
                 />
               </div>
@@ -194,7 +198,7 @@ export default function Contact() {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-6 py-4 border-2 border-indigo-500/20 rounded-lg bg-slate-900/30 text-white transition-all duration-300 focus:outline-none focus:border-indigo-400 focus:bg-slate-900/50 focus:shadow-lg"
+                  className="w-full px-6 py-4 rounded-lg text-white transition-all duration-300 focus:outline-none focus:border-indigo-400 focus:shadow-lg input-3d"
                   placeholder="Enter message subject"
                 />
               </div>
@@ -210,7 +214,7 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   rows={6}
-                  className="w-full px-6 py-4 border-2 border-indigo-500/20 rounded-lg bg-slate-900/30 text-white transition-all duration-300 focus:outline-none focus:border-indigo-400 focus:bg-slate-900/50 focus:shadow-lg resize-y"
+                  className="w-full px-6 py-4 rounded-lg text-white transition-all duration-300 focus:outline-none focus:border-indigo-400 focus:shadow-lg resize-y input-3d"
                   placeholder="Enter your message"
                 />
               </div>
@@ -230,7 +234,7 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-gradient-to-r from-cyan-400 to-blue-500 text-white py-4 px-8 rounded-lg font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-cyan-400/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none relative overflow-hidden group focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-slate-900"
+                className="w-full bg-gradient-to-r from-cyan-400 to-blue-500 text-white py-4 px-8 rounded-lg font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-cyan-400/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none relative overflow-hidden group focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-slate-900 shine-line glow-ring"
               >
                 <span className="relative z-10 flex items-center justify-center gap-2">
                   {isSubmitting ? (
