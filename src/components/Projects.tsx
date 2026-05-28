@@ -174,7 +174,7 @@ function ProjectImage({ project }: { project: Project }) {
 
 function TechBadge({ tech }: { tech: string }) {
   return (
-    <span className="px-3 py-1 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 text-yellow-400 rounded-full text-xs font-medium border border-yellow-500/30 hover:border-yellow-400/50 transition-colors duration-300">
+    <span className="px-3 py-1 text-yellow-200 rounded-full text-xs font-medium transition-colors duration-300 chip-3d">
       {tech}
     </span>
   )
@@ -215,7 +215,7 @@ function ProjectCard({ project }: { project: Project }) {
   const isMicromouse = project.title === MICROMOUSE_TITLE
 
   return (
-    <article className="group bg-slate-800/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-indigo-500/20 hover:border-indigo-500/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-indigo-500/20 relative">
+    <article className="group rounded-2xl overflow-hidden relative depth-card edge-glow lift shine-line">
       {/* Image / Demo */}
       <div
         className={`h-52 bg-gradient-to-br ${project.gradient} flex items-center justify-center relative overflow-hidden`}
@@ -284,13 +284,17 @@ function SectionHeader() {
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-24 relative bg-slate-900/30" aria-labelledby="projects-heading">
+    <section id="projects" className="py-24 relative section-3d" aria-labelledby="projects-heading">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(projectsJsonLd) }}
       />
 
-      <div className="max-w-7xl mx-auto px-5">
+      <div className="accent-orbs" aria-hidden="true">
+        <div className="accent-orb orb-2" />
+        <div className="accent-orb orb-4" />
+      </div>
+      <div className="max-w-7xl mx-auto px-5 relative z-10">
         <SectionHeader />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
