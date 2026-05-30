@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { GraduationCap, MapPin, Briefcase, Users, Linkedin, Github, Twitter, Instagram } from 'lucide-react'
 
 export default function About() {
@@ -55,21 +54,6 @@ export default function About() {
         </div>
 
         <div className="flex flex-col lg:flex-row items-center gap-16">
-          {/* Profile Image */}
-          <div className="flex-shrink-0">
-            <div className="relative w-[26rem] h-[32rem] rounded-2xl overflow-hidden depth-card edge-glow lift shine-line">
-              <Image
-                src="/images/IMG_6446.jpeg"
-                alt="Prashant Bhandari - Electronics Engineer in Pokhara, Nepal"
-                width={416}
-                height={512}
-                className="w-full h-full object-cover transition-transform duration-500 hover:scale-105 filter grayscale-[20%] contrast-110 hover:grayscale-0 hover:contrast-120"
-                priority
-              />
-              <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/10 via-transparent to-yellow-400/10 rounded-2xl" aria-hidden="true"></div>
-            </div>
-          </div>
-
           {/* About Text */}
           <div className="flex-1">
             <div className="space-y-6 text-gray-300">
