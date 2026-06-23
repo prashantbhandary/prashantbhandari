@@ -198,6 +198,223 @@ body {
   animation: float 6s ease-in-out infinite;
 }
 
+/* ===========================================================
+   3D Design System (cards, sections & floating accent orbs)
+   =========================================================== */
+
+/* Section wrapper: positioning context + clips decorative orbs */
+.section-3d {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* Floating accent orbs container */
+.accent-orbs {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.accent-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.55;
+  will-change: transform;
+  animation: orbFloat 18s ease-in-out infinite;
+}
+
+.orb-1 {
+  width: 340px;
+  height: 340px;
+  top: -70px;
+  left: -90px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.55) 0%, transparent 70%);
+  animation-delay: 0s;
+}
+
+.orb-2 {
+  width: 280px;
+  height: 280px;
+  top: 35%;
+  right: -80px;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.5) 0%, transparent 70%);
+  animation-delay: -4s;
+}
+
+.orb-3 {
+  width: 320px;
+  height: 320px;
+  bottom: -90px;
+  left: 28%;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.45) 0%, transparent 70%);
+  animation-delay: -8s;
+}
+
+.orb-4 {
+  width: 240px;
+  height: 240px;
+  bottom: 8%;
+  right: 18%;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.4) 0%, transparent 70%);
+  animation-delay: -12s;
+}
+
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(30px, -25px) scale(1.08); }
+  66%      { transform: translate(-22px, 20px) scale(0.95); }
+}
+
+/* Glassmorphic surface / card background box */
+.surface-3d {
+  background: linear-gradient(145deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.55));
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow:
+    0 10px 30px -12px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+/* Larger glassmorphic card surface (project / skill / contact cards) */
+.depth-card {
+  background: linear-gradient(160deg, rgba(30, 41, 59, 0.65), rgba(15, 23, 42, 0.5));
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow:
+    0 18px 40px -18px rgba(0, 0, 0, 0.65),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+/* Pill / tag chip */
+.chip-3d {
+  background: rgba(99, 102, 241, 0.12);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+
+.chip-3d:hover {
+  background: rgba(99, 102, 241, 0.22);
+  border-color: rgba(99, 102, 241, 0.5);
+}
+
+/* Form input field */
+.input-3d {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.35);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.input-3d::placeholder {
+  color: rgba(148, 163, 184, 0.6);
+}
+
+.input-3d:focus {
+  background: rgba(15, 23, 42, 0.8);
+  border-color: rgba(99, 102, 241, 0.6);
+  box-shadow:
+    inset 0 2px 6px rgba(0, 0, 0, 0.35),
+    0 0 0 3px rgba(99, 102, 241, 0.18);
+}
+
+/* Glowing edge on hover */
+.edge-glow {
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.edge-glow:hover {
+  border-color: rgba(99, 102, 241, 0.5);
+  box-shadow:
+    0 14px 40px -12px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(99, 102, 241, 0.35),
+    0 0 30px -6px rgba(99, 102, 241, 0.45);
+}
+
+/* Lift on hover */
+.lift {
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.lift:hover {
+  transform: translateY(-6px);
+}
+
+/* Sweeping shine line across a surface on hover */
+.shine-line {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.7s ease;
+  pointer-events: none;
+}
+
+.shine-line:hover::after {
+  left: 140%;
+}
+
+/* Glow ring for circular icon buttons */
+.glow-ring {
+  box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.glow-ring:hover {
+  box-shadow: 0 0 22px -2px rgba(99, 102, 241, 0.6);
+}
+
+/* ===========================================================
+   Scroll-reveal (fade-up on enter). Only active once JS adds
+   `.js-reveal` to <html>, so content stays visible without JS.
+   =========================================================== */
+.js-reveal .reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.5s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.js-reveal .reveal.in-view {
+  opacity: 1;
+  transform: none;
+  /* Drop the perf hint once revealed so it doesn't linger on every card */
+  will-change: auto;
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .accent-orb {
+    animation: none;
+  }
+
+  .js-reveal .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
 /* Hide mobile navigation on desktop by default */
 .nav-links {
   display: none;

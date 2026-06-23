@@ -8,6 +8,7 @@ import Certificates from '@/components/Certificates'
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
 import CircuitElements from '@/components/CircuitElements'
+import ScrollReveal from '@/components/ScrollReveal'
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
       </main>
       <Footer />
       <CircuitElements />
+      <ScrollReveal />
     </>
   )
 }
