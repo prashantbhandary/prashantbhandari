@@ -267,7 +267,7 @@ function ProjectCard({ project }: { project: Project }) {
 
 function SectionHeader() {
   return (
-    <div className="text-center mb-16">
+    <div className="text-center mb-12 reveal">
       <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
         Featured Projects
       </h2>
@@ -284,7 +284,7 @@ function SectionHeader() {
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-24 relative section-3d" aria-labelledby="projects-heading">
+    <section id="projects" className="py-16 md:py-20 relative section-3d" aria-labelledby="projects-heading">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(projectsJsonLd) }}
@@ -297,7 +297,7 @@ export default function Projects() {
       <div className="max-w-7xl mx-auto px-5 relative z-10">
         <SectionHeader />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 reveal-group">
           {projects.map((project) => (
             <ProjectCard key={project.title} project={project} />
           ))}

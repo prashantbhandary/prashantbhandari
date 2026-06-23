@@ -22,6 +22,34 @@ export default function Footer() {
             <span className="text-3xl text-indigo-400 absolute -right-4 -bottom-6">&quot;</span>
           </div>
           
+          {/* Sponsor */}
+          <div className="flex flex-col items-center gap-3 mb-10 reveal">
+            <p className="text-xs uppercase tracking-[0.2em] text-gray-500">Proudly sponsored by</p>
+            <a
+              href="https://www.nextpcb.com/"
+              target="_blank"
+              rel="noopener"
+              aria-label="NextPCB — PCB manufacturing & PCBA assembly services"
+              className="group inline-flex items-center rounded-lg bg-white px-5 py-2.5 shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/20"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/nextpcb.svg"
+                alt="NextPCB"
+                width={150}
+                height={41}
+                className="h-7 w-auto"
+              />
+            </a>
+            <p className="text-sm text-gray-400">
+              Thanks to{' '}
+              <a href="https://www.nextpcb.com/" target="_blank" rel="noopener" className="font-medium text-white hover:text-indigo-300 transition-colors">
+                NextPCB
+              </a>{' '}
+              for the <span className="text-indigo-300">PCB</span> &amp; <span className="text-cyan-300">PCBA</span> services.
+            </p>
+          </div>
+
           {/* Copyright */}
           <div className="border-t border-gray-700 pt-8">
             <p className="text-gray-400">

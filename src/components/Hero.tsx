@@ -5,11 +5,9 @@ import { Download, ExternalLink, ChevronDown } from 'lucide-react'
 import Image from 'next/image'
 
 const TECH_BADGES = [
-  { label: 'Arduino', color: 'bg-teal-500/20 border-teal-400/50 text-teal-300', style: { top: '4%', left: '-8%' }, delay: '0s' },
-  { label: 'ESP32', color: 'bg-blue-500/20 border-blue-400/50 text-blue-300', style: { top: '18%', right: '-10%' }, delay: '0.8s' },
-  { label: 'PCB Design', color: 'bg-green-500/20 border-green-400/50 text-green-300', style: { bottom: '22%', left: '-12%' }, delay: '1.4s' },
-  { label: 'Robotics', color: 'bg-purple-500/20 border-purple-400/50 text-purple-300', style: { bottom: '6%', right: '-8%' }, delay: '2s' },
-  { label: 'C / C++', color: 'bg-orange-500/20 border-orange-400/50 text-orange-300', style: { top: '50%', right: '-14%' }, delay: '0.4s' },
+  { label: 'Robotics', color: 'bg-purple-500/20 border-purple-400/50 text-purple-300', style: { top: '10%', left: '-14%' }, delay: '0s' },
+  { label: 'PCB Design', color: 'bg-green-500/20 border-green-400/50 text-green-300', style: { bottom: '14%', left: '-12%' }, delay: '1.2s' },
+  { label: 'ESP32', color: 'bg-blue-500/20 border-blue-400/50 text-blue-300', style: { top: '38%', right: '-12%' }, delay: '0.6s' },
 ]
 
 const STATS = [
@@ -158,19 +156,19 @@ export default function Hero() {
           </div>
 
           {/* ── Right: profile photo ── */}
-          <div className="relative flex-shrink-0 w-72 h-72 md:w-80 md:h-80 lg:w-[360px] lg:h-[360px]">
-            {/* Rotating ring */}
+          <div className="relative flex-shrink-0 w-64 h-80 md:w-72 md:h-96 lg:w-[340px] lg:h-[440px]">
+            {/* Soft glow behind the card */}
             <div
               aria-hidden="true"
-              className="absolute inset-0 rounded-full border-2 border-dashed border-cyan-400/20 animate-spin-slow"
+              className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-cyan-400/20 via-indigo-500/10 to-purple-600/20 blur-2xl"
             />
-            {/* Outer glow ring */}
+            {/* Decorative offset border */}
             <div
               aria-hidden="true"
-              className="absolute inset-2 rounded-full bg-gradient-to-br from-cyan-400/20 via-indigo-500/10 to-purple-600/20 blur-sm"
+              className="absolute -inset-2 rounded-[1.75rem] border border-dashed border-cyan-400/20"
             />
             {/* Photo frame */}
-            <div className="absolute inset-4 rounded-full overflow-hidden ring-2 ring-cyan-400/40 shadow-[0_0_40px_rgba(6,182,212,0.25)]">
+            <div className="absolute inset-0 rounded-3xl overflow-hidden ring-1 ring-cyan-400/40 shadow-[0_0_45px_rgba(6,182,212,0.25)]">
               <Image
                 src="/images/IMG_6446.jpeg"
                 alt="Prashant Bhandari"
@@ -178,9 +176,14 @@ export default function Hero() {
                 className="object-cover object-top"
                 priority
               />
+              {/* Bottom gradient for depth */}
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 bg-gradient-to-t from-slate-950/50 via-transparent to-transparent"
+              />
             </div>
 
-            {/* Floating tech badges */}
+            {/* Floating tech badges (kept minimal) */}
             {TECH_BADGES.map((badge) => (
               <span
                 key={badge.label}
@@ -195,7 +198,7 @@ export default function Hero() {
             {/* Status dot */}
             <div
               aria-hidden="true"
-              className="absolute bottom-6 right-6 flex items-center gap-1.5 bg-slate-900/80 border border-green-400/40 rounded-full px-3 py-1.5 text-xs text-green-300 font-medium backdrop-blur-sm"
+              className="absolute bottom-4 right-4 flex items-center gap-1.5 bg-slate-900/80 border border-green-400/40 rounded-full px-3 py-1.5 text-xs text-green-300 font-medium backdrop-blur-sm"
             >
               <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
               Open to work

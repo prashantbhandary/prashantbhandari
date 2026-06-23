@@ -187,13 +187,13 @@ export default function CertificatesShowcase() {
 
   return (
     <>
-      <section id="certificates" className="py-24 relative section-3d">
+      <section id="certificates" className="py-16 md:py-20 relative section-3d">
         <div className="accent-orbs" aria-hidden="true">
           <div className="accent-orb orb-1" />
           <div className="accent-orb orb-2" />
         </div>
         <div className="max-w-7xl mx-auto px-5 relative z-10">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12 reveal">
             <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
               Certificates & Awards
             </h2>
@@ -233,7 +233,7 @@ export default function CertificatesShowcase() {
           </div>
 
           {/* Certificates Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 reveal-group">
             {filteredCertificates.map((certificate) => (
               <div
                 key={certificate.id}

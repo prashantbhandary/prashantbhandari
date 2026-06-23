@@ -40,13 +40,13 @@ export default function About() {
   ]
 
   return (
-    <section id="about" className="py-24 relative section-3d" aria-labelledby="about-heading">
+    <section id="about" className="py-16 md:py-20 relative section-3d" aria-labelledby="about-heading">
       <div className="accent-orbs" aria-hidden="true">
         <div className="accent-orb orb-1" />
         <div className="accent-orb orb-4" />
       </div>
       <div className="max-w-6xl mx-auto px-5 relative z-10">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 reveal">
           <h2 id="about-heading" className="text-5xl font-bold mb-6 bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
             About Me
           </h2>
@@ -65,7 +65,7 @@ export default function About() {
             </div>
 
             {/* Info Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 reveal-group">
               {infoCards.map((card, index) => (
                 <div
                   key={index}

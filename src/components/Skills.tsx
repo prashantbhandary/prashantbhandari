@@ -35,13 +35,13 @@ export default function Skills() {
   ]
 
   return (
-    <section id="skills" className="py-24 relative section-3d" aria-labelledby="skills-heading">
+    <section id="skills" className="py-16 md:py-20 relative section-3d" aria-labelledby="skills-heading">
       <div className="accent-orbs" aria-hidden="true">
         <div className="accent-orb orb-2" />
         <div className="accent-orb orb-3" />
       </div>
       <div className="max-w-6xl mx-auto px-5 relative z-10">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 reveal">
           <h2 id="skills-heading" className="text-5xl font-bold mb-6 bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
             Skills & Expertise
           </h2>
@@ -52,7 +52,7 @@ export default function Skills() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 reveal-group">
           {skillCategories.map((category, index) => (
             <article
               key={index}

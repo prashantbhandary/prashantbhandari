@@ -144,9 +144,9 @@ export default function Experience() {
   }
 
   return (
-    <section id="experience" className="py-24 relative bg-slate-900/30" aria-labelledby="experience-heading">
+    <section id="experience" className="py-16 md:py-20 relative bg-slate-900/30" aria-labelledby="experience-heading">
       <div className="max-w-5xl mx-auto px-5">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 reveal">
           <h2 id="experience-heading" className="text-5xl font-bold mb-6 bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
             Experience
           </h2>
@@ -157,7 +157,7 @@ export default function Experience() {
           </p>
         </div>
 
-        <div className="space-y-8">
+        <div className="space-y-8 reveal-group">
           {experiences.map((exp, index) => {
             const IconComponent = getIcon(exp.type)
             return (

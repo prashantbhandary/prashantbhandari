@@ -98,13 +98,13 @@ export default function Contact() {
   ]
 
   return (
-    <section id="contact" className="py-16 md:py-24 relative section-3d" aria-labelledby="contact-heading">
+    <section id="contact" className="py-16 md:py-20 relative section-3d" aria-labelledby="contact-heading">
       <div className="accent-orbs" aria-hidden="true">
         <div className="accent-orb orb-3" />
         <div className="accent-orb orb-4" />
       </div>
       <div className="max-w-6xl mx-auto px-5 relative z-10">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 reveal">
           <h2 id="contact-heading" className="text-5xl font-bold mb-6 bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
             Contact Me
           </h2>
@@ -114,7 +114,7 @@ export default function Contact() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 reveal-group">
           {/* Contact Information */}
           <div className="space-y-8">
             {contactInfo.map((info, index) => (
