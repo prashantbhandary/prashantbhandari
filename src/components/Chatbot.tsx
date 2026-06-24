@@ -134,12 +134,12 @@ export default function Chatbot() {
 
   return (
     <>
-      {/* Launcher — bottom-left so it clears the theme toggle (bottom-right) */}
+      {/* Launcher — bottom-right */}
       <button
         onClick={() => setOpen((o) => !o)}
         aria-label={open ? 'Close chat' : 'Open AI assistant'}
         aria-expanded={open}
-        className="fixed bottom-6 left-6 z-50 w-14 h-14 rounded-full bg-gradient-to-r from-indigo-500 to-cyan-500 text-white flex items-center justify-center shadow-lg shadow-cyan-500/30 hover:shadow-xl hover:shadow-cyan-500/40 hover:scale-110 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-slate-900"
+        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-gradient-to-r from-indigo-500 to-cyan-500 text-white flex items-center justify-center shadow-lg shadow-cyan-500/30 hover:shadow-xl hover:shadow-cyan-500/40 hover:scale-110 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-slate-900"
       >
         {open ? <X className="w-6 h-6" /> : <MessageSquare className="w-6 h-6" />}
       </button>
@@ -149,7 +149,7 @@ export default function Chatbot() {
         role="dialog"
         aria-label="AI assistant"
         aria-hidden={!open}
-        className={`fixed bottom-24 left-4 sm:left-6 z-50 w-[calc(100vw-2rem)] max-w-sm origin-bottom-left transition-all duration-300 ${
+        className={`fixed bottom-24 right-4 sm:right-6 z-50 w-[calc(100vw-2rem)] max-w-sm origin-bottom-right transition-all duration-300 ${
           open ? 'opacity-100 scale-100 pointer-events-auto' : 'opacity-0 scale-95 pointer-events-none'
         }`}
       >
@@ -167,19 +167,30 @@ export default function Chatbot() {
 
           {/* Transcript */}
           <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
-            {messages.map((m, i) => (
-              <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <p
-                  className={`max-w-[85%] text-sm leading-relaxed rounded-2xl px-4 py-2.5 whitespace-pre-wrap ${
-                    m.role === 'user'
-                      ? 'bg-gradient-to-r from-indigo-500 to-cyan-500 text-white rounded-br-sm'
-                      : 'bg-white/5 border border-white/10 text-slate-200 rounded-bl-sm'
-                  }`}
-                >
-                  {m.content || (busy && i === messages.length - 1 ? '•••' : '')}
-                </p>
-              </div>
-            ))}
+            {messages.map((m, i) => {
+              const typing = busy && i === messages.length - 1 && !m.content
+              return (
+                <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                  <div
+                    className={`max-w-[85%] text-sm leading-relaxed rounded-2xl px-4 py-2.5 whitespace-pre-wrap ${
+                      m.role === 'user'
+                        ? 'bg-gradient-to-r from-indigo-500 to-cyan-500 text-white rounded-br-sm'
+                        : 'bg-white/5 border border-white/10 text-slate-200 rounded-bl-sm'
+                    }`}
+                  >
+                    {typing ? (
+                      <span className="flex gap-1 py-1" aria-label="Assistant is typing">
+                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-bounce [animation-delay:-0.3s]" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-bounce [animation-delay:-0.15s]" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-bounce" />
+                      </span>
+                    ) : (
+                      m.content
+                    )}
+                  </div>
+                </div>
+              )
+            })}
 
             {messages.length === 1 && (
               <div className="flex flex-wrap gap-2 pt-1">
