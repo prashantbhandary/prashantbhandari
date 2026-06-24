@@ -33,6 +33,10 @@ yarn-error.log*
 # vercel
 .vercel
 
+# cloudflare pages — local function secrets & state
+.dev.vars
+.wrangler/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
