@@ -218,7 +218,7 @@ export default function Hero() {
               src="/images/prashant-figure.webp"
               alt="Prashant Bhandari"
               fill
-              sizes="(max-width: 940px) 70vw, 23rem"
+              sizes="(max-width: 940px) 80vw, 27rem"
               priority
             />
             </motion.div>

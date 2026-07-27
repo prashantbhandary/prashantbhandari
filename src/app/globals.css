@@ -526,7 +526,7 @@ p { text-wrap: pretty; }
 }
 
 @media (min-width: 940px) {
-  .hero__grid { grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr); }
+  .hero__grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); }
 }
 
 .hero__role {
@@ -648,7 +648,7 @@ p { text-wrap: pretty; }
 .hero__figure {
   position: relative;
   width: 100%;
-  max-width: 23rem;
+  max-width: 27rem;
   aspect-ratio: 1100 / 1375;
   margin-inline: auto;
 }
@@ -660,7 +660,7 @@ p { text-wrap: pretty; }
 }
 
 @media (max-width: 939px) {
-  .hero__figure { max-width: 18rem; }
+  .hero__figure { max-width: 21rem; }
 }
 
 .stat-strip {
