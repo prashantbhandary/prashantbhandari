@@ -122,6 +122,14 @@ export default function RootLayout({
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="googlebot" content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1" />
         <meta name="google-adsense-account" content="ca-pub-7919679791683906" />
+        {/*
+          Framer Motion pre-renders its scroll reveals with inline
+          `opacity:0`, so without JS the page would render blank. This puts
+          every hidden block back on screen when scripts don't run.
+        */}
+        <noscript>
+          <style>{`[style*="opacity:0"]{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

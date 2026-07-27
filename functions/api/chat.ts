@@ -32,10 +32,10 @@ EDUCATION
 
 TECHNICAL SKILLS
 - PCB Design: KiCad, Proteus, schematic capture, PCB layout, buck/boost converter design, DRC/ERC.
-- Embedded: ESP32, Arduino, FreeRTOS, ECU2000, HCM111Z, BLE, LoRa, UART/SPI/I2C.
+- Embedded: STM32 bare-metal C, NuttX RTOS, FreeRTOS, ESP32, Arduino, ECU2000, HCM111Z, BLE, LoRa, UART/SPI/I2C.
 - Languages: C/C++, Python, MicroPython, JavaScript.
 - Hardware: IoT systems, power electronics, QC test fixtures, robotics, CubeSat subsystems.
-- Tools: Git, OLED dashboards, sensor integration, OTA, JLCPCB/Gerber workflows.
+- Tools: Fusion 360, 3D CAD, Git, OLED dashboards, sensor integration, OTA, JLCPCB/Gerber workflows.
 
 EXPERIENCE
 - Satellite Systems Intern — Antarikchya Pratisthan Nepal (APN), Slippers2Sat-2 (S2S-2) mission (June 2026 – present, current role): develops and tests embedded firmware for satellite subsystems; supports the COM subsystem and ground station link — command reception and telemetry downlink over the amateur UHF band. About the mission: S2S-2 is a student-built 1U CubeSat initiated by APN, with UNOOSA and Exolaunch supporting launch and deployment. Its objectives include in-house design and operation of Nepal's 1U CubeSat, supporting education for lower-secondary students, a text-based digipeater for the amateur radio community, earthquake precursor investigation, and NIR/RGB Earth imaging for NDWI. Mission site: s2s2.antarikchya.org.np.

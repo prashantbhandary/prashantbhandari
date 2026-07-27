@@ -9,6 +9,9 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { MessageSquare, X, ArrowUp, Loader2, Bot } from 'lucide-react'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+
+const EASE = [0.22, 0.61, 0.36, 1] as const
 
 interface Message {
   role: 'user' | 'assistant'
@@ -33,6 +36,7 @@ export default function Chatbot() {
   const [messages, setMessages] = useState<Message[]>([GREETING])
   const [input, setInput] = useState('')
   const [busy, setBusy] = useState(false)
+  const reduce = useReducedMotion()
 
   const scrollRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLTextAreaElement>(null)
@@ -135,17 +139,43 @@ export default function Chatbot() {
   return (
     <>
       {/* Launcher */}
-      <button
+      <motion.button
         onClick={() => setOpen((o) => !o)}
         aria-label={open ? 'Close chat' : 'Open AI assistant'}
         aria-expanded={open}
         className="bot-fab"
+        initial={reduce ? false : { opacity: 0, scale: 0.6 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ type: 'spring', stiffness: 380, damping: 24, delay: 0.6 }}
+        whileHover={reduce ? undefined : { scale: 1.06 }}
+        whileTap={reduce ? undefined : { scale: 0.94 }}
       >
-        {open ? <X className="w-5 h-5" /> : <MessageSquare className="w-5 h-5" />}
-      </button>
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.span
+            key={open ? 'close' : 'open'}
+            initial={reduce ? false : { opacity: 0, rotate: -90, scale: 0.6 }}
+            animate={{ opacity: 1, rotate: 0, scale: 1 }}
+            exit={reduce ? undefined : { opacity: 0, rotate: 90, scale: 0.6 }}
+            transition={{ duration: 0.18, ease: EASE }}
+            className="grid place-items-center"
+          >
+            {open ? <X className="w-5 h-5" /> : <MessageSquare className="w-5 h-5" />}
+          </motion.span>
+        </AnimatePresence>
+      </motion.button>
 
       {/* Panel */}
-      <div role="dialog" aria-label="AI assistant" aria-hidden={!open} data-open={open} className="bot-panel">
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            role="dialog"
+            aria-label="AI assistant"
+            className="bot-panel"
+            initial={reduce ? false : { opacity: 0, scale: 0.94, y: 12 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={reduce ? undefined : { opacity: 0, scale: 0.96, y: 8 }}
+            transition={{ type: 'spring', stiffness: 320, damping: 30 }}
+          >
         <div className="bot-head">
           <span
             className="grid place-items-center w-8 h-8 rounded-[var(--r-sm)] shrink-0"
@@ -168,7 +198,13 @@ export default function Chatbot() {
           {messages.map((m, i) => {
             const typing = busy && i === messages.length - 1 && !m.content
             return (
-              <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+              <motion.div
+                key={i}
+                className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                initial={reduce ? false : { opacity: 0, y: 8, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.24, ease: EASE }}
+              >
                 <div className={`bubble ${m.role === 'user' ? 'bubble--user' : 'bubble--bot'}`}>
                   {typing ? (
                     <span className="flex gap-1 py-1" aria-label="Assistant is typing">
@@ -180,7 +216,7 @@ export default function Chatbot() {
                     m.content
                   )}
                 </div>
-              </div>
+              </motion.div>
             )
           })}
 
@@ -217,8 +253,10 @@ export default function Chatbot() {
           >
             {busy ? <Loader2 className="w-4 h-4 animate-spin" /> : <ArrowUp className="w-4 h-4" />}
           </button>
-        </form>
-      </div>
+            </form>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   )
 }

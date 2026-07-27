@@ -297,10 +297,15 @@ p { text-wrap: pretty; }
 
 .nav-link:hover { color: var(--ink); background: var(--surface-sunk); }
 
+/* The active pill itself is a shared-layout element animated by Framer
+   (layoutId="nav-active"), so this only carries the colour change —
+   a background here would double up behind the sliding pill. */
 .nav-link[aria-current='true'] {
   color: var(--ink);
-  background: var(--accent-soft);
+  background: transparent;
 }
+
+.nav-link[aria-current='true']:hover { background: transparent; }
 
 .nav-cta {
   display: inline-flex;
@@ -1147,14 +1152,6 @@ p { text-wrap: pretty; }
   background: var(--surface);
   box-shadow: var(--shadow-lg);
   transform-origin: bottom right;
-  transition: opacity var(--t-base) var(--ease), transform var(--t-base) var(--ease), visibility var(--t-base);
-}
-
-.bot-panel[data-open='false'] {
-  opacity: 0;
-  visibility: hidden;
-  transform: scale(0.96) translateY(8px);
-  pointer-events: none;
 }
 
 .bot-head {
@@ -1179,19 +1176,12 @@ p { text-wrap: pretty; }
 .bubble--bot { background: var(--surface-sunk); border: 1px solid var(--line); color: var(--ink-2); border-bottom-left-radius: var(--r-xs); }
 
 /* ============================================================
-   SCROLL REVEAL (JS adds .js-reveal to <html>)
+   MOTION
+   Scroll reveals live in components/motion/Motion.tsx (Framer
+   Motion) — they collapse to static markup on their own when
+   reduced motion is requested. This block covers everything that
+   is still animated in CSS.
    ============================================================ */
-
-.js-reveal .reveal {
-  opacity: 0;
-  transform: translateY(14px);
-  transition:
-    opacity 520ms var(--ease),
-    transform 520ms var(--ease);
-  transition-delay: var(--reveal-delay, 0ms);
-}
-
-.js-reveal .reveal.in-view { opacity: 1; transform: none; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -1201,7 +1191,6 @@ p { text-wrap: pretty; }
     scroll-behavior: auto !important;
   }
   html { scroll-behavior: auto; }
-  .js-reveal .reveal { opacity: 1 !important; transform: none !important; }
 }
 
 /* Touch devices: no sticky hover offsets, no tap delay */
@@ -1224,4 +1213,188 @@ p { text-wrap: pretty; }
   background: var(--ink);
   color: #fff;
   overflow: visible;
+}
+
+/* ============================================================
+   RÉSUMÉ PAGE
+   A document, not a landing page: one column, tight vertical
+   rhythm, mono for dates, and a print stylesheet that drops the
+   chrome so Cmd-P produces a clean A4.
+   ============================================================ */
+
+.cv-page {
+  min-height: 100dvh;
+  background: var(--canvas-alt);
+  padding: clamp(1rem, 3vw, 2.5rem) var(--gutter) clamp(3rem, 6vw, 5rem);
+}
+
+.cv-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 52rem;
+  margin: 0 auto 1rem;
+}
+
+.cv {
+  max-width: 52rem;
+  margin-inline: auto;
+  padding: clamp(1.75rem, 4vw, 3.25rem);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-md);
+}
+
+.cv-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-bottom: 1.25rem;
+  border-bottom: 2px solid var(--ink);
+}
+
+.cv-name {
+  font-size: clamp(1.75rem, 1.3rem + 1.8vw, 2.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+
+.cv-role {
+  margin-top: 0.375rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+
+.cv-contacts {
+  display: grid;
+  gap: 0.25rem;
+  list-style: none;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+}
+
+.cv-contacts a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4375rem;
+  color: var(--ink-3);
+  text-decoration: none;
+}
+
+.cv-contacts a:hover { color: var(--accent); }
+
+.cv-block { margin-top: 1.75rem; }
+
+.cv-block__title {
+  margin-bottom: 0.875rem;
+  padding-bottom: 0.375rem;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+
+.cv-text { font-size: 0.9375rem; line-height: 1.65; color: var(--ink-2); }
+
+.cv-entry { margin-bottom: 1.125rem; }
+.cv-entry:last-child { margin-bottom: 0; }
+
+.cv-entry__head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.cv-entry__head h3 {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.cv-period {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--ink-4);
+  white-space: nowrap;
+}
+
+.cv-link {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent-line);
+}
+
+.cv-org { margin-top: 0.125rem; font-size: 0.875rem; color: var(--ink-3); }
+
+.cv-list { margin-top: 0.5rem; display: grid; gap: 0.3125rem; list-style: none; }
+
+.cv-list--two { gap: 0.3125rem 1.5rem; }
+
+@media (min-width: 720px) {
+  .cv-list--two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+.cv-list li {
+  position: relative;
+  padding-left: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+.cv-list li::before {
+  content: '';
+  position: absolute;
+  left: 0.125rem;
+  top: 0.6em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--ink-4);
+}
+
+.cv-skills { display: grid; gap: 0.5rem; }
+
+@media (min-width: 640px) {
+  .cv-skills > div { display: grid; grid-template-columns: 10rem minmax(0, 1fr); gap: 0.75rem; }
+}
+
+.cv-skills dt {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  padding-top: 0.15rem;
+}
+
+.cv-skills dd { font-size: 0.875rem; color: var(--ink-2); line-height: 1.55; }
+
+/* Cmd-P should give a clean sheet: no toolbar, no card, no shadows */
+@media print {
+  .cv-page { background: #fff; padding: 0; }
+  .cv-toolbar { display: none; }
+  .cv {
+    max-width: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+  }
+  .cv-block { break-inside: avoid; }
+  .cv-entry { break-inside: avoid; }
+  a { text-decoration: none; color: inherit; }
 }

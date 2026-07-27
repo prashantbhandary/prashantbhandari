@@ -10,7 +10,7 @@ const skillCategories = [
   {
     title: 'Embedded Systems',
     icon: Zap,
-    skills: ['ESP32', 'Arduino', 'FreeRTOS', 'ECU2000', 'HCM111Z', 'BLE', 'LoRa', 'UART/SPI/I2C'],
+    skills: ['STM32 Bare-Metal C', 'NuttX RTOS', 'FreeRTOS', 'ESP32', 'Arduino', 'ECU2000', 'HCM111Z', 'BLE', 'LoRa', 'UART/SPI/I2C'],
   },
   {
     title: 'Programming',
@@ -25,7 +25,7 @@ const skillCategories = [
   {
     title: 'Tools',
     icon: Wrench,
-    skills: ['Git', 'OLED Dashboards', 'Sensor Integration', 'OTA', 'JLCPCB/Gerber Workflows'],
+    skills: ['Fusion 360', '3D CAD', 'Git', 'OLED Dashboards', 'Sensor Integration', 'OTA', 'JLCPCB/Gerber Workflows'],
   },
 ]
 
