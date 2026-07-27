@@ -134,100 +134,90 @@ export default function Chatbot() {
 
   return (
     <>
-      {/* Launcher — bottom-right */}
+      {/* Launcher */}
       <button
         onClick={() => setOpen((o) => !o)}
         aria-label={open ? 'Close chat' : 'Open AI assistant'}
         aria-expanded={open}
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-gradient-to-r from-indigo-500 to-cyan-500 text-white flex items-center justify-center shadow-lg shadow-cyan-500/30 hover:shadow-xl hover:shadow-cyan-500/40 hover:scale-110 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-slate-900"
+        className="bot-fab"
       >
-        {open ? <X className="w-6 h-6" /> : <MessageSquare className="w-6 h-6" />}
+        {open ? <X className="w-5 h-5" /> : <MessageSquare className="w-5 h-5" />}
       </button>
 
-      {/* Chat panel */}
-      <div
-        role="dialog"
-        aria-label="AI assistant"
-        aria-hidden={!open}
-        className={`fixed bottom-24 right-4 sm:right-6 z-50 w-[calc(100vw-2rem)] max-w-sm origin-bottom-right transition-all duration-300 ${
-          open ? 'opacity-100 scale-100 pointer-events-auto' : 'opacity-0 scale-95 pointer-events-none'
-        }`}
-      >
-        <div className="flex flex-col h-[60vh] max-h-[34rem] rounded-2xl overflow-hidden bg-slate-900/95 backdrop-blur-xl border border-white/10 shadow-2xl">
-          {/* Header */}
-          <div className="flex items-center gap-3 px-5 py-4 bg-gradient-to-r from-indigo-600 to-cyan-600 text-white">
-            <span className="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center shrink-0">
-              <Bot className="w-5 h-5" />
-            </span>
-            <div className="leading-tight">
-              <p className="font-semibold text-sm">Prashant&apos;s AI Assistant</p>
-              <p className="text-white/70 text-xs">Ask me anything about his work</p>
-            </div>
+      {/* Panel */}
+      <div role="dialog" aria-label="AI assistant" aria-hidden={!open} data-open={open} className="bot-panel">
+        <div className="bot-head">
+          <span
+            className="grid place-items-center w-8 h-8 rounded-[var(--r-sm)] shrink-0"
+            style={{ background: 'var(--accent-soft)', color: 'var(--accent)' }}
+          >
+            <Bot className="w-4 h-4" />
+          </span>
+          <div className="leading-tight">
+            <p style={{ fontWeight: 600, fontSize: '0.875rem', color: 'var(--ink)' }}>
+              Prashant&apos;s AI Assistant
+            </p>
+            <p className="mono" style={{ color: 'var(--ink-4)' }}>
+              Ask anything about his work
+            </p>
           </div>
-
-          {/* Transcript */}
-          <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
-            {messages.map((m, i) => {
-              const typing = busy && i === messages.length - 1 && !m.content
-              return (
-                <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <div
-                    className={`max-w-[85%] text-sm leading-relaxed rounded-2xl px-4 py-2.5 whitespace-pre-wrap ${
-                      m.role === 'user'
-                        ? 'bg-gradient-to-r from-indigo-500 to-cyan-500 text-white rounded-br-sm'
-                        : 'bg-white/5 border border-white/10 text-slate-200 rounded-bl-sm'
-                    }`}
-                  >
-                    {typing ? (
-                      <span className="flex gap-1 py-1" aria-label="Assistant is typing">
-                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-bounce [animation-delay:-0.3s]" />
-                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-bounce [animation-delay:-0.15s]" />
-                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-bounce" />
-                      </span>
-                    ) : (
-                      m.content
-                    )}
-                  </div>
-                </div>
-              )
-            })}
-
-            {messages.length === 1 && (
-              <div className="flex flex-wrap gap-2 pt-1">
-                {PROMPTS.map((p) => (
-                  <button
-                    key={p}
-                    onClick={() => send(p)}
-                    className="text-xs text-cyan-300 border border-cyan-400/30 rounded-full px-3 py-1.5 hover:bg-cyan-400/10 hover:border-cyan-400/60 transition-colors duration-200"
-                  >
-                    {p}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Composer */}
-          <form onSubmit={onSubmit} className="border-t border-white/10 p-3 flex items-end gap-2">
-            <textarea
-              ref={inputRef}
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={onKeyDown}
-              rows={1}
-              placeholder="Type your question…"
-              className="flex-1 resize-none bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-slate-400 focus:outline-none focus:border-cyan-400/60 transition-colors duration-200 max-h-28"
-            />
-            <button
-              type="submit"
-              disabled={busy || !input.trim()}
-              aria-label="Send message"
-              className="w-10 h-10 shrink-0 rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-500 text-white flex items-center justify-center hover:opacity-90 transition-opacity duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
-            >
-              {busy ? <Loader2 className="w-5 h-5 animate-spin" /> : <ArrowUp className="w-5 h-5" />}
-            </button>
-          </form>
         </div>
+
+        {/* Transcript */}
+        <div ref={scrollRef} className="flex-1 overflow-y-auto px-3 py-3 space-y-2.5">
+          {messages.map((m, i) => {
+            const typing = busy && i === messages.length - 1 && !m.content
+            return (
+              <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                <div className={`bubble ${m.role === 'user' ? 'bubble--user' : 'bubble--bot'}`}>
+                  {typing ? (
+                    <span className="flex gap-1 py-1" aria-label="Assistant is typing">
+                      <span className="w-1.5 h-1.5 rounded-full animate-bounce [animation-delay:-0.3s]" style={{ background: 'var(--ink-4)' }} />
+                      <span className="w-1.5 h-1.5 rounded-full animate-bounce [animation-delay:-0.15s]" style={{ background: 'var(--ink-4)' }} />
+                      <span className="w-1.5 h-1.5 rounded-full animate-bounce" style={{ background: 'var(--ink-4)' }} />
+                    </span>
+                  ) : (
+                    m.content
+                  )}
+                </div>
+              </div>
+            )
+          })}
+
+          {messages.length === 1 && (
+            <div className="flex flex-wrap gap-1.5 pt-1">
+              {PROMPTS.map((p) => (
+                <button key={p} onClick={() => send(p)} className="tag" style={{ cursor: 'pointer' }}>
+                  {p}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Composer */}
+        <form onSubmit={onSubmit} className="p-2.5 flex items-end gap-2" style={{ borderTop: '1px solid var(--line)' }}>
+          <textarea
+            ref={inputRef}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={onKeyDown}
+            rows={1}
+            placeholder="Type your question…"
+            aria-label="Message"
+            className="flex-1 resize-none max-h-28 px-3 py-2 text-sm rounded-[var(--r-sm)]"
+            style={{ border: '1px solid var(--line)', background: 'var(--surface-sunk)', color: 'var(--ink)' }}
+          />
+          <button
+            type="submit"
+            disabled={busy || !input.trim()}
+            aria-label="Send message"
+            className="btn btn--primary shrink-0"
+            style={{ minHeight: 38, width: 38, padding: 0 }}
+          >
+            {busy ? <Loader2 className="w-4 h-4 animate-spin" /> : <ArrowUp className="w-4 h-4" />}
+          </button>
+        </form>
       </div>
     </>
   )

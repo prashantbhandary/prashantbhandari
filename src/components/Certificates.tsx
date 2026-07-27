@@ -1,7 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
+import { X, Award } from 'lucide-react'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { Reveal } from './motion/Motion'
 
 interface Certificate {
   id: string
@@ -13,55 +16,158 @@ interface Certificate {
   organization?: string
 }
 
-interface CertificateModalProps {
-  certificate: Certificate | null
-  isOpen: boolean
-  onClose: () => void
-}
+const certificates: Certificate[] = [
+  {
+    id: 'yarsa-tech-experience',
+    title: 'Yarsa Tech Experience Certificate',
+    description:
+      'Certificate of experience for completing Electronics Engineer Internship at Yarsa Tech, Pokhara. Gained hands-on experience in electronics engineering, PCB design, and embedded systems development.',
+    image: '/images/YarsaTechCertificationOfExperience.jpg',
+    category: 'experience',
+    date: 'January 2025 - July 2025',
+    organization: 'Yarsa Tech, Pokhara',
+  },
+  {
+    id: 'delta-robothon',
+    title: 'Delta Robothon Runner-Up',
+    description:
+      'Second place achievement in Delta Robothon competition, showcasing advanced robotics skills and innovation.',
+    image: '/images/DeltaRobothonRunnerUpCertification.jpg',
+    category: 'competition',
+    date: 'February 2025',
+    organization: 'Delta Robothon',
+  },
+  {
+    id: 'mesh-merize-iit',
+    title: 'MeshMerize IIT Bombay',
+    description:
+      "Participation certificate from MeshMerize competition at IIT Bombay, one of India's premier technical institutes.",
+    image: '/images/MeshMerizeIITBombay.png',
+    category: 'competition',
+    date: 'December 2024',
+    organization: 'IIT Bombay',
+  },
+  {
+    id: 'karyashala-mentor',
+    title: 'Karyashala Mentor Certification',
+    description:
+      'Certification for mentoring students in robotics and engineering projects at Karyashala workshop.',
+    image: '/images/KaryaShalaMentorCertification.jpg',
+    category: 'mentorship',
+    date: 'July 2024',
+    organization: 'Karyashala & Engineer Without Borders',
+  },
+  {
+    id: 'mentorship',
+    title: 'Mentorship Certification',
+    description:
+      'Recognition for outstanding mentorship and guidance provided to junior students in robotics and embedded systems.',
+    image: '/images/MentorShipCertification.jpg',
+    category: 'mentorship',
+    date: '2024',
+    organization: 'Educational Institution',
+  },
+  {
+    id: 'workshop-lab448',
+    title: 'Workshop by Lab448',
+    description:
+      'Completion certificate for advanced workshop conducted by Lab448, focusing on cutting-edge technology and innovation.',
+    image: '/images/WokshopBylab448.jpg',
+    category: 'workshop',
+    date: '2024',
+    organization: 'Lab448',
+  },
+  {
+    id: 'general-member',
+    title: 'General Member Certification',
+    description:
+      'Official membership certification recognizing active participation and contribution to the robotics club activities.',
+    image: '/images/GeneralMemberCertification.png',
+    category: 'experience',
+    date: 'March 2024 - March 2025',
+    organization: 'Robotics Club',
+  },
+  {
+    id: 'battle-for-speed',
+    title: 'Battle For Speed 2023 Winner',
+    description:
+      'First place winner in the Battle For Speed 2023 robotics competition with Voyager Line Follower Bot. Built advanced line-following robot with ultrasonic obstacle detection, optimized for speed and stability using advanced sensor integration.',
+    image: '/images/BattleForSpeed2023WinnerCertification.jpg',
+    category: 'competition',
+    date: 'March 2023',
+    organization: 'Robotics Competition',
+  },
+]
 
-export function CertificateModal({ certificate, isOpen, onClose }: CertificateModalProps) {
-  if (!isOpen || !certificate) return null
+const FILTERS = [
+  { id: 'all', label: 'All' },
+  { id: 'competition', label: 'Competitions' },
+  { id: 'mentorship', label: 'Mentorship' },
+  { id: 'workshop', label: 'Workshops' },
+  { id: 'experience', label: 'Experience' },
+]
+
+export function CertificateModal({
+  certificate,
+  onClose,
+}: {
+  certificate: Certificate | null
+  onClose: () => void
+}) {
+  useEffect(() => {
+    if (!certificate) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+    }
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', onKey)
+    return () => {
+      document.body.style.overflow = ''
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [certificate, onClose])
+
+  if (!certificate) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-      <div className="relative max-w-5xl w-full max-h-[95vh] bg-slate-900 rounded-2xl border border-indigo-500/30 flex flex-col overflow-hidden">
-        {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-slate-700 flex-shrink-0">
+    <div
+      className="fixed inset-0 z-[80] flex items-center justify-center p-4"
+      style={{ background: 'rgba(11,11,15,0.55)', backdropFilter: 'blur(6px)' }}
+      role="dialog"
+      aria-modal="true"
+      aria-label={certificate.title}
+      onClick={onClose}
+    >
+      <div
+        className="card w-full max-w-4xl max-h-[92vh] flex flex-col overflow-hidden"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-start justify-between gap-4 p-5 border-b" style={{ borderColor: 'var(--line)' }}>
           <div>
-            <h3 className="text-2xl font-bold text-white">{certificate.title}</h3>
+            <h3 style={{ fontSize: '1.125rem' }}>{certificate.title}</h3>
             {certificate.organization && (
-              <p className="text-indigo-300">{certificate.organization}</p>
-            )}
-            {certificate.date && (
-              <p className="text-cyan-400 text-sm">{certificate.date}</p>
+              <p className="mono" style={{ color: 'var(--ink-3)', marginTop: 4 }}>
+                {certificate.organization}
+                {certificate.date ? ` · ${certificate.date}` : ''}
+              </p>
             )}
           </div>
-          <button
-            onClick={onClose}
-            className="w-10 h-10 rounded-full bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-gray-400 hover:text-white transition-colors"
-          >
-            <i className="fas fa-times"></i>
+          <button type="button" className="nav-toggle" onClick={onClose} aria-label="Close certificate">
+            <X size={18} aria-hidden="true" />
           </button>
         </div>
 
-        {/* Scrollable Content */}
-        <div className="flex-1 overflow-y-auto p-6">
-          {/* Certificate Image */}
-          <div className="relative w-full min-h-[70vh] bg-slate-800 rounded-lg overflow-hidden mb-6">
-            <Image
-              src={certificate.image}
-              alt={certificate.title}
-              fill
-              className="object-contain p-4"
-              priority
-            />
+        <div className="flex-1 overflow-y-auto p-5">
+          <div
+            className="relative w-full rounded-[var(--r-sm)] overflow-hidden"
+            style={{ background: 'var(--surface-sunk)', minHeight: '60vh' }}
+          >
+            <Image src={certificate.image} alt={certificate.title} fill className="object-contain p-3" />
           </div>
-          
-          {/* Description */}
           {certificate.description && (
-            <div className="p-4 bg-slate-800/50 rounded-lg">
-              <p className="text-gray-300 leading-relaxed">{certificate.description}</p>
-            </div>
+            <p style={{ marginTop: '1rem', fontSize: '0.9375rem', color: 'var(--ink-3)' }}>
+              {certificate.description}
+            </p>
           )}
         </div>
       </div>
@@ -70,236 +176,92 @@ export function CertificateModal({ certificate, isOpen, onClose }: CertificateMo
 }
 
 export default function CertificatesShowcase() {
-  const [selectedCertificate, setSelectedCertificate] = useState<Certificate | null>(null)
-  const [modalOpen, setModalOpen] = useState(false)
+  const [selected, setSelected] = useState<Certificate | null>(null)
+  const [filter, setFilter] = useState('all')
+  const reduce = useReducedMotion()
 
-  const certificates: Certificate[] = [
-    {
-      id: 'yarsa-tech-experience',
-      title: 'Yarsa Tech Experience Certificate',
-      description: 'Certificate of experience for completing Electronics Engineer Internship at Yarsa Tech, Pokhara. Gained hands-on experience in electronics engineering, PCB design, and embedded systems development.',
-      image: '/images/YarsaTechCertificationOfExperience.jpg',
-      category: 'experience',
-      date: 'January 2025 - July 2025',
-      organization: 'Yarsa Tech, Pokhara'
-    },
-    {
-      id: 'delta-robothon',
-      title: 'Delta Robothon Runner-Up',
-      description: 'Second place achievement in Delta Robothon competition, showcasing advanced robotics skills and innovation.',
-      image: '/images/DeltaRobothonRunnerUpCertification.jpg',
-      category: 'competition',
-      date: 'February 2025',
-      organization: 'Delta Robothon'
-    },
-    {
-      id: 'mesh-merize-iit',
-      title: 'MeshMerize IIT Bombay',
-      description: 'Participation certificate from MeshMerize competition at IIT Bombay, one of India\'s premier technical institutes.',
-      image: '/images/MeshMerizeIITBombay.png',
-      category: 'competition',
-      date: 'December 2024',
-      organization: 'IIT Bombay'
-    },
-    {
-      id: 'karyashala-mentor',
-      title: 'Karyashala Mentor Certification',
-      description: 'Certification for mentoring students in robotics and engineering projects at Karyashala workshop.',
-      image: '/images/KaryaShalaMentorCertification.jpg',
-      category: 'mentorship',
-      date: 'July 2024',
-      organization: 'Karyashala & Engineer Without Borders'
-    },
-    {
-      id: 'mentorship',
-      title: 'Mentorship Certification',
-      description: 'Recognition for outstanding mentorship and guidance provided to junior students in robotics and embedded systems.',
-      image: '/images/MentorShipCertification.jpg',
-      category: 'mentorship',
-      date: '2024',
-      organization: 'Educational Institution'
-    },
-    {
-      id: 'workshop-lab448',
-      title: 'Workshop by Lab448',
-      description: 'Completion certificate for advanced workshop conducted by Lab448, focusing on cutting-edge technology and innovation.',
-      image: '/images/WokshopBylab448.jpg',
-      category: 'workshop',
-      date: '2024',
-      organization: 'Lab448'
-    },
-    {
-      id: 'general-member',
-      title: 'General Member Certification',
-      description: 'Official membership certification recognizing active participation and contribution to the robotics club activities.',
-      image: '/images/GeneralMemberCertification.png',
-      category: 'experience',
-      date: 'March 2024 - March 2025',
-      organization: 'Robotics Club'
-    },
-    {
-      id: 'battle-for-speed',
-      title: 'Battle For Speed 2023 Winner',
-      description: 'First place winner in the Battle For Speed 2023 robotics competition with Voyager Line Follower Bot. Built advanced line-following robot with ultrasonic obstacle detection, optimized for speed and stability using advanced sensor integration.',
-      image: '/images/BattleForSpeed2023WinnerCertification.jpg',
-      category: 'competition',
-      date: 'March 2023',
-      organization: 'Robotics Competition'
-    }
-  ]
-
-  const openModal = (certificate: Certificate) => {
-    setSelectedCertificate(certificate)
-    setModalOpen(true)
-  }
-
-  const closeModal = () => {
-    setModalOpen(false)
-    setSelectedCertificate(null)
-  }
-
-  const getCategoryIcon = (category: string) => {
-    switch (category) {
-      case 'competition': return 'fas fa-trophy'
-      case 'mentorship': return 'fas fa-chalkboard-teacher'
-      case 'workshop': return 'fas fa-tools'
-      case 'experience': return 'fas fa-briefcase'
-      default: return 'fas fa-certificate'
-    }
-  }
-
-  const getCategoryColor = (category: string) => {
-    switch (category) {
-      case 'competition': return 'from-yellow-500 to-orange-500'
-      case 'mentorship': return 'from-green-500 to-teal-500'
-      case 'workshop': return 'from-pink-500 to-red-500'
-      case 'experience': return 'from-purple-500 to-violet-500'
-      default: return 'from-gray-500 to-gray-600'
-    }
-  }
-
-  const categories = ['competition', 'mentorship', 'workshop', 'experience']
-  const [activeCategory, setActiveCategory] = useState<string>('all')
-
-  const filteredCertificates = activeCategory === 'all' 
-    ? certificates 
-    : certificates.filter(cert => cert.category === activeCategory)
+  const visible = filter === 'all' ? certificates : certificates.filter((c) => c.category === filter)
 
   return (
     <>
-      <section id="certificates" className="py-16 md:py-20 relative section-3d">
-        <div className="accent-orbs" aria-hidden="true">
-          <div className="accent-orb orb-1" />
-          <div className="accent-orb orb-2" />
-        </div>
-        <div className="max-w-7xl mx-auto px-5 relative z-10">
-          <div className="text-center mb-12 reveal">
-            <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
-              Certificates & Awards
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-yellow-400 mx-auto rounded-full mb-4"></div>
-            <p className="text-gray-400 max-w-3xl mx-auto text-lg">
-              Recognition and certifications earned through competitions, mentorship, workshops, and active participation 
-              in various technical and leadership activities.
+      <section id="certificates" className="section" aria-labelledby="certificates-heading">
+        <div className="shell">
+          <Reveal as="header" className="section-head">
+            <p className="section-index">
+              <span>05</span> Recognition
             </p>
-          </div>
+            <h2 id="certificates-heading" className="section-title">
+              Certificates &amp; awards
+            </h2>
+            <p className="section-lead">
+              Competition results, mentorship recognition and internship certificates — tap any
+              card to read the original document.
+            </p>
+          </Reveal>
 
-          {/* Category Filter */}
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            <button
-              onClick={() => setActiveCategory('all')}
-              className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
-                activeCategory === 'all'
-                  ? 'bg-gradient-to-r from-cyan-400 to-blue-500 text-white shadow-lg glow-ring'
-                  : 'text-gray-300 hover:text-white surface-3d'
-              }`}
-            >
-              All Certificates
-            </button>
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setActiveCategory(category)}
-                className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 flex items-center gap-2 ${
-                  activeCategory === category
-                    ? `bg-gradient-to-r ${getCategoryColor(category)} text-white shadow-lg glow-ring`
-                    : 'text-gray-300 hover:text-white surface-3d'
-                }`}
-              >
-                <i className={getCategoryIcon(category)}></i>
-                {category.charAt(0).toUpperCase() + category.slice(1)}
-              </button>
-            ))}
-          </div>
+          <Reveal delay={0.05}>
+            <div className="filter-row" role="group" aria-label="Filter certificates">
+              {FILTERS.map((f) => (
+                <button
+                  key={f.id}
+                  type="button"
+                  className="filter-chip"
+                  aria-pressed={filter === f.id}
+                  onClick={() => setFilter(f.id)}
+                >
+                  {f.label}
+                </button>
+              ))}
+            </div>
+          </Reveal>
 
-          {/* Certificates Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 reveal-group">
-            {filteredCertificates.map((certificate) => (
-              <div
-                key={certificate.id}
-                onClick={() => openModal(certificate)}
-                className="group rounded-2xl overflow-hidden cursor-pointer depth-card edge-glow lift shine-line"
-              >
-                {/* Certificate Preview */}
-                <div className="relative h-48 bg-slate-700/50 overflow-hidden">
+          <motion.div layout={!reduce} className="cert-grid">
+            <AnimatePresence mode="popLayout">
+              {visible.map((certificate) => (
+                <motion.button
+                  key={certificate.id}
+                  type="button"
+                  className="cert card--hover"
+                  onClick={() => setSelected(certificate)}
+                  layout={!reduce}
+                  initial={reduce ? false : { opacity: 0, scale: 0.94 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={reduce ? undefined : { opacity: 0, scale: 0.94 }}
+                  transition={{ duration: 0.28, ease: [0.22, 0.61, 0.36, 1] }}
+                  whileHover={reduce ? undefined : { y: -3 }}
+                >
+                <span className="cert__thumb">
                   <Image
                     src={certificate.image}
                     alt={certificate.title}
                     fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    sizes="(max-width: 780px) 50vw, 15rem"
+                    className="object-cover"
+                    loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent"></div>
-                  
-                  {/* Category Badge */}
-                  <div className={`absolute top-4 right-4 px-3 py-1 rounded-full bg-gradient-to-r ${getCategoryColor(certificate.category)} text-white text-xs font-semibold flex items-center gap-1`}>
-                    <i className={getCategoryIcon(certificate.category)}></i>
-                    {certificate.category}
-                  </div>
+                </span>
+                <span className="cert__body">
+                  <span className="cert__title">{certificate.title}</span>
+                  <span className="cert__meta">
+                    {certificate.organization}
+                    {certificate.date ? ` · ${certificate.date}` : ''}
+                  </span>
+                  </span>
+                </motion.button>
+              ))}
+            </AnimatePresence>
+          </motion.div>
 
-                  {/* View Icon */}
-                  <div className="absolute bottom-4 right-4 w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <i className="fas fa-eye text-white"></i>
-                  </div>
-                </div>
-
-                {/* Certificate Info */}
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
-                    {certificate.title}
-                  </h3>
-                  {certificate.organization && (
-                    <p className="text-indigo-300 text-sm mb-2">{certificate.organization}</p>
-                  )}
-                  {certificate.date && (
-                    <p className="text-cyan-400 text-sm mb-3">{certificate.date}</p>
-                  )}
-                  <p className="text-gray-400 text-sm leading-relaxed line-clamp-3">
-                    {certificate.description}
-                  </p>
-                  
-                  <div className="mt-4 flex items-center gap-2 text-cyan-400 text-sm font-medium">
-                    <span>Click to view certificate</span>
-                    <i className="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {filteredCertificates.length === 0 && (
-            <div className="text-center py-12">
-              <p className="text-gray-400 text-lg">No certificates found in this category.</p>
-            </div>
+          {visible.length === 0 && (
+            <p className="flex items-center gap-2 mono" style={{ color: 'var(--ink-4)' }}>
+              <Award size={14} aria-hidden="true" />
+              Nothing in this category yet.
+            </p>
           )}
         </div>
       </section>
 
-      {/* Certificate Modal */}
-      <CertificateModal
-        certificate={selectedCertificate}
-        isOpen={modalOpen}
-        onClose={closeModal}
-      />
+      <CertificateModal certificate={selected} onClose={() => setSelected(null)} />
     </>
   )
 }

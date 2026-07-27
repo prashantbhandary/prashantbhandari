@@ -8,17 +8,36 @@
  */
 
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
+// Body copy
 const inter = Inter({
   subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
+
+// Headlines — a grotesk with enough character to not read as a template
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["500", "600", "700"],
+  variable: "--font-space-grotesk",
+});
+
+// Metadata, tags, periods — the engineering register of the page
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500"],
+  variable: "--font-jetbrains-mono",
 });
 
 export const metadata: Metadata = {
   title: "Prashant Bhandari | Electronics Engineer & Robotics Developer",
   description: "Portfolio of Prashant Bhandari — Electronics Engineering student, robotics competition winner, PCB designer, and embedded systems developer from Pokhara, Nepal.",
-  keywords: "Prashant Bhandari, electronics engineering student, robotics competition winner, Battle For Speed 2023, Delta Robothon, Pokhara Nepal, Pashchimanchal Campus, Yarsa Tech intern, Arduino ESP32, PCB design, embedded systems, micromouse robot, line follower bot, autonomous boat, KiCad, C++ Python, robotics club executive member, electronics intern Nepal, competition robotics, maze solving robot, QTR sensors PID control",
+  keywords: "Prashant Bhandari, electronics engineering student, Antarikchya Pratisthan Nepal, Slippers2Sat-2, S2S-2 CubeSat, satellite systems intern Nepal, CubeSat firmware, Yarsa Tech intern, robotics competition winner, Battle For Speed 2023, Delta Robothon, Pokhara Nepal, Pashchimanchal Campus, Arduino ESP32, PCB design, embedded systems, micromouse robot, line follower bot, autonomous boat, KiCad, C++ Python, robotics club executive member, electronics intern Nepal, competition robotics, maze solving robot, QTR sensors PID control",
   authors: [{ name: "Prashant Bhandari", url: "https://bhandari-prashant.com.np" }],
   creator: "Prashant Bhandari",
   publisher: "Prashant Bhandari",
@@ -95,7 +114,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html
+      lang="en"
+      className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
+    >
       <head>
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="googlebot" content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1" />
@@ -115,8 +137,8 @@ export default function RootLayout({
                 "width": 400,
                 "height": 400
               },
-              "description": "Electronics Engineering Student from Pokhara, Nepal. Competition winner in robotics (Battle For Speed 2023, Delta Robothon Runner-Up). Currently studying at Pashchimanchal Campus and working as Electronics Engineer Intern at Yarsa Tech.",
-              "jobTitle": ["Electronics Engineering Student", "Electronics Engineer Intern", "Robotics Competition Winner"],
+              "description": "Electronics Engineering Student from Pokhara, Nepal. Currently a Satellite Systems Intern at Antarikchya Pratisthan Nepal on the Slippers2Sat-2 (S2S-2) 1U CubeSat mission, and previously Electronics Engineer Intern at Yarsa Tech. Competition winner in robotics (Battle For Speed 2023, Delta Robothon Runner-Up), studying at Pashchimanchal Campus.",
+              "jobTitle": ["Satellite Systems Intern", "Electronics Engineering Student", "Electronics Engineer Intern"],
               "hasOccupation": {
                 "@type": "Occupation",
                 "name": "Electronics Engineer",
@@ -133,6 +155,16 @@ export default function RootLayout({
                 "https://www.instagram.com/_prashant.08/"
               ],
               "worksFor": [
+                {
+                  "@type": "Organization",
+                  "name": "Antarikchya Pratisthan Nepal",
+                  "url": "https://www.antarikchya.org.np",
+                  "description": "Nepali space education organization behind the Slippers2Sat-2 (S2S-2) 1U CubeSat mission",
+                  "location": {
+                    "@type": "Place",
+                    "name": "Nepal"
+                  }
+                },
                 {
                   "@type": "Organization",
                   "name": "YarsaTech",
@@ -212,14 +244,10 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${inter.className} bg-dark text-light overflow-x-hidden relative`}>
-        <a 
-          href="#main-content" 
-          className="absolute left-[-999px] top-auto w-1 h-1 overflow-hidden z-[1000] bg-white text-black py-2 px-4 focus:left-2 focus:top-2 focus:w-auto focus:h-auto focus:overflow-visible focus:z-[10000] focus:outline-none focus:ring-2 focus:ring-cyan-400"
-        >
+      <body className="relative overflow-x-hidden">
+        <a href="#main-content" className="sr-only sr-only-focusable">
           Skip to main content
         </a>
-        <div className="circuit-background" aria-hidden="true" />
         {children}
       </body>
     </html>

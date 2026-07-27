@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import emailjs from '@emailjs/browser'
 import { Mail, Phone, MapPin, Send, Loader2, Linkedin, Github, Twitter, Instagram } from 'lucide-react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { Reveal, RevealGroup, RevealItem } from './motion/Motion'
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -69,191 +71,143 @@ export default function Contact() {
     }
   }
 
-  const contactInfo = [
-    {
-      icon: Mail,
-      title: 'Email',
-      info: 'info@bhandari-prashant.com.np',
-      gradient: 'from-blue-500 to-purple-500'
-    },
-    {
-      icon: Phone,
-      title: 'Phone',
-      info: '+977 9867756915',
-      gradient: 'from-green-500 to-teal-500'
-    },
-    {
-      icon: MapPin,
-      title: 'Location',
-      info: 'Pokhara, Nepal',
-      gradient: 'from-red-500 to-pink-500'
-    }
+  const contactRows = [
+    { icon: Mail, label: 'Email', value: 'info@bhandari-prashant.com.np', href: 'mailto:info@bhandari-prashant.com.np' },
+    { icon: Phone, label: 'Phone', value: '+977 9867756915', href: 'tel:+9779867756915' },
+    { icon: MapPin, label: 'Location', value: 'Pokhara, Nepal', href: undefined },
   ]
 
-  const socialLinks = [
-    { href: 'https://www.linkedin.com/in/prashantbdri', icon: Linkedin, color: 'from-blue-600 to-blue-700', label: 'LinkedIn profile' },
-    { href: 'https://github.com/prashantbhandary', icon: Github, color: 'from-gray-700 to-gray-800', label: 'GitHub profile' },
-    { href: 'https://twitter.com/santhprashant', icon: Twitter, color: 'from-gray-400 to-gray-600', label: 'Twitter profile' },
-    { href: 'https://www.instagram.com/_prashant.08/', icon: Instagram, color: 'from-pink-500 to-purple-600', label: 'Instagram profile' }
+  const socials = [
+    { href: 'https://www.linkedin.com/in/prashantbdri', icon: Linkedin, label: 'LinkedIn profile' },
+    { href: 'https://github.com/prashantbhandary', icon: Github, label: 'GitHub profile' },
+    { href: 'https://twitter.com/santhprashant', icon: Twitter, label: 'Twitter profile' },
+    { href: 'https://www.instagram.com/_prashant.08/', icon: Instagram, label: 'Instagram profile' },
+  ]
+
+  const fields = [
+    { name: 'name', label: 'Name', type: 'text', placeholder: 'Your name', value: formData.name },
+    { name: 'email', label: 'Email', type: 'email', placeholder: 'you@example.com', value: formData.email },
+    { name: 'subject', label: 'Subject', type: 'text', placeholder: "What's this about?", value: formData.subject },
   ]
 
   return (
-    <section id="contact" className="py-16 md:py-20 relative section-3d" aria-labelledby="contact-heading">
-      <div className="accent-orbs" aria-hidden="true">
-        <div className="accent-orb orb-3" />
-        <div className="accent-orb orb-4" />
-      </div>
-      <div className="max-w-6xl mx-auto px-5 relative z-10">
-        <div className="text-center mb-12 reveal">
-          <h2 id="contact-heading" className="text-5xl font-bold mb-6 bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
-            Contact Me
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-yellow-400 mx-auto rounded-full mb-4"></div>
-          <p className="text-gray-300 max-w-2xl mx-auto text-lg">
-            Get in touch for collaborations, opportunities, or just to discuss technology and innovation.
+    <section id="contact" className="section section--alt" aria-labelledby="contact-heading">
+      <div className="shell">
+        <Reveal as="header" className="section-head">
+          <p className="section-index">
+            <span>06</span> Contact
           </p>
-        </div>
+          <h2 id="contact-heading" className="section-title">
+            Let&apos;s build something
+          </h2>
+          <p className="section-lead">
+            Open to internships, hardware collaborations and freelance PCB or firmware work. The
+            fastest way to reach me is email.
+          </p>
+        </Reveal>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 reveal-group">
-          {/* Contact Information */}
-          <div className="space-y-8">
-            {contactInfo.map((info, index) => (
-              <div
-                key={index}
-                className="flex items-start gap-6 p-6 rounded-2xl depth-card edge-glow lift shine-line"
-              >
-                <div className={`w-16 h-16 bg-gradient-to-r ${info.gradient} rounded-full flex items-center justify-center flex-shrink-0 shadow-lg`} aria-hidden="true">
-                  <info.icon className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-white mb-2">{info.title}</h3>
-                  <p className="text-gray-300 font-medium">{info.info}</p>
-                </div>
-              </div>
-            ))}
+        <RevealGroup className="grid gap-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]" stagger={0.1}>
+          {/* Details */}
+          <RevealItem>
+            <div>
+              {contactRows.map((row) => {
+                const Row = row.href ? 'a' : 'div'
+                return (
+                  <Row key={row.label} className="contact-row" {...(row.href ? { href: row.href } : {})}>
+                    <span className="contact-row__icon" aria-hidden="true">
+                      <row.icon size={16} />
+                    </span>
+                    <span>
+                      <span className="contact-row__label block">{row.label}</span>
+                      <span className="contact-row__value">{row.value}</span>
+                    </span>
+                  </Row>
+                )
+              })}
+            </div>
 
-            {/* Social Links */}
-            <div className="flex gap-4 justify-center lg:justify-start">
-              {socialLinks.map((social, index) => (
+            <div className="social-row mt-6">
+              {socials.map((social) => (
                 <a
-                  key={index}
+                  key={social.href}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className={`w-14 h-14 rounded-full bg-gradient-to-r ${social.color} flex items-center justify-center text-white transition-all duration-300 hover:-translate-y-2 hover:scale-110 hover:shadow-lg relative overflow-hidden group focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-900 glow-ring`}
+                  className="social-btn"
                 >
-                  <social.icon className="w-5 h-5 relative z-10" aria-hidden="true" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700" aria-hidden="true" />
+                  <social.icon size={18} aria-hidden="true" />
                 </a>
               ))}
             </div>
-          </div>
+          </RevealItem>
 
-          {/* Contact Form */}
-          <div className="rounded-2xl p-8 depth-card edge-glow">
-            <div className="w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full mb-8" aria-hidden="true"></div>
-            
-            <form onSubmit={handleSubmit} className="space-y-6" aria-label="Contact form">
-              <div>
-                <label htmlFor="name" className="block text-white font-semibold mb-3">
-                  Your Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-6 py-4 rounded-lg text-white transition-all duration-300 focus:outline-none focus:border-indigo-400 focus:shadow-lg input-3d"
-                  placeholder="Enter your name"
-                />
-              </div>
+          {/* Form */}
+          <RevealItem className="card form-card">
+            <form onSubmit={handleSubmit} className="grid gap-4" aria-label="Contact form">
+              {fields.map((field) => (
+                <div key={field.name} className="field">
+                  <label htmlFor={field.name}>{field.label}</label>
+                  <input
+                    id={field.name}
+                    name={field.name}
+                    type={field.type}
+                    value={field.value}
+                    onChange={handleChange}
+                    placeholder={field.placeholder}
+                    required
+                    autoComplete={field.name === 'email' ? 'email' : field.name === 'name' ? 'name' : 'off'}
+                  />
+                </div>
+              ))}
 
-              <div>
-                <label htmlFor="email" className="block text-white font-semibold mb-3">
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-6 py-4 rounded-lg text-white transition-all duration-300 focus:outline-none focus:border-indigo-400 focus:shadow-lg input-3d"
-                  placeholder="Enter your email"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="subject" className="block text-white font-semibold mb-3">
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-6 py-4 rounded-lg text-white transition-all duration-300 focus:outline-none focus:border-indigo-400 focus:shadow-lg input-3d"
-                  placeholder="Enter message subject"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="message" className="block text-white font-semibold mb-3">
-                  Message
-                </label>
+              <div className="field">
+                <label htmlFor="message">Message</label>
                 <textarea
                   id="message"
                   name="message"
+                  rows={5}
                   value={formData.message}
                   onChange={handleChange}
+                  placeholder="Tell me about the project…"
                   required
-                  rows={6}
-                  className="w-full px-6 py-4 rounded-lg text-white transition-all duration-300 focus:outline-none focus:border-indigo-400 focus:shadow-lg resize-y input-3d"
-                  placeholder="Enter your message"
                 />
               </div>
 
-              {status === 'success' && (
-                <div className="p-4 bg-green-500/20 border border-green-500/40 rounded-lg text-green-300" role="alert">
-                  Thank you for your message! I will get back to you soon.
-                </div>
-              )}
+              <AnimatePresence mode="wait">
+                {status !== 'idle' && (
+                  <motion.p
+                    key={status}
+                    className={`note ${status === 'success' ? 'note--ok' : 'note--bad'}`}
+                    role={status === 'success' ? 'status' : 'alert'}
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.25, ease: [0.22, 0.61, 0.36, 1] }}
+                  >
+                    {status === 'success'
+                      ? "Thanks — your message is on its way. I'll reply soon."
+                      : "That didn't send. Check the fields and try again, or email me directly."}
+                  </motion.p>
+                )}
+              </AnimatePresence>
 
-              {status === 'error' && (
-                <div className="p-4 bg-red-500/20 border border-red-500/40 rounded-lg text-red-300" role="alert">
-                  There was an error sending your message. Please try again or contact me directly at info@bhandari-prashant.com.np
-                </div>
-              )}
-
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-gradient-to-r from-cyan-400 to-blue-500 text-white py-4 px-8 rounded-lg font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-cyan-400/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none relative overflow-hidden group focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-slate-900 shine-line glow-ring"
-              >
-                <span className="relative z-10 flex items-center justify-center gap-2">
-                  {isSubmitting ? (
-                    <>
-                      <Loader2 className="w-5 h-5 animate-spin" aria-hidden="true" />
-                      Sending...
-                    </>
-                  ) : (
-                    <>
-                      <Send className="w-5 h-5" aria-hidden="true" />
-                      Send Message
-                    </>
-                  )}
-                </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700" aria-hidden="true" />
+              <button type="submit" className="btn btn--primary w-full" disabled={isSubmitting}>
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
+                    Sending…
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-4 h-4" aria-hidden="true" />
+                    Send message
+                  </>
+                )}
               </button>
             </form>
-          </div>
-        </div>
+          </RevealItem>
+        </RevealGroup>
       </div>
     </section>
   )

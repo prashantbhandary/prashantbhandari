@@ -30,10 +30,10 @@ export default function Blog() {
     <section id="blog" className="py-24 relative bg-slate-900/30">
       <div className="max-w-6xl mx-auto px-5">
         <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
+          <h2 className="section-title">
             Latest Blog Posts
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-yellow-400 mx-auto rounded-full mb-4"></div>
+          <div className="section-rule"></div>
           <p className="text-gray-400 max-w-2xl mx-auto text-lg">
             Sharing knowledge and insights about electronics, robotics, and embedded systems development.
           </p>

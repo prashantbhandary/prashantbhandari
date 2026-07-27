@@ -109,6 +109,15 @@ export default function Resume() {
               <h2 className="text-2xl font-bold text-gray-800 mb-4 border-b-2 border-blue-500 pb-2">EXPERIENCE</h2>
               <div className="space-y-6">
                 <div>
+                  <h3 className="font-semibold text-gray-800 text-lg">Satellite Systems Intern - Antarikchya Pratisthan Nepal, Slippers2Sat-2 (S2S-2) (June 2026 - Present)</h3>
+                  <ul className="list-disc list-inside text-gray-700 ml-4 space-y-1">
+                    <li>Develop and test embedded firmware for satellite subsystems on the S2S-2 1U CubeSat bus</li>
+                    <li>Support the communication (COM) subsystem: command reception and telemetry downlink over the amateur UHF band</li>
+                    <li>Assist with ground station operations, link verification, and decoding of downlinked mission data</li>
+                  </ul>
+                </div>
+
+                <div>
                   <h3 className="font-semibold text-gray-800 text-lg">Electronics Design Intern - SEDS Nepal (Remote), Pokhara, Nepal (Sept 2025 - Jan 2026)</h3>
                   <ul className="list-disc list-inside text-gray-700 ml-4 space-y-1">
                     <li>Designed electronics modules for pseudo-satellite (HAPS) systems, ensuring modular and reproducible architecture</li>

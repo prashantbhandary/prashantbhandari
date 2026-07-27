@@ -1,184 +1,202 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
-import { Menu, X, FileText } from 'lucide-react'
+import { Menu, X, ArrowUpRight, FileText } from 'lucide-react'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+
+const NAV_ITEMS = [
+  { id: 'about', label: 'About' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'projects', label: 'Work' },
+  { id: 'certificates', label: 'Certificates' },
+]
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [active, setActive] = useState('')
+  const reduce = useReducedMotion()
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen)
-  }
-
-  const closeMenu = () => {
-    setIsMenuOpen(false)
-  }
-
+  // Highlight whichever section is currently in the reading zone
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 1024) {
-        setIsMenuOpen(false)
-      }
-    }
+    const sections = NAV_ITEMS.map((item) => document.getElementById(item.id)).filter(
+      (el): el is HTMLElement => Boolean(el)
+    )
+    if (!sections.length) return
 
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
+        if (visible) setActive(visible.target.id)
+      },
+      { rootMargin: '-45% 0px -45% 0px', threshold: [0, 0.25, 0.5, 1] }
+    )
+
+    sections.forEach((section) => observer.observe(section))
+    return () => observer.disconnect()
   }, [])
 
+  // Lock page scroll while the mobile sheet is open
   useEffect(() => {
-    if (isMenuOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
-
+    document.body.style.overflow = menuOpen ? 'hidden' : ''
     return () => {
       document.body.style.overflow = ''
     }
-  }, [isMenuOpen])
+  }, [menuOpen])
 
-  const scrollToSection = (sectionId: string) => {
-    closeMenu()
-    
-    setTimeout(() => {
-      const element = document.getElementById(sectionId)
-      if (element) {
-        const headerHeight = 80
-        const elementPosition = element.getBoundingClientRect().top
-        const offsetPosition = elementPosition + window.pageYOffset - headerHeight - 20
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMenuOpen(false)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
 
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        })
-      }
-    }, 100)
-  }
-
-  const navItems = [
-    { href: 'about', label: 'About' },
-    { href: 'skills', label: 'Skills' },
-    { href: 'experience', label: 'Experience' },
-    { href: 'projects', label: 'Projects' },
-    { href: 'certificates', label: 'Certificates' },
-    { href: 'contact', label: 'Contact' }
-  ]
+  const goTo = useCallback((id: string) => {
+    setMenuOpen(false)
+    const el = document.getElementById(id)
+    if (!el) return
+    // let the sheet close before the scroll starts
+    requestAnimationFrame(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }))
+  }, [])
 
   return (
     <>
-      {/* Mobile Navigation Overlay */}
-      <div 
-        className={`nav-overlay ${isMenuOpen ? 'open' : ''}`}
-        onClick={closeMenu}
-        aria-hidden="true"
-      />
-      {/* Header */}
-      <header className="bg-slate-900/80 backdrop-blur-md text-white py-4 sticky top-0 z-50 shadow-lg border-b border-indigo-500/20">
-        <div className="max-w-6xl mx-auto px-5">
-          <nav className="flex justify-between items-center relative" role="navigation" aria-label="Main navigation">
-            {/* Logo */}
-            <Link 
-              href="/"
-              className="text-3xl font-bold flex items-center cursor-pointer hover:text-cyan-400 transition-colors"
-              aria-label="Prashant Bhandari - Home"
-            >
-              <span>Prashant</span>
-            </Link>
+      <header className="site-header">
+        <motion.nav
+          className="nav-pill"
+          aria-label="Main navigation"
+          initial={reduce ? false : { opacity: 0, y: -14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: [0.22, 0.61, 0.36, 1], delay: 0.1 }}
+        >
+          <Link href="/" className="nav-brand">
+            Prashant<span style={{ color: 'var(--accent)' }}>.</span>
+          </Link>
 
-            {/* Hamburger Menu Button (Mobile) */}
-            <button
-              className="hamburger lg:hidden"
-              onClick={toggleMenu}
-              aria-label="Toggle navigation menu"
-              aria-expanded={isMenuOpen}
-              aria-controls="mobile-menu"
-            >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-
-            {/* Desktop Navigation */}
-            <ul className="hidden lg:flex space-x-8" role="menubar">
-              {navItems.map((item) => (
-                <li key={item.href} role="none">
-                  <button
-                    onClick={() => scrollToSection(item.href)}
-                    className="text-white hover:text-yellow-400 font-medium transition-all duration-300 relative py-2 hover:-translate-y-1 after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-yellow-400 after:to-cyan-400 hover:after:w-full after:transition-all after:duration-300"
-                    role="menuitem"
-                  >
-                    {item.label}
-                  </button>
-                </li>
-              ))}
-              
-              {/* Resume Link */}
-              <li role="none">
-                <Link
-                  href="/resume"
-                  className="text-white hover:text-green-400 font-medium transition-all duration-300 relative py-2 hover:-translate-y-1 after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-green-400 after:to-emerald-400 hover:after:w-full after:transition-all after:duration-300 flex items-center gap-1"
-                  role="menuitem"
+          <ul className="nav-list">
+            {NAV_ITEMS.map((item) => (
+              <li key={item.id} className="relative">
+                {active === item.id && !reduce && (
+                  <motion.span
+                    layoutId="nav-active"
+                    className="absolute inset-0 rounded-[var(--r-pill)]"
+                    style={{ background: 'var(--accent-soft)' }}
+                    transition={{ type: 'spring', stiffness: 420, damping: 34 }}
+                    aria-hidden="true"
+                  />
+                )}
+                <button
+                  type="button"
+                  className="nav-link relative"
+                  aria-current={active === item.id ? 'true' : undefined}
+                  onClick={() => goTo(item.id)}
                 >
-                  <FileText size={16} aria-hidden="true" />
-                  Resume
-                </Link>
+                  {item.label}
+                </button>
               </li>
-            </ul>
+            ))}
+            <li>
+              <Link href="/resume" className="nav-link">
+                <FileText size={13} aria-hidden="true" />
+                Résumé
+              </Link>
+            </li>
+          </ul>
 
-            {/* Mobile Navigation */}
-            <ul 
-              id="mobile-menu"
-              className={`nav-links ${isMenuOpen ? 'open' : ''}`}
-              role="menu"
-              aria-hidden={!isMenuOpen}
-            >
-              {navItems.map((item, index) => (
-                <li 
-                  key={item.href}
-                  style={{ animationDelay: `${(index + 1) * 0.05}s` }}
-                  role="none"
-                >
-                  <button
-                    onClick={() => scrollToSection(item.href)}
-                    className="block w-full text-left py-6 px-6 text-white hover:text-yellow-400 font-medium transition-all duration-300 border-b border-white/10 hover:bg-yellow-400/10 rounded-lg cursor-pointer touch-manipulation"
-                    style={{ 
-                      touchAction: 'manipulation',
-                      WebkitTapHighlightColor: 'rgba(255, 255, 255, 0.1)',
-                      minHeight: '60px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      userSelect: 'none'
-                    }}
-                    role="menuitem"
-                    tabIndex={isMenuOpen ? 0 : -1}
-                  >
-                    {item.label}
-                  </button>
-                </li>
-              ))}
-              
-              {/* Resume Link for Mobile */}
-              <li style={{ animationDelay: `${7 * 0.05}s` }} role="none">
-                <Link
-                  href="/resume"
-                  onClick={() => closeMenu()}
-                  className="flex w-full text-left py-6 px-6 text-white hover:text-green-400 font-medium transition-all duration-300 border-b border-white/10 hover:bg-green-400/10 rounded-lg cursor-pointer touch-manipulation items-center gap-2"
-                  style={{ 
-                    touchAction: 'manipulation',
-                    WebkitTapHighlightColor: 'rgba(255, 255, 255, 0.1)',
-                    minHeight: '60px',
-                    userSelect: 'none'
-                  }}
-                  role="menuitem"
-                  tabIndex={isMenuOpen ? 0 : -1}
-                >
-                  <FileText size={16} aria-hidden="true" />
-                  Resume
-                </Link>
-              </li>
-            </ul>
-          </nav>
-        </div>
+          <motion.button
+            type="button"
+            className="nav-cta"
+            onClick={() => goTo('contact')}
+            whileHover={reduce ? undefined : { y: -1 }}
+            whileTap={reduce ? undefined : { scale: 0.96 }}
+          >
+            Contact
+            <ArrowUpRight size={13} aria-hidden="true" />
+          </motion.button>
+
+          <button
+            type="button"
+            className="nav-toggle"
+            aria-label="Open navigation menu"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-nav"
+            onClick={() => setMenuOpen(true)}
+          >
+            <Menu size={18} aria-hidden="true" />
+          </button>
+        </motion.nav>
       </header>
+
+      {/* Mobile sheet */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            id="mobile-nav"
+            className="nav-sheet"
+            data-open="true"
+            onClick={() => setMenuOpen(false)}
+            initial={reduce ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={reduce ? undefined : { opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+        <div />
+        <motion.div
+          className="nav-sheet__panel"
+          onClick={(e) => e.stopPropagation()}
+          initial={reduce ? false : { y: '12%' }}
+          animate={{ y: 0 }}
+          exit={reduce ? undefined : { y: '12%' }}
+          transition={{ type: 'spring', stiffness: 320, damping: 34 }}
+        >
+          <div className="flex items-center justify-between px-3 pb-2">
+            <span className="eyebrow">Navigate</span>
+            <button
+              type="button"
+              className="nav-toggle"
+              aria-label="Close navigation menu"
+              onClick={() => setMenuOpen(false)}
+            >
+              <X size={18} aria-hidden="true" />
+            </button>
+          </div>
+
+          {NAV_ITEMS.map((item) => (
+            <button
+              key={item.id}
+              type="button"
+              className="nav-sheet__link"
+              onClick={() => goTo(item.id)}
+            >
+              {item.label}
+              <ArrowUpRight size={16} aria-hidden="true" style={{ color: 'var(--ink-4)' }} />
+            </button>
+          ))}
+
+          <Link
+            href="/resume"
+            className="nav-sheet__link"
+            onClick={() => setMenuOpen(false)}
+          >
+            Résumé
+            <FileText size={16} aria-hidden="true" style={{ color: 'var(--ink-4)' }} />
+          </Link>
+
+          <button
+            type="button"
+            className="btn btn--primary w-full mt-2"
+            onClick={() => goTo('contact')}
+          >
+            Get in touch
+          </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   )
 }

@@ -38,6 +38,7 @@ TECHNICAL SKILLS
 - Tools: Git, OLED dashboards, sensor integration, OTA, JLCPCB/Gerber workflows.
 
 EXPERIENCE
+- Satellite Systems Intern — Antarikchya Pratisthan Nepal (APN), Slippers2Sat-2 (S2S-2) mission (June 2026 – present, current role): develops and tests embedded firmware for satellite subsystems; supports the COM subsystem and ground station link — command reception and telemetry downlink over the amateur UHF band. About the mission: S2S-2 is a student-built 1U CubeSat initiated by APN, with UNOOSA and Exolaunch supporting launch and deployment. Its objectives include in-house design and operation of Nepal's 1U CubeSat, supporting education for lower-secondary students, a text-based digipeater for the amateur radio community, earthquake precursor investigation, and NIR/RGB Earth imaging for NDWI. Mission site: s2s2.antarikchya.org.np.
 - Electronics Design Intern — SEDS Nepal (Remote), Pokhara (Sept 2025 – Jan 2026): designed electronics modules for pseudo-satellite (HAPS) systems; component selection, BOM budgeting, and design reviews across satellite subsystems.
 - Electronics Engineer Intern — YarsaTech, Pokhara (Jan 2025 – Jul 2025): designed/optimized buck converter circuits in KiCad; built an automated QC testing device (MicroPython); built a BLE QR/barcode scanner with a full C/C++ firmware stack.
 

@@ -62,10 +62,10 @@ export default function Achievements() {
     <section id="achievements" className="py-24 relative">
       <div className="max-w-6xl mx-auto px-5">
         <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
+          <h2 className="section-title">
             Achievements
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-yellow-400 mx-auto rounded-full"></div>
+          <div className="section-rule"></div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">

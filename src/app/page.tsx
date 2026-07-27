@@ -7,13 +7,13 @@ import Projects from '@/components/Projects'
 import Certificates from '@/components/Certificates'
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
-import CircuitElements from '@/components/CircuitElements'
-import ScrollReveal from '@/components/ScrollReveal'
+import { ScrollProgress } from '@/components/motion/Motion'
 import Chatbot from '@/components/Chatbot'
 
 export default function Home() {
   return (
     <>
+      <ScrollProgress />
       <Header />
       <main id="main-content">
         <Hero />
@@ -25,8 +25,6 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
-      <CircuitElements />
-      <ScrollReveal />
       <Chatbot />
     </>
   )

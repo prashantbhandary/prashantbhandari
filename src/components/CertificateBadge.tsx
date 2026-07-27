@@ -1,7 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
+import { Eye, X } from 'lucide-react'
 
 interface CertificateBadgeProps {
   certificateImage: string
@@ -10,69 +11,92 @@ interface CertificateBadgeProps {
   size?: 'sm' | 'md' | 'lg'
 }
 
-export default function CertificateBadge({ 
-  certificateImage, 
-  title, 
-  description,
-  size = 'sm' 
-}: CertificateBadgeProps) {
-  const [showModal, setShowModal] = useState(false)
+const SIZES = {
+  sm: 'w-8 h-8',
+  md: 'w-12 h-12',
+  lg: 'w-16 h-16',
+}
 
-  const sizeClasses = {
-    sm: 'w-8 h-8',
-    md: 'w-12 h-12',
-    lg: 'w-16 h-16'
-  }
+export default function CertificateBadge({
+  certificateImage,
+  title,
+  description,
+  size = 'sm',
+}: CertificateBadgeProps) {
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    if (!open) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', onKey)
+    return () => {
+      document.body.style.overflow = ''
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [open])
 
   return (
     <>
       <button
-        onClick={() => setShowModal(true)}
-        className={`${sizeClasses[size]} rounded-lg overflow-hidden border-2 border-yellow-400/50 hover:border-yellow-400 transition-all duration-300 hover:scale-110 group relative flex-shrink-0`}
-        title={`View ${title} certificate`}
+        type="button"
+        onClick={() => setOpen(true)}
+        className={`${SIZES[size]} relative shrink-0 overflow-hidden rounded-[var(--r-xs)] group`}
+        style={{ border: '1px solid var(--line-strong)' }}
+        aria-label={`View the ${title} certificate`}
+        title={title}
       >
-        <Image
-          src={certificateImage}
-          alt={title}
-          fill
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-yellow-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-          <i className="fas fa-eye text-white text-xs"></i>
-        </div>
+        <Image src={certificateImage} alt="" fill className="object-cover" />
+        <span
+          className="absolute inset-0 grid place-items-center opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+          style={{ background: 'rgba(11,11,15,0.45)', color: '#fff' }}
+          aria-hidden="true"
+        >
+          <Eye size={12} />
+        </span>
       </button>
 
-      {/* Modal */}
-      {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-          <div className="relative max-w-3xl w-full max-h-[90vh] bg-slate-900 rounded-2xl border border-indigo-500/30 overflow-hidden">
-            {/* Header */}
-            <div className="flex items-center justify-between p-4 border-b border-slate-700">
-              <h3 className="text-xl font-bold text-white">{title}</h3>
+      {open && (
+        <div
+          className="fixed inset-0 z-[80] flex items-center justify-center p-4"
+          style={{ background: 'rgba(11,11,15,0.55)', backdropFilter: 'blur(6px)' }}
+          role="dialog"
+          aria-modal="true"
+          aria-label={title}
+          onClick={() => setOpen(false)}
+        >
+          <div
+            className="card w-full max-w-3xl max-h-[92vh] flex flex-col overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div
+              className="flex items-center justify-between gap-4 p-4"
+              style={{ borderBottom: '1px solid var(--line)' }}
+            >
+              <h3 style={{ fontSize: '1.0625rem' }}>{title}</h3>
               <button
-                onClick={() => setShowModal(false)}
-                className="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-gray-400 hover:text-white transition-colors"
+                type="button"
+                className="nav-toggle"
+                onClick={() => setOpen(false)}
+                aria-label="Close certificate"
               >
-                <i className="fas fa-times text-sm"></i>
+                <X size={18} aria-hidden="true" />
               </button>
             </div>
 
-            {/* Certificate Image */}
-            <div className="p-4">
-              <div className="relative w-full h-[60vh] bg-slate-800 rounded-lg overflow-hidden">
-                <Image
-                  src={certificateImage}
-                  alt={title}
-                  fill
-                  className="object-contain"
-                  priority
-                />
+            <div className="flex-1 overflow-y-auto p-4">
+              <div
+                className="relative w-full rounded-[var(--r-sm)] overflow-hidden"
+                style={{ background: 'var(--surface-sunk)', height: '60vh' }}
+              >
+                <Image src={certificateImage} alt={title} fill className="object-contain p-2" priority />
               </div>
-              
               {description && (
-                <div className="mt-4 p-3 bg-slate-800/50 rounded-lg">
-                  <p className="text-gray-300 text-sm leading-relaxed">{description}</p>
-                </div>
+                <p style={{ marginTop: '0.875rem', fontSize: '0.875rem', color: 'var(--ink-3)' }}>
+                  {description}
+                </p>
               )}
             </div>
           </div>
