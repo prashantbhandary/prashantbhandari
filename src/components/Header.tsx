@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Menu, X, ArrowUpRight, FileText } from 'lucide-react'
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 
 const NAV_ITEMS = [
   { id: 'about', label: 'About' },
@@ -16,7 +16,6 @@ const NAV_ITEMS = [
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [active, setActive] = useState('')
-  const reduce = useReducedMotion()
 
   // Highlight whichever section is currently in the reading zone
   useEffect(() => {
@@ -69,7 +68,7 @@ export default function Header() {
         <motion.nav
           className="nav-pill"
           aria-label="Main navigation"
-          initial={reduce ? false : { opacity: 0, y: -14 }}
+          initial={{ opacity: 0, y: -14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: [0.22, 0.61, 0.36, 1], delay: 0.1 }}
         >
@@ -80,7 +79,7 @@ export default function Header() {
           <ul className="nav-list">
             {NAV_ITEMS.map((item) => (
               <li key={item.id} className="relative">
-                {active === item.id && !reduce && (
+                {active === item.id && (
                   <motion.span
                     layoutId="nav-active"
                     className="absolute inset-0 rounded-[var(--r-pill)]"
@@ -111,8 +110,8 @@ export default function Header() {
             type="button"
             className="nav-cta"
             onClick={() => goTo('contact')}
-            whileHover={reduce ? undefined : { y: -1 }}
-            whileTap={reduce ? undefined : { scale: 0.96 }}
+            whileHover={{ y: -1 }}
+            whileTap={{ scale: 0.96 }}
           >
             Contact
             <ArrowUpRight size={13} aria-hidden="true" />
@@ -139,18 +138,18 @@ export default function Header() {
             className="nav-sheet"
             data-open="true"
             onClick={() => setMenuOpen(false)}
-            initial={reduce ? false : { opacity: 0 }}
+            initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={reduce ? undefined : { opacity: 0 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
           >
         <div />
         <motion.div
           className="nav-sheet__panel"
           onClick={(e) => e.stopPropagation()}
-          initial={reduce ? false : { y: '12%' }}
+          initial={{ y: '12%' }}
           animate={{ y: 0 }}
-          exit={reduce ? undefined : { y: '12%' }}
+          exit={{ y: '12%' }}
           transition={{ type: 'spring', stiffness: 320, damping: 34 }}
         >
           <div className="flex items-center justify-between px-3 pb-2">

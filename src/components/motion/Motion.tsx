@@ -1,14 +1,7 @@
 'use client'
 
 import { type ReactNode } from 'react'
-import {
-  motion,
-  useReducedMotion,
-  useScroll,
-  useSpring,
-  useTransform,
-  type Variants,
-} from 'framer-motion'
+import { motion, useScroll, useSpring, useTransform, type Variants } from 'framer-motion'
 
 /**
  * Shared motion primitives.
@@ -42,11 +35,7 @@ export function Reveal({
   y?: number
   as?: Tag
 }) {
-  const reduce = useReducedMotion()
   const Tag = tagged[as]
-  const Plain = as
-
-  if (reduce) return <Plain className={className}>{children}</Plain>
 
   return (
     <Tag
@@ -76,10 +65,6 @@ export function RevealGroup({
   stagger?: number
   delay?: number
 }) {
-  const reduce = useReducedMotion()
-
-  if (reduce) return <div className={className}>{children}</div>
-
   const variants: Variants = {
     hidden: {},
     show: { transition: { staggerChildren: stagger, delayChildren: delay } },
@@ -112,11 +97,7 @@ export function RevealItem({
   className?: string
   as?: Tag
 }) {
-  const reduce = useReducedMotion()
   const Tag = tagged[as]
-  const Plain = as
-
-  if (reduce) return <Plain className={className}>{children}</Plain>
 
   return (
     <Tag className={className} variants={itemVariants}>
@@ -127,11 +108,8 @@ export function RevealItem({
 
 /** Thin accent bar across the top showing how far down the page you are. */
 export function ScrollProgress() {
-  const reduce = useReducedMotion()
   const { scrollYProgress } = useScroll()
   const scaleX = useSpring(scrollYProgress, { stiffness: 140, damping: 26, restDelta: 0.001 })
-
-  if (reduce) return null
 
   return (
     <motion.div
@@ -157,11 +135,8 @@ export function Parallax({
   className?: string
   offset?: number
 }) {
-  const reduce = useReducedMotion()
   const { scrollYProgress } = useScroll()
   const y = useTransform(scrollYProgress, [0, 1], [0, -offset])
-
-  if (reduce) return <div className={className}>{children}</div>
 
   return (
     <motion.div className={className} style={{ y }}>

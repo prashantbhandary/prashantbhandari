@@ -8,11 +8,12 @@ import Certificates from '@/components/Certificates'
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
 import { ScrollProgress } from '@/components/motion/Motion'
+import MotionProvider from '@/components/motion/MotionProvider'
 import Chatbot from '@/components/Chatbot'
 
 export default function Home() {
   return (
-    <>
+    <MotionProvider>
       <ScrollProgress />
       <Header />
       <main id="main-content">
@@ -26,6 +27,6 @@ export default function Home() {
       </main>
       <Footer />
       <Chatbot />
-    </>
+    </MotionProvider>
   )
 }

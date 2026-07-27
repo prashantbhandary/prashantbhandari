@@ -128,7 +128,7 @@ export default function Resume() {
             <Printer size={15} aria-hidden="true" />
             Print
           </button>
-          <a href="/resume_prashant.pdf" download className="btn btn--primary btn--sm">
+          <a href="/resume_prashant-v2.pdf" download="Prashant-Bhandari-Resume.pdf" className="btn btn--primary btn--sm">
             <Download size={15} aria-hidden="true" />
             Download PDF
           </a>

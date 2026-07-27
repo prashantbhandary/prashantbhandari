@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { X, Award } from 'lucide-react'
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { Reveal } from './motion/Motion'
 
 interface Certificate {
@@ -178,7 +178,6 @@ export function CertificateModal({
 export default function CertificatesShowcase() {
   const [selected, setSelected] = useState<Certificate | null>(null)
   const [filter, setFilter] = useState('all')
-  const reduce = useReducedMotion()
 
   const visible = filter === 'all' ? certificates : certificates.filter((c) => c.category === filter)
 
@@ -215,20 +214,20 @@ export default function CertificatesShowcase() {
             </div>
           </Reveal>
 
-          <motion.div layout={!reduce} className="cert-grid">
-            <AnimatePresence mode="popLayout">
+          <motion.div layout className="cert-grid">
+            <AnimatePresence>
               {visible.map((certificate) => (
                 <motion.button
                   key={certificate.id}
                   type="button"
                   className="cert card--hover"
                   onClick={() => setSelected(certificate)}
-                  layout={!reduce}
-                  initial={reduce ? false : { opacity: 0, scale: 0.94 }}
+                  layout
+                  initial={{ opacity: 0, scale: 0.94 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={reduce ? undefined : { opacity: 0, scale: 0.94 }}
+                  exit={{ opacity: 0, scale: 0.94 }}
                   transition={{ duration: 0.28, ease: [0.22, 0.61, 0.36, 1] }}
-                  whileHover={reduce ? undefined : { y: -3 }}
+                  whileHover={{ y: -3 }}
                 >
                 <span className="cert__thumb">
                   <Image

@@ -9,7 +9,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { MessageSquare, X, ArrowUp, Loader2, Bot } from 'lucide-react'
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 
 const EASE = [0.22, 0.61, 0.36, 1] as const
 
@@ -36,7 +36,6 @@ export default function Chatbot() {
   const [messages, setMessages] = useState<Message[]>([GREETING])
   const [input, setInput] = useState('')
   const [busy, setBusy] = useState(false)
-  const reduce = useReducedMotion()
 
   const scrollRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLTextAreaElement>(null)
@@ -144,18 +143,18 @@ export default function Chatbot() {
         aria-label={open ? 'Close chat' : 'Open AI assistant'}
         aria-expanded={open}
         className="bot-fab"
-        initial={reduce ? false : { opacity: 0, scale: 0.6 }}
+        initial={{ opacity: 0, scale: 0.6 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ type: 'spring', stiffness: 380, damping: 24, delay: 0.6 }}
-        whileHover={reduce ? undefined : { scale: 1.06 }}
-        whileTap={reduce ? undefined : { scale: 0.94 }}
+        whileHover={{ scale: 1.06 }}
+        whileTap={{ scale: 0.94 }}
       >
         <AnimatePresence mode="wait" initial={false}>
           <motion.span
             key={open ? 'close' : 'open'}
-            initial={reduce ? false : { opacity: 0, rotate: -90, scale: 0.6 }}
+            initial={{ opacity: 0, rotate: -90, scale: 0.6 }}
             animate={{ opacity: 1, rotate: 0, scale: 1 }}
-            exit={reduce ? undefined : { opacity: 0, rotate: 90, scale: 0.6 }}
+            exit={{ opacity: 0, rotate: 90, scale: 0.6 }}
             transition={{ duration: 0.18, ease: EASE }}
             className="grid place-items-center"
           >
@@ -171,9 +170,9 @@ export default function Chatbot() {
             role="dialog"
             aria-label="AI assistant"
             className="bot-panel"
-            initial={reduce ? false : { opacity: 0, scale: 0.94, y: 12 }}
+            initial={{ opacity: 0, scale: 0.94, y: 12 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={reduce ? undefined : { opacity: 0, scale: 0.96, y: 8 }}
+            exit={{ opacity: 0, scale: 0.96, y: 8 }}
             transition={{ type: 'spring', stiffness: 320, damping: 30 }}
           >
         <div className="bot-head">
@@ -201,7 +200,7 @@ export default function Chatbot() {
               <motion.div
                 key={i}
                 className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}
-                initial={reduce ? false : { opacity: 0, y: 8, scale: 0.98 }}
+                initial={{ opacity: 0, y: 8, scale: 0.98 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ duration: 0.24, ease: EASE }}
               >

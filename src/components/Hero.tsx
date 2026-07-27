@@ -1,9 +1,10 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { ArrowRight, Download, MapPin } from 'lucide-react'
 import Image from 'next/image'
-import { motion, useReducedMotion, useScroll, useTransform, type Variants } from 'framer-motion'
+import { animate, motion, useInView, useScroll, useTransform, type Variants } from 'framer-motion'
+import Marquee from './motion/Marquee'
 
 const EASE = [0.22, 0.61, 0.36, 1] as const
 
@@ -19,10 +20,45 @@ const rise: Variants = {
 }
 
 const STATS = [
-  { value: '10+', label: 'Projects' },
-  { value: '5+', label: 'Awards' },
-  { value: '3+', label: 'Years Exp.' },
+  { to: 10, suffix: '+', label: 'Projects' },
+  { to: 5, suffix: '+', label: 'Awards' },
+  { to: 3, suffix: '+', label: 'Years Exp.' },
 ]
+
+const TICKER = [
+  'PCB Design', 'KiCad', 'STM32 Bare-Metal C', 'NuttX RTOS', 'ESP32', 'FreeRTOS',
+  'LoRa', 'CubeSat Subsystems', 'Embedded Firmware', 'BLE', 'Power Electronics',
+  'Robotics', 'Fusion 360', 'C/C++', 'MicroPython',
+]
+
+/** Counts up once, when the strip scrolls into view. */
+function Stat({ to, suffix, label }: { to: number; suffix: string; label: string }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const inView = useInView(ref, { once: true, margin: '-15%' })
+  // starts at the real figure so the pre-rendered HTML (and anyone without
+  // JS, and crawlers) shows "10+", not "0+"; the count-up takes over on view
+  const [n, setN] = useState(to)
+
+  useEffect(() => {
+    if (!inView) return
+    const controls = animate(0, to, {
+      duration: 1.1,
+      ease: [0.22, 0.61, 0.36, 1],
+      onUpdate: (v) => setN(Math.round(v)),
+    })
+    return () => controls.stop()
+  }, [inView, to])
+
+  return (
+    <div ref={ref}>
+      <strong>
+        {n}
+        {suffix}
+      </strong>
+      <span>{label}</span>
+    </div>
+  )
+}
 
 export default function Hero() {
   const [typedText, setTypedText] = useState('')
@@ -82,7 +118,6 @@ export default function Hero() {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
-  const reduce = useReducedMotion()
   const { scrollY } = useScroll()
   // portrait drifts up a little slower than the page
   const portraitY = useTransform(scrollY, [0, 600], [0, -34])
@@ -92,7 +127,7 @@ export default function Hero() {
       <div className="shell">
         <div className="hero__grid">
           {/* ── Left: the pitch ── */}
-          <motion.div variants={container} initial={reduce ? false : 'hidden'} animate="show">
+          <motion.div variants={container} initial={'hidden'} animate="show">
             <motion.div variants={rise} className="flex flex-wrap items-center gap-2 mb-7">
               <span className="pin">
                 <span className="dot-live" aria-hidden="true" />
@@ -128,17 +163,18 @@ export default function Hero() {
                 type="button"
                 className="btn btn--primary"
                 onClick={() => scrollTo('projects')}
-                whileHover={reduce ? undefined : { y: -2 }}
-                whileTap={reduce ? undefined : { scale: 0.97 }}
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.97 }}
               >
                 View work
                 <ArrowRight size={16} aria-hidden="true" />
               </motion.button>
               <motion.a
-                href="/resume"
+                href="/resume_prashant-v2.pdf"
+                download="Prashant-Bhandari-Resume.pdf"
                 className="btn btn--outline"
-                whileHover={reduce ? undefined : { y: -2 }}
-                whileTap={reduce ? undefined : { scale: 0.97 }}
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.97 }}
               >
                 <Download size={16} aria-hidden="true" />
                 Résumé
@@ -147,34 +183,52 @@ export default function Hero() {
 
             <motion.div variants={rise} className="stat-strip max-w-lg">
               {STATS.map((stat) => (
-                <div key={stat.label}>
-                  <strong>{stat.value}</strong>
-                  <span>{stat.label}</span>
-                </div>
+                <Stat key={stat.label} {...stat} />
               ))}
             </motion.div>
           </motion.div>
 
-          {/* ── Right: portrait ── */}
-          <motion.div
+          {/* ── Right: portrait. object-fit + the mirror live on
+              .hero__figure img so the arch crops the photo's straight edges ── */}
+          <div className="hero__stage">
+            {/* the curve the portrait sits into */}
+            <span className="hero__curve" aria-hidden="true" />
+
+            {/* signal pulse — three rings expanding on a long, staggered loop */}
+            <span className="hero__pulse" aria-hidden="true">
+              {[0, 1, 2].map((i) => (
+                <motion.span
+                  key={i}
+                  className="hero__ring"
+                  initial={{ scale: 0.5, opacity: 0 }}
+                  animate={{ scale: [0.5, 1.18], opacity: [0, 0.5, 0] }}
+                  transition={{ duration: 6.6, repeat: Infinity, delay: i * 2.2, ease: 'easeOut' }}
+                />
+              ))}
+            </span>
+
+            <motion.div
             className="hero__figure"
-            style={reduce ? undefined : { y: portraitY }}
-            initial={reduce ? false : { opacity: 0, scale: 0.97 }}
+            style={{ y: portraitY }}
+            initial={{ opacity: 0, scale: 0.97 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, ease: EASE, delay: 0.15 }}
           >
             <Image
-              src="/images/prashant-cutout.webp"
+              src="/images/prashant-figure.webp"
               alt="Prashant Bhandari"
               fill
-              sizes="(max-width: 940px) 80vw, 24rem"
-              className="object-contain object-bottom"
-              // mirrored, so the portrait faces into the page rather than off the edge
-              style={{ transform: 'scaleX(-1)' }}
+              sizes="(max-width: 940px) 70vw, 23rem"
               priority
             />
-          </motion.div>
+            </motion.div>
+
+          </div>
         </div>
+      </div>
+
+      <div className="hero__ticker">
+        <Marquee items={TICKER} label="Technologies Prashant works with" />
       </div>
     </section>
   )

@@ -543,75 +543,124 @@ p { text-wrap: pretty; }
   max-width: 34rem;
 }
 
-/* Cut-out portrait, unframed.
-   Two problems a bare cutout has on a flat canvas: the photo's bottom
-   edge cuts the coat off in a hard straight line, and the figure has
-   nothing to stand against. So: a soft disc + hairline ring behind it
-   to anchor it, and a mask that dissolves the bottom into the page. */
-.hero__figure {
+/* ---- portrait stage: curve + orbit + figure ---- */
+.hero__stage {
   position: relative;
+  display: grid;
+  place-items: end center;
   isolation: isolate;
-  width: 100%;
-  max-width: 22rem;
-  /* matches the cut-out's own ratio (1400x1638) so `contain` doesn't
-     letterbox — the mask stops below then map 1:1 onto the figure */
-  aspect-ratio: 1400 / 1638;
-  margin-inline: auto;
 }
 
-/* the disc it stands against */
-.hero__figure::before {
-  content: '';
+/* the curve the portrait sits into, bottom-right */
+.hero__curve {
   position: absolute;
-  left: 50%;
-  top: 2%;
-  width: 96%;
+  right: -14%;
+  bottom: -6%;
+  width: 118%;
   aspect-ratio: 1;
-  transform: translateX(-50%);
   border-radius: 50%;
-  background: radial-gradient(
-    closest-side,
-    rgba(79, 70, 229, 0.14),
-    rgba(6, 182, 212, 0.08) 62%,
-    transparent 100%
-  );
+  background:
+    radial-gradient(closest-side, rgba(79, 70, 229, 0.11), rgba(6, 182, 212, 0.07) 62%, transparent 100%);
   z-index: -2;
 }
 
-/* hairline ring — echoes the nav pill, keeps the shape deliberate */
-.hero__figure::after {
+.hero__curve::after {
   content: '';
   position: absolute;
-  left: 50%;
-  top: 7%;
-  width: 82%;
-  aspect-ratio: 1;
-  transform: translateX(-50%);
+  inset: 9%;
   border-radius: 50%;
   border: 1px solid var(--line);
-  z-index: -1;
+  border-top-color: transparent;
+  border-left-color: transparent;
 }
 
-/* dissolve the hard bottom crop instead of letting it read as a sticker */
-.hero__figure img {
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    #000 74%,
-    rgba(0, 0, 0, 0.72) 87%,
-    rgba(0, 0, 0, 0.22) 96%,
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    to bottom,
-    #000 74%,
-    rgba(0, 0, 0, 0.72) 87%,
-    rgba(0, 0, 0, 0.22) 96%,
-    transparent 100%
-  );
+/* signal pulse behind the portrait — the only motion here, and it is
+   shape, not text: three hairline rings breathing outwards */
+.hero__pulse {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 108%;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.hero__ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(79, 70, 229, 0.3);
+  will-change: transform, opacity;
 }
 
 @media (max-width: 939px) {
-  .hero__figure { max-width: 17rem; }
+  .hero__pulse { display: none; }
+}
+
+/* ---- ticker ---- */
+.hero__ticker {
+  margin-top: clamp(2.5rem, 6vw, 4.5rem);
+  padding-block: 0.875rem;
+  border-block: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.marquee {
+  overflow: hidden;
+  /* feather both ends so items enter and leave instead of popping */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.marquee__track {
+  display: flex;
+  width: max-content;
+  gap: 2.5rem;
+  list-style: none;
+  will-change: transform;
+}
+
+.marquee__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 2.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+
+.marquee__item::after {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent-line);
+}
+
+/* Portrait — no frame, no panel, no background.
+   The dissolve is baked into the image's own alpha channel rather than
+   done in CSS, so the shoulders fade into whatever is behind them and
+   there is no hard edge, no white smear and no box to fight with. */
+.hero__figure {
+  position: relative;
+  width: 100%;
+  max-width: 23rem;
+  aspect-ratio: 1100 / 1375;
+  margin-inline: auto;
+}
+
+.hero__figure img {
+  object-fit: contain;
+  /* mirrored so he faces into the page */
+  transform: scaleX(-1);
+}
+
+@media (max-width: 939px) {
+  .hero__figure { max-width: 18rem; }
 }
 
 .stat-strip {

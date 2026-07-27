@@ -17,7 +17,7 @@ import {
   type LucideIcon,
 } from 'lucide-react'
 import CertificateBadge from './CertificateBadge'
-import { motion, useReducedMotion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { Reveal, RevealGroup, RevealItem } from './motion/Motion'
 
 type Project = {
@@ -288,7 +288,6 @@ function FeaturedCard({ project }: { project: Project }) {
 }
 
 function WorkRow({ project, index }: { project: Project; index: number }) {
-  const reduce = useReducedMotion()
 
   return (
     <motion.a
@@ -296,11 +295,11 @@ function WorkRow({ project, index }: { project: Project; index: number }) {
       href={project.primaryLink}
       target="_blank"
       rel="noopener noreferrer"
-      initial={reduce ? false : { opacity: 0, y: 12 }}
+      initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-10% 0px -10% 0px' }}
       transition={{ duration: 0.45, ease: [0.22, 0.61, 0.36, 1], delay: (index % 5) * 0.05 }}
-      whileHover={reduce ? undefined : { x: 6 }}
+      whileHover={{ x: 6 }}
     >
       <span className="work-row__num" aria-hidden="true">
         {String(index).padStart(2, '0')}
