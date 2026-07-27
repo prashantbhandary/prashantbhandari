@@ -157,18 +157,20 @@ export default function Hero() {
 
           {/* ── Right: portrait ── */}
           <motion.div
-            className="hero__portrait"
+            className="hero__figure"
             style={reduce ? undefined : { y: portraitY }}
             initial={reduce ? false : { opacity: 0, scale: 0.97 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, ease: EASE, delay: 0.15 }}
           >
             <Image
-              src="/images/IMG_6446.jpeg"
+              src="/images/prashant-cutout.webp"
               alt="Prashant Bhandari"
               fill
-              sizes="(max-width: 940px) 90vw, 22rem"
-              className="object-cover object-top"
+              sizes="(max-width: 940px) 80vw, 24rem"
+              className="object-contain object-bottom"
+              // mirrored, so the portrait faces into the page rather than off the edge
+              style={{ transform: 'scaleX(-1)' }}
               priority
             />
           </motion.div>

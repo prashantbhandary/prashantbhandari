@@ -543,17 +543,75 @@ p { text-wrap: pretty; }
   max-width: 34rem;
 }
 
-.hero__portrait {
+/* Cut-out portrait, unframed.
+   Two problems a bare cutout has on a flat canvas: the photo's bottom
+   edge cuts the coat off in a hard straight line, and the figure has
+   nothing to stand against. So: a soft disc + hairline ring behind it
+   to anchor it, and a mask that dissolves the bottom into the page. */
+.hero__figure {
   position: relative;
-  aspect-ratio: 4 / 5;
+  isolation: isolate;
   width: 100%;
   max-width: 22rem;
+  /* matches the cut-out's own ratio (1400x1638) so `contain` doesn't
+     letterbox — the mask stops below then map 1:1 onto the figure */
+  aspect-ratio: 1400 / 1638;
   margin-inline: auto;
-  border-radius: var(--r-lg);
-  overflow: hidden;
+}
+
+/* the disc it stands against */
+.hero__figure::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 2%;
+  width: 96%;
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    rgba(79, 70, 229, 0.14),
+    rgba(6, 182, 212, 0.08) 62%,
+    transparent 100%
+  );
+  z-index: -2;
+}
+
+/* hairline ring — echoes the nav pill, keeps the shape deliberate */
+.hero__figure::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 7%;
+  width: 82%;
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+  border-radius: 50%;
   border: 1px solid var(--line);
-  background: var(--surface-sunk);
-  box-shadow: var(--shadow-lg);
+  z-index: -1;
+}
+
+/* dissolve the hard bottom crop instead of letting it read as a sticker */
+.hero__figure img {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 74%,
+    rgba(0, 0, 0, 0.72) 87%,
+    rgba(0, 0, 0, 0.22) 96%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000 74%,
+    rgba(0, 0, 0, 0.72) 87%,
+    rgba(0, 0, 0, 0.22) 96%,
+    transparent 100%
+  );
+}
+
+@media (max-width: 939px) {
+  .hero__figure { max-width: 17rem; }
 }
 
 .stat-strip {
