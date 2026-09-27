@@ -17,26 +17,6 @@ type ExperienceItem = {
 
 const experiences: ExperienceItem[] = [
     {
-      title: 'Satellite Systems Intern',
-      company: 'Antarikchya Pratisthan Nepal — Slippers2Sat-2 (S2S-2)',
-      period: 'June 2026 - Present',
-      description: 'Contributing to Slippers2Sat-2, a student-built 1U CubeSat by Antarikchya Pratisthan Nepal, working on onboard embedded firmware and the amateur-band communication link to the ground station.',
-      responsibilities: [
-        'Develop and test embedded firmware for satellite subsystems on the S2S-2 1U CubeSat bus',
-        'Support the communication (COM) subsystem — command reception and telemetry downlink over the amateur UHF band',
-        'Assist with ground station operations, link verification, and decoding of downlinked mission data',
-        'Debug and validate firmware behaviour during subsystem bring-up alongside the APN mission team'
-      ],
-      links: [
-        {
-          label: 'S2S-2 Mission Site',
-          href: 'https://s2s2.antarikchya.org.np/'
-        }
-      ],
-      featured: true,
-      type: 'internship'
-    },
-    {
       title: 'Electronics Engineer Intern',
       company: 'Yarsa Tech, Pokhara',
       period: 'Jan 2025 - July 2025',

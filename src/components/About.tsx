@@ -3,7 +3,6 @@ import {
   MapPin,
   Briefcase,
   Users,
-  Satellite,
   Linkedin,
   Github,
   Twitter,
@@ -19,14 +18,6 @@ const socialLinks = [
 ]
 
 const facts = [
-  {
-    icon: Satellite,
-    label: 'Current role',
-    value: 'Satellite Systems Intern',
-    meta: 'Antarikchya Pratisthan Nepal — Slippers2Sat-2 (June 2026 – Present)',
-    feature: true,
-    wide: true,
-  },
   {
     icon: Briefcase,
     label: 'Industry experience',

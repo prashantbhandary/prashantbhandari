@@ -13,16 +13,6 @@ const SKILLS: [string, string][] = [
 
 const EXPERIENCE = [
   {
-    role: 'Satellite Systems Intern',
-    org: 'Antarikchya Pratisthan Nepal — Slippers2Sat-2 (S2S-2)',
-    period: 'June 2026 – Present',
-    points: [
-      'Develop and test embedded firmware for satellite subsystems on the S2S-2 1U CubeSat bus',
-      'Support the communication (COM) subsystem: command reception and telemetry downlink over the amateur UHF band',
-      'Assist with ground station operations, link verification, and decoding of downlinked mission data',
-    ],
-  },
-  {
     role: 'Electronics Design Intern',
     org: 'SEDS Nepal (Remote), Pokhara, Nepal',
     period: 'Sept 2025 – Jan 2026',
@@ -128,7 +118,7 @@ export default function Resume() {
             <Printer size={15} aria-hidden="true" />
             Print
           </button>
-          <a href="/resume_prashant-v2.pdf" download="Prashant-Bhandari-Resume.pdf" className="btn btn--primary btn--sm">
+          <a href="/resume_prashant_v3.pdf" download="Prashant-Bhandari-Resume.pdf" className="btn btn--primary btn--sm">
             <Download size={15} aria-hidden="true" />
             Download PDF
           </a>

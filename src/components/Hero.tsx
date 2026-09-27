@@ -170,7 +170,7 @@ export default function Hero() {
                 <ArrowRight size={16} aria-hidden="true" />
               </motion.button>
               <motion.a
-                href="/resume_prashant-v2.pdf"
+                href="/resume_prashant_v3.pdf"
                 download="Prashant-Bhandari-Resume.pdf"
                 className="btn btn--outline"
                 whileHover={{ y: -2 }}
