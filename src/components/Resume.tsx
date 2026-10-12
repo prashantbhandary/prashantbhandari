@@ -17,9 +17,9 @@ const EXPERIENCE = [
     org: 'SEDS Nepal (Remote), Pokhara, Nepal',
     period: 'Sept 2025 – Jan 2026',
     points: [
-      'Designed and explored electronics for a pseudo-satellite, focusing on practical and modular subsystem architectures.',
+      'Designed and explored electronics for pseudo-satellite focusing on practical and modular subsystem architectures.',
       'Worked through component selection, schematic development, BOM preparation, and design reviews while considering reliability, power requirements, and system-level integration.',
-      'Collaborated with team members from different engineering areas to understand how individual electronics modules fit together.',
+      'Collaborated with team members from different engineering areas to understand how individual electronics modules can fit.',
     ],
   },
   {
@@ -29,7 +29,7 @@ const EXPERIENCE = [
     points: [
       'Designed, tested, and iterated buck converter circuits, improving PCB layouts and power regulation through multiple KiCad design revisions.',
       'Built an automated quality-control testing device for power backup products, developing custom C/C++ firmware to automate product testing and verification.',
-      'Worked on a BLE-enabled QR/barcode scanning system, integrating the scanner hardware with custom embedded firmware for a complete working prototype.',
+      'Worked a BLE-enabled QR/barcode scanning system, integrating the scanner hardware with custom embedded firmware for a complete working prototype.',
       'Worked with embedded displays and user interfaces using LVGL, gaining practical experience developing firmware and hardware for commercial products.',
     ],
   },
@@ -39,7 +39,7 @@ const PROJECTS = [
   {
     name: 'Micromouse Autonomous Maze-Solving Robot',
     detail:
-      'Custom PCB, PID control, and LSRB line-maze-solving algorithm on an Arduino Nano. Custom PCB reduced board size by 40%. 1st Place LOCUS 2025 (IOE Pulchowk), 2nd Place Delta 5.0 (IOE Purwanchal), 5th Place Techfest IIT Bombay.',
+      'Designed and fabricated a custom PCB, reducing the robot\'s board size by 40%; implemented PID motion control and a LSRB solving algorithm on an Arduino Nano Micro Controller. 1st Place LOCUS 2025 (IOE Pulchowk), 2nd Place Delta 5.0 (IOE Purwanchal), 5th Place Techfest IIT Bombay.',
     href: 'https://github.com/prashantbhandary/MicroMouse-LineMaze.git',
   },
   {
@@ -51,7 +51,7 @@ const PROJECTS = [
   {
     name: 'Pocket CubeSat Module (1.5U PocketQube)',
     detail:
-      '1.5U PocketQube with stacked-PCB architecture: onboard computing, power management, sensors, LoRa, and Li-Po solar charging.',
+      'Developed a compact stacked-PCB architecture integrating onboard computing, power management, sensors, and LoRa communication in a 1.5U form factor with Li-Po solar charging.',
     href: '/cubesat.pdf',
   },
   {
@@ -75,7 +75,7 @@ const PROJECTS = [
   {
     name: 'LoRaNet Communication Module',
     detail:
-      'Wireless communication module for long-range links when cellular or other communication fails, achieving ~3 km line-of-sight range; ESP32 firmware for reliable packet transmission with LoRa transceivers.',
+      'Designed the wireless communication system for long range when the cellular or other communication fails achieving ~3 km line-of-sight range. Developed ESP32 firmware for reliable packet transmission and communication with LoRa transceivers.',
     href: 'https://github.com/awakesid/LoraNet.git',
   },
 ]
