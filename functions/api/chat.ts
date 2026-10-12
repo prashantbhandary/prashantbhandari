@@ -16,7 +16,7 @@ interface Env {
 }
 
 const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions'
-const MODEL = 'llama-3.3-70b-versatile'
+const MODEL = 'openai/gpt-oss-120b'
 
 // Grounded in Prashant's résumé — the assistant must not invent beyond this.
 const SYSTEM_PROMPT = `You are Prashant Bhandari's portfolio assistant — a friendly, concise AI that answers visitors' questions about Prashant based on his résumé. Speak in the third person about Prashant, in a warm, professional tone.
@@ -133,6 +133,9 @@ export const onRequestPost = async (context: {
       temperature: 0.3,
       top_p: 0.9,
       max_tokens: 400,
+      // gpt-oss reasons before answering; keep that short so replies stay fast
+      // and the token budget goes to the answer.
+      reasoning_effort: 'low',
       messages: [{ role: 'system', content: SYSTEM_PROMPT }, ...trimmed],
     }),
   })
