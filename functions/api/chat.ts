@@ -40,19 +40,19 @@ TECHNICAL SKILLS
 EXPERIENCE
 - Satellite Systems Intern — Antarikchya Pratisthan Nepal (APN), Slippers2Sat-2 (S2S-2) mission (June 2026 – present, current role): develops and tests embedded firmware for satellite subsystems; supports the COM subsystem and ground station link — command reception and telemetry downlink over the amateur UHF band. About the mission: S2S-2 is a student-built 1U CubeSat initiated by APN, with UNOOSA and Exolaunch supporting launch and deployment. Its objectives include in-house design and operation of Nepal's 1U CubeSat, supporting education for lower-secondary students, a text-based digipeater for the amateur radio community, earthquake precursor investigation, and NIR/RGB Earth imaging for NDWI. Mission site: s2s2.antarikchya.org.np.
 - Electronics Design Intern — SEDS Nepal (Remote), Pokhara (Sept 2025 – Jan 2026): designed electronics modules for pseudo-satellite (HAPS) systems; component selection, BOM budgeting, and design reviews across satellite subsystems.
-- Electronics Engineer Intern — YarsaTech, Pokhara (Jan 2025 – Jul 2025): designed/optimized buck converter circuits in KiCad; built an automated QC testing device (MicroPython); built a BLE QR/barcode scanner with a full C/C++ firmware stack.
+- Electronics Engineer Intern — YarsaTech, Pokhara (Jan 2025 – Jul 2025): designed/optimized buck converter circuits in KiCad; built an automated QC testing device for power backup products with custom C/C++ firmware; worked on a BLE QR/barcode scanner with custom embedded firmware; embedded displays and UIs with LVGL.
 
 PROJECTS
-- LoRaNet Communication Module — multi-layer PCB + firmware, ~7 km LoS range over LoRa.
+- LoRaNet Communication Module — ESP32 + LoRa firmware, ~3 km line-of-sight range.
 - DC-DC Buck Converter — 12V→5V, ~90% efficiency, reduced ripple.
-- Micromouse Maze-Solving Robot — custom PCB (40% smaller), 95% navigation accuracy with PID control. 1st LOCUS 2025, 2nd Delta 5.0, 5th Techfest IIT Bombay.
+- Micromouse Maze-Solving Robot — Arduino Nano, custom PCB (40% smaller), PID motion control, LSRB line-maze-solving algorithm. 1st LOCUS 2025, 2nd Delta 5.0, 5th Techfest IIT Bombay.
 - Pocket CubeSat (1.5U PocketQube) — stacked PCB integrating OBC, power, sensors, LoRa with Li-Po solar charging.
 - Solar Greenhouse Automation — solar-powered soil/temp/humidity monitoring, MOSFET irrigation, BLE + OLED dashboard.
 - Smart Helmet Safety System — pulse/SpO2 sensing, fall detection, BLE SOS alerts.
 
 LEADERSHIP & ACHIEVEMENTS
 - Electronics & Software Lead, Robotics Club, Pashchimanchal Campus (2024–2026): mentored 350+ students, started an in-house PCB prototyping lab, led competition robotics.
-- Top 25 Nationwide — U.S.-Nepal Startup Weekend Challenge (2026); International Finalist — Techfest IIT Bombay (2025); 1st LOCUS 2025 Micromouse; 1st Runner-Up Autonomous Boat Racing (WRC 2024); 1st Line Follower (WRC 2023).
+- Top 25 Nationwide — U.S.-Nepal Startup Weekend Challenge (2026); International Finalist — Techfest IIT Bombay (2025); 1st LOCUS 2025 Micromouse; 2nd Place Delta Robothon (Micromouse) 2025; 5th Place Meshmerize (Micromouse), Techfest IIT Bombay 2024; 1st Runner-Up Autonomous Boat Racing (WRC 2024); Winner, Battle For Speed / Line Follower (Robotics Club 2023).
 
 RULES
 - Answer only from the facts above. If asked something not covered, say you don't have that detail and suggest emailing Prashant at santhprashant@gmail.com.

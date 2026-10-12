@@ -34,7 +34,7 @@ const experiences: ExperienceItem[] = [
       title: 'Electronics Design Intern',
       company: 'SEDS Nepal (Remote), Pokhara, Nepal',
       period: 'Sept 2025 - Jan 2026',
-      description: 'Designed and explored electronics for a pseudo-satellite, focusing on practical and modular subsystem architectures.',
+      description: 'Designed electronics for a pseudo-satellite with a focus on practical, modular subsystem architectures.',
       responsibilities: [
         'Designed and explored electronics for a pseudo-satellite, focusing on practical and modular subsystem architectures.',
         'Worked through component selection, schematic development, BOM preparation, and design reviews while considering reliability, power requirements, and system-level integration.',
@@ -52,7 +52,7 @@ const experiences: ExperienceItem[] = [
       title: 'Electronics & Software Lead',
       company: 'Robotics Club, Pashchimanchal Campus IOE, Tribhuvan University',
       period: '2024 - 2026',
-      description: 'Coached 350+ students in PCB design, firmware development, and robotics; launched an in-house PCB prototyping lab.',
+      description: 'Leading electronics and software for the club, coaching 350+ students and running campus-wide technical training.',
       responsibilities: [
         'Coached 350+ students in PCB design, firmware development, and robotics; launched an in-house PCB prototyping lab.',
         'Led competitive robotics projects; organized workshops and technical training programs campus-wide, including a 15-day "Rainy Session" training 100+ students.'

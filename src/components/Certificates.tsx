@@ -99,6 +99,16 @@ const certificates: Certificate[] = [
   },
 ]
 
+const ACHIEVEMENTS = [
+  'Top 25 Nationwide – U.S.–Nepal Startup Weekend Challenge (Safety Modules), 2026',
+  'International Finalist – Techfest IIT Bombay, representing Nepal (Safety Modules), 2025',
+  '1st Place – LOCUS 2025 Micromouse, IOE Pulchowk Campus',
+  '2nd Place – Delta Robothon (Micromouse), 2025',
+  '5th Place – Meshmerize (Micromouse), Techfest IIT Bombay, representing Nepal, 2024',
+  '1st Runner-Up – Autonomous Boat Racing, Robotics Club WRC 2024',
+  'Winner – Battle For Speed / Line Follower Competition, Robotics Club 2023',
+]
+
 const FILTERS = [
   { id: 'all', label: 'All' },
   { id: 'competition', label: 'Competitions' },
@@ -196,6 +206,17 @@ export default function CertificatesShowcase() {
               Competition results, mentorship recognition and internship certificates — tap any
               card to read the original document.
             </p>
+          </Reveal>
+
+          <Reveal className="card p-6 mb-10" delay={0.05}>
+            <h3 className="eyebrow" id="achievements">
+              Achievements
+            </h3>
+            <ul className="xp__list" aria-labelledby="achievements">
+              {ACHIEVEMENTS.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
           </Reveal>
 
           <Reveal delay={0.05}>

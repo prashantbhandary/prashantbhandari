@@ -52,7 +52,7 @@ export default function Footer() {
         </Reveal>
 
         <div className="footer-bottom">
-          <p>© 2026 Prashant Bhandari. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Prashant Bhandari. All rights reserved.</p>
           <a
             href="https://github.com/prashantbhandary"
             target="_blank"

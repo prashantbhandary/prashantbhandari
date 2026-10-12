@@ -37,7 +37,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Prashant Bhandari | Electronics Engineer & Robotics Developer",
   description: "Portfolio of Prashant Bhandari — Electronics Engineering student, robotics competition winner, PCB designer, and embedded systems developer from Pokhara, Nepal.",
-  keywords: "Prashant Bhandari, electronics engineering student, Yarsa Tech intern, robotics competition winner, Battle For Speed 2023, Delta Robothon, Pokhara Nepal, Pashchimanchal Campus, Arduino ESP32, PCB design, embedded systems, micromouse robot, line follower bot, autonomous boat, KiCad, C++ Python, robotics club electronics and software lead, electronics intern Nepal, competition robotics, maze solving robot, QTR sensors PID control",
+  keywords: "Prashant Bhandari, electronics engineering student, Yarsa Tech intern, robotics competition winner, Battle For Speed 2023, Delta Robothon, Pokhara Nepal, Pashchimanchal Campus, Arduino ESP32, PCB design, embedded systems, micromouse robot, line follower bot, autonomous boat, KiCad, C++ Python, robotics club electronics and software lead, PhD applicant robotics, electronics intern Nepal, competition robotics, maze solving robot, QTR sensors PID control",
   authors: [{ name: "Prashant Bhandari", url: "https://bhandari-prashant.com.np" }],
   creator: "Prashant Bhandari",
   publisher: "Prashant Bhandari",

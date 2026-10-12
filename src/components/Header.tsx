@@ -99,10 +99,10 @@ export default function Header() {
               </li>
             ))}
             <li>
-              <Link href="/resume" className="nav-link">
+              <a href="/resume_prashant.pdf" target="_blank" rel="noopener noreferrer" className="nav-link">
                 <FileText size={13} aria-hidden="true" />
                 Résumé
-              </Link>
+              </a>
             </li>
           </ul>
 
@@ -176,14 +176,16 @@ export default function Header() {
             </button>
           ))}
 
-          <Link
-            href="/resume"
+          <a
+            href="/resume_prashant.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             className="nav-sheet__link"
             onClick={() => setMenuOpen(false)}
           >
             Résumé
             <FileText size={16} aria-hidden="true" style={{ color: 'var(--ink-4)' }} />
-          </Link>
+          </a>
 
           <button
             type="button"
