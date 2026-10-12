@@ -21,7 +21,7 @@ const rise: Variants = {
 
 const STATS = [
   { to: 10, suffix: '+', label: 'Projects' },
-  { to: 5, suffix: '+', label: 'Awards' },
+  { to: 7, suffix: '+', label: 'Awards' },
   { to: 3, suffix: '+', label: 'Years Exp.' },
 ]
 
@@ -131,7 +131,7 @@ export default function Hero() {
             <motion.div variants={rise} className="flex flex-wrap items-center gap-2 mb-7">
               <span className="pin">
                 <span className="dot-live" aria-hidden="true" />
-                Open to work
+                Seeking PhD positions – Fall 2027
               </span>
               <span className="pin">
                 <MapPin size={11} aria-hidden="true" />
@@ -170,7 +170,7 @@ export default function Hero() {
                 <ArrowRight size={16} aria-hidden="true" />
               </motion.button>
               <motion.a
-                href="/resume_prashant_v3.pdf"
+                href="/resume_prashant.pdf"
                 download="Prashant-Bhandari-Resume.pdf"
                 className="btn btn--outline"
                 whileHover={{ y: -2 }}

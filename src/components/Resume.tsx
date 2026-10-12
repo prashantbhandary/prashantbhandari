@@ -17,18 +17,20 @@ const EXPERIENCE = [
     org: 'SEDS Nepal (Remote), Pokhara, Nepal',
     period: 'Sept 2025 – Jan 2026',
     points: [
-      'Designed electronics modules for pseudo-satellite (HAPS) systems, ensuring modular and reproducible architecture',
-      'Performed component selection, BOM budgeting, and design reviews across interdisciplinary satellite subsystems',
+      'Designed and explored electronics for a pseudo-satellite, focusing on practical and modular subsystem architectures.',
+      'Worked through component selection, schematic development, BOM preparation, and design reviews while considering reliability, power requirements, and system-level integration.',
+      'Collaborated with team members from different engineering areas to understand how individual electronics modules fit together.',
     ],
   },
   {
     role: 'Electronics Engineer Intern',
-    org: 'YarsaTech, Pokhara, Nepal',
+    org: 'Yarsa Tech (On-site), Pokhara, Nepal',
     period: 'Jan 2025 – Jul 2025',
     points: [
-      'Designed and optimized buck converter circuits; improved layout across multiple iterations using KiCad',
-      'Developed automated QC testing device for power backup products using MicroPython and custom firmware',
-      'Built BLE-enabled QR/barcode scanner system; implemented complete firmware stack in C/C++',
+      'Designed, tested, and iterated buck converter circuits, improving PCB layouts and power regulation through multiple KiCad design revisions.',
+      'Built an automated quality-control testing device for power backup products, developing custom C/C++ firmware to automate product testing and verification.',
+      'Worked on a BLE-enabled QR/barcode scanning system, integrating the scanner hardware with custom embedded firmware for a complete working prototype.',
+      'Worked with embedded displays and user interfaces using LVGL, gaining practical experience developing firmware and hardware for commercial products.',
     ],
   },
 ]
@@ -37,25 +39,25 @@ const PROJECTS = [
   {
     name: 'Micromouse Autonomous Maze-Solving Robot',
     detail:
-      'Designed custom PCB reducing board size by 40%; achieved 95% navigation accuracy with PID motion control. Awards: 1st Place LOCUS 2025, 2nd Place Delta 5.0, 5th Place Techfest IIT Bombay.',
+      'Custom PCB, PID control, and LSRB line-maze-solving algorithm on an Arduino Nano. Custom PCB reduced board size by 40%. 1st Place LOCUS 2025 (IOE Pulchowk), 2nd Place Delta 5.0 (IOE Purwanchal), 5th Place Techfest IIT Bombay.',
     href: 'https://github.com/prashantbhandary/MicroMouse-LineMaze.git',
   },
   {
     name: 'Solar Greenhouse Automation System',
     detail:
-      'Built solar-powered system monitoring soil, temperature, and humidity; automated irrigation via MOSFET control with BLE data transmission and real-time OLED dashboard.',
+      'Built a solar-powered greenhouse monitoring and control system using ESP32 to monitor soil moisture, temperature, and humidity, with automated irrigation, BLE connectivity, and an OLED dashboard.',
     href: '/minor_project_report.pdf',
   },
   {
     name: 'Pocket CubeSat Module (1.5U PocketQube)',
     detail:
-      'Designed stacked PCB architecture integrating OBC, power management, sensors, and LoRa comms in a 1.5U form factor with Li-Po solar charging.',
+      '1.5U PocketQube with stacked-PCB architecture: onboard computing, power management, sensors, LoRa, and Li-Po solar charging.',
     href: '/cubesat.pdf',
   },
   {
     name: 'Smart Helmet Safety System',
     detail:
-      'Developed wearable prototype with pulse/SpO2 sensing, fall detection, and SOS alerts transmitted via BLE to a supervisor dashboard.',
+      'Rapid-prototyped wearable safety system integrating pulse/SpO2 sensing, fall detection, and SOS alerts, with sensor data sent over BLE to a supervisor monitoring dashboard.',
     href: '/safetron-mvp-safe-250345.pdf',
   },
   {
@@ -67,23 +69,25 @@ const PROJECTS = [
   {
     name: 'DC-DC Buck Converter',
     detail:
-      'Designed 12V-to-5V converter from schematic through PCB; iterated layout to achieve ~90% efficiency and reduced ripple suitable for embedded and industrial use.',
+      'Designed a 12V-to-5V buck converter from schematic to PCB. Iterated the layout to reach ~90% efficiency and reduced output ripple.',
     href: '/buck-converter-documentation.pdf',
   },
   {
     name: 'LoRaNet Communication Module',
     detail:
-      'Designed full schematic and multi-layer PCB for a long-range wireless system achieving ~7 km LoS range, with embedded firmware for reliable packet transmission.',
+      'Wireless communication module for long-range links when cellular or other communication fails, achieving ~3 km line-of-sight range; ESP32 firmware for reliable packet transmission with LoRa transceivers.',
     href: 'https://github.com/awakesid/LoraNet.git',
   },
 ]
 
 const ACHIEVEMENTS = [
   'Top 25 Nationwide — U.S.-Nepal Startup Weekend Challenge (Safety Modules), 2026',
-  'International Finalist — Techfest IIT Bombay (Safety Modules), 2025',
+  'International Finalist — Techfest IIT Bombay, representing Nepal (Safety Modules), 2025',
   '1st Place — LOCUS 2025 Micromouse, IOE Pulchowk Campus',
+  '2nd Place — Delta Robothon (Micromouse), 2025',
+  '5th Place — Meshmerize (Micromouse), Techfest IIT Bombay, representing Nepal, 2024',
   '1st Runner-Up — Autonomous Boat Racing, Robotics Club WRC 2024',
-  '1st Place — Line Follower Competition, Robotics Club WRC 2023',
+  'Winner — Battle For Speed / Line Follower Competition, Robotics Club 2023',
 ]
 
 const CONTACTS = [
@@ -118,7 +122,7 @@ export default function Resume() {
             <Printer size={15} aria-hidden="true" />
             Print
           </button>
-          <a href="/resume_prashant_v3.pdf" download="Prashant-Bhandari-Resume.pdf" className="btn btn--primary btn--sm">
+          <a href="/resume_prashant.pdf" download="Prashant-Bhandari-Resume.pdf" className="btn btn--primary btn--sm">
             <Download size={15} aria-hidden="true" />
             Download PDF
           </a>
@@ -213,12 +217,12 @@ export default function Resume() {
         <Block title="Leadership">
           <div className="cv-entry">
             <div className="cv-entry__head">
-              <h3>Electronics &amp; Software Lead — Robotics Club, Pashchimanchal Campus</h3>
+              <h3>Electronics &amp; Software Lead — Robotics Club, Pashchimanchal Campus IOE, Tribhuvan University</h3>
               <span className="cv-period">2024 – 2026</span>
             </div>
             <ul className="cv-list">
-              <li>Mentored 350+ students in embedded systems and PCB design; initiated in-house PCB prototyping lab</li>
-              <li>Led competition robotics projects; organized workshops and technical training programs</li>
+              <li>Coached 350+ students in PCB design, firmware development, and robotics; launched an in-house PCB prototyping lab.</li>
+              <li>Led competitive robotics projects; organized workshops and technical training programs campus-wide, including a 15-day &quot;Rainy Session&quot; training 100+ students.</li>
             </ul>
           </div>
         </Block>

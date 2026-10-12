@@ -19,12 +19,13 @@ const experiences: ExperienceItem[] = [
     {
       title: 'Electronics Engineer Intern',
       company: 'Yarsa Tech, Pokhara',
-      period: 'Jan 2025 - July 2025',
-      description: 'Designed and optimized power electronics and embedded firmware for production hardware and QA systems.',
+      period: 'Jan 2025 - Jul 2025',
+      description: 'Designed, tested, and iterated electronics and embedded systems for commercial products.',
       responsibilities: [
-        'Designed and optimized buck converter circuits; improved layout across multiple iterations using KiCad',
-        'Developed automated QC testing device for power backup products using MicroPython and custom firmware',
-        'Built BLE-enabled QR/barcode scanner system; implemented complete firmware stack in C/C++'
+        'Designed, tested, and iterated buck converter circuits, improving PCB layouts and power regulation through multiple KiCad design revisions.',
+        'Built an automated quality-control testing device for power backup products, developing custom C/C++ firmware to automate product testing and verification.',
+        'Worked on a BLE-enabled QR/barcode scanning system, integrating the scanner hardware with custom embedded firmware for a complete working prototype.',
+        'Worked with embedded displays and user interfaces using LVGL, gaining practical experience developing firmware and hardware for commercial products.'
       ],
       featured: true,
       type: 'internship'
@@ -33,10 +34,11 @@ const experiences: ExperienceItem[] = [
       title: 'Electronics Design Intern',
       company: 'SEDS Nepal (Remote), Pokhara, Nepal',
       period: 'Sept 2025 - Jan 2026',
-      description: 'Designed electronics modules for pseudo-satellite (HAPS) systems with a focus on modular, reproducible architecture.',
+      description: 'Designed and explored electronics for a pseudo-satellite, focusing on practical and modular subsystem architectures.',
       responsibilities: [
-        'Designed electronics modules for pseudo-satellite (HAPS) systems and validated subsystem interfaces',
-        'Performed component selection, BOM budgeting, and design reviews across interdisciplinary satellite subsystems'
+        'Designed and explored electronics for a pseudo-satellite, focusing on practical and modular subsystem architectures.',
+        'Worked through component selection, schematic development, BOM preparation, and design reviews while considering reliability, power requirements, and system-level integration.',
+        'Collaborated with team members from different engineering areas to understand how individual electronics modules fit together.'
       ],
       links: [
         {
@@ -47,15 +49,13 @@ const experiences: ExperienceItem[] = [
       type: 'internship'
     },
     {
-      title: 'Executive Member',
-      company: 'Robotics Club, Pashchimanchal Campus',
-      period: 'March 2025 - Present',
-      description: 'Leading functional teams and coordinating club technical activities while mentoring 50+ members in microcontroller programming and PCB design.',
+      title: 'Electronics & Software Lead',
+      company: 'Robotics Club, Pashchimanchal Campus IOE, Tribhuvan University',
+      period: '2024 - 2026',
+      description: 'Coached 350+ students in PCB design, firmware development, and robotics; launched an in-house PCB prototyping lab.',
       responsibilities: [
-        'Lead functional teams and coordinate club technical activities',
-        'Mentor 50+ members in microcontroller programming and PCB design',
-        'Organize robotics competitions and technical workshops',
-        'Coordinate with industry professionals for knowledge sharing sessions'
+        'Coached 350+ students in PCB design, firmware development, and robotics; launched an in-house PCB prototyping lab.',
+        'Led competitive robotics projects; organized workshops and technical training programs campus-wide, including a 15-day "Rainy Session" training 100+ students.'
       ],
       type: 'leadership'
     },
@@ -63,10 +63,8 @@ const experiences: ExperienceItem[] = [
       title: 'General Member',
       company: 'Robotics Club Pashchimanchal Campus',
       period: 'March 2024 - March 2025',
-      description: 'Developed advanced Micromouse robot using line maze-solving algorithms and coordinated 15-day "Rainy Session" workshop, training 100+ students in robotics.',
+      description: 'Developed an advanced Micromouse robot using line-maze-solving algorithms.',
       responsibilities: [
-        'Developed advanced Micromouse robot using line maze-solving algorithms',
-        'Coordinated 15-day "Rainy Session" workshop, training 100+ students in robotics',
         'Mentored teams for Autonomous Boat Racing Competition, achieving 1st Runner-up position',
         'Participated in various robotics projects and competitions'
       ],

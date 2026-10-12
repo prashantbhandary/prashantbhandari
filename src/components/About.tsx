@@ -36,8 +36,8 @@ const facts = [
   {
     icon: Users,
     label: 'Leadership',
-    value: 'Executive Member',
-    meta: 'Robotics Club, Pashchimanchal Campus (March 2025 – Present)',
+    value: 'Electronics & Software Lead',
+    meta: 'Robotics Club, Pashchimanchal Campus IOE, Tribhuvan University (2024 – 2026)',
   },
   {
     icon: MapPin,

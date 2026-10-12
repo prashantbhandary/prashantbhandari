@@ -37,9 +37,9 @@ type Project = {
 const projects: Project[] = [
   {
     title: 'Micromouse Robot (Maze-Solving)',
-    summary: 'Arduino Nano micromouse using QTR sensors, PID control, and flood-fill maze-solving.',
-    outcome: '95% maze accuracy with a 40% speed boost over previous iterations.',
-    techStack: ['Arduino Nano', 'QTR Sensors', 'PID Control', 'Flood-Fill Algorithm', 'C++'],
+    summary: 'Custom PCB, PID control, and LSRB line-maze-solving algorithm on an Arduino Nano.',
+    outcome: 'Custom PCB reduced board size by 40%. 1st Place LOCUS 2025 (IOE Pulchowk), 2nd Place Delta 5.0 (IOE Purwanchal), 5th Place Techfest IIT Bombay.',
+    techStack: ['Arduino Nano', 'Custom PCB', 'PID Control', 'LSRB Algorithm'],
     image: '/images/MicroMouse.jpg',
     demoEmbedUrl: '',
     primaryLink: 'https://github.com/prashantbhandary/MicroMouse-LineMaze.git',
@@ -49,8 +49,8 @@ const projects: Project[] = [
   },
   {
     title: 'Solar Greenhouse Automation',
-    summary: 'Solar-powered automation for soil, temperature, and humidity monitoring.',
-    outcome: 'Automated irrigation with BLE data transmission and OLED dashboard.',
+    summary: 'Solar-powered greenhouse monitoring soil moisture, temperature, and humidity.',
+    outcome: 'Automated irrigation with BLE connectivity and an OLED dashboard.',
     techStack: ['ESP32', 'BLE', 'MOSFET Control', 'OLED'],
     image: '/file.svg',
     demoEmbedUrl: '',
@@ -73,8 +73,8 @@ const projects: Project[] = [
   },
   {
     title: 'Pocket CubeSat Module (1.5U)',
-    summary: 'Stacked PCB CubeSat module integrating OBC, power management, sensors, and LoRa comms.',
-    outcome: 'Compact 1.5U form factor with Li-Po solar charging integration.',
+    summary: '1.5U PocketQube with stacked-PCB architecture: onboard computing, power management, sensors, LoRa, and Li-Po solar charging.',
+    outcome: 'Compact stacked-PCB architecture for a 1.5U form factor.',
     techStack: ['Stacked PCB', 'LoRa', 'NodeMCU', 'Power Management'],
     image: '/file.svg',
     demoEmbedUrl: '',
@@ -85,8 +85,8 @@ const projects: Project[] = [
   },
   {
     title: 'Smart Helmet Safety System',
-    summary: 'Wearable safety system with pulse/SpO2 sensing and fall detection.',
-    outcome: 'SOS alerts transmitted via BLE to a supervisor dashboard.',
+    summary: 'Rapid-prototyped wearable safety system integrating pulse/SpO2 sensing, fall detection, and SOS alerts.',
+    outcome: 'Sensor data sent over BLE to a supervisor monitoring dashboard.',
     techStack: ['IoT', 'BLE', 'SpO2 Sensor', 'Fall Detection'],
     image: '/file.svg',
     demoEmbedUrl: '',
@@ -98,7 +98,7 @@ const projects: Project[] = [
   {
     title: 'DC-DC Buck Converter',
     summary: '12V-to-5V converter designed from schematic through PCB for embedded use.',
-    outcome: 'Reached ~90% efficiency with reduced ripple suitable for industrial loads.',
+    outcome: 'Iterated the layout to reach ~90% efficiency and reduced output ripple.',
     techStack: ['KiCad', 'Power Electronics', 'XL2013E1', 'PCB Layout'],
     image: '/file.svg',
     demoEmbedUrl: '',
@@ -122,7 +122,7 @@ const projects: Project[] = [
   {
     title: 'LoRaNet Communication Module',
     summary: 'Long-range LoRa communication module with custom PCB and embedded firmware.',
-    outcome: 'Achieved ~7 km line-of-sight range with reliable packet transmission.',
+    outcome: 'Wireless communication module for long-range links when cellular or other communication fails, achieving ~3 km line-of-sight range; ESP32 firmware for reliable packet transmission with LoRa transceivers.',
     techStack: ['KiCad', 'ESP32', 'LoRa', 'C/C++'],
     image: '/file.svg',
     demoEmbedUrl: '',

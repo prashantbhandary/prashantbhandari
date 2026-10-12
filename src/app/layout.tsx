@@ -4,7 +4,7 @@
  * Author: Prashant Bhandari
  * Last Modified: Su/08/2025 05:21:00
  * Modified By: Prashant Bhandari
- * Copyright (c) 2025 Prashant Bhandari
+ * Copyright (c) 2026 Prashant Bhandari
  */
 
 import type { Metadata } from "next";
@@ -37,7 +37,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Prashant Bhandari | Electronics Engineer & Robotics Developer",
   description: "Portfolio of Prashant Bhandari — Electronics Engineering student, robotics competition winner, PCB designer, and embedded systems developer from Pokhara, Nepal.",
-  keywords: "Prashant Bhandari, electronics engineering student, Yarsa Tech intern, robotics competition winner, Battle For Speed 2023, Delta Robothon, Pokhara Nepal, Pashchimanchal Campus, Arduino ESP32, PCB design, embedded systems, micromouse robot, line follower bot, autonomous boat, KiCad, C++ Python, robotics club executive member, electronics intern Nepal, competition robotics, maze solving robot, QTR sensors PID control",
+  keywords: "Prashant Bhandari, electronics engineering student, Yarsa Tech intern, robotics competition winner, Battle For Speed 2023, Delta Robothon, Pokhara Nepal, Pashchimanchal Campus, Arduino ESP32, PCB design, embedded systems, micromouse robot, line follower bot, autonomous boat, KiCad, C++ Python, robotics club electronics and software lead, electronics intern Nepal, competition robotics, maze solving robot, QTR sensors PID control",
   authors: [{ name: "Prashant Bhandari", url: "https://bhandari-prashant.com.np" }],
   creator: "Prashant Bhandari",
   publisher: "Prashant Bhandari",
@@ -176,7 +176,7 @@ export default function RootLayout({
               "memberOf": {
                 "@type": "Organization",
                 "name": "Robotics Club Pashchimanchal Campus",
-                "description": "Executive Member leading robotics initiatives and mentoring projects",
+                "description": "Electronics and Software Lead leading robotics initiatives and technical training",
                 "url": "https://www.robotics.wrc.edu.np"
               },
               "alumniOf": {

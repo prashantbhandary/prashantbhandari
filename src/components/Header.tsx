@@ -99,7 +99,7 @@ export default function Header() {
               </li>
             ))}
             <li>
-              <Link href="/resume" className="nav-link">
+              <Link href="/resume_prashant.pdf" className="nav-link">
                 <FileText size={13} aria-hidden="true" />
                 Résumé
               </Link>
@@ -177,7 +177,7 @@ export default function Header() {
           ))}
 
           <Link
-            href="/resume"
+            href="/resume_prashant.pdf"
             className="nav-sheet__link"
             onClick={() => setMenuOpen(false)}
           >

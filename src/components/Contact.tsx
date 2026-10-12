@@ -101,7 +101,7 @@ export default function Contact() {
             Let&apos;s build something
           </h2>
           <p className="section-lead">
-            Open to internships, hardware collaborations and freelance PCB or firmware work. The
+            Open to PhD research positions in robotics, as well as hardware collaborations. The
             fastest way to reach me is email.
           </p>
         </Reveal>
