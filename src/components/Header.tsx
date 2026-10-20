@@ -2,7 +2,8 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
-import { Menu, X, ArrowUpRight, FileText } from 'lucide-react'
+import { usePathname, useRouter } from 'next/navigation'
+import { Menu, X, ArrowUpRight, FileText, NotebookPen } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
 
 const NAV_ITEMS = [
@@ -16,6 +17,8 @@ const NAV_ITEMS = [
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [active, setActive] = useState('')
+  const router = useRouter()
+  const onProjects = usePathname()?.startsWith('/projects') ?? false
 
   // Highlight whichever section is currently in the reading zone
   useEffect(() => {
@@ -57,10 +60,14 @@ export default function Header() {
   const goTo = useCallback((id: string) => {
     setMenuOpen(false)
     const el = document.getElementById(id)
-    if (!el) return
+    // the sections live on the home page; from any other page, go there first
+    if (!el) {
+      router.push(`/#${id}`)
+      return
+    }
     // let the sheet close before the scroll starts
     requestAnimationFrame(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }))
-  }, [])
+  }, [router])
 
   return (
     <>
@@ -98,6 +105,16 @@ export default function Header() {
                 </button>
               </li>
             ))}
+            <li>
+              <Link
+                href="/projects"
+                className="nav-link"
+                aria-current={onProjects ? 'page' : undefined}
+              >
+                <NotebookPen size={13} aria-hidden="true" />
+                Projects
+              </Link>
+            </li>
             <li>
               <Link href="/resume" className="nav-link">
                 <FileText size={13} aria-hidden="true" />
@@ -175,6 +192,15 @@ export default function Header() {
               <ArrowUpRight size={16} aria-hidden="true" style={{ color: 'var(--ink-4)' }} />
             </button>
           ))}
+
+          <Link
+            href="/projects"
+            className="nav-sheet__link"
+            onClick={() => setMenuOpen(false)}
+          >
+            Projects
+            <NotebookPen size={16} aria-hidden="true" style={{ color: 'var(--ink-4)' }} />
+          </Link>
 
           <Link
             href="/resume"
