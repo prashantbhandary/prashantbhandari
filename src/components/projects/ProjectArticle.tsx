@@ -6,6 +6,7 @@ import { ArrowLeft, ArrowRight, ArrowUpRight, FileText, Github, ListTree } from 
 import { motion } from 'framer-motion'
 import { formatMonth, getProject, SORTED_PROJECTS, CATEGORIES, type ProjectLink } from '@/content/projects'
 import { BlockView, FigureView } from './Blocks'
+import ReadingList from './ReadingList'
 import { Reveal } from '../motion/Motion'
 
 const LINK_ICON: Record<ProjectLink['kind'], typeof Github> = {
@@ -37,7 +38,7 @@ function useActiveSection(ids: string[]) {
 export default function ProjectArticle({ slug }: { slug: string }) {
   const project = getProject(slug)!
   // stable across renders so the observer isn't rebuilt every time `active` changes
-  const sectionIds = useMemo(() => project.sections.map((s) => s.id), [project])
+  const sectionIds = useMemo(() => [...project.sections.map((s) => s.id), 'reading'], [project])
   const active = useActiveSection(sectionIds)
 
   const index = SORTED_PROJECTS.findIndex((p) => p.slug === slug)
@@ -123,7 +124,7 @@ export default function ProjectArticle({ slug }: { slug: string }) {
           <aside className="pj-toc" aria-label="On this page">
             <p className="eyebrow mb-3">On this page</p>
             <ol>
-              {project.sections.map((section) => (
+              {[...project.sections, { id: 'reading', title: 'Further reading' }].map((section) => (
                 <li key={section.id}>
                   <a
                     href={`#${section.id}`}
@@ -142,7 +143,7 @@ export default function ProjectArticle({ slug }: { slug: string }) {
             <details className="pj-toc-mobile">
               <summary>On this page</summary>
               <ol>
-                {project.sections.map((section) => (
+                {[...project.sections, { id: 'reading', title: 'Further reading' }].map((section) => (
                   <li key={section.id}>
                     <a href={`#${section.id}`}>{section.title}</a>
                   </li>
@@ -160,6 +161,14 @@ export default function ProjectArticle({ slug }: { slug: string }) {
                 ))}
               </section>
             ))}
+
+            <section id="reading" className="pj-section" aria-labelledby="reading-title">
+              <h2 id="reading-title" className="pj-h2">
+                Further reading
+              </h2>
+              <p className="pj-p">The papers, app notes and datasheets this project builds on.</p>
+              <ReadingList items={project.reading} />
+            </section>
           </div>
         </div>
 
