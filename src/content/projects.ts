@@ -1,17 +1,22 @@
 /*
- * Project write-ups shown at /projects and /projects/[slug].
+ * Everything shown in the Work section and at /projects.
  *
- * To add a project:
- *  1. Put its images/PDFs in public/images/projects/<slug>/
- *  2. Add an entry to PROJECTS below — `sections` become the article body
- *     and the table of contents, in order.
- *  3. Add the URL to public/sitemap.xml
+ *  - PROJECTS: long-form write-ups, each with its own page at /projects/<slug>.
+ *    `sections` become the article body and its table of contents.
+ *  - OTHER_WORK: projects listed as cards only, linking out to GitHub.
+ *  - WORK: both merged into one card list, which every listing reads.
+ *
+ * Every project must have a GitHub link. Images go in
+ * public/images/projects/<id>/. New write-ups also go in public/sitemap.xml.
  *
  * Paragraph text understands `code` and **bold**. A `tree` block is written
  * as an indented listing (2 spaces per level) with optional `# notes`.
  */
 
-export type Category = 'hardware' | 'research'
+import type { LucideIcon } from 'lucide-react'
+import { Bot, CircuitBoard, Cpu, FlaskConical, Gamepad2, Gauge, HardHat, Radio, Satellite } from 'lucide-react'
+
+export type Category = 'robotics' | 'pcb' | 'embedded' | 'research'
 
 export type Figure = {
   src: string
@@ -47,8 +52,10 @@ export type ProjectLink = {
 export type Project = {
   slug: string
   title: string
-  /** One sentence for cards and meta description */
+  /** One sentence for the article lead and meta description */
   summary: string
+  /** Under ~12 words, for cards */
+  line: string
   category: Category
   /** What kind of work, shown as the card's eyebrow */
   kind: string
@@ -63,17 +70,12 @@ export type Project = {
   sections: Section[]
 }
 
-export const CATEGORIES: { id: Category; label: string; blurb: string }[] = [
-  {
-    id: 'hardware',
-    label: 'Hardware & PCB design',
-    blurb: 'Boards taken from schematic to manufacturing files, with the firmware that drives them.',
-  },
-  {
-    id: 'research',
-    label: 'Research & simulation',
-    blurb: 'Signal-processing and communication experiments, written up with method and results.',
-  },
+/** Listing order, and the drawn cover used when a project has no image */
+export const CATEGORIES: { id: Category; label: string; icon: LucideIcon; tint: [string, string] }[] = [
+  { id: 'robotics', label: 'Robotics', icon: Bot, tint: ['#7c3aed', '#c026d3'] },
+  { id: 'pcb', label: 'PCB design', icon: CircuitBoard, tint: ['#047857', '#0d9488'] },
+  { id: 'embedded', label: 'Embedded & IoT', icon: Cpu, tint: ['#1d4ed8', '#0891b2'] },
+  { id: 'research', label: 'Research', icon: FlaskConical, tint: ['#b45309', '#e11d48'] },
 ]
 
 const GITHUB = 'https://github.com/prashantbhandary'
@@ -85,7 +87,8 @@ export const PROJECTS: Project[] = [
     title: 'MSPM0G3507 Development Board',
     summary:
       'A compact USB-C development board for TI’s Arm Cortex-M0+ MSPM0G3507, with on-board USB-UART, a 3-axis accelerometer and Tag-Connect SWD.',
-    category: 'hardware',
+    line: 'USB-C Cortex-M0+ board with USB-serial, accelerometer and SWD pads.',
+    category: 'pcb',
     kind: 'PCB design · MCU board',
     date: '2026-10',
     status: 'Fab files ready',
@@ -270,6 +273,7 @@ export const PROJECTS: Project[] = [
     title: 'OFDM + QPSK Link Simulation',
     summary:
       'A text message sent end to end through an 8-subcarrier OFDM link over a noisy channel in Python, with bit-error-rate results checked against theory.',
+    line: 'Text sent through an 8-subcarrier OFDM link, BER checked against theory.',
     category: 'research',
     kind: 'Simulation · Digital communication',
     date: '2026-09',
@@ -485,7 +489,8 @@ recovered_pairs = [demap(y) for y in Y]            # nearest QPSK point`,
     title: '4-Digit 7-Segment LED Display',
     summary:
       'A large 4-digit display built from 60 discrete SMD LEDs, multiplexed by an ESP32, with a GitHub Actions pipeline that publishes manufacturing files on every release tag.',
-    category: 'hardware',
+    line: 'Four digits built from 60 SMD LEDs, multiplexed by an ESP32.',
+    category: 'pcb',
     kind: 'PCB design · Firmware · CI',
     date: '2026-06',
     status: 'Design + firmware',
@@ -720,7 +725,8 @@ recovered_pairs = [demap(y) for y in Y]            # nearest QPSK point`,
     title: 'Heart-Shaped “Breathing” LED PCB',
     summary:
       'A heart-shaped board where a 555 timer and one transistor make 20 LEDs fade in and out like breathing, with no microcontroller and no code.',
-    category: 'hardware',
+    line: 'A 555 timer and one transistor make 20 LEDs fade like breathing.',
+    category: 'pcb',
     kind: 'PCB design · Analog',
     date: '2026-02',
     status: 'Gerbers for NextPCB',
@@ -851,12 +857,173 @@ recovered_pairs = [demap(y) for y in Y]            # nearest QPSK point`,
   },
 ]
 
-/** Category order first, then newest first within a category */
-export const SORTED_PROJECTS = [...PROJECTS].sort((a, b) => {
-  const byCategory =
-    CATEGORIES.findIndex((c) => c.id === a.category) - CATEGORIES.findIndex((c) => c.id === b.category)
-  return byCategory || b.date.localeCompare(a.date)
-})
+// ─── Cards ───────────────────────────────────────────────────────────────────
+
+export type CardLink = { label: string; href: string; kind: 'github' | 'pdf' | 'demo' }
+
+export type Card = {
+  id: string
+  title: string
+  line: string
+  category: Category
+  date: string
+  tags: string[]
+  /** Required: the real work */
+  github: string
+  /** Second repo, report PDF, video… */
+  more?: CardLink[]
+  /** Set when the project has a write-up page */
+  writeup?: string
+  image?: { src: string; fit?: 'cover' | 'contain' }
+  icon?: LucideIcon
+  /** Only for unfinished work */
+  status?: string
+  /** A result worth one line: an award, a measured number */
+  highlight?: string
+}
+
+const OTHER_WORK: Card[] = [
+  {
+    id: 'micromouse',
+    title: 'Micromouse Line-Maze Robot',
+    line: 'Maze-solving robot on a custom PCB, with PID motion control.',
+    category: 'robotics',
+    date: '2025-09',
+    tags: ['Arduino Nano', 'PID', 'LSRB'],
+    github: `${GITHUB}/MicroMouse-LineMaze`,
+    image: { src: '/images/MicroMouse.jpg' },
+    highlight: '1st LOCUS 2025 · 2nd Delta 5.0 · 5th Techfest IIT Bombay',
+  },
+  {
+    id: 'line-follower',
+    title: 'Project Voyager Line Follower',
+    line: 'Line-following robot with ultrasonic obstacle detection.',
+    category: 'robotics',
+    date: '2023-08',
+    tags: ['Arduino', 'PID', 'Ultrasonic'],
+    github: `${GITHUB}/Project_Voyager`,
+    more: [{ label: 'Report', href: '/documentation-project-voyager.pdf', kind: 'pdf' }],
+    image: { src: '/images/VoyagerBot2023.jpg' },
+  },
+  {
+    id: 'relay-module',
+    title: '4-Channel Relay Module',
+    line: 'Opto-isolated relay board with status LEDs and screw terminals.',
+    category: 'pcb',
+    date: '2025-10',
+    tags: ['KiCad', 'Relays', 'Opto-isolation'],
+    github: `${GITHUB}/4-RelayModulePCBDesign`,
+    image: { src: '/images/projects/relay-module/cover.webp' },
+  },
+  {
+    id: 'mosfet-driver',
+    title: 'Quad-MOSFET Motor Driver',
+    line: 'Four-channel MOSFET board for one-direction DC motors.',
+    category: 'pcb',
+    date: '2025-10',
+    tags: ['KiCad', 'MOSFET', 'Motors'],
+    github: `${GITHUB}/Unidirectional-Quad-MOSFET-Motor-Driver`,
+    image: { src: '/images/projects/mosfet-driver/cover.webp' },
+  },
+  {
+    id: 'power-monitor',
+    title: 'ESP32 Power Monitor',
+    line: 'Measures load current and power with an INA219 and reports over Wi-Fi.',
+    category: 'pcb',
+    date: '2026-06',
+    tags: ['KiCad', 'ESP32', 'INA219'],
+    github: `${GITHUB}/power-monitor`,
+    icon: Gauge,
+    status: 'Schematic stage',
+  },
+  {
+    id: 'greenhouse',
+    title: 'Solar Greenhouse Automation',
+    line: 'Solar-powered ESP32 that logs the soil and air and runs irrigation.',
+    category: 'embedded',
+    date: '2026-05',
+    tags: ['ESP32', 'BLE', 'Solar'],
+    github: `${GITHUB}/GreenHouseMonitoring`,
+    more: [
+      { label: 'PCB', href: `${GITHUB}/SolarBasedRealTimeGreenHouseAutomation`, kind: 'github' },
+      { label: 'Report', href: '/minor_project_report.pdf', kind: 'pdf' },
+    ],
+    image: { src: '/images/projects/greenhouse/cover.webp' },
+  },
+  {
+    id: 'smart-helmet',
+    title: 'Smart Safety Helmet',
+    line: 'Tracks pulse, SpO₂ and impacts; alerts a supervisor over BLE.',
+    category: 'embedded',
+    date: '2026-01',
+    tags: ['ESP32', 'BLE', 'MAX30105'],
+    github: `${GITHUB}/SmartHelmet_Esp32_BLE`,
+    more: [{ label: 'Pitch', href: '/safetron-mvp-safe-250345.pdf', kind: 'pdf' }],
+    icon: HardHat,
+  },
+  {
+    id: 'cubesat',
+    title: 'Pocket CubeSat (1.5U)',
+    line: 'Stacked-PCB PocketQube with LoRa radio and solar charging.',
+    category: 'embedded',
+    date: '2026-01',
+    tags: ['KiCad', 'LoRa', 'NodeMCU'],
+    github: `${GITHUB}/pocketCubeSat_Esp32_demo`,
+    more: [{ label: 'Report', href: '/cubesat.pdf', kind: 'pdf' }],
+    icon: Satellite,
+  },
+  {
+    id: 'loranet',
+    title: 'LoRaNet',
+    line: 'Reach home internet over LoRa when cellular is down.',
+    category: 'embedded',
+    date: '2026-03',
+    tags: ['ESP32', 'LoRa', 'C/C++'],
+    github: 'https://github.com/awakesid/LoraNet',
+    icon: Radio,
+    highlight: '~3 km line-of-sight range',
+  },
+  {
+    id: 'flappy-bird',
+    title: 'Flappy Bird on ESP32',
+    line: 'The game on a 128×64 OLED, with a button and a buzzer.',
+    category: 'embedded',
+    date: '2026-03',
+    tags: ['ESP32', 'SSD1306', 'PlatformIO'],
+    github: `${GITHUB}/FlappyBird`,
+    more: [{ label: 'Video', href: 'https://www.instagram.com/reel/DV0zjzuk2FA/', kind: 'demo' }],
+    icon: Gamepad2,
+  },
+]
+
+function writeupCard(p: Project): Card {
+  return {
+    id: p.slug,
+    title: p.title,
+    line: p.line,
+    category: p.category,
+    date: p.date,
+    tags: p.tools.slice(0, 3),
+    github: p.links.find((l) => l.kind === 'source')!.href,
+    writeup: p.slug,
+    image: { src: p.cover.src, fit: p.cover.fit },
+  }
+}
+
+const byCategoryThenNewest = (a: { category: Category; date: string }, b: { category: Category; date: string }) => {
+  const order = (c: Category) => CATEGORIES.findIndex((x) => x.id === c)
+  return order(a.category) - order(b.category) || b.date.localeCompare(a.date)
+}
+
+/** Every project, write-ups included: category order, newest first within each */
+export const WORK: Card[] = [...PROJECTS.map(writeupCard), ...OTHER_WORK].sort(byCategoryThenNewest)
+
+/** Write-ups only, same order — drives the article prev/next links */
+export const SORTED_PROJECTS = [...PROJECTS].sort(byCategoryThenNewest)
+
+export function getCard(id: string) {
+  return WORK.find((c) => c.id === id)
+}
 
 export function getProject(slug: string) {
   return PROJECTS.find((p) => p.slug === slug)
