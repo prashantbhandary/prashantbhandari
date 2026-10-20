@@ -605,48 +605,6 @@ p { text-wrap: pretty; }
   .hero__pulse { display: none; }
 }
 
-/* ---- ticker ---- */
-.hero__ticker {
-  margin-top: clamp(2.5rem, 6vw, 4.5rem);
-  padding-block: 0.875rem;
-  border-block: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.6);
-}
-
-.marquee {
-  overflow: hidden;
-  /* feather both ends so items enter and leave instead of popping */
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-}
-
-.marquee__track {
-  display: flex;
-  width: max-content;
-  gap: 2.5rem;
-  list-style: none;
-  will-change: transform;
-}
-
-.marquee__item {
-  display: inline-flex;
-  align-items: center;
-  gap: 2.5rem;
-  font-family: var(--font-mono);
-  font-size: 0.8125rem;
-  letter-spacing: 0.02em;
-  color: var(--ink-3);
-  white-space: nowrap;
-}
-
-.marquee__item::after {
-  content: '';
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--accent-line);
-}
-
 /* Portrait — no frame, no panel, no background.
    The dissolve is baked into the image's own alpha channel rather than
    done in CSS, so the shoulders fade into whatever is behind them and
@@ -667,6 +625,11 @@ p { text-wrap: pretty; }
 
 @media (max-width: 939px) {
   .hero__figure { max-width: 21rem; }
+}
+
+/* phones: keep the portrait from pushing everything below the fold */
+@media (max-width: 600px) {
+  .hero__figure { max-width: 13rem; }
 }
 
 .stat-strip {
@@ -718,8 +681,8 @@ p { text-wrap: pretty; }
 }
 
 @media (min-width: 860px) {
-  .bento { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .bento__item--wide { grid-column: span 2; }
+  .bento { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .bento .bento__item { grid-column: auto; }
 }
 
 .bento__item {
@@ -964,11 +927,6 @@ p { text-wrap: pretty; }
   padding: 1.375rem 1.375rem 1.25rem;
 }
 
-.xp--featured {
-  border-color: var(--accent-line);
-  background: linear-gradient(150deg, var(--accent-soft), var(--surface) 55%);
-}
-
 .xp__top {
   display: flex;
   flex-wrap: wrap;
@@ -1069,6 +1027,13 @@ p { text-wrap: pretty; }
 }
 
 .cert__meta { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--ink-4); }
+
+/* phones: two across, so eight certificates aren't eight screens of scrolling */
+@media (max-width: 600px) {
+  .cert-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.625rem; }
+  .cert__body { padding: 0.625rem 0.75rem 0.75rem; }
+  .cert__title { font-size: 0.8125rem; }
+}
 
 .filter-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.75rem; }
 

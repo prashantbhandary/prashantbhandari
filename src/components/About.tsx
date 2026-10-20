@@ -1,6 +1,5 @@
 import {
   GraduationCap,
-  MapPin,
   Briefcase,
   Users,
   Linkedin,
@@ -19,31 +18,23 @@ const socialLinks = [
 
 const facts = [
   {
-    icon: Briefcase,
-    label: 'Industry experience',
-    value: 'Electronics Engineer Intern',
-    meta: 'Yarsa Tech, Pokhara (Jan 2025 – July 2025)',
-    feature: true,
-    wide: true,
-  },
-  {
     icon: GraduationCap,
     label: 'Education',
     value: 'B.E. Electronics, Communication & Information Engineering',
-    meta: 'Pashchimanchal Campus, Pokhara (2023 – Present)',
-    wide: true,
+    meta: 'Pashchimanchal Campus, IOE · 2023 – present',
+    feature: true,
+  },
+  {
+    icon: Briefcase,
+    label: 'Internships',
+    value: 'Yarsa Tech · SEDS Nepal',
+    meta: 'Product electronics, satellite subsystems · 2025 – 2026',
   },
   {
     icon: Users,
     label: 'Leadership',
     value: 'Electronics & Software Lead',
-    meta: 'Robotics Club, Pashchimanchal Campus IOE, Tribhuvan University (2024 – 2026)',
-  },
-  {
-    icon: MapPin,
-    label: 'Based in',
-    value: 'Pokhara, Nepal',
-    meta: 'City of Lakes',
+    meta: 'Robotics Club, Pashchimanchal Campus · 2024 – 2026',
   },
 ]
 
@@ -59,9 +50,8 @@ export default function About() {
             Electronics engineer, hardware first
           </h2>
           <p className="section-lead">
-            I&apos;m Prashant Bhandari — an Electronics Engineering student specializing in
-            robotics, PCB design and embedded systems, with a track record in competition-winning
-            projects.
+            I study electronics engineering in Pokhara and spend most of my time building robots
+            and circuit boards. At the campus Robotics Club I lead electronics and teach PCB design.
           </p>
         </Reveal>
 
@@ -69,9 +59,7 @@ export default function About() {
           {facts.map((fact) => (
             <RevealItem
               key={fact.label}
-              className={`bento__item card ${fact.feature ? 'bento__item--feature' : ''} ${
-                fact.wide ? 'bento__item--wide' : ''
-              }`}
+              className={`bento__item card ${fact.feature ? 'bento__item--feature' : ''}`}
             >
               <fact.icon
                 size={18}

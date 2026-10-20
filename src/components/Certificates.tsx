@@ -203,8 +203,7 @@ export default function CertificatesShowcase() {
               Certificates &amp; awards
             </h2>
             <p className="section-lead">
-              Competition results, mentorship recognition and internship certificates — tap any
-              card to read the original document.
+              Competition results and certificates. Tap a card to open the original.
             </p>
           </Reveal>
 

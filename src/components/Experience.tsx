@@ -1,6 +1,6 @@
 'use client'
 
-import { FileText, ExternalLink, Star } from 'lucide-react'
+import { FileText, ExternalLink } from 'lucide-react'
 import { Reveal, RevealGroup, RevealItem } from './motion/Motion'
 import CertificateBadge from './CertificateBadge'
 
@@ -11,79 +11,63 @@ type ExperienceItem = {
   description: string
   responsibilities: string[]
   links?: { label: string; href: string }[]
-  featured?: boolean
   type: string
 }
 
 const experiences: ExperienceItem[] = [
-    {
-      title: 'Electronics Engineer Intern',
-      company: 'Yarsa Tech, Pokhara',
-      period: 'Jan 2025 - Jul 2025',
-      description: 'Designed, tested, and iterated electronics and embedded systems for commercial products.',
-      responsibilities: [
-        'Designed, tested, and iterated buck converter circuits, improving PCB layouts and power regulation through multiple KiCad design revisions.',
-        'Built an automated quality-control testing device for power backup products, developing custom C/C++ firmware to automate product testing and verification.',
-        'Worked on a BLE-enabled QR/barcode scanning system, integrating the scanner hardware with custom embedded firmware for a complete working prototype.',
-        'Worked with embedded displays and user interfaces using LVGL, gaining practical experience developing firmware and hardware for commercial products.'
-      ],
-      featured: true,
-      type: 'internship'
-    },
-    {
-      title: 'Electronics Design Intern',
-      company: 'SEDS Nepal (Remote), Pokhara, Nepal',
-      period: 'Sept 2025 - Jan 2026',
-      description: 'Designed electronics for a pseudo-satellite with a focus on practical, modular subsystem architectures.',
-      responsibilities: [
-        'Designed and explored electronics for a pseudo-satellite, focusing on practical and modular subsystem architectures.',
-        'Worked through component selection, schematic development, BOM preparation, and design reviews while considering reliability, power requirements, and system-level integration.',
-        'Collaborated with team members from different engineering areas to understand how individual electronics modules fit together.'
-      ],
-      links: [
-        {
-          label: 'Completion Letter',
-          href: '/completion-letter-prashant.pdf'
-        }
-      ],
-      type: 'internship'
-    },
-    {
-      title: 'Electronics & Software Lead',
-      company: 'Robotics Club, Pashchimanchal Campus IOE, Tribhuvan University',
-      period: '2024 - 2026',
-      description: 'Leading electronics and software for the club, coaching 350+ students and running campus-wide technical training.',
-      responsibilities: [
-        'Coached 350+ students in PCB design, firmware development, and robotics; launched an in-house PCB prototyping lab.',
-        'Led competitive robotics projects; organized workshops and technical training programs campus-wide, including a 15-day "Rainy Session" training 100+ students.'
-      ],
-      type: 'leadership'
-    },
-    {
-      title: 'General Member',
-      company: 'Robotics Club Pashchimanchal Campus',
-      period: 'March 2024 - March 2025',
-      description: 'Developed an advanced Micromouse robot using line-maze-solving algorithms.',
-      responsibilities: [
-        'Mentored teams for Autonomous Boat Racing Competition, achieving 1st Runner-up position',
-        'Participated in various robotics projects and competitions'
-      ],
-      type: 'leadership'
-    },
-    {
-      title: 'Robotics Mentor',
-      company: 'Karyashala & Engineer Without Borders',
-      period: 'July 2024, 7 days',
-      description: 'Guided students through 3D design, 3D printing, and ESP32-based projects as a volunteer mentor.',
-      responsibilities: [
-        'Mentored students in 3D design and 3D printing techniques',
-        'Guided ESP32-based project development',
-        'Provided hands-on training in embedded systems',
-        'Supported students in robotics project implementation'
-      ],
-      type: 'volunteer'
-    }
-  ]
+  {
+    title: 'Electronics Design Intern',
+    company: 'SEDS Nepal (remote)',
+    period: 'Sept 2025 – Jan 2026',
+    description: 'Electronics for a pseudo-satellite, built as modular subsystems.',
+    responsibilities: [
+      'Component selection, schematics, BOMs and design reviews, weighing reliability and power budget.',
+      'Worked with teammates from other engineering disciplines on how each module fits the system.',
+    ],
+    links: [{ label: 'Completion letter', href: '/completion-letter-prashant.pdf' }],
+    type: 'internship',
+  },
+  {
+    title: 'Electronics Engineer Intern',
+    company: 'Yarsa Tech, Pokhara',
+    period: 'Jan 2025 – Jul 2025',
+    description: 'Hardware and firmware for commercial products.',
+    responsibilities: [
+      'Revised buck-converter PCB layouts in KiCad to improve power regulation.',
+      'Built an automated QC test rig, with C/C++ firmware, for power-backup products.',
+      'Brought up a BLE QR/barcode scanner prototype.',
+      'Wrote LVGL interfaces for embedded displays.',
+    ],
+    type: 'internship',
+  },
+  {
+    title: 'Electronics & Software Lead',
+    company: 'Robotics Club, Pashchimanchal Campus IOE',
+    period: '2024 – 2026',
+    description: 'Run electronics and software for the club and its competition teams.',
+    responsibilities: [
+      'Coached 350+ students in PCB design, firmware and robotics; set up an in-house PCB prototyping lab.',
+      'Organised campus workshops, including a 15-day “Rainy Session” for 100+ students.',
+    ],
+    type: 'leadership',
+  },
+  {
+    title: 'General Member',
+    company: 'Robotics Club, Pashchimanchal Campus',
+    period: 'Mar 2024 – Mar 2025',
+    description: 'Built a line-maze Micromouse robot.',
+    responsibilities: ['Mentored the Autonomous Boat Racing team to 1st runner-up.'],
+    type: 'leadership',
+  },
+  {
+    title: 'Robotics Mentor',
+    company: 'Karyashala & Engineers Without Borders',
+    period: 'Jul 2024 · 7 days',
+    description: 'Volunteer mentor at a hands-on workshop.',
+    responsibilities: ['Taught 3D design, 3D printing and ESP32 projects.'],
+    type: 'volunteer',
+  },
+]
 
 const TYPE_LABEL: Record<string, string> = {
   work: 'Work',
@@ -130,15 +114,9 @@ function ExperienceEntry({ exp }: { exp: ExperienceItem }) {
   const certificates = ROLE_CERTIFICATES[exp.title] ?? []
 
   return (
-    <RevealItem as="article" className={`xp card ${exp.featured ? 'xp--featured' : ''}`}>
+    <RevealItem as="article" className="xp card">
       <div className="flex flex-wrap items-center gap-2 mb-3">
         <span className="tag">{TYPE_LABEL[exp.type] ?? exp.type}</span>
-        {exp.featured && (
-          <span className="tag tag--accent">
-            <Star size={10} aria-hidden="true" className="mr-1" />
-            Featured
-          </span>
-        )}
         {certificates.map((certificate) => (
           <CertificateBadge key={certificate.title} {...certificate} size="sm" />
         ))}
@@ -193,8 +171,8 @@ export default function Experience() {
             Where I&apos;ve worked and led
           </h2>
           <p className="section-lead">
-            Internships in satellite and industrial electronics, alongside the club roles where I
-            mentor and run competition teams.
+            Internships in product and satellite electronics, and the club roles where I teach
+            and lead teams.
           </p>
         </Reveal>
 
