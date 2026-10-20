@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
 import { Reveal } from './motion/Motion'
 
@@ -22,6 +23,24 @@ export default function Footer() {
             <p style={{ marginTop: '0.5rem', fontSize: '0.9375rem', color: 'var(--ink-3)' }}>
               Electronics Engineering Student · Robotics Enthusiast · Embedded Systems Developer
             </p>
+          </div>
+
+          <div className="flex flex-col items-start gap-2">
+            <p className="eyebrow">Founder of</p>
+            <a
+              href="https://electrophobia.tech"
+              target="_blank"
+              rel="noopener"
+              className="footer-sister card card--hover"
+            >
+              <span className="footer-sister__name">
+                ElectroPhobia
+                <ArrowUpRight size={14} aria-hidden="true" style={{ color: 'var(--ink-4)' }} />
+              </span>
+              <span className="footer-sister__text">
+                Electronics mentorship, workshops and a hands-on circuits lab.
+              </span>
+            </a>
           </div>
 
           <div className="flex flex-col items-start gap-2">
@@ -53,6 +72,9 @@ export default function Footer() {
 
         <div className="footer-bottom">
           <p>© {new Date().getFullYear()} Prashant Bhandari. All rights reserved.</p>
+          <Link href="/projects" style={{ color: 'var(--ink-3)' }}>
+            Project write-ups
+          </Link>
           <a
             href="https://github.com/prashantbhandary"
             target="_blank"
