@@ -6,23 +6,29 @@ import { usePathname, useRouter } from 'next/navigation'
 import { Menu, X, ArrowUpRight, FileText, NotebookPen } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
 
-const NAV_ITEMS = [
+/** Sections scroll on the home page; pages are their own routes */
+type NavItem = { id: string; label: string } | { href: string; label: string; icon: typeof FileText }
+
+const NAV_ITEMS: NavItem[] = [
   { id: 'about', label: 'About' },
-  { id: 'skills', label: 'Skills' },
   { id: 'experience', label: 'Experience' },
-  { id: 'projects', label: 'Work' },
+  { href: '/projects', label: 'Projects', icon: NotebookPen },
   { id: 'certificates', label: 'Certificates' },
+  { href: '/resume', label: 'Résumé', icon: FileText },
 ]
+
+const SECTION_IDS = NAV_ITEMS.flatMap((item) => ('id' in item ? [item.id] : []))
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [active, setActive] = useState('')
   const router = useRouter()
-  const onProjects = usePathname()?.startsWith('/projects') ?? false
+  const pathname = usePathname() ?? ''
 
   // Highlight whichever section is currently in the reading zone
   useEffect(() => {
-    const sections = NAV_ITEMS.map((item) => document.getElementById(item.id)).filter(
+    // 'hero' has no nav item, so reaching it clears the highlight
+    const sections = ['hero', ...SECTION_IDS].map((id) => document.getElementById(id)).filter(
       (el): el is HTMLElement => Boolean(el)
     )
     if (!sections.length) return
@@ -84,43 +90,40 @@ export default function Header() {
           </Link>
 
           <ul className="nav-list">
-            {NAV_ITEMS.map((item) => (
-              <li key={item.id} className="relative">
-                {active === item.id && (
-                  <motion.span
-                    layoutId="nav-active"
-                    className="absolute inset-0 rounded-[var(--r-pill)]"
-                    style={{ background: 'var(--accent-soft)' }}
-                    transition={{ type: 'spring', stiffness: 420, damping: 34 }}
-                    aria-hidden="true"
-                  />
-                )}
-                <button
-                  type="button"
-                  className="nav-link relative"
-                  aria-current={active === item.id ? 'true' : undefined}
-                  onClick={() => goTo(item.id)}
-                >
-                  {item.label}
-                </button>
-              </li>
-            ))}
-            <li>
-              <Link
-                href="/projects"
-                className="nav-link"
-                aria-current={onProjects ? 'page' : undefined}
-              >
-                <NotebookPen size={13} aria-hidden="true" />
-                Projects
-              </Link>
-            </li>
-            <li>
-              <Link href="/resume" className="nav-link">
-                <FileText size={13} aria-hidden="true" />
-                Résumé
-              </Link>
-            </li>
+            {NAV_ITEMS.map((item) =>
+              'href' in item ? (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="nav-link"
+                    aria-current={pathname.startsWith(item.href) ? 'page' : undefined}
+                  >
+                    <item.icon size={13} aria-hidden="true" />
+                    {item.label}
+                  </Link>
+                </li>
+              ) : (
+                <li key={item.id} className="relative">
+                  {active === item.id && (
+                    <motion.span
+                      layoutId="nav-active"
+                      className="absolute inset-0 rounded-[var(--r-pill)]"
+                      style={{ background: 'var(--accent-soft)' }}
+                      transition={{ type: 'spring', stiffness: 420, damping: 34 }}
+                      aria-hidden="true"
+                    />
+                  )}
+                  <button
+                    type="button"
+                    className="nav-link relative"
+                    aria-current={active === item.id ? 'true' : undefined}
+                    onClick={() => goTo(item.id)}
+                  >
+                    {item.label}
+                  </button>
+                </li>
+              )
+            )}
           </ul>
 
           <motion.button
@@ -181,35 +184,29 @@ export default function Header() {
             </button>
           </div>
 
-          {NAV_ITEMS.map((item) => (
-            <button
-              key={item.id}
-              type="button"
-              className="nav-sheet__link"
-              onClick={() => goTo(item.id)}
-            >
-              {item.label}
-              <ArrowUpRight size={16} aria-hidden="true" style={{ color: 'var(--ink-4)' }} />
-            </button>
-          ))}
-
-          <Link
-            href="/projects"
-            className="nav-sheet__link"
-            onClick={() => setMenuOpen(false)}
-          >
-            Projects
-            <NotebookPen size={16} aria-hidden="true" style={{ color: 'var(--ink-4)' }} />
-          </Link>
-
-          <Link
-            href="/resume"
-            className="nav-sheet__link"
-            onClick={() => setMenuOpen(false)}
-          >
-            Résumé
-            <FileText size={16} aria-hidden="true" style={{ color: 'var(--ink-4)' }} />
-          </Link>
+          {NAV_ITEMS.map((item) =>
+            'href' in item ? (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="nav-sheet__link"
+                onClick={() => setMenuOpen(false)}
+              >
+                {item.label}
+                <item.icon size={16} aria-hidden="true" style={{ color: 'var(--ink-4)' }} />
+              </Link>
+            ) : (
+              <button
+                key={item.id}
+                type="button"
+                className="nav-sheet__link"
+                onClick={() => goTo(item.id)}
+              >
+                {item.label}
+                <ArrowUpRight size={16} aria-hidden="true" style={{ color: 'var(--ink-4)' }} />
+              </button>
+            )
+          )}
 
           <button
             type="button"

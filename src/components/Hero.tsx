@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { ArrowRight, Download, MapPin } from 'lucide-react'
 import Image from 'next/image'
 import { animate, motion, useInView, useScroll, useTransform, type Variants } from 'framer-motion'
-import Marquee from './motion/Marquee'
+import { WORK } from '@/content/projects'
 
 const EASE = [0.22, 0.61, 0.36, 1] as const
 
@@ -20,15 +20,9 @@ const rise: Variants = {
 }
 
 const STATS = [
-  { to: 10, suffix: '+', label: 'Projects' },
+  { to: WORK.length, suffix: '', label: 'Projects' },
   { to: 7, suffix: '+', label: 'Awards' },
   { to: 3, suffix: '+', label: 'Years Exp.' },
-]
-
-const TICKER = [
-  'PCB Design', 'KiCad', 'STM32 Bare-Metal C', 'NuttX RTOS', 'ESP32', 'FreeRTOS',
-  'LoRa', 'CubeSat Subsystems', 'Embedded Firmware', 'BLE', 'Power Electronics',
-  'Robotics', 'Fusion 360', 'C/C++', 'MicroPython',
 ]
 
 /** Counts up once, when the strip scrolls into view. */
@@ -66,12 +60,10 @@ export default function Hero() {
   const texts = useMemo(
     () => [
       'Electronics Engineering Student',
+      'PCB Designer',
+      'Embedded Firmware Developer',
+      'Robotics Builder',
       'Satellite Research Fellow',
-      'Robotics Enthusiast',
-      'PCB Design Expert',
-      'Embedded Systems Developer',
-      'Arduino , Esp 32 , Raspberry Pi S',
-      'Innovation Builder',
     ],
     []
   )
@@ -153,9 +145,8 @@ export default function Hero() {
             </motion.div>
 
             <motion.p variants={rise} className="hero__lead mb-9">
-              B.E. Electronics, Communication &amp; Information Engineering student building
-              hardware end to end — PCB design, embedded firmware, and satellite subsystems, from
-              schematic through to a working board.
+              I design circuit boards and write the firmware that runs on them: robots, IoT
+              devices and satellite subsystems, from schematic to a working board.
             </motion.p>
 
             <motion.div variants={rise} className="flex flex-wrap gap-3 mb-10">
@@ -225,10 +216,6 @@ export default function Hero() {
 
           </div>
         </div>
-      </div>
-
-      <div className="hero__ticker">
-        <Marquee items={TICKER} label="Technologies Prashant works with" />
       </div>
     </section>
   )
