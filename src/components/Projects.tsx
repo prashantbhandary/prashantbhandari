@@ -9,9 +9,9 @@ import { Reveal, RevealGroup, RevealItem } from './motion/Motion'
 import { WORK, getCard, type Card } from '@/content/projects'
 
 /** Shown as cards on the home page; one per area of work */
-const FEATURED = ['micromouse', 'mspm0-board', 'ofdm-simulation']
+const FEATURED = ['micromouse', 'greenhouse', 'ofdm-simulation']
 /** Shown as rows underneath; the rest are on /projects */
-const LISTED = ['heart-pcb', 'seven-segment-led', 'smart-helmet', 'greenhouse', 'cubesat']
+const LISTED = ['mspm0-board', 'cubesat', 'loranet', 'heart-pcb', 'seven-segment-led']
 
 const micromouseBadges = [
   {

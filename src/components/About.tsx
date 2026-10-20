@@ -7,6 +7,7 @@ import {
   Twitter,
   Instagram,
 } from 'lucide-react'
+import Link from 'next/link'
 import { Reveal, RevealGroup, RevealItem } from './motion/Motion'
 
 const socialLinks = [
@@ -35,6 +36,35 @@ const facts = [
     label: 'Leadership',
     value: 'Electronics & Software Lead',
     meta: 'Robotics Club, Pashchimanchal Campus · 2024 – 2026',
+  },
+]
+
+/** What I want to research next, each backed by work already on the site */
+const interests = [
+  {
+    title: 'Embedded systems for small satellites',
+    text: 'Fitting computing, power and radio into a 5 cm PocketQube, and the electronics design reviews behind a pseudo-satellite at SEDS Nepal.',
+    evidence: [
+      { label: 'Pocket CubeSat', href: '/projects/cubesat' },
+      { label: 'MSPM0 board', href: '/projects/mspm0-board' },
+    ],
+  },
+  {
+    title: 'Sensing and control for mobile robots',
+    text: 'Line sensing, PD control and maze planning on small robots that have to work at competition speed.',
+    evidence: [
+      { label: 'Micromouse', href: '/projects/micromouse' },
+      { label: 'Motor driver', href: '/projects/mosfet-driver' },
+    ],
+  },
+  {
+    title: 'Low-power wireless sensing',
+    text: 'Battery-powered devices that measure, decide and report from the field, and measuring how well they actually work.',
+    evidence: [
+      { label: 'Greenhouse experiment', href: '/projects/greenhouse' },
+      { label: 'LoRaNet', href: '/projects/loranet' },
+      { label: 'OFDM simulation', href: '/projects/ofdm-simulation' },
+    ],
   },
 ]
 
@@ -69,6 +99,25 @@ export default function About() {
               <p className="bento__label">{fact.label}</p>
               <p className="bento__value">{fact.value}</p>
               <p className="bento__meta">{fact.meta}</p>
+            </RevealItem>
+          ))}
+        </RevealGroup>
+
+        <Reveal as="header" className="mt-12 mb-4">
+          <h3 className="eyebrow">Research interests</h3>
+        </Reveal>
+        <RevealGroup className="interest-grid">
+          {interests.map((interest) => (
+            <RevealItem key={interest.title} as="article" className="interest card">
+              <h4 className="interest__title">{interest.title}</h4>
+              <p className="interest__text">{interest.text}</p>
+              <ul className="interest__evidence" aria-label={`Work on ${interest.title.toLowerCase()}`}>
+                {interest.evidence.map((item) => (
+                  <li key={item.href}>
+                    <Link href={item.href}>{item.label}</Link>
+                  </li>
+                ))}
+              </ul>
             </RevealItem>
           ))}
         </RevealGroup>

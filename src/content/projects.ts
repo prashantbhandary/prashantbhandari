@@ -14,7 +14,8 @@
  */
 
 import type { LucideIcon } from 'lucide-react'
-import { Bot, CircuitBoard, Cpu, FlaskConical, Gamepad2, Gauge, HardHat, Radio, Satellite } from 'lucide-react'
+import { Bot, CircuitBoard, Cpu, FlaskConical, HardHat } from 'lucide-react'
+import { MORE_WRITEUPS } from './project-writeups'
 
 export type Category = 'robotics' | 'pcb' | 'embedded' | 'research'
 
@@ -43,6 +44,18 @@ export type Block =
 
 export type Section = { id: string; title: string; blocks: Block[] }
 
+/** A paper, app note or datasheet the project builds on — every project has some */
+export type Reading = {
+  title: string
+  /** Authors or publisher, then venue */
+  source: string
+  year?: number
+  kind: 'Paper' | 'App note' | 'Datasheet' | 'Standard' | 'Guide'
+  href: string
+}
+
+const doi = (id: string) => `https://doi.org/${id}`
+
 export type ProjectLink = {
   label: string
   href: string
@@ -62,12 +75,17 @@ export type Project = {
   /** ISO year-month of the most recent work; projects sort newest first */
   date: string
   status: string
+  /** Shows `status` as a badge on the card instead of "Write-up" */
+  inProgress?: boolean
+  /** A result worth one line on the card: an award, a measured number */
+  highlight?: string
   tools: string[]
   cover: Figure
   /** Three or four numbers that describe the project at a glance */
   facts: { value: string; label: string }[]
   links: ProjectLink[]
   sections: Section[]
+  reading: Reading[]
 }
 
 /** Listing order, and the drawn cover used when a project has no image */
@@ -80,7 +98,7 @@ export const CATEGORIES: { id: Category; label: string; icon: LucideIcon; tint: 
 
 const GITHUB = 'https://github.com/prashantbhandary'
 
-export const PROJECTS: Project[] = [
+const CORE_WRITEUPS: Project[] = [
   // ───────────────────────────────────────────────────────────────────────────
   {
     slug: 'mspm0-board',
@@ -109,6 +127,10 @@ export const PROJECTS: Project[] = [
       { label: 'Source', href: `${GITHUB}/mspmo-baord`, kind: 'source' },
       { label: 'Schematic (PDF)', href: '/images/projects/mspm0-board/schematic.pdf', kind: 'doc' },
       { label: 'Interactive BOM', href: '/images/projects/mspm0-board/ibom.html', kind: 'bom' },
+    ],
+    reading: [
+      { title: 'MSPM0G350x Mixed-Signal Microcontrollers (datasheet)', source: 'Texas Instruments', kind: 'Datasheet', href: 'https://www.ti.com/lit/ds/symlink/mspm0g3507.pdf' },
+      { title: 'A Primer on USB Type-C and USB Power Delivery Applications and Requirements', source: 'N. Enos, B. Gosselin · Texas Instruments', kind: 'App note', href: 'https://www.ti.com/lit/wp/slyy109/slyy109.pdf' },
     ],
     sections: [
       {
@@ -293,6 +315,11 @@ export const PROJECTS: Project[] = [
       { value: '5.65 %', label: 'BER over 400k bits' },
     ],
     links: [{ label: 'Source', href: `${GITHUB}/ofdm-sumulations`, kind: 'source' }],
+    reading: [
+      { title: 'Synthesis of Band-Limited Orthogonal Signals for Multichannel Data Transmission', source: 'R. W. Chang · Bell System Technical Journal', year: 1966, kind: 'Paper', href: doi('10.1002/j.1538-7305.1966.tb02435.x') },
+      { title: 'Data Transmission by Frequency-Division Multiplexing Using the Discrete Fourier Transform', source: 'S. Weinstein, P. Ebert · IEEE Trans. Communication Technology', year: 1971, kind: 'Paper', href: doi('10.1109/TCOM.1971.1090705') },
+      { title: 'The History of Orthogonal Frequency-Division Multiplexing', source: 'S. Weinstein · IEEE Communications Magazine', year: 2009, kind: 'Paper', href: doi('10.1109/MCOM.2009.5307460') },
+    ],
     sections: [
       {
         id: 'overview',
@@ -511,6 +538,10 @@ recovered_pairs = [demap(y) for y in Y]            # nearest QPSK point`,
       { label: 'Source', href: `${GITHUB}/7-segment-led`, kind: 'source' },
       { label: 'Schematic (PDF)', href: '/images/projects/seven-segment-led/schematic.pdf', kind: 'doc' },
       { label: 'Interactive BOM', href: '/images/projects/seven-segment-led/ibom.html', kind: 'bom' },
+    ],
+    reading: [
+      { title: 'IEEE 1789-2015: Recommended Practices for Modulating Current in High-Brightness LEDs for Mitigating Health Risks to Viewers', source: 'IEEE Standards Association', year: 2015, kind: 'Standard', href: doi('10.1109/IEEESTD.2015.7118618') },
+      { title: 'ESP32 Series Datasheet (strapping pins)', source: 'Espressif Systems', kind: 'Datasheet', href: 'https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf' },
     ],
     sections: [
       {
@@ -747,6 +778,10 @@ recovered_pairs = [demap(y) for y in Y]            # nearest QPSK point`,
       { label: 'Source', href: `${GITHUB}/HeartShaped_PCB_FAB`, kind: 'source' },
       { label: 'Schematic (PDF)', href: '/images/projects/heart-pcb/schematic.pdf', kind: 'doc' },
     ],
+    reading: [
+      { title: 'TLC555 LinCMOS Timer (datasheet)', source: 'Texas Instruments', kind: 'Datasheet', href: 'https://www.ti.com/lit/ds/symlink/tlc555.pdf' },
+      { title: 'IEEE 1789-2015: Modulating Current in High-Brightness LEDs', source: 'IEEE Standards Association', year: 2015, kind: 'Standard', href: doi('10.1109/IEEESTD.2015.7118618') },
+    ],
     sections: [
       {
         id: 'overview',
@@ -880,20 +915,10 @@ export type Card = {
   status?: string
   /** A result worth one line: an award, a measured number */
   highlight?: string
+  reading: Reading[]
 }
 
 const OTHER_WORK: Card[] = [
-  {
-    id: 'micromouse',
-    title: 'Micromouse Line-Maze Robot',
-    line: 'Maze-solving robot on a custom PCB, with PID motion control.',
-    category: 'robotics',
-    date: '2025-09',
-    tags: ['Arduino Nano', 'PID', 'LSRB'],
-    github: `${GITHUB}/MicroMouse-LineMaze`,
-    image: { src: '/images/MicroMouse.jpg' },
-    highlight: '1st LOCUS 2025 · 2nd Delta 5.0 · 5th Techfest IIT Bombay',
-  },
   {
     id: 'line-follower',
     title: 'Project Voyager Line Follower',
@@ -904,51 +929,10 @@ const OTHER_WORK: Card[] = [
     github: `${GITHUB}/Project_Voyager`,
     more: [{ label: 'Report', href: '/documentation-project-voyager.pdf', kind: 'pdf' }],
     image: { src: '/images/VoyagerBot2023.jpg' },
-  },
-  {
-    id: 'relay-module',
-    title: '4-Channel Relay Module',
-    line: 'Opto-isolated relay board with status LEDs and screw terminals.',
-    category: 'pcb',
-    date: '2025-10',
-    tags: ['KiCad', 'Relays', 'Opto-isolation'],
-    github: `${GITHUB}/4-RelayModulePCBDesign`,
-    image: { src: '/images/projects/relay-module/cover.webp' },
-  },
-  {
-    id: 'mosfet-driver',
-    title: 'Quad-MOSFET Motor Driver',
-    line: 'Four-channel MOSFET board for one-direction DC motors.',
-    category: 'pcb',
-    date: '2025-10',
-    tags: ['KiCad', 'MOSFET', 'Motors'],
-    github: `${GITHUB}/Unidirectional-Quad-MOSFET-Motor-Driver`,
-    image: { src: '/images/projects/mosfet-driver/cover.webp' },
-  },
-  {
-    id: 'power-monitor',
-    title: 'ESP32 Power Monitor',
-    line: 'Measures load current and power with an INA219 and reports over Wi-Fi.',
-    category: 'pcb',
-    date: '2026-06',
-    tags: ['KiCad', 'ESP32', 'INA219'],
-    github: `${GITHUB}/power-monitor`,
-    icon: Gauge,
-    status: 'Schematic stage',
-  },
-  {
-    id: 'greenhouse',
-    title: 'Solar Greenhouse Automation',
-    line: 'Solar-powered ESP32 that logs the soil and air and runs irrigation.',
-    category: 'embedded',
-    date: '2026-05',
-    tags: ['ESP32', 'BLE', 'Solar'],
-    github: `${GITHUB}/GreenHouseMonitoring`,
-    more: [
-      { label: 'PCB', href: `${GITHUB}/SolarBasedRealTimeGreenHouseAutomation`, kind: 'github' },
-      { label: 'Report', href: '/minor_project_report.pdf', kind: 'pdf' },
+    reading: [
+      { title: 'A Fuzzy Rule-Based Control System for Fast Line-Following Robots', source: 'G. Eleftheriou et al. · IEEE DCOSS', year: 2020, kind: 'Paper', href: doi('10.1109/DCOSS49796.2020.00068') },
+      { title: '3pi Robot User’s Guide — Advanced Line Following with PID Control', source: 'Pololu', kind: 'Guide', href: 'https://www.pololu.com/docs/0J21/7.c' },
     ],
-    image: { src: '/images/projects/greenhouse/cover.webp' },
   },
   {
     id: 'smart-helmet',
@@ -960,28 +944,10 @@ const OTHER_WORK: Card[] = [
     github: `${GITHUB}/SmartHelmet_Esp32_BLE`,
     more: [{ label: 'Pitch', href: '/safetron-mvp-safe-250345.pdf', kind: 'pdf' }],
     icon: HardHat,
-  },
-  {
-    id: 'cubesat',
-    title: 'Pocket CubeSat (1.5U)',
-    line: 'Stacked-PCB PocketQube with LoRa radio and solar charging.',
-    category: 'embedded',
-    date: '2026-01',
-    tags: ['KiCad', 'LoRa', 'NodeMCU'],
-    github: `${GITHUB}/pocketCubeSat_Esp32_demo`,
-    more: [{ label: 'Report', href: '/cubesat.pdf', kind: 'pdf' }],
-    icon: Satellite,
-  },
-  {
-    id: 'loranet',
-    title: 'LoRaNet',
-    line: 'Reach home internet over LoRa when cellular is down.',
-    category: 'embedded',
-    date: '2026-03',
-    tags: ['ESP32', 'LoRa', 'C/C++'],
-    github: 'https://github.com/awakesid/LoraNet',
-    icon: Radio,
-    highlight: '~3 km line-of-sight range',
+    reading: [
+      { title: 'A Survey on Fall Detection: Principles and Approaches', source: 'M. Mubashir, L. Shao, L. Seed · Neurocomputing', year: 2013, kind: 'Paper', href: doi('10.1016/j.neucom.2011.09.037') },
+      { title: 'Pulse Oximetry', source: 'A. Jubran · Critical Care', year: 2015, kind: 'Paper', href: doi('10.1186/s13054-015-0984-8') },
+    ],
   },
   {
     id: 'flappy-bird',
@@ -992,11 +958,19 @@ const OTHER_WORK: Card[] = [
     tags: ['ESP32', 'SSD1306', 'PlatformIO'],
     github: `${GITHUB}/FlappyBird`,
     more: [{ label: 'Video', href: 'https://www.instagram.com/reel/DV0zjzuk2FA/', kind: 'demo' }],
-    icon: Gamepad2,
+    image: { src: '/images/projects/flappy-bird/cover.webp' },
+    reading: [
+      { title: 'SSD1306 128×64 OLED Driver (datasheet)', source: 'Solomon Systech', kind: 'Datasheet', href: 'https://cdn-shop.adafruit.com/datasheets/SSD1306.pdf' },
+      { title: 'Fix Your Timestep!', source: 'G. Fiedler · Gaffer On Games', kind: 'Guide', href: 'https://gafferongames.com/post/fix_your_timestep/' },
+    ],
   },
 ]
 
+export const PROJECTS: Project[] = [...CORE_WRITEUPS, ...MORE_WRITEUPS]
+
 function writeupCard(p: Project): Card {
+  // cards keep the repos; schematics, BOMs and reports live in the write-up itself
+  const [repo, ...rest] = p.links.filter((l) => l.kind === 'source')
   return {
     id: p.slug,
     title: p.title,
@@ -1004,9 +978,13 @@ function writeupCard(p: Project): Card {
     category: p.category,
     date: p.date,
     tags: p.tools.slice(0, 3),
-    github: p.links.find((l) => l.kind === 'source')!.href,
+    github: repo.href,
+    more: rest.map((l) => ({ label: l.label, href: l.href, kind: 'github' as const })),
     writeup: p.slug,
+    highlight: p.highlight,
+    status: p.inProgress ? p.status : undefined,
     image: { src: p.cover.src, fit: p.cover.fit },
+    reading: p.reading,
   }
 }
 

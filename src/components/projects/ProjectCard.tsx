@@ -3,6 +3,7 @@ import Link from 'next/link'
 import type { ReactNode } from 'react'
 import { FileText, Github, PlayCircle, TrendingUp } from 'lucide-react'
 import { CATEGORIES, type Card, type CardLink } from '@/content/projects'
+import ReadingList from './ReadingList'
 
 const MORE_ICON: Record<CardLink['kind'], typeof Github> = { github: Github, pdf: FileText, demo: PlayCircle }
 
@@ -95,6 +96,13 @@ export default function ProjectCard({ card, badges }: { card: Card; badges?: Rea
             </li>
           ))}
         </ul>
+
+        <details className="pj-card__reading">
+          <summary>
+            Further reading <span className="pj-count">{card.reading.length}</span>
+          </summary>
+          <ReadingList items={card.reading} compact />
+        </details>
 
         <div className="pj-card__foot">
           {card.writeup && (
