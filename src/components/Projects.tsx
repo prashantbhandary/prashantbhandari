@@ -1,8 +1,10 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 import {
   ArrowUpRight,
+  NotebookPen,
   Github,
   FileText,
   TrendingUp,
@@ -365,6 +367,14 @@ export default function Projects() {
               <WorkRow key={project.title} project={project} index={i + featured.length + 1} />
             ))}
           </div>
+        </Reveal>
+
+        <Reveal className="mt-8">
+          <Link href="/projects" className="btn btn--outline">
+            <NotebookPen size={16} aria-hidden="true" />
+            Read the full project write-ups
+            <ArrowUpRight size={14} aria-hidden="true" />
+          </Link>
         </Reveal>
       </div>
     </section>
