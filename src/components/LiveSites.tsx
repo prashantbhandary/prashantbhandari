@@ -72,7 +72,7 @@ export default function LiveSites() {
             </span>
           </li>
         ))}
-  </ul>
-</section>
+      </ul>
+    </section>
   )
 }

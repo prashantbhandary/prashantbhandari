@@ -8,29 +8,33 @@
  */
 
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
+// Fonts are bundled (Latin subset, variable weight) so the build never has to
+// reach Google Fonts — a failed fetch there used to fail the whole deploy.
+
 // Body copy
-const inter = Inter({
-  subsets: ["latin"],
+const inter = localFont({
+  src: "./fonts/inter-latin.woff2",
+  weight: "100 900",
   display: "swap",
   variable: "--font-inter",
 });
 
 // Headlines — a grotesk with enough character to not read as a template
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
+const spaceGrotesk = localFont({
+  src: "./fonts/space-grotesk-latin.woff2",
+  weight: "300 700",
   display: "swap",
-  weight: ["500", "600", "700"],
   variable: "--font-space-grotesk",
 });
 
 // Metadata, tags, periods — the engineering register of the page
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
+const jetbrainsMono = localFont({
+  src: "./fonts/jetbrains-mono-latin.woff2",
+  weight: "100 800",
   display: "swap",
-  weight: ["400", "500"],
   variable: "--font-jetbrains-mono",
 });
 
