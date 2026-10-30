@@ -2289,3 +2289,24 @@ p { text-wrap: pretty; }
 
 .live-row__actions { display: flex; justify-content: flex-end; gap: 0.25rem; min-width: 4.25rem; }
 .live-row .work-row__arrow:hover { color: var(--ink); background: var(--accent-soft); }
+
+/* contact form validation */
+.field__error {
+  font-size: 0.8125rem;
+  color: #dc2626;
+}
+
+.field input[aria-invalid='true'],
+.field textarea[aria-invalid='true'] { border-color: #dc2626; }
+
+.field input[aria-invalid='true']:focus,
+.field textarea[aria-invalid='true']:focus { box-shadow: 0 0 0 3px rgb(220 38 38 / 0.15); }
+
+/* honeypot: off-screen rather than display:none, which some bots skip */
+.hp-field {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}

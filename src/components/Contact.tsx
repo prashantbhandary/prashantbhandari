@@ -1,72 +1,116 @@
 'use client'
 
-import { useState } from 'react'
-import emailjs from '@emailjs/browser'
+import { useEffect, useRef, useState } from 'react'
 import { Mail, Phone, MapPin, Send, Loader2, Linkedin, Github, Twitter, Instagram } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Reveal, RevealGroup, RevealItem } from './motion/Motion'
+import { checkFields, validateContact, type ContactErrors, type ContactForm } from '@/lib/contact-validation'
 
 const CONTACT_EMAIL = 'info@bhandari-prashant.com.np'
 
-// EmailJS IDs are public (they ship to the browser), so they live here rather than
-// only in .env.local, which the Cloudflare Pages build never sees
-const EMAILJS = {
-  service: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'service_vqzpcsn',
-  template: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'template_pmdilpp',
-  publicKey: process.env.NEXT_PUBLIC_EMAILJS_USER_ID || '90R1DZh0HH_ycIDrs',
+// Web3Forms emails each submission to the address the key was created with.
+// The key is public by design (it ships to the browser), so it lives here.
+// Get one at https://web3forms.com
+const WEB3FORMS_KEY = '7b15b754-c79d-4604-aa8a-20730f05526e'
+
+const EMPTY: ContactForm = { name: '', email: '', subject: '', message: '' }
+/** A person takes longer than this to fill the form; scripts don't */
+const MIN_FILL_MS = 3000
+/** One message a minute per browser */
+const COOLDOWN_MS = 60_000
+const LAST_SENT_KEY = 'contact:lastSent'
+
+type Status = 'idle' | 'checking' | 'sending' | 'success' | 'invalid' | 'cooldown' | 'error'
+
+function lastSent() {
+  try {
+    return Number(localStorage.getItem(LAST_SENT_KEY)) || 0
+  } catch {
+    return 0
+  }
 }
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [status, setStatus] = useState<'idle' | 'success' | 'invalid' | 'error'>('idle')
+  const [formData, setFormData] = useState<ContactForm>(EMPTY)
+  const [errors, setErrors] = useState<ContactErrors>({})
+  const [status, setStatus] = useState<Status>('idle')
+  const [trap, setTrap] = useState('')
+  const openedAt = useRef(0)
+  const formRef = useRef<HTMLFormElement>(null)
+  const busy = status === 'checking' || status === 'sending'
+
+  useEffect(() => {
+    openedAt.current = Date.now()
+  }, [])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    })
+    const field = e.target.name as keyof ContactForm
+    setFormData({ ...formData, [field]: e.target.value })
+    if (errors[field]) setErrors({ ...errors, [field]: undefined })
+  }
+
+  // Format errors show as soon as a field is left, not only on submit
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const field = e.target.name as keyof ContactForm
+    if (!formData[field].trim()) return
+    setErrors({ ...errors, [field]: checkFields(formData)[field] })
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
-    const { name, email, subject, message } = formData
-    if (!name || !email || !subject || !message) {
-      setStatus('invalid')
-      return
-    }
+    if (busy) return
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(email)) {
-      setStatus('invalid')
-      return
-    }
-
-    setIsSubmitting(true)
-    setStatus('idle')
-
-    const templateParams = {
-      from_name: name,
-      from_email: email,
-      subject: subject,
-      message: message,
-      to_email: CONTACT_EMAIL
-    }
-
-    try {
-      await emailjs.send(EMAILJS.service, EMAILJS.template, templateParams, { publicKey: EMAILJS.publicKey })
+    // Bots fill the hidden field or submit instantly: act as if it worked, send nothing
+    if (trap || Date.now() - openedAt.current < MIN_FILL_MS) {
       setStatus('success')
-      setFormData({ name: '', email: '', subject: '', message: '' })
+      setFormData(EMPTY)
+      return
+    }
+
+    if (Date.now() - lastSent() < COOLDOWN_MS) {
+      setStatus('cooldown')
+      return
+    }
+
+    setStatus('checking')
+    const found = await validateContact(formData)
+    setErrors(found)
+    const firstBad = (Object.keys(EMPTY) as (keyof ContactForm)[]).find((f) => found[f])
+    if (firstBad) {
+      setStatus('invalid')
+      formRef.current?.querySelector<HTMLElement>(`#${firstBad}`)?.focus()
+      return
+    }
+
+    setStatus('sending')
+    try {
+      // Plain form data keeps this a "simple" request: no CORS preflight to fail
+      const body = new FormData()
+      body.append('access_key', WEB3FORMS_KEY)
+      body.append('from_name', 'bhandari-prashant.com.np')
+      body.append('subject', `Website: ${formData.subject.trim()}`)
+      body.append('name', formData.name.trim())
+      body.append('email', formData.email.trim())
+      body.append('replyto', formData.email.trim())
+      body.append('message', formData.message.trim())
+      body.append('botcheck', '') // Web3Forms' own honeypot: rejected unless empty
+
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body,
+      })
+      const data = await res.json()
+      if (!data.success) throw new Error(data.message)
+      try {
+        localStorage.setItem(LAST_SENT_KEY, String(Date.now()))
+      } catch {
+        // storage blocked: no cooldown, still sent
+      }
+      setStatus('success')
+      setFormData(EMPTY)
     } catch {
       setStatus('error')
-    } finally {
-      setIsSubmitting(false)
     }
   }
 
@@ -92,10 +136,27 @@ export default function Contact() {
   ]
 
   const fields = [
-    { name: 'name', label: 'Name', type: 'text', placeholder: 'Your name', value: formData.name },
-    { name: 'email', label: 'Email', type: 'email', placeholder: 'you@example.com', value: formData.email },
-    { name: 'subject', label: 'Subject', type: 'text', placeholder: "What's this about?", value: formData.subject },
-  ]
+    { name: 'name', label: 'Name', type: 'text', placeholder: 'Your name', autoComplete: 'name', maxLength: 80 },
+    { name: 'email', label: 'Email', type: 'email', placeholder: 'you@example.com', autoComplete: 'email', maxLength: 254 },
+    { name: 'subject', label: 'Subject', type: 'text', placeholder: "What's this about?", autoComplete: 'off', maxLength: 120 },
+  ] as const
+
+  const fieldProps = (name: keyof ContactForm) => ({
+    id: name,
+    name,
+    value: formData[name],
+    onChange: handleChange,
+    onBlur: handleBlur,
+    'aria-invalid': Boolean(errors[name]),
+    'aria-describedby': errors[name] ? `${name}-error` : undefined,
+  })
+
+  const fieldError = (name: keyof ContactForm) =>
+    errors[name] && (
+      <p id={`${name}-error`} className="field__error">
+        {errors[name]}
+      </p>
+    )
 
   return (
     <section id="contact" className="section section--alt" aria-labelledby="contact-heading">
@@ -151,38 +212,50 @@ export default function Contact() {
 
           {/* Form */}
           <RevealItem className="card form-card">
-            <form onSubmit={handleSubmit} className="grid gap-4" aria-label="Contact form">
+            <form ref={formRef} onSubmit={handleSubmit} className="grid gap-4" aria-label="Contact form" noValidate>
               {fields.map((field) => (
                 <div key={field.name} className="field">
                   <label htmlFor={field.name}>{field.label}</label>
                   <input
-                    id={field.name}
-                    name={field.name}
+                    {...fieldProps(field.name)}
                     type={field.type}
-                    value={field.value}
-                    onChange={handleChange}
                     placeholder={field.placeholder}
+                    autoComplete={field.autoComplete}
+                    maxLength={field.maxLength}
                     required
-                    autoComplete={field.name === 'email' ? 'email' : field.name === 'name' ? 'name' : 'off'}
                   />
+                  {fieldError(field.name)}
                 </div>
               ))}
 
               <div className="field">
                 <label htmlFor="message">Message</label>
                 <textarea
-                  id="message"
-                  name="message"
+                  {...fieldProps('message')}
                   rows={5}
-                  value={formData.message}
-                  onChange={handleChange}
+                  maxLength={5000}
                   placeholder="Tell me about the project…"
                   required
+                />
+                {fieldError('message')}
+              </div>
+
+              {/* Hidden from people, irresistible to form-filling bots */}
+              <div className="hp-field" aria-hidden="true">
+                <label htmlFor="website">Website</label>
+                <input
+                  id="website"
+                  name="website"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={trap}
+                  onChange={(e) => setTrap(e.target.value)}
                 />
               </div>
 
               <AnimatePresence mode="wait">
-                {status !== 'idle' && (
+                {(status === 'success' || status === 'invalid' || status === 'cooldown' || status === 'error') && (
                   <motion.p
                     key={status}
                     className={`note ${status === 'success' ? 'note--ok' : 'note--bad'}`}
@@ -193,7 +266,8 @@ export default function Contact() {
                     transition={{ duration: 0.25, ease: [0.22, 0.61, 0.36, 1] }}
                   >
                     {status === 'success' && "Thanks — your message is on its way. I'll reply soon."}
-                    {status === 'invalid' && 'Please fill in every field with a valid email address.'}
+                    {status === 'invalid' && 'Please fix the highlighted fields.'}
+                    {status === 'cooldown' && 'Message already sent. Please wait a minute before sending another.'}
                     {status === 'error' && (
                       <>
                         That didn&apos;t send.{' '}
@@ -207,11 +281,11 @@ export default function Contact() {
                 )}
               </AnimatePresence>
 
-              <button type="submit" className="btn btn--primary w-full" disabled={isSubmitting}>
-                {isSubmitting ? (
+              <button type="submit" className="btn btn--primary w-full" disabled={busy}>
+                {busy ? (
                   <>
                     <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
-                    Sending…
+                    {status === 'checking' ? 'Checking your email…' : 'Sending…'}
                   </>
                 ) : (
                   <>

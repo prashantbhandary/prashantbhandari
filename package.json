@@ -17,7 +17,6 @@
     "deploy:build": "npm run lint && npm run type-check && npm run build:production"
   },
   "dependencies": {
-    "@emailjs/browser": "^4.4.1",
     "@next/font": "^14.2.15",
     "@splinetool/react-spline": "^4.1.0",
     "@splinetool/runtime": "^1.12.94",
