@@ -15,7 +15,7 @@ export function CardCover({ card, sizes }: { card: Card; sizes: string }) {
     return (
       <Image
         src={card.image.src}
-        alt=""
+        alt={card.title}
         fill
         sizes={sizes}
         loading="lazy"

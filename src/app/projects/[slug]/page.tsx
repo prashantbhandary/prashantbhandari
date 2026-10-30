@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 
   const url = `${SITE}/projects/${project.slug}`
   return {
-    title: `${project.title} | Prashant Bhandari`,
+    title: project.title,
     description: project.summary,
     keywords: [...project.tools, project.kind, 'Prashant Bhandari'],
     alternates: { canonical: url },
@@ -34,6 +34,8 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       url,
       title: project.title,
       description: project.summary,
+      modifiedTime: `${project.date}-01`,
+      authors: [SITE],
       images: [{ url: `${SITE}${project.cover.src}`, width: project.cover.width, height: project.cover.height, alt: project.cover.alt }],
     },
     twitter: {
@@ -49,16 +51,35 @@ export default async function ProjectPage({ params }: Params) {
   const project = getProject((await params).slug)
   if (!project) notFound()
 
+  const url = `${SITE}/projects/${project.slug}`
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'TechArticle',
-    headline: project.title,
-    description: project.summary,
-    image: `${SITE}${project.cover.src}`,
-    dateModified: `${project.date}-01`,
-    url: `${SITE}/projects/${project.slug}`,
-    keywords: project.tools.join(', '),
-    author: { '@type': 'Person', name: 'Prashant Bhandari', url: SITE },
+    '@graph': [
+      {
+        '@type': 'TechArticle',
+        headline: project.title,
+        description: project.summary,
+        image: `${SITE}${project.cover.src}`,
+        datePublished: `${project.date}-01`,
+        dateModified: `${project.date}-01`,
+        url,
+        mainEntityOfPage: url,
+        keywords: project.tools.join(', '),
+        about: project.kind,
+        author: { '@id': `${SITE}/#person` },
+        publisher: { '@id': `${SITE}/#person` },
+        isPartOf: { '@id': `${SITE}/#website` },
+        citation: project.reading.map((r) => r.href),
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE },
+          { '@type': 'ListItem', position: 2, name: 'Projects', item: `${SITE}/projects` },
+          { '@type': 'ListItem', position: 3, name: project.title, item: url },
+        ],
+      },
+    ],
   }
 
   return (

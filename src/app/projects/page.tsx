@@ -9,18 +9,18 @@ import { SORTED_PROJECTS } from '@/content/projects'
 
 const PAGE_URL = 'https://bhandari-prashant.com.np/projects'
 
+const DESCRIPTION =
+  'Robots, PCBs, firmware and signal-processing experiments by Prashant Bhandari, with write-ups covering how each one works, its design files and measured results.'
+
+// A page that sets its own Open Graph fields drops the default image, so name it again
+const SHARE_IMAGE = ['/opengraph-image']
+
 export const metadata: Metadata = {
-  title: 'Projects | Prashant Bhandari',
-  description:
-    'Write-ups of PCB designs, embedded firmware and communication-systems simulations by Prashant Bhandari: how each project works, its files, and its results.',
+  title: 'Projects',
+  description: DESCRIPTION,
   alternates: { canonical: PAGE_URL },
-  openGraph: {
-    type: 'website',
-    url: PAGE_URL,
-    title: 'Projects | Prashant Bhandari',
-    description: 'PCB design, embedded systems and signal-processing project write-ups.',
-    images: [{ url: `https://bhandari-prashant.com.np${SORTED_PROJECTS[0].cover.src}` }],
-  },
+  openGraph: { type: 'website', url: PAGE_URL, title: 'Projects | Prashant Bhandari', description: DESCRIPTION, images: SHARE_IMAGE },
+  twitter: { images: SHARE_IMAGE, title: 'Projects | Prashant Bhandari', description: DESCRIPTION },
 }
 
 const jsonLd = {
@@ -28,6 +28,8 @@ const jsonLd = {
   '@type': 'CollectionPage',
   name: 'Projects',
   url: PAGE_URL,
+  description: DESCRIPTION,
+  author: { '@id': 'https://bhandari-prashant.com.np/#person' },
   hasPart: SORTED_PROJECTS.map((p) => ({
     '@type': 'TechArticle',
     headline: p.title,

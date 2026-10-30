@@ -10,6 +10,11 @@ import Footer from '@/components/Footer'
 import { ScrollProgress } from '@/components/motion/Motion'
 import MotionProvider from '@/components/motion/MotionProvider'
 import Chatbot from '@/components/Chatbot'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  alternates: { canonical: '/' },
+}
 
 export default function Home() {
   return (

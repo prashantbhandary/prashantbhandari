@@ -7,7 +7,7 @@
  *  - WORK: both merged into one card list, which every listing reads.
  *
  * Every project must have a GitHub link. Images go in
- * public/images/projects/<id>/. New write-ups also go in public/sitemap.xml.
+ * public/images/projects/<id>/. The sitemap is built from this list (app/sitemap.ts).
  *
  * Paragraph text understands `code` and **bold**. A `tree` block is written
  * as an indented listing (2 spaces per level) with optional `# notes`.

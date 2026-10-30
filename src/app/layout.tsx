@@ -38,58 +38,61 @@ const jetbrainsMono = localFont({
   variable: "--font-jetbrains-mono",
 });
 
+const SITE = "https://bhandari-prashant.com.np";
+const DESCRIPTION =
+  "Electronics engineer in Pokhara, Nepal. I design PCBs and firmware for robots, IoT devices and satellite subsystems. Seeking a robotics PhD for Fall 2027.";
+
+// Each page sets its own title, description and canonical; these are the defaults.
+// The share image comes from app/opengraph-image.tsx.
 export const metadata: Metadata = {
-  title: "Prashant Bhandari | Electronics Engineer & Robotics Developer",
-  description: "Portfolio of Prashant Bhandari — Electronics Engineering student, robotics competition winner, PCB designer, and embedded systems developer from Pokhara, Nepal.",
-  keywords: "Prashant Bhandari, electronics engineering student, Yarsa Tech intern, robotics competition winner, Battle For Speed 2023, Delta Robothon, Pokhara Nepal, Pashchimanchal Campus, Arduino ESP32, PCB design, embedded systems, micromouse robot, line follower bot, autonomous boat, KiCad, C++ Python, robotics club electronics and software lead, PhD applicant robotics, electronics intern Nepal, competition robotics, maze solving robot, QTR sensors PID control",
-  authors: [{ name: "Prashant Bhandari", url: "https://bhandari-prashant.com.np" }],
+  metadataBase: new URL(SITE),
+  title: {
+    default: "Prashant Bhandari — Electronics Engineer, PCB Design & Robotics",
+    template: "%s | Prashant Bhandari",
+  },
+  description: DESCRIPTION,
+  keywords: [
+    "Prashant Bhandari",
+    "electronics engineer Nepal",
+    "PCB design",
+    "KiCad",
+    "embedded systems",
+    "firmware",
+    "robotics",
+    "micromouse",
+    "CubeSat",
+    "PocketQube",
+    "LoRa",
+    "OFDM",
+    "Pokhara",
+    "robotics PhD applicant",
+  ],
+  authors: [{ name: "Prashant Bhandari", url: SITE }],
   creator: "Prashant Bhandari",
-  publisher: "Prashant Bhandari",
   robots: {
     index: true,
     follow: true,
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://bhandari-prashant.com.np",
-    siteName: "Prashant Bhandari - Portfolio",
-    title: "Prashant Bhandari | Electronics Engineer & Robotics Developer",
-    description: "Portfolio of Prashant Bhandari — Electronics Engineering student, robotics competition winner, PCB designer, and embedded systems developer from Pokhara, Nepal.",
-    images: [
-      {
-        url: "https://bhandari-prashant.com.np/images/PrashantBhandari.png",
-        width: 1200,
-        height: 630,
-        alt: "Prashant Bhandari - Electronics Engineer & Robotics Expert",
-        type: "image/png",
-      },
-      {
-        url: "https://bhandari-prashant.com.np/images/mm.jpg",
-        width: 800,
-        height: 600,
-        alt: "Micromouse Robot Project by Prashant Bhandari",
-        type: "image/jpeg",
-      },
-    ],
+    siteName: "Prashant Bhandari",
+    title: "Prashant Bhandari — Electronics Engineer, PCB Design & Robotics",
+    description: DESCRIPTION,
   },
   twitter: {
     card: "summary_large_image",
     site: "@santhprashant",
     creator: "@santhprashant",
-    title: "Prashant Bhandari | Electronics Engineer & Robotics Developer",
-    description: "Portfolio of Prashant Bhandari — Electronics Engineering student, robotics competition winner, PCB designer, and embedded systems developer from Pokhara, Nepal.",
-    images: ["https://bhandari-prashant.com.np/images/PrashantBhandari.png"],
-  },
-  alternates: {
-    canonical: "https://bhandari-prashant.com.np",
+    title: "Prashant Bhandari — Electronics Engineer, PCB Design & Robotics",
+    description: DESCRIPTION,
   },
   manifest: "/manifest.json",
   icons: {
@@ -112,6 +115,78 @@ export const metadata: Metadata = {
   },
 };
 
+// One graph for the whole site: who the person is, and that this site is theirs
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": `${SITE}/#person`,
+      name: "Prashant Bhandari",
+      url: SITE,
+      image: { "@type": "ImageObject", url: `${SITE}/images/PrashantBhandari.png`, width: 550, height: 550 },
+      description:
+        "Electronics engineering student in Pokhara, Nepal who designs PCBs and firmware for robots, IoT devices and satellite subsystems. Seeking a robotics PhD position for Fall 2027.",
+      jobTitle: "Electronics Engineer",
+      knowsAbout: [
+        "PCB design",
+        "Embedded systems",
+        "Firmware",
+        "Robotics",
+        "Mobile robot control",
+        "Small satellite electronics",
+        "Low-power wireless sensing",
+        "LoRa",
+        "OFDM",
+        "KiCad",
+        "STM32",
+        "ESP32",
+        "FreeRTOS",
+        "C/C++",
+        "Python",
+      ],
+      alumniOf: {
+        "@type": "EducationalOrganization",
+        name: "Pashchimanchal Campus, Institute of Engineering",
+        address: { "@type": "PostalAddress", addressLocality: "Pokhara", addressCountry: "NP" },
+      },
+      memberOf: {
+        "@type": "Organization",
+        name: "Robotics Club, Pashchimanchal Campus",
+        url: "https://www.robotics.wrc.edu.np",
+      },
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Pokhara",
+        addressRegion: "Gandaki Province",
+        addressCountry: "NP",
+      },
+      email: "mailto:info@bhandari-prashant.com.np",
+      award: [
+        "1st Position, LOCUS 2025 Micromouse Competition",
+        "2nd Position, Delta 5.0 Micromouse Competition",
+        "5th Position, Techfest IIT Bombay Micromouse Competition",
+        "1st Runner-Up, Autonomous Boat Racing Competition",
+      ],
+      sameAs: [
+        "https://www.linkedin.com/in/prashantbdri",
+        "https://github.com/prashantbhandary",
+        "https://twitter.com/santhprashant",
+        "https://www.instagram.com/_prashant.08/",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE}/#website`,
+      url: SITE,
+      name: "Prashant Bhandari",
+      description: DESCRIPTION,
+      inLanguage: "en",
+      publisher: { "@id": `${SITE}/#person` },
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -123,8 +198,6 @@ export default function RootLayout({
       className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
     >
       <head>
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-        <meta name="googlebot" content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1" />
         <meta name="google-adsense-account" content="ca-pub-7919679791683906" />
         {/*
           Framer Motion pre-renders its scroll reveals with inline
@@ -134,117 +207,7 @@ export default function RootLayout({
         <noscript>
           <style>{`[style*="opacity:0"]{opacity:1!important;transform:none!important}`}</style>
         </noscript>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              "name": "Prashant Bhandari",
-              "@id": "https://bhandari-prashant.com.np/#person",
-              "url": "https://bhandari-prashant.com.np",
-              "image": {
-                "@type": "ImageObject",
-                "url": "https://bhandari-prashant.com.np/images/PrashantBhandari.png",
-                "width": 400,
-                "height": 400
-              },
-              "description": "Electronics Engineering Student from Pokhara, Nepal and former Electronics Engineer Intern at Yarsa Tech. Competition winner in robotics (Battle For Speed 2023, Delta Robothon Runner-Up), studying at Pashchimanchal Campus.",
-              "jobTitle": ["Electronics Engineering Student", "Electronics Engineer Intern"],
-              "hasOccupation": {
-                "@type": "Occupation",
-                "name": "Electronics Engineer",
-                "occupationLocation": {
-                  "@type": "City",
-                  "name": "Pokhara"
-                }
-              },
-              "knowsAbout": ["Electronics Engineering", "Robotics", "Embedded Systems", "PCB Design", "Arduino", "ESP32", "Raspberry Pi", "C/C++", "Python", "JavaScript", "Microcontrollers"],
-              "sameAs": [
-                "https://www.linkedin.com/in/prashantbdri",
-                "https://github.com/prashantbhandary",
-                "https://twitter.com/santhprashant",
-                "https://www.instagram.com/_prashant.08/"
-              ],
-              "worksFor": [
-                {
-                  "@type": "Organization",
-                  "name": "YarsaTech",
-                  "url": "https://yarsa.tech",
-                  "location": {
-                    "@type": "Place",
-                    "name": "Pokhara, Nepal"
-                  }
-                }
-              ],
-              "memberOf": {
-                "@type": "Organization",
-                "name": "Robotics Club Pashchimanchal Campus",
-                "description": "Electronics and Software Lead leading robotics initiatives and technical training",
-                "url": "https://www.robotics.wrc.edu.np"
-              },
-              "alumniOf": {
-                "@type": "EducationalOrganization",
-                "name": "Pashchimanchal Campus, Pokhara",
-                "description": "Electronics, Communication and Information Engineering (2023-Present)"
-              },
-              "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Pokhara",
-                "addressRegion": "Gandaki Province",
-                "addressCountry": "NP"
-              },
-              "email": "info@bhandari-prashant.com.np",
-              "telephone": "+977-9867756915",
-              "award": [
-                "1st Position - LOCUS 2025 Micromouse Competition",
-                "2nd Position - Delta 5.0 Micromouse Competition", 
-                "5th Position - Techfest IIT Bombay Micromouse Competition",
-                "1st Runner-Up - Autonomous Boat Racing Competition"
-              ]
-            })
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              "@id": "https://bhandari-prashant.com.np/#website",
-              "url": "https://bhandari-prashant.com.np",
-              "name": "Prashant Bhandari - Electronics Engineer & Robotics Expert",
-              "description": "Portfolio website of Prashant Bhandari showcasing expertise in electronics engineering, robotics, and embedded systems.",
-              "publisher": {
-                "@type": "Person",
-                "name": "Prashant Bhandari"
-              },
-              "potentialAction": {
-                "@type": "SearchAction",
-                "target": "https://bhandari-prashant.com.np/?s={search_term_string}",
-                "query-input": "required name=search_term_string"
-              }
-            })
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              "name": "Prashant Bhandari Portfolio",
-              "url": "https://bhandari-prashant.com.np",
-              "logo": "https://bhandari-prashant.com.np/images/PrashantBhandari.png",
-              "contactPoint": {
-                "@type": "ContactPoint",
-                "telephone": "+977-9867756915",
-                "contactType": "Customer Service",
-                "email": "info@bhandari-prashant.com.np"
-              }
-            })
-          }}
-        />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
       <body className="relative overflow-x-hidden">
         <a href="#main-content" className="sr-only sr-only-focusable">
