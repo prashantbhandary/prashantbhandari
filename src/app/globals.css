@@ -2245,3 +2245,47 @@ p { text-wrap: pretty; }
 }
 
 .interest__evidence a:hover { background: #e2e5ff; }
+
+/* --- live web apps and sites: kept quiet, below the main work --- */
+.live-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.375rem 0.875rem;
+  margin-top: 1.5rem;
+  font-size: 0.875rem;
+  color: var(--ink-3);
+}
+
+.live-line a {
+  color: var(--ink-2);
+  text-decoration: underline;
+  text-decoration-color: var(--line);
+  text-underline-offset: 3px;
+  transition: color var(--t-fast) var(--ease), text-decoration-color var(--t-fast) var(--ease);
+}
+
+.live-line a:hover { color: var(--ink); text-decoration-color: currentColor; }
+
+
+.live-sites {
+  margin-top: 4rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--line);
+  scroll-margin-top: 6rem;
+}
+
+
+
+.live-row__link { text-decoration: none; }
+.live-row__link:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+.live-row__host {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-4);
+  white-space: nowrap;
+}
+
+.live-row__actions { display: flex; justify-content: flex-end; gap: 0.25rem; min-width: 4.25rem; }
+.live-row .work-row__arrow:hover { color: var(--ink); background: var(--accent-soft); }

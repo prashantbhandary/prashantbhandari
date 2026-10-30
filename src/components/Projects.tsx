@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { ArrowRight, ArrowUpRight } from 'lucide-react'
 import { motion } from 'framer-motion'
 import CertificateBadge from './CertificateBadge'
+import { LiveSitesLine } from './LiveSites'
 import ProjectCard, { cardHref } from './projects/ProjectCard'
 import { Reveal, RevealGroup, RevealItem } from './motion/Motion'
 import { WORK, getCard, type Card } from '@/content/projects'
@@ -147,6 +148,7 @@ export default function Projects() {
             See all {WORK.length} projects
             <ArrowRight size={16} aria-hidden="true" />
           </Link>
+          <LiveSitesLine />
         </Reveal>
       </div>
     </section>

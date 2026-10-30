@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { CATEGORIES, WORK, type Category } from '@/content/projects'
 import ProjectCard from './ProjectCard'
 import { Reveal } from '../motion/Motion'
+import LiveSites from '../LiveSites'
 
 type Filter = 'all' | Category
 
@@ -73,6 +74,8 @@ export default function ProjectsIndex() {
             </motion.section>
           ))}
         </AnimatePresence>
+
+        <LiveSites />
       </div>
     </section>
   )

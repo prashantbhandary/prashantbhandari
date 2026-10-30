@@ -6,6 +6,16 @@ import { Mail, Phone, MapPin, Send, Loader2, Linkedin, Github, Twitter, Instagra
 import { AnimatePresence, motion } from 'framer-motion'
 import { Reveal, RevealGroup, RevealItem } from './motion/Motion'
 
+const CONTACT_EMAIL = 'info@bhandari-prashant.com.np'
+
+// EmailJS IDs are public (they ship to the browser), so they live here rather than
+// only in .env.local, which the Cloudflare Pages build never sees
+const EMAILJS = {
+  service: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'service_vqzpcsn',
+  template: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'template_pmdilpp',
+  publicKey: process.env.NEXT_PUBLIC_EMAILJS_USER_ID || '90R1DZh0HH_ycIDrs',
+}
+
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
@@ -14,7 +24,7 @@ export default function Contact() {
     message: ''
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [status, setStatus] = useState<'idle' | 'success' | 'invalid' | 'error'>('idle')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -28,40 +38,29 @@ export default function Contact() {
     
     const { name, email, subject, message } = formData
     if (!name || !email || !subject || !message) {
-      setStatus('error')
+      setStatus('invalid')
       return
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(email)) {
-      setStatus('error')
+      setStatus('invalid')
       return
     }
 
     setIsSubmitting(true)
     setStatus('idle')
-    
-    const serviceID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID
-    const templateID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
-    const userID = process.env.NEXT_PUBLIC_EMAILJS_USER_ID
-    const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "info@bhandari-prashant.com.np"
-    
-    if (!serviceID || !templateID || !userID) {
-      setStatus('error')
-      setIsSubmitting(false)
-      return
-    }
-    
+
     const templateParams = {
       from_name: name,
       from_email: email,
       subject: subject,
       message: message,
-      to_email: contactEmail
+      to_email: CONTACT_EMAIL
     }
 
     try {
-      await emailjs.send(serviceID, templateID, templateParams, userID)
+      await emailjs.send(EMAILJS.service, EMAILJS.template, templateParams, { publicKey: EMAILJS.publicKey })
       setStatus('success')
       setFormData({ name: '', email: '', subject: '', message: '' })
     } catch {
@@ -71,8 +70,16 @@ export default function Contact() {
     }
   }
 
+  // Fallback when sending fails: opens the visitor's mail app with the message filled in
+  const mailtoHref = `mailto:${CONTACT_EMAIL}?${new URLSearchParams({
+    subject: formData.subject,
+    body: `${formData.message}\n\n— ${formData.name}`,
+  })
+    .toString()
+    .replace(/\+/g, '%20')}`
+
   const contactRows = [
-    { icon: Mail, label: 'Email', value: 'info@bhandari-prashant.com.np', href: 'mailto:info@bhandari-prashant.com.np' },
+    { icon: Mail, label: 'Email', value: CONTACT_EMAIL, href: `mailto:${CONTACT_EMAIL}` },
     { icon: Phone, label: 'Phone', value: '+977 9867756915', href: 'tel:+9779867756915' },
     { icon: MapPin, label: 'Location', value: 'Pokhara, Nepal', href: undefined },
   ]
@@ -185,9 +192,17 @@ export default function Contact() {
                     exit={{ opacity: 0, height: 0 }}
                     transition={{ duration: 0.25, ease: [0.22, 0.61, 0.36, 1] }}
                   >
-                    {status === 'success'
-                      ? "Thanks — your message is on its way. I'll reply soon."
-                      : "That didn't send. Check the fields and try again, or email me directly."}
+                    {status === 'success' && "Thanks — your message is on its way. I'll reply soon."}
+                    {status === 'invalid' && 'Please fill in every field with a valid email address.'}
+                    {status === 'error' && (
+                      <>
+                        That didn&apos;t send.{' '}
+                        <a href={mailtoHref} className="underline font-medium">
+                          Send it from your email app instead
+                        </a>{' '}
+                        — your message is already filled in.
+                      </>
+                    )}
                   </motion.p>
                 )}
               </AnimatePresence>
