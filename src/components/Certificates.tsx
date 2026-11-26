@@ -80,6 +80,17 @@ const certificates: Certificate[] = [
     organization: 'Robotics Club, Pashchimanchal Campus · 20th Committee',
   },
   {
+    id: 'general-member',
+    title: 'General Member Certification',
+    description:
+      'Official membership certification recognizing active participation and contribution to the robotics club activities.',
+    image: '/images/GeneralMemberCertification.png',
+    alt: 'Robotics Club, Pashchimanchal Campus Certificate of Appreciation presented to Prashant Bhandari as General Member of the 19th Committee',
+    category: 'leadership',
+    date: 'March 2024 - March 2025',
+    organization: 'Robotics Club, Pashchimanchal Campus · 19th Committee',
+  },
+  {
     id: 'yarsa-tech-experience',
     title: 'Yarsa Tech Experience Certificate',
     description:
@@ -138,16 +149,6 @@ const certificates: Certificate[] = [
     category: 'workshop',
     date: '2024',
     organization: 'Lab448',
-  },
-  {
-    id: 'general-member',
-    title: 'General Member Certification',
-    description:
-      'Official membership certification recognizing active participation and contribution to the robotics club activities.',
-    image: '/images/GeneralMemberCertification.png',
-    category: 'experience',
-    date: 'March 2024 - March 2025',
-    organization: 'Robotics Club',
   },
   {
     id: 'battle-for-speed',
