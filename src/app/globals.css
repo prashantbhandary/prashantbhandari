@@ -460,7 +460,7 @@ p { text-wrap: pretty; }
   background: var(--surface-sunk);
   border: 1px solid var(--line);
   font-family: var(--font-mono);
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   color: var(--ink-3);
   white-space: nowrap;
 }
@@ -946,10 +946,30 @@ p { text-wrap: pretty; }
 
 .xp__period {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--ink-4);
+  font-size: 0.8125rem;
+  color: var(--ink-2);
   white-space: nowrap;
+  padding: 0.125rem 0.5rem;
+  border-radius: var(--r-xs);
+  background: var(--surface-sunk);
+  border: 1px solid var(--line);
 }
+
+/* Experience is split into two labelled lists */
+.xp-group + .xp-group { margin-top: clamp(2.5rem, 5vw, 3.5rem); }
+
+.xp-group__title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+.xp-group__title::after { content: ''; flex: 1; height: 1px; background: var(--line); }
 
 .xp__desc { margin-top: 0.75rem; font-size: 0.9375rem; color: var(--ink-3); line-height: 1.65; max-width: 60ch; }
 
@@ -958,16 +978,13 @@ p { text-wrap: pretty; }
   display: grid;
   gap: 0.5rem;
   list-style: none;
-}
-
-@media (min-width: 820px) {
-  .xp__list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem 1.5rem; }
+  max-width: 68ch;
 }
 
 .xp__list li {
   position: relative;
   padding-left: 1.125rem;
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   line-height: 1.6;
   color: var(--ink-3);
 }
@@ -2336,8 +2353,6 @@ p { text-wrap: pretty; }
 .side-work__inner {
   display: grid;
   gap: 1.5rem;
-  padding-bottom: clamp(2.5rem, 5vw, 3.5rem);
-  border-bottom: 1px solid var(--line);
 }
 
 @media (min-width: 900px) {
@@ -2387,3 +2402,9 @@ p { text-wrap: pretty; }
 .side-work__name:hover { color: var(--ink); text-decoration-color: currentColor; }
 
 .side-work__line { flex-basis: 100%; line-height: 1.55; color: var(--ink-3); }
+
+.xp__list--cols { max-width: none; }
+
+@media (min-width: 820px) {
+  .xp__list--cols { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.625rem 2rem; }
+}

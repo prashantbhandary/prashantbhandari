@@ -123,7 +123,7 @@ export default function Hero() {
             <motion.div variants={rise} className="flex flex-wrap items-center gap-2 mb-7">
               <span className="pin">
                 <span className="dot-live" aria-hidden="true" />
-                Seeking PhD positions – Fall 2027
+                Seeking Master’s or PhD positions – Fall 2028
               </span>
               <span className="pin">
                 <MapPin size={11} aria-hidden="true" />

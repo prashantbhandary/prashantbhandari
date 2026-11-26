@@ -99,7 +99,7 @@ export default function Projects() {
   const listed = LISTED.map((id) => getCard(id)!)
 
   return (
-    <section id="projects" className="section" aria-labelledby="projects-heading">
+    <section id="projects" className="section section--alt" aria-labelledby="projects-heading">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(projectsJsonLd) }}
@@ -108,7 +108,7 @@ export default function Projects() {
       <div className="shell">
         <Reveal as="header" className="section-head">
           <p className="section-index">
-            <span>04</span> Selected work
+            <span>03</span> Selected work
           </p>
           <h2 id="projects-heading" className="section-title">
             Things I&apos;ve designed and built

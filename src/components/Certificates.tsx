@@ -269,7 +269,7 @@ export default function CertificatesShowcase() {
         <div className="shell">
           <Reveal as="header" className="section-head">
             <p className="section-index">
-              <span>05</span> Recognition
+              <span>04</span> Recognition
             </p>
             <h2 id="certificates-heading" className="section-title">
               Certificates &amp; awards
@@ -283,7 +283,7 @@ export default function CertificatesShowcase() {
             <h3 className="eyebrow" id="achievements">
               Achievements
             </h3>
-            <ul className="xp__list" aria-labelledby="achievements">
+            <ul className="xp__list xp__list--cols" aria-labelledby="achievements">
               {ACHIEVEMENTS.map((item) => (
                 <li key={item}>{item}</li>
               ))}

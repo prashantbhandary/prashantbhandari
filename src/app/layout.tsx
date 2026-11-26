@@ -40,7 +40,7 @@ const jetbrainsMono = localFont({
 
 const SITE = "https://bhandari-prashant.com.np";
 const DESCRIPTION =
-  "Electronics engineer in Pokhara, Nepal. I design PCBs and firmware for robots, IoT devices and satellite subsystems. Seeking a robotics PhD for Fall 2027.";
+  "Electronics engineer in Pokhara, Nepal. I design PCBs and firmware for robots, IoT devices and satellite subsystems. Seeking a Master’s or PhD position in robotics for Fall 2028.";
 
 // Each page sets its own title, description and canonical; these are the defaults.
 // The share image comes from app/opengraph-image.tsx.
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     "LoRa",
     "OFDM",
     "Pokhara",
-    "robotics PhD applicant",
+    "robotics Master's and PhD applicant",
   ],
   authors: [{ name: "Prashant Bhandari", url: SITE }],
   creator: "Prashant Bhandari",
@@ -126,7 +126,7 @@ const jsonLd = {
       url: SITE,
       image: { "@type": "ImageObject", url: `${SITE}/images/PrashantBhandari.png`, width: 550, height: 550 },
       description:
-        "Electronics engineering student in Pokhara, Nepal who designs PCBs and firmware for robots, IoT devices and satellite subsystems. Seeking a robotics PhD position for Fall 2027.",
+        "Electronics engineering student in Pokhara, Nepal who designs PCBs and firmware for robots, IoT devices and satellite subsystems. Seeking a Master’s or PhD position in robotics for Fall 2028.",
       jobTitle: "Electronics Engineer",
       knowsAbout: [
         "PCB design",

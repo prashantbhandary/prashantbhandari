@@ -48,7 +48,7 @@ export default async function OpengraphImage() {
                 color: '#4338ca',
               }}
             >
-              Seeking a robotics PhD · Fall 2027
+              Seeking a Master’s or PhD · Fall 2028
             </div>
           </div>
         </div>

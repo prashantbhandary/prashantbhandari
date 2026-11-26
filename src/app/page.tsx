@@ -25,11 +25,11 @@ export default function Home() {
       <main id="main-content">
         <Hero />
         <About />
-        <Skills />
         <Experience />
         <SoftwarePartTime />
         <Projects />
         <Certificates />
+        <Skills />
         <Contact />
       </main>
       <Footer />

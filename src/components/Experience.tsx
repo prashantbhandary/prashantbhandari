@@ -12,6 +12,8 @@ type ExperienceItem = {
   responsibilities: string[]
   links?: { label: string; href: string }[]
   type: string
+  /** Which list the role appears in */
+  group: 'work' | 'leadership'
 }
 
 const experiences: ExperienceItem[] = [
@@ -26,6 +28,7 @@ const experiences: ExperienceItem[] = [
     ],
     links: [{ label: 'Completion letter', href: '/completion-letter-prashant.pdf' }],
     type: 'internship',
+    group: 'work',
   },
   {
     title: 'Electronics Engineer Intern',
@@ -39,6 +42,7 @@ const experiences: ExperienceItem[] = [
       'Wrote LVGL interfaces for embedded displays.',
     ],
     type: 'internship',
+    group: 'work',
   },
   {
     title: 'Electronics & Software Lead',
@@ -50,6 +54,7 @@ const experiences: ExperienceItem[] = [
       'Organised campus workshops, including a 15-day “Rainy Session” for 100+ students.',
     ],
     type: 'leadership',
+    group: 'leadership',
   },
   {
     title: 'General Member',
@@ -58,6 +63,7 @@ const experiences: ExperienceItem[] = [
     description: 'Built a line-maze Micromouse robot.',
     responsibilities: ['Mentored the Autonomous Boat Racing team to 1st runner-up.'],
     type: 'leadership',
+    group: 'leadership',
   },
   {
     title: 'Robotics Mentor',
@@ -66,8 +72,14 @@ const experiences: ExperienceItem[] = [
     description: 'Volunteer mentor at a hands-on workshop.',
     responsibilities: ['Taught 3D design, 3D printing and ESP32 projects.'],
     type: 'volunteer',
+    group: 'leadership',
   },
 ]
+
+const GROUPS = [
+  { id: 'work', label: 'Work & internships' },
+  { id: 'leadership', label: 'Leadership & teaching' },
+] as const
 
 const TYPE_LABEL: Record<string, string> = {
   work: 'Work',
@@ -87,6 +99,18 @@ const ROLE_CERTIFICATES: Record<
       certificateImage: '/images/YarsaTechCertificationOfExperience.jpg',
       title: 'Yarsa Tech Experience Certificate',
       description: 'Certificate of experience for Electronics Engineer Internship at Yarsa Tech',
+    },
+  ],
+  'Electronics & Software Lead': [
+    {
+      certificateImage: '/images/certificates/robotics-club-leadership-executive-member-20th-committee.webp',
+      title: 'Certificate of Leadership Excellence — Executive Member',
+      description: 'Executive Member, 20th Committee, Robotics Club, Pashchimanchal Campus',
+    },
+    {
+      certificateImage: '/images/certificates/robotics-club-leadership-senior-member.webp',
+      title: 'Certificate of Leadership Excellence — Senior Member',
+      description: 'Senior Member, Robotics Club, Pashchimanchal Campus',
     },
   ],
   'General Member': [
@@ -124,10 +148,12 @@ function ExperienceEntry({ exp }: { exp: ExperienceItem }) {
 
       <div className="xp__top">
         <div>
-          <h3 className="xp__role">{exp.title}</h3>
+          <h4 className="xp__role">{exp.title}</h4>
           <p className="xp__org">{exp.company}</p>
         </div>
-        <p className="xp__period">{exp.period}</p>
+        <p className="xp__period">
+          <time>{exp.period}</time>
+        </p>
       </div>
 
       <p className="xp__desc">{exp.description}</p>
@@ -161,26 +187,35 @@ function ExperienceEntry({ exp }: { exp: ExperienceItem }) {
 
 export default function Experience() {
   return (
-    <section id="experience" className="section section--alt" aria-labelledby="experience-heading">
+    <section id="experience" className="section" aria-labelledby="experience-heading">
       <div className="shell">
         <Reveal as="header" className="section-head">
           <p className="section-index">
-            <span>03</span> Experience
+            <span>02</span> Experience
           </p>
           <h2 id="experience-heading" className="section-title">
             Where I&apos;ve worked and led
           </h2>
           <p className="section-lead">
             Internships in product and satellite electronics, and the club roles where I teach
-            and lead teams.
+            and lead teams. Newest first.
           </p>
         </Reveal>
 
-        <RevealGroup className="timeline" stagger={0.08}>
-          {experiences.map((exp) => (
-            <ExperienceEntry key={`${exp.title}-${exp.company}`} exp={exp} />
-          ))}
-        </RevealGroup>
+        {GROUPS.map((group) => (
+          <div key={group.id} className="xp-group">
+            <h3 className="xp-group__title" id={`xp-${group.id}`}>
+              {group.label}
+            </h3>
+            <RevealGroup className="timeline" stagger={0.08}>
+              {experiences
+                .filter((exp) => exp.group === group.id)
+                .map((exp) => (
+                  <ExperienceEntry key={`${exp.title}-${exp.company}`} exp={exp} />
+                ))}
+            </RevealGroup>
+          </div>
+        ))}
       </div>
     </section>
   )

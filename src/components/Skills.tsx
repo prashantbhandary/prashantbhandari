@@ -31,11 +31,11 @@ const skillCategories = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="section" aria-labelledby="skills-heading">
+    <section id="skills" className="section section--alt" aria-labelledby="skills-heading">
       <div className="shell">
         <Reveal as="header" className="section-head">
           <p className="section-index">
-            <span>02</span> Capabilities
+            <span>05</span> Capabilities
           </p>
           <h2 id="skills-heading" className="section-title">
             Technical skills

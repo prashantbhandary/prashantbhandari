@@ -89,12 +89,14 @@ const PROJECTS = [
 
 const ACHIEVEMENTS = [
   'Top 25 Nationwide — U.S.-Nepal Startup Weekend Challenge (Safety Modules), 2026',
+  'Certificate of Appreciation (Exhibitor) — RUFEST 2026, UNDP GCRU Project / KOICA, awarded to Dhruva Tech',
   'International Finalist — Techfest IIT Bombay, representing Nepal (Safety Modules), 2025',
   '1st Place — LOCUS 2025 Micromouse, IOE Pulchowk Campus',
   '2nd Place — Delta Robothon (Micromouse), 2025',
   '5th Place — Meshmerize Event (Micromouse), Techfest IIT Bombay, representing Nepal, 2024',
   '1st Runner-Up — Autonomous Boat Racing, Robotics Club WRC 2024',
   'Winner — Battle For Speed / Line Follower Competition, Robotics Club 2023',
+  'Certificate of Leadership Excellence — Robotics Club, Pashchimanchal Campus',
 ]
 
 const CONTACTS = [
@@ -162,7 +164,7 @@ export default function Resume() {
             IoT/robotics systems. Proven track record with ESP32, KiCad, C/C++, and MicroPython; shipped
             hardware from schematic through production across satellite (CubeSat), industrial, and consumer IoT
             domains. International competition finalist with hands-on leadership of 350+ students in
-            embedded systems.
+            embedded systems. Seeking Master’s or PhD positions for Fall 2028.
           </p>
         </Block>
 
