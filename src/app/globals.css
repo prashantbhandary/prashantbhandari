@@ -2021,6 +2021,19 @@ p { text-wrap: pretty; }
   .pj-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
+/* ---- video: responsive 16:9 player ---- */
+
+.pj-video {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--surface-sunk);
+}
+
+.pj-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
 /* ---- code ---- */
 
 .pj-code {
@@ -2310,3 +2323,67 @@ p { text-wrap: pretty; }
   height: 1px;
   overflow: hidden;
 }
+
+/* ============================================================
+   SOFTWARE (PART-TIME) — a quiet strip between Experience and Work
+   ============================================================ */
+
+.side-work {
+  padding-block: clamp(2.5rem, 5vw, 3.5rem);
+  scroll-margin-top: 6rem;
+}
+
+.side-work__inner {
+  display: grid;
+  gap: 1.5rem;
+  padding-bottom: clamp(2.5rem, 5vw, 3.5rem);
+  border-bottom: 1px solid var(--line);
+}
+
+@media (min-width: 900px) {
+  .side-work__inner { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 3rem; align-items: start; }
+}
+
+.side-work__head { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.side-work__title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--ink-2);
+}
+
+.side-work__role {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--ink-4);
+}
+
+.side-work__lead { font-size: 0.9375rem; line-height: 1.65; color: var(--ink-3); }
+
+.side-work__list { list-style: none; display: grid; gap: 0.875rem; }
+
+.side-work__item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.625rem;
+  font-size: 0.875rem;
+}
+
+.side-work__name {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-weight: 600;
+  color: var(--ink-2);
+  text-decoration: underline;
+  text-decoration-color: var(--line);
+  text-underline-offset: 3px;
+  transition: color var(--t-fast) var(--ease), text-decoration-color var(--t-fast) var(--ease);
+}
+
+.side-work__name:hover { color: var(--ink); text-decoration-color: currentColor; }
+
+.side-work__line { flex-basis: 100%; line-height: 1.55; color: var(--ink-3); }

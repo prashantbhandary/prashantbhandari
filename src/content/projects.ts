@@ -14,7 +14,7 @@
  */
 
 import type { LucideIcon } from 'lucide-react'
-import { Bot, CircuitBoard, Cpu, FlaskConical, HardHat } from 'lucide-react'
+import { Bot, CircuitBoard, Cpu, FlaskConical } from 'lucide-react'
 import { MORE_WRITEUPS } from './project-writeups'
 
 export type Category = 'robotics' | 'pcb' | 'embedded' | 'research'
@@ -41,6 +41,8 @@ export type Block =
   | { type: 'code'; lang: string; code: string; caption?: string }
   | { type: 'callout'; tone: 'note' | 'result'; title: string; text: string }
   | { type: 'stats'; items: { value: string; label: string }[] }
+  /** Responsive 16:9 YouTube player (privacy-enhanced domain) */
+  | { type: 'video'; youtubeId: string; title: string; caption?: string }
 
 export type Section = { id: string; title: string; blocks: Block[] }
 
@@ -59,7 +61,7 @@ const doi = (id: string) => `https://doi.org/${id}`
 export type ProjectLink = {
   label: string
   href: string
-  kind: 'source' | 'doc' | 'bom'
+  kind: 'source' | 'doc' | 'bom' | 'site'
 }
 
 export type Project = {
@@ -932,21 +934,6 @@ const OTHER_WORK: Card[] = [
     reading: [
       { title: 'A Fuzzy Rule-Based Control System for Fast Line-Following Robots', source: 'G. Eleftheriou et al. · IEEE DCOSS', year: 2020, kind: 'Paper', href: doi('10.1109/DCOSS49796.2020.00068') },
       { title: '3pi Robot User’s Guide — Advanced Line Following with PID Control', source: 'Pololu', kind: 'Guide', href: 'https://www.pololu.com/docs/0J21/7.c' },
-    ],
-  },
-  {
-    id: 'smart-helmet',
-    title: 'Smart Safety Helmet',
-    line: 'Tracks pulse, SpO₂ and impacts; alerts a supervisor over BLE.',
-    category: 'embedded',
-    date: '2026-01',
-    tags: ['ESP32', 'BLE', 'MAX30105'],
-    github: `${GITHUB}/SmartHelmet_Esp32_BLE`,
-    more: [{ label: 'Pitch', href: '/safetron-mvp-safe-250345.pdf', kind: 'pdf' }],
-    icon: HardHat,
-    reading: [
-      { title: 'A Survey on Fall Detection: Principles and Approaches', source: 'M. Mubashir, L. Shao, L. Seed · Neurocomputing', year: 2013, kind: 'Paper', href: doi('10.1016/j.neucom.2011.09.037') },
-      { title: 'Pulse Oximetry', source: 'A. Jubran · Critical Care', year: 2015, kind: 'Paper', href: doi('10.1186/s13054-015-0984-8') },
     ],
   },
   {

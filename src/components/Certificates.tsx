@@ -11,12 +11,74 @@ interface Certificate {
   title: string
   description: string
   image: string
-  category: 'competition' | 'mentorship' | 'workshop' | 'experience'
+  /** Smaller file for the grid; the full image opens in the lightbox */
+  thumb?: string
+  /** Describes the photo itself; falls back to the title */
+  alt?: string
+  category: 'competition' | 'leadership' | 'exhibition' | 'mentorship' | 'workshop' | 'experience'
   date?: string
   organization?: string
 }
 
 const certificates: Certificate[] = [
+  {
+    id: 'rufest-2026-exhibitor',
+    title: 'Certificate of Appreciation — Exhibitor, RUFEST',
+    description:
+      'Awarded to Dhruva Tech for its contribution as an exhibitor at RUFEST (Recycling and Upcycling Fest), 2nd Edition, Re-Think 2026, under the UNDP GCRU Project in Pokhara, supported by KOICA and Pokhara Metropolitan City.',
+    image: '/images/certificates/rufest-2026-exhibitor-dhruva-tech.webp',
+    thumb: '/images/certificates/rufest-2026-exhibitor-dhruva-tech-thumb.webp',
+    alt: 'RUFEST Certificate of Appreciation presented to Dhruva Tech, held up in an event hall below an upcycled woven tray showing a mountain scene',
+    category: 'exhibition',
+    date: '2026',
+    organization: 'UNDP GCRU Project · KOICA · Pokhara Metropolitan City',
+  },
+  {
+    id: 'us-nepal-startup-weekend-2026',
+    title: 'Certificate of Participation — U.S.–Nepal Startup Weekend Challenge',
+    description:
+      'Presented to Prashant Bhandari of Team Dhruva Tech for participating in the U.S.–Nepal Startup Weekend Challenge, 19–21 February 2026, supported by the U.S. Embassy Nepal and implemented by One to Watch.',
+    image: '/images/certificates/us-nepal-startup-weekend-2026-dhruva-tech.webp',
+    thumb: '/images/certificates/us-nepal-startup-weekend-2026-dhruva-tech-thumb.webp',
+    alt: 'U.S.–Nepal Startup Weekend Challenge certificate of participation presented to Prashant Bhandari of Team Dhruva Tech',
+    category: 'competition',
+    date: 'February 2026',
+    organization: 'U.S. Embassy Nepal · One to Watch',
+  },
+  {
+    id: 'techfest-2025-safetronics',
+    title: 'Certificate of Participation — Safetronics, Techfest',
+    description:
+      'Presented to Prashant Bhandari for participating in the Safetronics competition conducted by Techfest, IIT Bombay, 22–24 December 2025.',
+    image: '/images/certificates/techfest-iit-bombay-2025-safetronics.webp',
+    thumb: '/images/certificates/techfest-iit-bombay-2025-safetronics-thumb.webp',
+    alt: 'Techfest IIT Bombay certificate of participation in Safetronics presented to Prashant Bhandari, December 2025',
+    category: 'competition',
+    date: 'December 2025',
+    organization: 'Techfest, IIT Bombay',
+  },
+  {
+    id: 'robotics-club-senior-member',
+    title: 'Certificate of Leadership Excellence — Senior Member',
+    description:
+      'Presented for service as a Senior Member of the Robotics Club, Pashchimanchal Campus. Signed by Campus Chief Dr. Gopal Prasad Ghimire.',
+    image: '/images/certificates/robotics-club-leadership-senior-member.webp',
+    thumb: '/images/certificates/robotics-club-leadership-senior-member-thumb.webp',
+    alt: 'Robotics Club, Pashchimanchal Campus Certificate of Leadership Excellence presented to Prashant Bhandari as Senior Member',
+    category: 'leadership',
+    organization: 'Robotics Club, Pashchimanchal Campus',
+  },
+  {
+    id: 'robotics-club-executive-member',
+    title: 'Certificate of Leadership Excellence — Executive Member',
+    description:
+      'Presented to an Executive Member of the 20th Committee of the Robotics Club, Pashchimanchal Campus, recognising the journey from General Member to Executive Member.',
+    image: '/images/certificates/robotics-club-leadership-executive-member-20th-committee.webp',
+    thumb: '/images/certificates/robotics-club-leadership-executive-member-20th-committee-thumb.webp',
+    alt: 'Robotics Club, Pashchimanchal Campus Certificate of Leadership Excellence presented to Prashant Bhandari as Executive Member of the 20th Committee',
+    category: 'leadership',
+    organization: 'Robotics Club, Pashchimanchal Campus · 20th Committee',
+  },
   {
     id: 'yarsa-tech-experience',
     title: 'Yarsa Tech Experience Certificate',
@@ -101,17 +163,21 @@ const certificates: Certificate[] = [
 
 const ACHIEVEMENTS = [
   'Top 25 Nationwide – U.S.–Nepal Startup Weekend Challenge (Safety Modules), 2026',
+  'Certificate of Appreciation (Exhibitor) – RUFEST 2026, UNDP GCRU Project / KOICA, awarded to Dhruva Tech',
   'International Finalist – Techfest IIT Bombay, representing Nepal (Safety Modules), 2025',
   '1st Place – LOCUS 2025 Micromouse, IOE Pulchowk Campus',
   '2nd Place – Delta Robothon (Micromouse), 2025',
   '5th Place – Meshmerize (Micromouse), Techfest IIT Bombay, representing Nepal, 2024',
   '1st Runner-Up – Autonomous Boat Racing, Robotics Club WRC 2024',
   'Winner – Battle For Speed / Line Follower Competition, Robotics Club 2023',
+  'Certificate of Leadership Excellence – Robotics Club, Pashchimanchal Campus',
 ]
 
 const FILTERS = [
   { id: 'all', label: 'All' },
   { id: 'competition', label: 'Competitions' },
+  { id: 'leadership', label: 'Leadership' },
+  { id: 'exhibition', label: 'Exhibitions' },
   { id: 'mentorship', label: 'Mentorship' },
   { id: 'workshop', label: 'Workshops' },
   { id: 'experience', label: 'Experience' },
@@ -172,7 +238,13 @@ export function CertificateModal({
             className="relative w-full rounded-[var(--r-sm)] overflow-hidden"
             style={{ background: 'var(--surface-sunk)', minHeight: '60vh' }}
           >
-            <Image src={certificate.image} alt={certificate.title} fill className="object-contain p-3" />
+            <Image
+              src={certificate.image}
+              alt={certificate.alt ?? certificate.title}
+              fill
+              sizes="(max-width: 960px) 100vw, 56rem"
+              className="object-contain p-3"
+            />
           </div>
           {certificate.description && (
             <p style={{ marginTop: '1rem', fontSize: '0.9375rem', color: 'var(--ink-3)' }}>
@@ -251,8 +323,8 @@ export default function CertificatesShowcase() {
                 >
                 <span className="cert__thumb">
                   <Image
-                    src={certificate.image}
-                    alt={certificate.title}
+                    src={certificate.thumb ?? certificate.image}
+                    alt={certificate.alt ?? certificate.title}
                     fill
                     sizes="(max-width: 780px) 50vw, 15rem"
                     className="object-cover"

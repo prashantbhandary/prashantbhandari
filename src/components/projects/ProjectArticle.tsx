@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useEffect, useMemo, useState } from 'react'
-import { ArrowLeft, ArrowRight, ArrowUpRight, FileText, Github, ListTree } from 'lucide-react'
+import { ArrowLeft, ArrowRight, ArrowUpRight, FileText, Github, Globe, ListTree } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { formatMonth, getProject, SORTED_PROJECTS, CATEGORIES, type ProjectLink } from '@/content/projects'
 import { BlockView, FigureView } from './Blocks'
@@ -13,6 +13,7 @@ const LINK_ICON: Record<ProjectLink['kind'], typeof Github> = {
   source: Github,
   doc: FileText,
   bom: ListTree,
+  site: Globe,
 }
 
 /** Tracks which section heading is in the reading zone, for the contents rail */

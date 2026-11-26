@@ -12,6 +12,136 @@ const doi = (id: string) => `https://doi.org/${id}`
 
 export const MORE_WRITEUPS: Project[] = [
   // ───────────────────────────────────────────────────────────────────────────
+  // Numbers below come from the team's pitch document (public/safetron-mvp-safe-250345.pdf)
+  {
+    slug: 'smart-helmet',
+    title: 'Smart Safety Helmet',
+    summary:
+      'A clip-on module for a standard industrial safety helmet that tracks a worker’s pulse, SpO₂, body temperature and falls, and alerts a supervisor’s dashboard over BLE. Built as Team Dhruva Tech.',
+    line: 'Tracks pulse, SpO₂, temperature and falls; alerts a supervisor over BLE.',
+    category: 'embedded',
+    kind: 'Embedded · IoT · Team project',
+    date: '2026-02',
+    status: 'Working prototype',
+    tools: ['ESP32', 'BLE', 'MAX30102', 'MPU-9250', 'MLX90614', 'FreeRTOS'],
+    highlight: 'Techfest IIT Bombay finalist · Top 25, U.S.–Nepal Startup Weekend',
+    cover: {
+      src: '/images/projects/smart-helmet/prototype.webp',
+      alt: 'The prototype electronics module in its white 3D-printed housing, mounted on the back of a yellow safety helmet, with a Li-Po battery on the side and wires to the sensor clip',
+      width: 1400,
+      height: 1050,
+    },
+    facts: [
+      { value: 'Top 25', label: 'U.S.–Nepal Startup Weekend 2026' },
+      { value: '< 5 s', label: 'Alert latency in testing' },
+      { value: '12–15 h', label: 'Estimated run time, 1800 mAh' },
+      { value: '$45.75', label: 'Estimated parts cost' },
+    ],
+    links: [
+      { label: 'Source', href: `${GITHUB}/SmartHelmet_Esp32_BLE`, kind: 'source' },
+      { label: 'Pitch document (PDF)', href: '/safetron-mvp-safe-250345.pdf', kind: 'doc' },
+      { label: 'Dhruva Tech', href: 'https://dhruva-tech-website.vercel.app/', kind: 'site' },
+    ],
+    reading: [
+      { title: 'Internet of Things (IoT) Based Smart Helmet for Construction', source: 'P. Kuhar, K. Sharma, Y. Hooda, N. K. Verma · Journal of Physics: Conference Series', year: 2021, kind: 'Paper', href: doi('10.1088/1742-6596/1950/1/012075') },
+      { title: 'A Survey on Fall Detection: Principles and Approaches', source: 'M. Mubashir, L. Shao, L. Seed · Neurocomputing', year: 2013, kind: 'Paper', href: doi('10.1016/j.neucom.2011.09.037') },
+      { title: 'Pulse Oximetry', source: 'A. Jubran · Critical Care', year: 2015, kind: 'Paper', href: doi('10.1186/s13054-015-0984-8') },
+    ],
+    sections: [
+      {
+        id: 'overview',
+        title: 'Overview',
+        blocks: [
+          {
+            type: 'p',
+            text: 'Most site safety gear only protects passively: a helmet takes the hit, but nobody learns that a worker has collapsed, is overheating or has fallen. This module clips onto the back of any standard industrial helmet and watches the wearer’s vitals and movement, then raises an alert on a supervisor’s dashboard when something is wrong — or when the worker presses an SOS button.',
+          },
+          {
+            type: 'p',
+            text: 'It was developed as a team project under **Team Dhruva Tech**.',
+          },
+        ],
+      },
+      {
+        id: 'video',
+        title: 'Video',
+        blocks: [
+          {
+            type: 'video',
+            youtubeId: 'AG_KSxNc-0I',
+            title: 'Safetronics finalist at Techfest, IIT Bombay — smart safety helmet',
+            caption: 'The helmet as a Safetronics finalist at Techfest, IIT Bombay. Video from the Robotics Club WRC channel.',
+          },
+        ],
+      },
+      {
+        id: 'recognition',
+        title: 'Recognition',
+        blocks: [
+          {
+            type: 'list',
+            items: [
+              '**Techfest, IIT Bombay (December 2025)** — competed in Safetronics as an international finalist, representing Nepal.',
+              '**U.S.–Nepal Startup Weekend Challenge (February 2026)** — selected in the Top 25 nationwide as Team Dhruva Tech. The challenge was supported by the U.S. Embassy Nepal and implemented by One to Watch.',
+            ],
+          },
+        ],
+      },
+      {
+        id: 'how-it-works',
+        title: 'How it works',
+        blocks: [
+          {
+            type: 'flow',
+            stages: [
+              { label: 'Sensors', note: 'SpO₂, pulse, temp, IMU' },
+              { label: 'ESP32', note: 'RTOS tasks' },
+              { label: 'BLE', note: '~100 m to gateway' },
+              { label: 'Gateway', note: 'Python listener + risk model' },
+              { label: 'Dashboard', note: 'Node.js + MySQL' },
+            ],
+            caption: 'From the helmet to the supervisor’s screen.',
+          },
+          {
+            type: 'steps',
+            items: [
+              {
+                title: 'Vitals',
+                text: 'A MAX30102 measures pulse and SpO₂ by photoplethysmography; readings are averaged over 60 seconds to reject motion and ambient-light noise. An MLX90614 infrared thermometer reads body temperature without touching the skin. Both sit on a small 3D-printed clip against the temple.',
+              },
+              {
+                title: 'Fall detection',
+                text: 'An MPU-9250 inside the main module tracks head motion. A fall is flagged when acceleration spikes above about 2.5 g and then stays below 0.3 g for more than two seconds.',
+              },
+              {
+                title: 'SOS',
+                text: 'A push-button on an interrupt lets the worker call for help even when no vital sign or fall looks abnormal; the SOS event pre-empts normal data and goes out immediately, with a buzzer for local feedback.',
+              },
+              {
+                title: 'Firmware',
+                text: 'The ESP32 runs separate RTOS tasks for sensor sampling, BLE transmission and emergency alerts, so a fall or SOS is handled at once even while the radio is busy. Vitals are sent at regular intervals; alerts are pushed without waiting.',
+              },
+              {
+                title: 'Gateway and dashboard',
+                text: 'An asynchronous Python BLE listener queues incoming packets. A processor thread stores alerts in MySQL and runs a small feed-forward neural network (16-8-4 hidden units) that classifies each worker as high or low health risk. A Node.js/Express backend pushes updates to an HTML/JS dashboard over WebSockets.',
+              },
+              {
+                title: 'Power and housing',
+                text: 'A 3.7 V 1800 mAh Li-Po with a TP4056 charger powers the module; at an average draw of 120–150 mA that is roughly 12–15 hours, about one work shift. The electronics sit in a waterproof PLA housing on the back of the helmet.',
+              },
+            ],
+          },
+          {
+            type: 'callout',
+            tone: 'note',
+            title: 'Full design',
+            text: 'Schematics, CAD views, the dashboard and the cost breakdown are in the team’s pitch document, linked at the top of this page.',
+          },
+        ],
+      },
+    ],
+  },
+  // ───────────────────────────────────────────────────────────────────────────
   {
     slug: 'micromouse',
     title: 'Micromouse Line-Maze Robot',

@@ -244,6 +244,23 @@ export function BlockView({ block }: { block: Block }) {
       )
     }
 
+    case 'video':
+      return (
+        <figure className="pj-block">
+          <div className="pj-video">
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${block.youtubeId}`}
+              title={block.title}
+              loading="lazy"
+              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            />
+          </div>
+          {block.caption && <figcaption className="pj-caption">{block.caption}</figcaption>}
+        </figure>
+      )
+
     case 'stats':
       return (
         <div className="stat-strip pj-block">
