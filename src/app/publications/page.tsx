@@ -6,14 +6,14 @@ import MotionProvider from '@/components/motion/MotionProvider'
 import { Reveal, RevealGroup, RevealItem, ScrollProgress } from '@/components/motion/Motion'
 import PublicationCard from '@/components/publications/PublicationCard'
 import ProfileLinks from '@/components/publications/ProfileLinks'
-import { SORTED_PUBLICATIONS } from '@/content/publications'
+import { SORTED_PUBLICATIONS, paperHref } from '@/content/publications'
 
 const SITE = 'https://bhandari-prashant.com.np'
 const PAGE_URL = `${SITE}/publications`
 
 const LEAD =
   'Technical reports and design notes from my embedded systems, PCB, robotics and signal-processing projects.'
-const DESCRIPTION = `${LEAD} Each one has its abstract and a free PDF.`
+const DESCRIPTION = `${LEAD} Read them on ResearchGate and Google Scholar.`
 
 const SHARE_IMAGE = ['/opengraph-image']
 
@@ -35,7 +35,7 @@ const jsonLd = {
   hasPart: SORTED_PUBLICATIONS.map((p) => ({
     '@type': 'ScholarlyArticle',
     headline: p.title,
-    url: `${PAGE_URL}/${p.slug}`,
+    url: paperHref(p),
   })),
 }
 

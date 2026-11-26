@@ -27,10 +27,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.9,
     },
-    ...PUBLICATIONS.flatMap((p) => [
-      { url: `${SITE}/publications/${p.slug}`, lastModified: month(p.date), changeFrequency: 'yearly' as const, priority: 0.8 },
-      { url: `${SITE}${p.pdf}`, lastModified: month(p.date), changeFrequency: 'yearly' as const, priority: 0.7 },
-    ]),
     { url: `${SITE}/resume`, lastModified: month(newest), changeFrequency: 'yearly', priority: 0.6 },
   ]
 }

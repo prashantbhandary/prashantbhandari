@@ -4,7 +4,3 @@
 /twitter-image
   Content-Type: image/png
 
-# Papers: served inline as PDFs so Google Scholar and browsers read them
-/papers/*
-  Content-Type: application/pdf
-  X-Robots-Tag: all

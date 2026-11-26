@@ -1,7 +1,6 @@
-import Link from 'next/link'
 import { Fragment } from 'react'
-import { ArrowUpRight, FileDown } from 'lucide-react'
-import { ME, doiUrl, type Publication } from '@/content/publications'
+import { ArrowUpRight, BookOpen, GraduationCap } from 'lucide-react'
+import { ME, doiUrl, paperHref, type Publication } from '@/content/publications'
 
 /** Author list in paper order, with the site owner in bold */
 export function Authors({ authors, className }: { authors: string[]; className?: string }) {
@@ -17,9 +16,16 @@ export function Authors({ authors, className }: { authors: string[]; className?:
   )
 }
 
-/** One paper as a card: type and year, title, authors, then DOI and PDF */
+const EXTERNAL = { target: '_blank', rel: 'noopener noreferrer' } as const
+
+/**
+ * One paper as a card. The paper itself isn't hosted here: the title and
+ * main button open it on ResearchGate, or the Google Scholar profile when
+ * it has no ResearchGate page yet, so reads and citations count there.
+ */
 export default function PublicationCard({ pub }: { pub: Publication }) {
-  const href = `/publications/${pub.slug}`
+  const href = paperHref(pub)
+  const onRG = Boolean(pub.researchgate)
 
   return (
     <article className="pj-card pub-card card card--hover">
@@ -30,28 +36,25 @@ export default function PublicationCard({ pub }: { pub: Publication }) {
         </p>
 
         <h3 className="pj-card__title">
-          <Link href={href}>{pub.title}</Link>
+          <a href={href} {...EXTERNAL}>
+            {pub.title}
+          </a>
         </h3>
 
         <Authors authors={pub.authors} className="pj-card__line" />
 
         <div className="pj-card__foot">
-          <a href={pub.pdf} className="btn btn--sm btn--primary" type="application/pdf">
-            <FileDown size={14} aria-hidden="true" />
-            PDF
-            <span className="sr-only"> of {pub.title}</span>
+          <a href={href} {...EXTERNAL} className="btn btn--sm btn--primary">
+            {onRG ? <BookOpen size={14} aria-hidden="true" /> : <GraduationCap size={14} aria-hidden="true" />}
+            {onRG ? 'Read on ResearchGate' : 'Google Scholar'}
+            <ArrowUpRight size={12} aria-hidden="true" style={{ opacity: 0.6 }} />
           </a>
           {pub.doi && (
-            <a href={doiUrl(pub.doi)} target="_blank" rel="noopener noreferrer" className="btn btn--sm btn--outline">
+            <a href={doiUrl(pub.doi)} {...EXTERNAL} className="btn btn--sm btn--outline">
               DOI
               <ArrowUpRight size={12} aria-hidden="true" style={{ opacity: 0.6 }} />
-              <span className="sr-only"> {pub.doi}</span>
             </a>
           )}
-          <Link href={href} className="btn btn--sm btn--ghost">
-            Abstract
-            <span className="sr-only"> of {pub.title}</span>
-          </Link>
         </div>
       </div>
     </article>
