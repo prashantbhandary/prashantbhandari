@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { Menu, X, ArrowUpRight, FileText, NotebookPen } from 'lucide-react'
+import { Menu, X, ArrowUpRight, BookOpen, FileText, NotebookPen } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
 
 /** Sections scroll on the home page; pages are their own routes */
@@ -13,6 +13,7 @@ const NAV_ITEMS: NavItem[] = [
   { id: 'about', label: 'About' },
   { id: 'experience', label: 'Experience' },
   { href: '/projects', label: 'Projects', icon: NotebookPen },
+  { href: '/publications', label: 'Publications', icon: BookOpen },
   { id: 'certificates', label: 'Certificates' },
   { href: '/resume', label: 'Résumé', icon: FileText },
 ]

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
 import { Reveal } from './motion/Motion'
+import { RESEARCHGATE_URL, SCHOLAR_URL } from '@/content/publications'
 
 export default function Footer() {
   return (
@@ -75,6 +76,29 @@ export default function Footer() {
           <Link href="/projects" style={{ color: 'var(--ink-3)' }}>
             Project write-ups
           </Link>
+          <Link href="/publications" style={{ color: 'var(--ink-3)' }}>
+            Publications
+          </Link>
+          <a
+            href={SCHOLAR_URL}
+            target="_blank"
+            rel="noopener noreferrer me"
+            className="inline-flex items-center gap-1"
+            style={{ color: 'var(--ink-3)' }}
+          >
+            Google Scholar
+            <ArrowUpRight size={12} aria-hidden="true" />
+          </a>
+          <a
+            href={RESEARCHGATE_URL}
+            target="_blank"
+            rel="noopener noreferrer me"
+            className="inline-flex items-center gap-1"
+            style={{ color: 'var(--ink-3)' }}
+          >
+            ResearchGate
+            <ArrowUpRight size={12} aria-hidden="true" />
+          </a>
           <a
             href="https://github.com/prashantbhandary"
             target="_blank"

@@ -173,6 +173,8 @@ const jsonLd = {
         "https://github.com/prashantbhandary",
         "https://twitter.com/santhprashant",
         "https://www.instagram.com/_prashant.08/",
+        "https://scholar.google.com/citations?user=hDOs2vwAAAAJ",
+        "https://www.researchgate.net/profile/Prashant-Bhandari-8",
       ],
     },
     {

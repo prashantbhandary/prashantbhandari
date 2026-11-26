@@ -35,7 +35,7 @@ export default function Skills() {
       <div className="shell">
         <Reveal as="header" className="section-head">
           <p className="section-index">
-            <span>05</span> Capabilities
+            <span>06</span> Capabilities
           </p>
           <h2 id="skills-heading" className="section-title">
             Technical skills

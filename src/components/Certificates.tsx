@@ -270,7 +270,7 @@ export default function CertificatesShowcase() {
         <div className="shell">
           <Reveal as="header" className="section-head">
             <p className="section-index">
-              <span>04</span> Recognition
+              <span>05</span> Recognition
             </p>
             <h2 id="certificates-heading" className="section-title">
               Certificates &amp; awards

@@ -1,9 +1,10 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { Mail, Phone, MapPin, Send, Loader2, Linkedin, Github, Twitter, Instagram } from 'lucide-react'
+import { Mail, Phone, MapPin, Send, Loader2, Linkedin, Github, Twitter, Instagram, GraduationCap, BookOpen } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Reveal, RevealGroup, RevealItem } from './motion/Motion'
+import { RESEARCHGATE_URL, SCHOLAR_URL } from '@/content/publications'
 import { checkFields, validateContact, type ContactErrors, type ContactForm } from '@/lib/contact-validation'
 
 const CONTACT_EMAIL = 'info@bhandari-prashant.com.np'
@@ -133,6 +134,8 @@ export default function Contact() {
     { href: 'https://github.com/prashantbhandary', icon: Github, label: 'GitHub profile' },
     { href: 'https://twitter.com/santhprashant', icon: Twitter, label: 'Twitter profile' },
     { href: 'https://www.instagram.com/_prashant.08/', icon: Instagram, label: 'Instagram profile' },
+    { href: SCHOLAR_URL, icon: GraduationCap, label: 'Google Scholar profile' },
+    { href: RESEARCHGATE_URL, icon: BookOpen, label: 'ResearchGate profile' },
   ]
 
   const fields = [
@@ -163,7 +166,7 @@ export default function Contact() {
       <div className="shell">
         <Reveal as="header" className="section-head">
           <p className="section-index">
-            <span>06</span> Contact
+            <span>07</span> Contact
           </p>
           <h2 id="contact-heading" className="section-title">
             Let&apos;s build something
