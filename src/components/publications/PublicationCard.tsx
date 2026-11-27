@@ -23,7 +23,14 @@ const EXTERNAL = { target: '_blank', rel: 'noopener noreferrer' } as const
  * main button open it on ResearchGate, or the Google Scholar profile when
  * it has no ResearchGate page yet, so reads and citations count there.
  */
-export default function PublicationCard({ pub }: { pub: Publication }) {
+export default function PublicationCard({
+  pub,
+  compact = false,
+}: {
+  pub: Publication
+  /** Home page: the title is the only link, to keep the outbound link count down */
+  compact?: boolean
+}) {
   const href = paperHref(pub)
   const onRG = Boolean(pub.researchgate)
 
@@ -43,6 +50,7 @@ export default function PublicationCard({ pub }: { pub: Publication }) {
 
         <Authors authors={pub.authors} className="pj-card__line" />
 
+        {!compact && (
         <div className="pj-card__foot">
           {onRG && (
             <a href={href} {...EXTERNAL} className="btn btn--sm btn--primary">
@@ -58,6 +66,7 @@ export default function PublicationCard({ pub }: { pub: Publication }) {
             </a>
           )}
         </div>
+        )}
       </div>
     </article>
   )

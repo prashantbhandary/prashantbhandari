@@ -26,7 +26,7 @@ export default function Publications() {
         <RevealGroup className="pj-grid pub-grid pj-grid--home" stagger={0.06}>
           {latest.map((pub) => (
             <RevealItem key={pub.slug} className="flex">
-              <PublicationCard pub={pub} />
+              <PublicationCard pub={pub} compact />
             </RevealItem>
           ))}
         </RevealGroup>

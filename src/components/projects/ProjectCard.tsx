@@ -40,19 +40,22 @@ export function CardCover({ card, sizes }: { card: Card; sizes: string }) {
 }
 
 /**
- * One project, as a card: cover, one line, tags, and the links. Write-ups
- * open their article; everything else opens its GitHub repo. GitHub is
- * always one of the buttons.
+ * One project, as a card: cover, one line, tags, and the links. The whole
+ * card opens the write-up (or the GitHub repo when there is none) through
+ * the title link. On /projects GitHub is always one of the buttons.
  */
 export default function ProjectCard({
   card,
   badges,
   reading = true,
+  links = true,
 }: {
   card: Card
   badges?: ReactNode
   /** The home page leaves this off to keep its outbound link count down; /projects shows it */
   reading?: boolean
+  /** GitHub and extra buttons. The home page leaves these off (repos are one click away on the write-up) */
+  links?: boolean
 }) {
   const href = cardHref(card)
   const external = !card.writeup
@@ -60,21 +63,16 @@ export default function ProjectCard({
 
   return (
     <article className="pj-card card card--hover">
-      {/* Second way into the same link as the title, kept out of the tab order */}
-      <Link
-        href={href}
-        className="pj-card__cover"
-        tabIndex={-1}
-        aria-hidden="true"
-        {...(external && { target: '_blank', rel: 'noopener noreferrer' })}
-      >
+      {/* Not a link: the title's link stretches over the whole card, so the
+          card is clickable without a second anchor (or the badge as anchor text) */}
+      <div className="pj-card__cover">
         <CardCover card={card} sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 360px" />
         {(card.writeup || card.status) && (
           <span className={`pj-card__badge${card.status ? ' pj-card__badge--wip' : ''}`}>
             {card.status ?? 'Write-up'}
           </span>
         )}
-      </Link>
+      </div>
 
       <div className="pj-card__body">
         <p className="pj-card__eyebrow">
@@ -83,7 +81,11 @@ export default function ProjectCard({
         </p>
 
         <h3 className="pj-card__title">
-          <Link href={href} {...(external && { target: '_blank', rel: 'noopener noreferrer' })}>
+          <Link
+            href={href}
+            className="pj-card__link"
+            {...(external && { target: '_blank', rel: 'noopener noreferrer' })}
+          >
             {card.title}
           </Link>
           {badges}
@@ -115,13 +117,8 @@ export default function ProjectCard({
           </details>
         )}
 
+        {links && (
         <div className="pj-card__foot">
-          {card.writeup && (
-            <Link href={href} className="btn btn--sm btn--primary">
-              Read write-up
-              <span className="sr-only"> on {card.title}</span>
-            </Link>
-          )}
           <a href={card.github} target="_blank" rel="noopener noreferrer" className="btn btn--sm btn--outline">
             <Github size={14} aria-hidden="true" />
             GitHub
@@ -138,6 +135,7 @@ export default function ProjectCard({
             )
           })}
         </div>
+        )}
       </div>
     </article>
   )

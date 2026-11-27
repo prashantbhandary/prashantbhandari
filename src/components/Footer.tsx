@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
 import { Reveal } from './motion/Motion'
 
@@ -64,12 +63,6 @@ export default function Footer() {
 
         <div className="footer-bottom">
           <p>© {new Date().getFullYear()} Prashant Bhandari. All rights reserved.</p>
-          <Link href="/projects" style={{ color: 'var(--ink-3)' }}>
-            Project write-ups
-          </Link>
-          <Link href="/publications" style={{ color: 'var(--ink-3)' }}>
-            Publications
-          </Link>
         </div>
       </div>
     </footer>

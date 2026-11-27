@@ -147,7 +147,7 @@ export default function Hero() {
             </motion.div>
 
             <motion.p variants={rise} className="hero__lead mb-9">
-              I design circuit boards and write the firmware that runs on them: robots, IoT
+              I design PCBs and write the firmware that runs on them: robots, IoT
               devices and satellite subsystems, from schematic to a working board.
             </motion.p>
 
@@ -170,7 +170,7 @@ export default function Hero() {
                 whileTap={{ scale: 0.97 }}
               >
                 <Download size={16} aria-hidden="true" />
-                Résumé
+                Download CV (PDF)
               </motion.a>
             </motion.div>
 

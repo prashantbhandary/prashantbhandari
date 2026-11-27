@@ -2,20 +2,9 @@ import {
   GraduationCap,
   Briefcase,
   Users,
-  Linkedin,
-  Github,
-  Twitter,
-  Instagram,
 } from 'lucide-react'
 import Link from 'next/link'
 import { Reveal, RevealGroup, RevealItem } from './motion/Motion'
-
-const socialLinks = [
-  { href: 'https://www.linkedin.com/in/prashantbdri', icon: Linkedin, label: 'LinkedIn profile' },
-  { href: 'https://github.com/prashantbhandary', icon: Github, label: 'GitHub profile' },
-  { href: 'https://twitter.com/santhprashant', icon: Twitter, label: 'Twitter profile' },
-  { href: 'https://www.instagram.com/_prashant.08/', icon: Instagram, label: 'Instagram profile' },
-]
 
 const facts = [
   {
@@ -62,7 +51,7 @@ const interests = [
     text: 'Battery-powered devices that measure, decide and report from the field, and measuring how well they actually work.',
     evidence: [
       { label: 'Greenhouse experiment', href: '/projects/greenhouse' },
-      { label: 'LoRaNet', href: '/projects/loranet' },
+      { label: 'LoRaNet app', href: '/projects/loranet' },
       { label: 'OFDM simulation', href: '/projects/ofdm-simulation' },
     ],
   },
@@ -122,20 +111,6 @@ export default function About() {
           ))}
         </RevealGroup>
 
-        <Reveal className="social-row mt-6" delay={0.05}>
-          {socialLinks.map((social) => (
-            <a
-              key={social.href}
-              href={social.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={social.label}
-              className="social-btn"
-            >
-              <social.icon size={18} aria-hidden="true" />
-            </a>
-          ))}
-        </Reveal>
       </div>
     </section>
   )

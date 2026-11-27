@@ -835,6 +835,11 @@ p { text-wrap: pretty; }
 }
 
 .work-row:hover { background: var(--surface); }
+.work-row { position: relative; }
+.work-row__link { text-decoration: none; }
+.work-row__link::after { content: ''; position: absolute; inset: 0; }
+.work-row:has(.work-row__link:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+.work-row__link:focus-visible { outline: none; }
 
 .work-row__num {
   font-family: var(--font-mono);
@@ -1545,6 +1550,7 @@ p { text-wrap: pretty; }
 .pj-grid > li { display: flex; }
 
 .pj-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -1626,6 +1632,14 @@ p { text-wrap: pretty; }
 }
 
 .pj-card__title a:hover { color: var(--accent); }
+
+/* Stretched link: the title's anchor covers the card; real controls sit above it */
+.pj-card__link::after { content: ''; position: absolute; inset: 0; z-index: 1; }
+.pj-card__title > :not(.pj-card__link),
+.pj-card__reading,
+.pj-card__foot { position: relative; z-index: 2; }
+.pj-card:has(.pj-card__link:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+.pj-card__link:focus-visible { outline: none; }
 
 .pj-card__line { font-size: 0.9375rem; line-height: 1.55; color: var(--ink-3); }
 

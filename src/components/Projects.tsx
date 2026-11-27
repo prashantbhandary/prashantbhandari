@@ -61,17 +61,20 @@ function WorkRow({ card, index }: { card: Card; index: number }) {
       viewport={{ once: true, margin: '-10% 0px -10% 0px' }}
       transition={{ duration: 0.45, ease: [0.22, 0.61, 0.36, 1], delay: (index % 5) * 0.05 }}
     >
-      <Link
-        className="work-row"
-        href={cardHref(card)}
-        {...(external && { target: '_blank', rel: 'noopener noreferrer' })}
-      >
+      <div className="work-row">
         <span className="work-row__num" aria-hidden="true">
           {String(index).padStart(2, '0')}
         </span>
 
         <span>
-          <span className="work-row__title">{card.title}</span>
+          {/* The only link in the row; it stretches over the row so the anchor text stays short */}
+          <Link
+            className="work-row__title work-row__link"
+            href={cardHref(card)}
+            {...(external && { target: '_blank', rel: 'noopener noreferrer' })}
+          >
+            {card.title}
+          </Link>
           <span className="work-row__meta block">{card.line}</span>
         </span>
 
@@ -87,7 +90,7 @@ function WorkRow({ card, index }: { card: Card; index: number }) {
         <span className="work-row__arrow" aria-hidden="true">
           <ArrowUpRight size={16} />
         </span>
-      </Link>
+      </div>
     </motion.div>
   )
 }
@@ -113,7 +116,7 @@ export default function Projects() {
           <h2 id="projects-heading" className="section-title">
             Things I&apos;ve designed and built
           </h2>
-          <p className="section-lead">Robots, boards, firmware and experiments. Each links to its code.</p>
+          <p className="section-lead">Robots, PCBs, firmware and experiments. Each write-up links to its code.</p>
         </Reveal>
 
         <RevealGroup className="pj-grid pj-grid--home" stagger={0.08}>
@@ -122,6 +125,7 @@ export default function Projects() {
               <ProjectCard
                 card={card}
                 reading={false}
+                links={false}
                 badges={
                   card.id === 'micromouse' && (
                     <span className="inline-flex gap-1">
