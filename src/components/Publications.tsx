@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import PublicationCard from './publications/PublicationCard'
-import ProfileLinks from './publications/ProfileLinks'
 import { Reveal, RevealGroup, RevealItem } from './motion/Motion'
 import { SORTED_PUBLICATIONS } from '@/content/publications'
 
@@ -22,7 +21,6 @@ export default function Publications() {
           <p className="section-lead">
             Technical reports and design notes from my embedded systems, PCB, robotics and signal-processing projects.
           </p>
-          <ProfileLinks />
         </Reveal>
 
         <RevealGroup className="pj-grid pub-grid pj-grid--home" stagger={0.06}>

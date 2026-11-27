@@ -148,7 +148,7 @@ function ExperienceEntry({ exp }: { exp: ExperienceItem }) {
 
       <div className="xp__top">
         <div>
-          <h4 className="xp__role">{exp.title}</h4>
+          <p className="xp__role">{exp.title}</p>
           <p className="xp__org">{exp.company}</p>
         </div>
         <p className="xp__period">

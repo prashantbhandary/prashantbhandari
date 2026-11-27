@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
 import { Reveal } from './motion/Motion'
-import { RESEARCHGATE_URL, SCHOLAR_URL } from '@/content/publications'
 
 export default function Footer() {
   return (
@@ -57,15 +56,7 @@ export default function Footer() {
               <img src="/images/nextpcb.svg" alt="NextPCB" width={150} height={41} className="h-6 w-auto" />
             </a>
             <p style={{ fontSize: '0.8125rem', color: 'var(--ink-3)' }}>
-              Thanks to{' '}
-              <a
-                href="https://www.nextpcb.com/"
-                target="_blank"
-                rel="noopener"
-                style={{ color: 'var(--ink)', fontWeight: 500 }}
-              >
-                NextPCB
-              </a>{' '}
+              Thanks to <span style={{ color: 'var(--ink)', fontWeight: 500 }}>NextPCB</span>{' '}
               for the PCB &amp; PCBA services.
             </p>
           </div>
@@ -79,36 +70,6 @@ export default function Footer() {
           <Link href="/publications" style={{ color: 'var(--ink-3)' }}>
             Publications
           </Link>
-          <a
-            href={SCHOLAR_URL}
-            target="_blank"
-            rel="noopener noreferrer me"
-            className="inline-flex items-center gap-1"
-            style={{ color: 'var(--ink-3)' }}
-          >
-            Google Scholar
-            <ArrowUpRight size={12} aria-hidden="true" />
-          </a>
-          <a
-            href={RESEARCHGATE_URL}
-            target="_blank"
-            rel="noopener noreferrer me"
-            className="inline-flex items-center gap-1"
-            style={{ color: 'var(--ink-3)' }}
-          >
-            ResearchGate
-            <ArrowUpRight size={12} aria-hidden="true" />
-          </a>
-          <a
-            href="https://github.com/prashantbhandary"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1"
-            style={{ color: 'var(--ink-3)' }}
-          >
-            github.com/prashantbhandary
-            <ArrowUpRight size={12} aria-hidden="true" />
-          </a>
         </div>
       </div>
     </footer>

@@ -44,7 +44,16 @@ export function CardCover({ card, sizes }: { card: Card; sizes: string }) {
  * open their article; everything else opens its GitHub repo. GitHub is
  * always one of the buttons.
  */
-export default function ProjectCard({ card, badges }: { card: Card; badges?: ReactNode }) {
+export default function ProjectCard({
+  card,
+  badges,
+  reading = true,
+}: {
+  card: Card
+  badges?: ReactNode
+  /** The home page leaves this off to keep its outbound link count down; /projects shows it */
+  reading?: boolean
+}) {
   const href = cardHref(card)
   const external = !card.writeup
   const category = CATEGORIES.find((c) => c.id === card.category)!
@@ -97,12 +106,14 @@ export default function ProjectCard({ card, badges }: { card: Card; badges?: Rea
           ))}
         </ul>
 
-        <details className="pj-card__reading">
-          <summary>
-            Further reading <span className="pj-count">{card.reading.length}</span>
-          </summary>
-          <ReadingList items={card.reading} compact />
-        </details>
+        {reading && (
+          <details className="pj-card__reading">
+            <summary>
+              Further reading <span className="pj-count">{card.reading.length}</span>
+            </summary>
+            <ReadingList items={card.reading} compact />
+          </details>
+        )}
 
         <div className="pj-card__foot">
           {card.writeup && (

@@ -121,6 +121,7 @@ export default function Projects() {
             <RevealItem key={card.id} className="flex">
               <ProjectCard
                 card={card}
+                reading={false}
                 badges={
                   card.id === 'micromouse' && (
                     <span className="inline-flex gap-1">

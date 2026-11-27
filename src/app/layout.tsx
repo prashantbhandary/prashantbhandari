@@ -40,14 +40,14 @@ const jetbrainsMono = localFont({
 
 const SITE = "https://bhandari-prashant.com.np";
 const DESCRIPTION =
-  "Electronics engineer in Pokhara, Nepal. I design PCBs and firmware for robots, IoT devices and satellite subsystems. Seeking a Master’s or PhD position in robotics for Fall 2028.";
+  "Electronics engineer in Nepal designing PCBs and firmware for robots, IoT and satellites. Seeking a robotics Master’s or PhD for Fall 2028.";
 
 // Each page sets its own title, description and canonical; these are the defaults.
 // The share image comes from app/opengraph-image.tsx.
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
   title: {
-    default: "Prashant Bhandari — Electronics Engineer, PCB Design & Robotics",
+    default: "Prashant Bhandari — Electronics Engineer, PCBs & Robotics",
     template: "%s | Prashant Bhandari",
   },
   description: DESCRIPTION,
@@ -84,14 +84,14 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     siteName: "Prashant Bhandari",
-    title: "Prashant Bhandari — Electronics Engineer, PCB Design & Robotics",
+    title: "Prashant Bhandari — Electronics Engineer, PCBs & Robotics",
     description: DESCRIPTION,
   },
   twitter: {
     card: "summary_large_image",
     site: "@santhprashant",
     creator: "@santhprashant",
-    title: "Prashant Bhandari — Electronics Engineer, PCB Design & Robotics",
+    title: "Prashant Bhandari — Electronics Engineer, PCBs & Robotics",
     description: DESCRIPTION,
   },
   manifest: "/manifest.json",

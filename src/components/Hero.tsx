@@ -135,6 +135,8 @@ export default function Hero() {
               Prashant
               <br />
               Bhandari
+
+              <span className="sr-only">, electronics engineer</span>
             </motion.h1>
 
             <motion.div variants={rise} className="hero__role mb-6" aria-live="polite">

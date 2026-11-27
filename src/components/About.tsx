@@ -104,7 +104,7 @@ export default function About() {
         </RevealGroup>
 
         <Reveal as="header" className="mt-12 mb-4">
-          <h3 className="eyebrow">Research interests</h3>
+          <p className="eyebrow">Research interests</p>
         </Reveal>
         <RevealGroup className="interest-grid">
           {interests.map((interest) => (

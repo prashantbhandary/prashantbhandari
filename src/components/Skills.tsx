@@ -52,7 +52,7 @@ export default function Skills() {
                 <span className="skill-card__icon" aria-hidden="true">
                   <category.icon size={16} />
                 </span>
-                <h3 className="skill-card__title">{category.title}</h3>
+                <p className="skill-card__title">{category.title}</p>
               </div>
 
               <ul className="tag-row" aria-label={`${category.title} skills`}>
