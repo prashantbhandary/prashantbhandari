@@ -104,6 +104,8 @@ export const PUBLICATIONS: Publication[] = [
     year: 2026,
     type: 'Technical Report',
     institution: IOE,
+    doi: '10.13140/RG.2.2.35716.36483',
+    researchgate: 'https://www.researchgate.net/publication/418424960',
   },
   {
     slug: 'maddpg-swarm-esp32',
@@ -114,6 +116,8 @@ export const PUBLICATIONS: Publication[] = [
     year: 2026,
     type: 'Technical Report',
     institution: IOE,
+    doi: '10.13140/RG.2.2.11389.40163',
+    researchgate: 'https://www.researchgate.net/publication/418425437',
   },
   {
     slug: 'pocketqube-electronics',
@@ -124,6 +128,8 @@ export const PUBLICATIONS: Publication[] = [
     year: 2026,
     type: 'Technical Report',
     institution: `SEDS Nepal and ${IOE}`,
+    doi: '10.13140/RG.2.2.14744.84482',
+    researchgate: 'https://www.researchgate.net/publication/418425160',
   },
   {
     slug: 'breathing-led-heart-555',
@@ -134,6 +140,8 @@ export const PUBLICATIONS: Publication[] = [
     year: 2026,
     type: 'Technical Report',
     institution: IOE,
+    doi: '10.13140/RG.2.2.24811.17444',
+    researchgate: 'https://www.researchgate.net/publication/418425722',
   },
   {
     slug: 'seven-segment-esp32',
@@ -144,6 +152,8 @@ export const PUBLICATIONS: Publication[] = [
     year: 2026,
     type: 'Technical Report',
     institution: IOE,
+    doi: '10.13140/RG.2.2.18100.28808',
+    researchgate: 'https://www.researchgate.net/publication/418425723',
   },
 ]
 
