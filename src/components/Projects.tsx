@@ -16,17 +16,17 @@ const LISTED = ['mspm0-board', 'cubesat', 'loranet', 'heart-pcb', 'seven-segment
 
 const micromouseBadges = [
   {
-    certificateImage: '/images/BattleForSpeed2023WinnerCertification.jpg',
+    certificateImage: '/images/BattleForSpeed2023WinnerCertification.webp',
     title: 'Battle For Speed 2023 Winner',
     description: 'First place winner in Battle For Speed robotics competition',
   },
   {
-    certificateImage: '/images/DeltaRobothonRunnerUpCertification.jpg',
+    certificateImage: '/images/DeltaRobothonRunnerUpCertification.webp',
     title: 'Delta Robothon Runner-Up',
     description: 'Second place in Delta Robothon competition',
   },
   {
-    certificateImage: '/images/MeshMerizeIITBombay.png',
+    certificateImage: '/images/MeshMerizeIITBombay.webp',
     title: 'MeshMerize IIT Bombay',
     description: 'Participation in MeshMerize competition at IIT Bombay',
   },

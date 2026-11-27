@@ -19,6 +19,16 @@ const rise: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
 }
 
+/*
+ * The name, the intro line and the portrait are the page's largest paint (LCP).
+ * They must be visible in the server HTML, not wait for JavaScript to fade them
+ * in, so they only slide — opacity stays at 1 from the first frame.
+ */
+const riseVisible: Variants = {
+  hidden: { y: 14 },
+  show: { y: 0, transition: { duration: 0.6, ease: EASE } },
+}
+
 const STATS = [
   { to: WORK.length, suffix: '', label: 'Projects' },
   { to: 7, suffix: '+', label: 'Awards' },
@@ -131,7 +141,7 @@ export default function Hero() {
               </span>
             </motion.div>
 
-            <motion.h1 variants={rise} className="display mb-5">
+            <motion.h1 variants={riseVisible} className="display mb-5">
               Prashant
               <br />
               Bhandari
@@ -146,7 +156,7 @@ export default function Hero() {
               </span>
             </motion.div>
 
-            <motion.p variants={rise} className="hero__lead mb-9">
+            <motion.p variants={riseVisible} className="hero__lead mb-9">
               I design PCBs and write the firmware that runs on them: robots, IoT
               devices and satellite subsystems, from schematic to a working board.
             </motion.p>
@@ -203,8 +213,8 @@ export default function Hero() {
             <motion.div
             className="hero__figure"
             style={{ y: portraitY }}
-            initial={{ opacity: 0, scale: 0.97 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ scale: 0.97 }}
+            animate={{ scale: 1 }}
             transition={{ duration: 0.7, ease: EASE, delay: 0.15 }}
           >
             <Image
@@ -213,6 +223,7 @@ export default function Hero() {
               fill
               sizes="(max-width: 940px) 80vw, 27rem"
               priority
+              fetchPriority="high"
             />
             </motion.div>
 

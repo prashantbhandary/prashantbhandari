@@ -40,7 +40,7 @@ const jetbrainsMono = localFont({
 
 const SITE = "https://bhandari-prashant.com.np";
 const DESCRIPTION =
-  "Electronics engineer in Nepal designing PCBs and firmware for robots, IoT and satellites. Seeking a robotics Master’s or PhD for Fall 2028.";
+  "Electronics engineer in Nepal designing PCBs and firmware for robots, IoT devices and satellites. Seeking a robotics Master’s or PhD for Fall 2028.";
 
 // Each page sets its own title, description and canonical; these are the defaults.
 // The share image comes from app/opengraph-image.tsx.
@@ -82,6 +82,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
+    // Subpages set their own openGraph (with their own url), so only the home page inherits this
+    url: "/",
     locale: "en_US",
     siteName: "Prashant Bhandari",
     title: "Prashant Bhandari — Electronics Engineer, PCBs & Robotics",
@@ -161,7 +163,8 @@ const jsonLd = {
         addressRegion: "Gandaki Province",
         addressCountry: "NP",
       },
-      email: "mailto:info@bhandari-prashant.com.np",
+      // No email here: a plaintext address in the HTML gets harvested (and fails
+      // security scanners). The Contact section's link is obfuscated by Cloudflare.
       award: [
         "1st Position, LOCUS 2025 Micromouse Competition",
         "2nd Position, Delta 5.0 Micromouse Competition",
@@ -189,6 +192,10 @@ const jsonLd = {
   ],
 };
 
+// Google Analytics 4. Set NEXT_PUBLIC_GA_ID (e.g. G-XXXXXXXXXX) in the build
+// environment (Cloudflare Pages → Settings → Variables) to turn it on.
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -210,6 +217,17 @@ export default function RootLayout({
           <style>{`[style*="opacity:0"]{opacity:1!important;transform:none!important}`}</style>
         </noscript>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        {GA_ID && (
+          <>
+            {/* async: never blocks rendering */}
+            <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${GA_ID}');`,
+              }}
+            />
+          </>
+        )}
       </head>
       <body className="relative overflow-x-hidden">
         <a href="#main-content" className="sr-only sr-only-focusable">

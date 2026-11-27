@@ -4,3 +4,12 @@
 /twitter-image
   Content-Type: image/png
 
+
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  X-Frame-Options: SAMEORIGIN
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# Images rarely change; let browsers keep them for a day
+/images/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800

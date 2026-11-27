@@ -96,7 +96,7 @@ const ROLE_CERTIFICATES: Record<
 > = {
   'Electronics Engineer Intern': [
     {
-      certificateImage: '/images/YarsaTechCertificationOfExperience.jpg',
+      certificateImage: '/images/YarsaTechCertificationOfExperience.webp',
       title: 'Yarsa Tech Experience Certificate',
       description: 'Certificate of experience for Electronics Engineer Internship at Yarsa Tech',
     },
@@ -115,19 +115,19 @@ const ROLE_CERTIFICATES: Record<
   ],
   'General Member': [
     {
-      certificateImage: '/images/GeneralMemberCertification.png',
+      certificateImage: '/images/GeneralMemberCertification.webp',
       title: 'General Member Certification',
       description: 'Official membership certification for Robotics Club',
     },
   ],
   'Robotics Mentor': [
     {
-      certificateImage: '/images/KaryaShalaMentorCertification.jpg',
+      certificateImage: '/images/KaryaShalaMentorCertification.webp',
       title: 'Karyashala Mentor Certification',
       description: 'Certification for mentoring students in robotics projects',
     },
     {
-      certificateImage: '/images/MentorShipCertification.jpg',
+      certificateImage: '/images/MentorShipCertification.webp',
       title: 'Mentorship Certification',
       description: 'Recognition for outstanding mentorship in robotics',
     },

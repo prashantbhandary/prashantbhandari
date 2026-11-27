@@ -48,7 +48,13 @@ export default function CertificateBadge({
         aria-label={`View the ${title} certificate`}
         title={title}
       >
-        <Image src={certificateImage} alt={` certificate`} fill className="object-cover" />
+        <Image
+          src={certificateImage.replace(/\.webp$/, '-badge.webp')}
+          alt={`${title} certificate`}
+          fill
+          sizes="64px"
+          className="object-cover"
+        />
         <span
           className="absolute inset-0 grid place-items-center opacity-0 group-hover:opacity-100 transition-opacity duration-200"
           style={{ background: 'rgba(11,11,15,0.45)', color: '#fff' }}

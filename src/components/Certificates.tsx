@@ -84,7 +84,7 @@ const certificates: Certificate[] = [
     title: 'General Member Certification',
     description:
       'Official membership certification recognizing active participation and contribution to the robotics club activities.',
-    image: '/images/GeneralMemberCertification.png',
+    image: '/images/GeneralMemberCertification.webp',
     alt: 'Robotics Club, Pashchimanchal Campus Certificate of Appreciation presented to Prashant Bhandari as General Member of the 19th Committee',
     category: 'leadership',
     date: 'March 2024 - March 2025',
@@ -95,7 +95,7 @@ const certificates: Certificate[] = [
     title: 'Yarsa Tech Experience Certificate',
     description:
       'Certificate of experience for completing Electronics Engineer Internship at Yarsa Tech, Pokhara. Gained hands-on experience in electronics engineering, PCB design, and embedded systems development.',
-    image: '/images/YarsaTechCertificationOfExperience.jpg',
+    image: '/images/YarsaTechCertificationOfExperience.webp',
     category: 'experience',
     date: 'January 2025 - July 2025',
     organization: 'Yarsa Tech, Pokhara',
@@ -105,7 +105,7 @@ const certificates: Certificate[] = [
     title: 'Delta Robothon Runner-Up',
     description:
       'Second place achievement in Delta Robothon competition, showcasing advanced robotics skills and innovation.',
-    image: '/images/DeltaRobothonRunnerUpCertification.jpg',
+    image: '/images/DeltaRobothonRunnerUpCertification.webp',
     category: 'competition',
     date: 'February 2025',
     organization: 'Delta Robothon',
@@ -115,7 +115,7 @@ const certificates: Certificate[] = [
     title: 'MeshMerize IIT Bombay',
     description:
       "Participation certificate from MeshMerize competition at IIT Bombay, one of India's premier technical institutes.",
-    image: '/images/MeshMerizeIITBombay.png',
+    image: '/images/MeshMerizeIITBombay.webp',
     category: 'competition',
     date: 'December 2024',
     organization: 'IIT Bombay',
@@ -125,7 +125,7 @@ const certificates: Certificate[] = [
     title: 'Karyashala Mentor Certification',
     description:
       'Certification for mentoring students in robotics and engineering projects at Karyashala workshop.',
-    image: '/images/KaryaShalaMentorCertification.jpg',
+    image: '/images/KaryaShalaMentorCertification.webp',
     category: 'mentorship',
     date: 'July 2024',
     organization: 'Karyashala & Engineer Without Borders',
@@ -135,7 +135,7 @@ const certificates: Certificate[] = [
     title: 'Mentorship Certification',
     description:
       'Recognition for outstanding mentorship and guidance provided to junior students in robotics and embedded systems.',
-    image: '/images/MentorShipCertification.jpg',
+    image: '/images/MentorShipCertification.webp',
     category: 'mentorship',
     date: '2024',
     organization: 'Educational Institution',
@@ -145,7 +145,7 @@ const certificates: Certificate[] = [
     title: 'Workshop by Lab448',
     description:
       'Completion certificate for advanced workshop conducted by Lab448, focusing on cutting-edge technology and innovation.',
-    image: '/images/WokshopBylab448.jpg',
+    image: '/images/WokshopBylab448.webp',
     category: 'workshop',
     date: '2024',
     organization: 'Lab448',
@@ -155,7 +155,7 @@ const certificates: Certificate[] = [
     title: 'Battle For Speed 2023 Winner',
     description:
       'First place winner in the Battle For Speed 2023 robotics competition with Voyager Line Follower Bot. Built advanced line-following robot with ultrasonic obstacle detection, optimized for speed and stability using advanced sensor integration.',
-    image: '/images/BattleForSpeed2023WinnerCertification.jpg',
+    image: '/images/BattleForSpeed2023WinnerCertification.webp',
     category: 'competition',
     date: 'March 2023',
     organization: 'Robotics Competition',
@@ -324,7 +324,7 @@ export default function CertificatesShowcase() {
                 >
                 <span className="cert__thumb">
                   <Image
-                    src={certificate.thumb ?? certificate.image}
+                    src={certificate.thumb ?? certificate.image.replace(/\.webp$/, '-thumb.webp')}
                     alt={certificate.alt ?? certificate.title}
                     fill
                     sizes="(max-width: 780px) 50vw, 15rem"

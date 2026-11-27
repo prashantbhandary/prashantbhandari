@@ -9,17 +9,24 @@ const MORE_ICON: Record<CardLink['kind'], typeof Github> = { github: Github, pdf
 
 export const cardHref = (card: Card) => (card.writeup ? `/projects/${card.writeup}` : card.github)
 
+/**
+ * Card covers are pre-cut to the card's 16:10 box (scripts/make-web-images.cjs), so the
+ * browser downloads an 800px WebP instead of the full photo and nothing is
+ * cropped or stretched at display time. Contain-fit covers are padded on white.
+ */
+const cardImage = (src: string) => src.replace(/\.(jpe?g|png|webp)$/i, '-card.webp')
+
 /** Photo/render when there is one, otherwise a cover drawn in the category's colours */
 export function CardCover({ card, sizes }: { card: Card; sizes: string }) {
   if (card.image) {
     return (
       <Image
-        src={card.image.src}
+        src={cardImage(card.image.src)}
         alt={card.title}
         fill
         sizes={sizes}
         loading="lazy"
-        className={card.image.fit === 'contain' ? 'pj-cover-img--contain' : 'pj-cover-img'}
+        className="pj-cover-img"
       />
     )
   }

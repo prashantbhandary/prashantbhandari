@@ -1568,10 +1568,6 @@ p { text-wrap: pretty; }
 
 .pj-card__cover:has(.pj-cover-img--contain) { background: #fff; }
 
-/* phones: a shorter cover keeps more cards on screen */
-@media (max-width: 600px) {
-  .pj-card__cover { aspect-ratio: 2 / 1; }
-}
 
 .pj-cover-img,
 .pj-cover-img--contain { transition: transform 500ms var(--ease); }
